@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    'timeline'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -132,18 +133,46 @@ INSTALLED_APPS = (
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+        },
+    },
     'handlers': {
+        'default': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(PROJECT_DIR, 'logs/mylog.log') ,
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter':'standard',
+        },
+        'request_handler': {
+                'level':'DEBUG',
+                'class':'logging.handlers.RotatingFileHandler',
+                'filename': os.path.join(PROJECT_DIR, 'logs/django_request.log'),
+                'maxBytes': 1024 * 1024 * 5,  # 5 MB
+                'backupCount': 5,
+                'formatter':'standard',
+        },
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
         }
     },
     'loggers': {
+
+        '': {
+            'handlers': ['default'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
         'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
+            'handlers': ['request_handler'],
+            'level': 'DEBUG',
+            'propagate': True
         },
     }
 }
+
