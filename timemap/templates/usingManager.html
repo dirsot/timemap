@@ -18,6 +18,9 @@
 	var infoWindow = new google.maps.InfoWindow;
 			  var triangleCoords = [
         ];
+			  var circles = [];
+			  var markers = [];
+			  var polygons = [];
 		
       function initialize() {
     	  //getPoints();
@@ -40,7 +43,12 @@ drawingManager = new google.maps.drawing.DrawingManager({
 				},
 						circleOptions: {
 							editable: false,
-							clickable:true
+							clickable:true,
+							strokeColor: '#FF0000',
+					          strokeOpacity: 0.8,
+					          strokeWeight: 2,
+					          fillColor: '#FF0000',
+					          fillOpacity: 0.35,
 						},
 						rectangleOptions: {
 							editable: true
@@ -51,26 +59,44 @@ drawingManager = new google.maps.drawing.DrawingManager({
 			});
 			drawingManager.setMap(map);
 			
-			var circles = [];
+
 			google.maps.event.addDomListener(drawingManager, 'circlecomplete', function(circle) {
 		        circles.push(circle);
 		      });
-			
-			google.maps.event.addDomListener(savebutton, 'click', function() {
-		        document.getElementById("savedata").value = "";
-		        for (var i = 0; i < circles.length; i++) {
-		          var circleCenter = circles[i].getCenter();
-		          var circleRadius = circles[i].getRadius();
-		          document.getElementById("savedata").value += "circle((";
-		          document.getElementById("savedata").value += 
-		            circleCenter.lat().toFixed(3) + "," + circleCenter.lng().toFixed(3);
-		          document.getElementById("savedata").value += "), ";
-		          document.getElementById("savedata").value += circleRadius.toFixed(3) + ")\n";
-		                            
-		        }
+			google.maps.event.addDomListener(drawingManager, 'markercomplete', function(marker) {
+				markers.push(marker);
 		      });
+			google.maps.event.addDomListener(drawingManager, 'polygoncomplete', function(marker) {
+				polygons.push(marker);
+		      });
+			
+			google.maps.event.addDomListener(savebutton, 'click', circleEvent);
 		    
-		
+      }
+      
+      function circleEvent() {
+	        document.getElementById("savedata").value = "";
+
+	        for (var i = 0; i < markers.length; i++) {
+	        	document.getElementById("savedata").value += "marker("+markers[i].position.lng().toFixed(3)+", "+markers[i].position.lat().toFixed(3)+"),\n";
+	        }
+	        for (var i = 0; i < circles.length; i++) {
+	          var circleCenter = circles[i].getCenter();
+	          var circleRadius = circles[i].getRadius();
+	          document.getElementById("savedata").value += "circle((";
+	          document.getElementById("savedata").value += 
+	            circleCenter.lat().toFixed(3) + "," + circleCenter.lng().toFixed(3);
+	          document.getElementById("savedata").value += "), ";
+	          document.getElementById("savedata").value += circleRadius.toFixed(3) + ")\n";                   
+	        }
+	        for (var i = 0; i < polygons.length; i++) {
+	        	document.getElementById("savedata").value += "polygon(";
+	        	var path = polygons[i].getPath();
+	        	for (var j = 0; j < path.length; j++) {
+	        		document.getElementById("savedata").value +="("+ path.getAt(j).lng().toFixed(3) +","+path.getAt(j).lat().toFixed(3)+"),";
+	        }
+	        	document.getElementById("savedata").value += "),\n";
+	      }
       }
 
     </script>
@@ -78,7 +104,7 @@ drawingManager = new google.maps.drawing.DrawingManager({
   <body onload="initialize()">
 	<p>Zapisz</p>
 	<button id="savebutton">SAVE</button>
-	<textarea id="savedata" rows="5" cols="40"></textarea>
+	<textarea id="savedata" rows="5" cols="100"></textarea>
     <div id="map_canvas" style="width:800px; height:500px"></div>
 	<div id="statusDiv" style="width:800px; height:100px"></div>
   </body>
