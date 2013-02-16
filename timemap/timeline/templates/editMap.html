@@ -51,11 +51,12 @@ body {
 			drawingControl : true,
 			drawingControlOptions : {
 				position : google.maps.ControlPosition.TOP_CENTER,
-				drawingModes : [ google.maps.drawing.OverlayType.MARKER,
-						google.maps.drawing.OverlayType.POLYLINE,
-						google.maps.drawing.OverlayType.CIRCLE,
-						google.maps.drawing.OverlayType.RECTANGLE,
-						google.maps.drawing.OverlayType.POLYGON ]
+				drawingModes : [ google.maps.drawing.OverlayType.MARKER//,
+						//google.maps.drawing.OverlayType.POLYLINE,
+						//google.maps.drawing.OverlayType.CIRCLE,
+						//google.maps.drawing.OverlayType.RECTANGLE,
+						//google.maps.drawing.OverlayType.POLYGON 
+						]
 			},
 			circleOptions : {
 				editable : false,
@@ -93,13 +94,30 @@ body {
 	}
 
 	function circleEvent() {
+		console.log('here data goes to database');
 		document.getElementById("savedata").value = "";
-
+		var jsonString = "\"{";
+		var jsonObj = {};
+		var jsonMarkers = {};
+		
+		jsonString = jsonString+"\\\"marker\\\":[";
 		for ( var i = 0; i < markers.length; i++) {
+			if(markers[i].metadata){
+				id = markers[i].metadata.id;
+			}else{
+				id=-1;
+			}
 			document.getElementById("savedata").value += "marker("
+					+ id + ", "
 					+ markers[i].position.lng().toFixed(3) + ", "
 					+ markers[i].position.lat().toFixed(3) + "),\n";
+			jsonMarkers[i]={'lng':markers[i].position.lng().toFixed(3),'lat':markers[i].position.lat().toFixed(3)};
+			jsonString = jsonString+"{\\\"id\\\":"+id+",\\\"lng\\\":"+markers[i].position.lng().toFixed(3)+",\\\"lat\\\":"+markers[i].position.lat().toFixed(3)+"},";
 		}
+		jsonString = jsonString.substring(0, jsonString.length - 1);
+		jsonString = jsonString+"]";
+		jsonObj['marker']=jsonMarkers;
+		console.log(jsonObj);
 		for ( var i = 0; i < circles.length; i++) {
 			var circleCenter = circles[i].getCenter();
 			var circleRadius = circles[i].getRadius();
@@ -122,6 +140,31 @@ body {
 			}
 			document.getElementById("savedata").value += "),\n";
 		}
+		jsonString = jsonString+"}\"";
+		
+		$.ajax({
+            url: "/map/ajaxAction/",
+            type: "POST",
+            beforeSend : function(xhr) {
+				xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'))
+			},
+            data:{"data":jsonString},
+            datatype: "json",
+            success : function(response,
+					textStatus, jqXHR) {
+				console.log(response.success);
+			},
+			error : function(jqXHR, textStatus,
+					errorThrown) {
+				console.log(
+						"The following error occured: "
+								+ textStatus,
+						errorThrown);
+			},
+			complete : function() {
+				console.log(3);
+			}
+        });
 	}
 	
 	function getMarkers(){
@@ -133,9 +176,25 @@ body {
 				draggable : true,
 				title : "{{marker.title}}"
 			});
+			marker.metadata={'id':{{marker.id}}};
 			markersArray.push(marker);
 			markers.push(marker);
 		{% endfor %}
+	}
+	function getCookie(name) {
+		var cookieValue = null;
+		if (document.cookie && document.cookie != '') {
+			var cookies = document.cookie.split(';');
+			for ( var i = 0; i < cookies.length; i++) {
+				var cookie = jQuery.trim(cookies[i]);
+				if (cookie.substring(0, name.length + 1) == (name + '=')) {
+					cookieValue = decodeURIComponent(cookie
+							.substring(name.length + 1));
+					break;
+				}
+			}
+		}
+		return cookieValue;
 	}
 </script>
 </head>

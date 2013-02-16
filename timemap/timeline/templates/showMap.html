@@ -47,14 +47,59 @@ body {
 			marker = new google.maps.Marker({
 				position : new google.maps.LatLng({{marker.lat}}, {{marker.lon}}),
 				map : map,
+				id: {{marker.id}},
 				title : "{{marker.title}}"
 			});
 			markersArray.push(marker);
+			google.maps.event.addListener(marker, 'click', onMarkerClick);
 		{% endfor %}
+	}
+	
+	var onMarkerClick = function() {
+		var infoField = document.getElementById("info");
+		var marker = this;
+		var latLng = marker.getPosition();
+		$.ajax({
+			url : "/map/getMoreInfo",
+			dataType : "html",
+			type : 'POST',
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'))
+			},
+			data : "elementId=" + marker.id ,
+			success : function(response, textStatus, jqXHR) {
+				json = JSON.parse($("<div/>").html(response).text());
+				infoField.value = json[0].fields.title;	
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				infoField.value = "error";
+				console.log("The following error occured: " + textStatus,
+						errorThrown);
+			},
+		});
+		
+		
+	}
+	
+	function getCookie(name) {
+		var cookieValue = null;
+		if (document.cookie && document.cookie != '') {
+			var cookies = document.cookie.split(';');
+			for ( var i = 0; i < cookies.length; i++) {
+				var cookie = jQuery.trim(cookies[i]);
+				if (cookie.substring(0, name.length + 1) == (name + '=')) {
+					cookieValue = decodeURIComponent(cookie
+							.substring(name.length + 1));
+					break;
+				}
+			}
+		}
+		return cookieValue;
 	}
 </script>
 </head>
 <body onload="initialize()">
+	<textarea id="info" rows="5" cols="100"></textarea>
 	<div id="map_canvas" style="width: 800px; height: 500px"></div>
 	<div id="statusDiv" style="width: 800px; height: 100px"></div>
 </body>

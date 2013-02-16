@@ -7,7 +7,7 @@ class Map(models.Model):
     title = models.CharField(max_length=255, verbose_name='Tytuł', blank=False)
     owner = models.ForeignKey(User)
     code = models.CharField(max_length=255, verbose_name='kod', unique=True, blank=False)
-
+    #text = models.TextField(verbose_name = "Informacje o mapie")
     class Meta:
         verbose_name ="Mapa"
         verbose_name_plural ="Mapy"
@@ -25,7 +25,7 @@ class Marker(models.Model):
     lat = models.FloatField(blank=False)
     dateFrom = models.DateTimeField(blank=True, null=True)
     dateTo = models.DateTimeField(blank=True, null=True)
-    
+    #text = models.TextField(verbose_name = "Informacje o markerze")
     class Meta:
         verbose_name ="Marker"
         verbose_name_plural ="Markers"
