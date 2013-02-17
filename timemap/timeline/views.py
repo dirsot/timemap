@@ -34,7 +34,7 @@ def ajaxAction(request):
                 for marker in markers:
                     id=marker.get('id')
                     if(id==-1):
-                        m = Marker(lat=marker.get('lat'),lon=marker.get('lng'),map_id=1)
+                        m = Marker(lat=marker.get('lat'),lon=marker.get('lng'),map_id=1,title=marker.get('title'))
                         m.save();
                 logger.debug(markers)           
             except Exception, e:
