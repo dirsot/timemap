@@ -19,6 +19,28 @@ CHAR_SET = string.ascii_uppercase + string.digits
 def getCode():
     return ''.join(random.sample(CHAR_SET, 9))
 
+def ajaxUpdate(request):
+    results = {'success':False}
+    if request.method == u'POST':
+        POST = request.POST
+        if POST.has_key(u'data'):
+            try: 
+                logger.debug(POST[u'data'])
+                data = json.loads(POST[u'data'])
+                logger.debug(data)
+                data = json.loads(data)
+                marker=data.get('marker')
+                id=marker.get('id')
+                title=marker.get('title')
+                markerObject = Marker.objects.get(id=id)
+                markerObject.title = title
+                markerObject.save()
+                results = {'success':True}
+            except Exception, e:
+                logger.debug(e)
+    jsonResult = simplejson.dumps(results)
+    return HttpResponse(jsonResult, mimetype='application/json')
+    
 def ajaxAction(request):
     results = {'success':False}
     if request.method == u'POST':
@@ -26,7 +48,8 @@ def ajaxAction(request):
         logger.debug("POST: ")
         logger.debug(POST)
         if POST.has_key(u'data'):
-            try:          
+            try:  
+                logger.debug(POST[u'data'])        
                 data = json.loads(POST[u'data'])
                 data = json.loads(data)
                 markers=data.get('marker') 
