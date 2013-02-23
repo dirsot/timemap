@@ -19,6 +19,30 @@ CHAR_SET = string.ascii_uppercase + string.digits
 def getCode():
     return ''.join(random.sample(CHAR_SET, 9))
 
+def jsonMapData(request,mapCode):
+    mapCode = Map.objects.get(code=mapCode)
+    markers = Marker.objects.filter(map=mapCode)
+    
+    results={
+'dateTimeFormat': 'iso8601',
+'wikiURL': "http://simile.mit.edu/shelf/",
+'wikiSection': "Simile Cubism Timeline",
+
+'events' : [
+        {'start': '1924',
+        'title': 'Punkt'
+        },
+
+
+        {'start': '1913',
+        'end': '1929',
+        'title': 'Okres'
+        }]}
+    
+
+    jsonResult = simplejson.dumps(results)
+    return HttpResponse(jsonResult, mimetype='application/json')
+
 def ajaxUpdate(request):
     results = {'success':False}
     if request.method == u'POST':

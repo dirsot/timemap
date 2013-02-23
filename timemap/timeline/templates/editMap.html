@@ -47,7 +47,10 @@ body {
 	var polygons = [];
 	var selectedMarker;
 	var file;
-	
+	var infowindow = new google.maps.InfoWindow({
+	      content: '<div id="content" >Hello</div>',
+	      maxWidth: 10
+	    });
 	$(function(){
 		file=document.getElementById('iconSelection');
 		file.onchange= function() {
@@ -77,11 +80,11 @@ body {
 			drawingControlOptions : {
 				position : google.maps.ControlPosition.TOP_CENTER,
 				drawingModes : [ 
-				        google.maps.drawing.OverlayType.MARKER/*,
+				        google.maps.drawing.OverlayType.MARKER,
 						google.maps.drawing.OverlayType.POLYLINE,
 						google.maps.drawing.OverlayType.CIRCLE,
 						google.maps.drawing.OverlayType.RECTANGLE,
-						google.maps.drawing.OverlayType.POLYGON */
+						google.maps.drawing.OverlayType.POLYGON 
 						]
 			},
 			circleOptions : {
@@ -114,9 +117,12 @@ body {
 					var title = $("#markerInfoDiv #markerTitle").val();
 					marker.setTitle(title);
 					console.log(marker);
-					console.log(marker.icon);
+					
 					
 					markers.push(marker);
+					
+					console.log(infowindow);
+					infowindow.open(map,marker);
 				});
 		google.maps.event.addListener(drawingManager, 'drawingmode_changed', 
 				function() {
@@ -316,7 +322,7 @@ body {
             }
         ];
         
-        var d = Timeline.DateTime.parseGregorianDateTime("1000");
+        var d = Timeline.DateTime.parseGregorianDateTime("1920");
         var bandInfos = [
             Timeline.createHotZoneBandInfo({
                 width:          "75%", 
@@ -343,8 +349,10 @@ body {
         bandInfos[1].highlight = true;
         
         tl = Timeline.create(document.getElementById("tl"), bandInfos, Timeline.HORIZONTAL);
-        tl.loadXML("/site_media/jewish.xml", function(xml, url) {
-            eventSource.loadXML(xml, url);
+        tl.loadJSON("/map/jsonmapdata/123456789/", function(json, url) {
+        	console.log(json)
+        	console.log(url)
+            eventSource.loadJSON(json, url);
         });
     }
     function centerTimeline(year) {
