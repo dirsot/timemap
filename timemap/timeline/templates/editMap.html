@@ -17,6 +17,14 @@ body {
 	height: 100%
 }
 </style>
+    <script>
+      Timeline_ajax_url="/site_media/timeline/ajax/api/simile-ajax-api.js";
+      Timeline_urlPrefix='/site_media/timeline/api/';       
+      Timeline_parameters='bundle=true';
+    </script>
+    <script src="/site_media/timeline/api/timeline-api.js"    
+      type="text/javascript">
+    </script>
 <link rel="shortcut icon" type="image/x-icon" href="http://niebezpiecznik.pl/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="/site_media/spectrum.css">
 <script src="/site_media/js/utils.js"></script>
@@ -38,6 +46,16 @@ body {
 	var markers = [];
 	var polygons = [];
 	var selectedMarker;
+	var file;
+	
+	$(function(){
+		file=document.getElementById('iconSelection');
+		file.onchange= function() {
+	        if (this.value!=='')
+	        	selectedMarker.setIcon(createIconImage("/site_media/icons/"+file.value.replace("C\:\\fakepath\\","")));
+	    };	
+	})
+	
 
 	function initialize() {
 		$("#markerInfoDiv").hide();
@@ -96,6 +114,8 @@ body {
 					var title = $("#markerInfoDiv #markerTitle").val();
 					marker.setTitle(title);
 					console.log(marker);
+					console.log(marker.icon);
+					
 					markers.push(marker);
 				});
 		google.maps.event.addListener(drawingManager, 'drawingmode_changed', 
@@ -133,9 +153,10 @@ body {
 		var markerTitle = $("#markerTitle").val();
 		var markerDsc = $("#markerDescription").val();
 		var markerId = $("#markerId").val();
+		var icon = selectedMarker.getIcon().url;
 		var markerLat = selectedMarker.position.lat().toFixed(3);
 		var markerLng = selectedMarker.position.lng().toFixed(3);
-		var request = "\"{\\\"marker\\\":{\\\"id\\\":\\\""+markerId+"\\\",\\\"title\\\":\\\""+markerTitle+"\\\",\\\"dsc\\\":\\\""+markerDsc+"\\\",\\\"lng\\\":\\\""+markerLng+"\\\",\\\"lat\\\":\\\""+markerLat+"\\\"}}\"";
+		var request = "\"{\\\"marker\\\":{\\\"id\\\":\\\""+markerId+"\\\",\\\"title\\\":\\\""+markerTitle+"\\\",\\\"dsc\\\":\\\""+markerDsc+"\\\",\\\"icon\\\":\\\""+icon+"\\\",\\\"lng\\\":\\\""+markerLng+"\\\",\\\"lat\\\":\\\""+markerLat+"\\\"}}\"";
 		console.log(request);
 		$.ajax({
             url: "/map/ajaxUpdate/",
@@ -162,7 +183,9 @@ body {
 			}
         });
 	}
-	
+	function getIconFromForm(){
+		
+	}
 	function circleEvent() {
 		console.log('here data goes to database');
 		document.getElementById("savedata").value = "";
@@ -177,7 +200,9 @@ body {
 				dsc = markers[i].metadata.dsc;
 			}else{
 				id=-1;
+				dsc='';
 			}
+			icon=getIconFromForm();
 			title = markers[i].getTitle();
 			document.getElementById("savedata").value += "marker("
 					+ id + ", "
@@ -223,7 +248,8 @@ body {
 	
 	function getMarkers(){
 		{% for marker in markers %}
-			var newMarker = createMarker(new google.maps.LatLng({{marker.lat}}, {{marker.lon}}),"{{marker.title}}",{{marker.id}},"{{marker.dsc}}");
+			icon = createIconImage("{{marker.icon}}");
+			var newMarker = createMarker(new google.maps.LatLng({{marker.lat}}, {{marker.lon}}),icon,"{{marker.title}}",{{marker.id}},"{{marker.dsc}}");
 			markers.push(newMarker);
 		{% endfor %}
 	}
@@ -233,13 +259,14 @@ body {
 		});
 	});
 	
-    function createMarker(latlng, title, id,dsc) {
+    function createMarker(latlng,icon, title, id,dsc) {
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
         clickable : true,
 		draggable : true,
-		title : title
+		title : title,
+		icon : icon
         });
     marker.metadata={'id':id,'dsc':dsc};
     google.maps.event.addListener(marker, 'click', function() {
@@ -252,11 +279,91 @@ body {
     return marker;
 }
 
+    
+    var tl;
+    function onLoad() {
+        var eventSource = new Timeline.DefaultEventSource(0);
+        
+        var theme = Timeline.ClassicTheme.create();
+        // demonstrate highlighting of labels (in addition to icons and tapes)
+        theme.event.highlightLabelBackground = true;
+        theme.event.bubble.width = 320;
+        
+        var zones = [
+            {   start:    "1700",
+                end:      "2100",
+                magnify:  5,
+                unit:     Timeline.DateTime.DECADE
+            },
+            {   start:    "1800",
+                end:      "2100",
+                magnify:  3,
+                unit:     Timeline.DateTime.YEAR,
+                multiple: 5
+            }
+        ];
+        var zones2 = [
+            {   start:    "1700",
+                end:      "2100",
+                magnify:  5,
+                unit:     Timeline.DateTime.DECADE
+            },
+            {   start:    "1800",
+                end:      "2100",
+                magnify:  3,
+                unit:     Timeline.DateTime.YEAR,
+                multiple: 10
+            }
+        ];
+        
+        var d = Timeline.DateTime.parseGregorianDateTime("1000");
+        var bandInfos = [
+            Timeline.createHotZoneBandInfo({
+                width:          "75%", 
+                intervalUnit:   Timeline.DateTime.CENTURY, 
+                intervalPixels: 250,
+                zones:          zones,
+                eventSource:    eventSource,
+                date:           d,
+                timeZone:       -6,
+                theme:          theme
+            }),
+            Timeline.createHotZoneBandInfo({
+                width:          "25%", 
+                intervalUnit:   Timeline.DateTime.CENTURY, 
+                intervalPixels: 70,
+                zones:          zones2,
+                eventSource:    eventSource,
+                date:           d,
+                overview:       true,
+                theme:          theme
+            })
+        ];
+        bandInfos[1].syncWith = 0;
+        bandInfos[1].highlight = true;
+        
+        tl = Timeline.create(document.getElementById("tl"), bandInfos, Timeline.HORIZONTAL);
+        tl.loadXML("/site_media/jewish.xml", function(xml, url) {
+            eventSource.loadXML(xml, url);
+        });
+    }
+    function centerTimeline(year) {
+        tl.getBand(0).setCenterVisibleDate(new Date(year, 0, 1));
+    }
+
+    var resizeTimerID = null;
+    function onResize() {
+        if (resizeTimerID == null) {
+            resizeTimerID = window.setTimeout(function() {
+                resizeTimerID = null;
+                tl.layout();
+            }, 500);
+        }
+    }
 	
 </script>
 </head>
-<body style="width:1220px;" onload="initialize()">
-<input type='text' id="flat" />
+<body style="width:1220px;" onload="initialize();onLoad();">
 <div style="width:400px;float:right;" id="markerInfoDiv">
   <fieldset style="width:400px;">
   	<input type="hidden" id="markerId" name="markerId" value="-1">
@@ -265,15 +372,34 @@ body {
     Description: 
     <textarea rows="4" cols="40" id="markerDescription">
 	</textarea><br>
-    Icon: <input type="text">
+	Icon:<input type="file" id="iconSelection" size="chars"> <br/>
+    Icon special: <input id="iconGenerator" type="text">
+    <input type='text' id="flat" />
   </fieldset>
   <button id="updatebutton">Update</button>
   <button id="removebutton">Remove</button>
 </div>
-	<p>Zapisz</p>
 	<button id="savebutton">SAVE</button>
-	<textarea id="savedata" rows="5" cols="90"></textarea>
+	<textarea id="savedata" rows="2" cols="90"></textarea>
 	<div id="map_canvas" style="width: 800px; height: 500px"></div>
-	<div id="statusDiv" style="width: 800px; height: 100px"></div>
+	
+	    <div id="tl" class="timeline-default" style="height: 200px;">
+    </div>
+    
+    <div style="width: 100%">
+        <table style="text-align: center; width: 100%">
+            <tr>
+                <td><a href="javascript:centerTimeline(1);">1 AD</a></td>
+                <td><a href="javascript:centerTimeline(250);">250 AD</a></td>
+                <td><a href="javascript:centerTimeline(500);">500 AD</a></td>
+                <td><a href="javascript:centerTimeline(750);">750 AD</a></td>
+                <td><a href="javascript:centerTimeline(1000);">1000 AD</a></td>
+                <td><a href="javascript:centerTimeline(1250);">1250 AD</a></td>
+                <td><a href="javascript:centerTimeline(1500);">1500 AD</a></td>
+                <td><a href="javascript:centerTimeline(1750);">1750 AD</a></td>
+                <td><a href="javascript:centerTimeline(2000);">2000 AD</a></td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

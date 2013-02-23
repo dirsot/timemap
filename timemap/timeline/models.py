@@ -22,6 +22,7 @@ class Marker(models.Model):
     map = models.ForeignKey(Map,blank=False)
     title = models.CharField(max_length=255, verbose_name='Tytuł')
     dsc = models.TextField(max_length=16384, verbose_name='Opis')
+    icon=models.CharField(max_length=255, verbose_name='Icon',blank=True, null=True)
     lon = models.FloatField(blank=False)
     lat = models.FloatField(blank=False)
     dateFrom = models.DateTimeField(blank=True, null=True)

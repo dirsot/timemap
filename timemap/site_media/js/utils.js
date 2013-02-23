@@ -39,3 +39,8 @@ function ajaxRequest(url,data,succesFunction,errorFunction,completeFunction){
 		}
     });
 }
+
+function createIconImage(path){
+	if(path && path!="None")
+		return new google.maps.MarkerImage(path);
+}

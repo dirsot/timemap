@@ -35,11 +35,13 @@ def ajaxUpdate(request):
                 lat=marker.get('lat')
                 lng=marker.get('lng')
                 dsc=marker.get('dsc')
+                icon=marker.get('icon')
                 markerObject = Marker.objects.get(id=id)
                 markerObject.title = title
                 markerObject.lon = lng
                 markerObject.lat = lat
                 markerObject.dsc = dsc
+                markerObject.icon = icon       
                 logger.debug(markerObject)
                 logger.debug(lat)
                 markerObject.save()
