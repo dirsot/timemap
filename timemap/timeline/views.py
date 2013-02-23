@@ -32,9 +32,37 @@ def ajaxUpdate(request):
                 marker=data.get('marker')
                 id=marker.get('id')
                 title=marker.get('title')
+                lat=marker.get('lat')
+                lng=marker.get('lng')
+                dsc=marker.get('dsc')
                 markerObject = Marker.objects.get(id=id)
                 markerObject.title = title
+                markerObject.lon = lng
+                markerObject.lat = lat
+                markerObject.dsc = dsc
+                logger.debug(markerObject)
+                logger.debug(lat)
                 markerObject.save()
+                results = {'success':True}
+            except Exception, e:
+                logger.debug(e)
+    jsonResult = simplejson.dumps(results)
+    return HttpResponse(jsonResult, mimetype='application/json')
+
+def ajaxRemove(request):
+    results = {'success':False}
+    if request.method == u'POST':
+        POST = request.POST
+        if POST.has_key(u'data'):
+            try: 
+                logger.debug(POST[u'data'])
+                data = json.loads(POST[u'data'])
+                logger.debug(data)
+                data = json.loads(data)
+                marker=data.get('marker')
+                id=marker.get('id')
+                markerObject = Marker.objects.get(id=id)
+                markerObject.delete()
                 results = {'success':True}
             except Exception, e:
                 logger.debug(e)
@@ -57,7 +85,7 @@ def ajaxAction(request):
                 for marker in markers:
                     id=marker.get('id')
                     if(id==-1):
-                        m = Marker(lat=marker.get('lat'),lon=marker.get('lng'),map_id=1,title=marker.get('title'))
+                        m = Marker(lat=marker.get('lat'),lon=marker.get('lng'),map_id=1,title=marker.get('title'),dsc=marker.get('dsc'))
                         m.save();
                 logger.debug(markers)           
             except Exception, e:

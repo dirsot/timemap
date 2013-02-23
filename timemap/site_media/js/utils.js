@@ -13,3 +13,29 @@ function getCookie(name) {
 	}
 	return cookieValue;
 }
+function ajaxRequest(url,data,succesFunction,errorFunction,completeFunction){
+	$.ajax({
+        url: url,
+        type: "POST",
+        beforeSend : function(xhr) {
+			xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'))
+		},
+        data:{"data":data},
+        datatype: "json",
+        success : function(response,textStatus, jqXHR) {
+        	if(succesFunction)
+        	succesFunction()
+		},
+		error : function(jqXHR, textStatus,errorThrown) {
+			if(errorFunction){
+				errorFunction()
+			}else{
+				console.log("The following error occured: "+ textStatus,errorThrown);
+			}
+		},
+		complete : function() {
+			if(completeFunction)
+			completeFunction()
+		}
+    });
+}

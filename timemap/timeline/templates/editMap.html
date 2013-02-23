@@ -113,14 +113,29 @@ body {
 
 		google.maps.event.addDomListener(savebutton, 'click', circleEvent);
 		google.maps.event.addDomListener(updatebutton, 'click', updateMarker);
+		google.maps.event.addDomListener(removebutton, 'click', removeMarker);
 		getMarkers();
 	}
-
+	
+	function removeMarkerSuccessFunction(){
+		$("#markerInfoDiv").hide();
+		selectedMarker.setMap(null);
+	}
+	
+	function removeMarker(){
+		console.log("remove marker");
+		var markerId = $("#markerId").val();
+		var request = "\"{\\\"marker\\\":{\\\"id\\\":\\\""+markerId+"\\\"}}\"";
+		ajaxRequest("/map/ajaxRemove/",request,removeMarkerSuccessFunction)
+	}
 	function updateMarker(){
 		console.log("update marker");
 		var markerTitle = $("#markerTitle").val();
+		var markerDsc = $("#markerDescription").val();
 		var markerId = $("#markerId").val();
-		var request = "\"{\\\"marker\\\":{\\\"id\\\":\\\""+markerId+"\\\",\\\"title\\\":\\\""+markerTitle+"\\\"}}\"";
+		var markerLat = selectedMarker.position.lat().toFixed(3);
+		var markerLng = selectedMarker.position.lng().toFixed(3);
+		var request = "\"{\\\"marker\\\":{\\\"id\\\":\\\""+markerId+"\\\",\\\"title\\\":\\\""+markerTitle+"\\\",\\\"dsc\\\":\\\""+markerDsc+"\\\",\\\"lng\\\":\\\""+markerLng+"\\\",\\\"lat\\\":\\\""+markerLat+"\\\"}}\"";
 		console.log(request);
 		$.ajax({
             url: "/map/ajaxUpdate/",
@@ -159,6 +174,7 @@ body {
 		for ( var i = 0; i < markers.length; i++) {
 			if(markers[i].metadata){
 				id = markers[i].metadata.id;
+				dsc = markers[i].metadata.dsc;
 			}else{
 				id=-1;
 			}
@@ -168,7 +184,7 @@ body {
 					+ markers[i].position.lng().toFixed(3) + ", "
 					+ markers[i].position.lat().toFixed(3) + "),\n";
 			jsonMarkers[i]={'lng':markers[i].position.lng().toFixed(3),'lat':markers[i].position.lat().toFixed(3)};
-			jsonString = jsonString+"{\\\"id\\\":"+id+",\\\"title\\\":\\\""+title+"\\\",\\\"lng\\\":"+markers[i].position.lng().toFixed(3)+",\\\"lat\\\":"+markers[i].position.lat().toFixed(3)+"},";
+			jsonString = jsonString+"{\\\"id\\\":"+id+",\\\"title\\\":\\\""+title+"\\\",\\\"dsc\\\":\\\""+dsc+"\\\",\\\"lng\\\":"+markers[i].position.lng().toFixed(3)+",\\\"lat\\\":"+markers[i].position.lat().toFixed(3)+"},";
 		}
 		jsonString = jsonString.substring(0, jsonString.length - 1);
 		jsonString = jsonString+"]";
@@ -197,30 +213,8 @@ body {
 			document.getElementById("savedata").value += "),\n";
 		}
 		jsonString = jsonString+"}\"";
-		
-		$.ajax({
-            url: "/map/ajaxAction/",
-            type: "POST",
-            beforeSend : function(xhr) {
-				xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'))
-			},
-            data:{"data":jsonString},
-            datatype: "json",
-            success : function(response,
-					textStatus, jqXHR) {
-				console.log(response.success);
-			},
-			error : function(jqXHR, textStatus,
-					errorThrown) {
-				console.log(
-						"The following error occured: "
-								+ textStatus,
-						errorThrown);
-			},
-			complete : function() {
-				console.log(3);
-			}
-        });
+		console.log(jsonString);
+		ajaxRequest("/map/ajaxAction/",jsonString);
 	}
 	
 	function createMarker(){
@@ -229,7 +223,7 @@ body {
 	
 	function getMarkers(){
 		{% for marker in markers %}
-			var newMarker = createMarker(new google.maps.LatLng({{marker.lat}}, {{marker.lon}}),"{{marker.title}}",{{marker.id}});
+			var newMarker = createMarker(new google.maps.LatLng({{marker.lat}}, {{marker.lon}}),"{{marker.title}}",{{marker.id}},"{{marker.dsc}}");
 			markers.push(newMarker);
 		{% endfor %}
 	}
@@ -239,7 +233,7 @@ body {
 		});
 	});
 	
-    function createMarker(latlng, title, id) {
+    function createMarker(latlng, title, id,dsc) {
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
@@ -247,10 +241,11 @@ body {
 		draggable : true,
 		title : title
         });
-    marker.metadata={'id':id};
+    marker.metadata={'id':id,'dsc':dsc};
     google.maps.event.addListener(marker, 'click', function() {
     	$("#markerTitle").val(marker.title);
     	$("#markerId").val(marker.metadata.id);
+    	$("#markerDescription").val(marker.metadata.dsc);
 		$("#markerInfoDiv").show();
 		selectedMarker = marker;
         });
@@ -273,6 +268,7 @@ body {
     Icon: <input type="text">
   </fieldset>
   <button id="updatebutton">Update</button>
+  <button id="removebutton">Remove</button>
 </div>
 	<p>Zapisz</p>
 	<button id="savebutton">SAVE</button>
