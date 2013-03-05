@@ -1,0 +1,41 @@
+<?
+ 
+// get timestamps
+$start = strtotime($_GET['start']);
+$end = strtotime($_GET['end']);
+$cb = $_GET['callback'];
+ 
+// start data
+echo "$cb([";
+ 
+// make some fake data
+for ($x=0; $x<20; $x++) {
+  if ($x) echo ',';
+  echo '{';
+  echo 'title:"Item '.$x.'",';
+  echo 'start:"'.date('Y-m-d\TH:i:sO', rand($start, $end)).'",';
+  echo 'point:{lat:'.(43.0 + 10*(float)rand()/(float)getrandmax())
+       .',lon:'.(11.0 + 10*(float)rand()/(float)getrandmax()).'}';
+  echo '}';
+}
+ 
+// end data
+echo "])";
+ 
+?>
+
+options: {
+                    // Data to be loaded in JSON from a remote URL
+                    type: "json", 
+                    // url with start/end placeholders
+                    url: "http://www.nickrabinowitz.com/projects/timemap/progsvc.php?start=[start]&end=[end]&callback=?",
+                    start: "2004-10-15",
+                    // lower cutoff date for data
+                    dataMinDate: "2004-10-15",
+                    // four months in milliseconds
+                    interval: 10368000000,   
+                    // function to turn date into string appropriate for service
+                    formatDate: function(d) {
+                        return TimeMap.util.formatDate(d, 1);
+                    }
+                }

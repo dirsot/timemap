@@ -16,7 +16,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('timemap.view',
-    url(r'^$', 'index', name='index'), 
+    #url(r'^$', 'index', name='index'), 
     url(r'^line',  include('timemap.timeline.urls')),  
     url(r'^map',  include('timemap.timeline.urls')),                    
 )

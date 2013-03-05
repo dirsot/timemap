@@ -19,6 +19,10 @@ CHAR_SET = string.ascii_uppercase + string.digits
 def getCode():
     return ''.join(random.sample(CHAR_SET, 9))
 
+def showTimeMap(request,fileCode=None):
+    return render_to_response('timeMap.html', {},
+        context_instance=RequestContext(request))
+
 def jsonMapData(request,mapCode):
     mapCode = Map.objects.get(code=mapCode)
     markers = Marker.objects.filter(map=mapCode)

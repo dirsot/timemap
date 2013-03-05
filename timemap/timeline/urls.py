@@ -2,7 +2,9 @@ from django.conf.urls.defaults import patterns, include, url
 import os.path
 
 urlpatterns = patterns('timemap.timeline.views',
-    url(r'^$', 'index', name='index'), 
+    #url(r'^$', 'index', name='index'), 
+    url(r'/tm/(?P<fileCode>[A-Zz0-9]{9})/$', 'showTimeMap', name='showTimeMap'),
+
     url(r'/dodajMarker$', 'addMarker', name='addMarker'),
     url(r'/googleManager$', 'googleManager', name='googleManager'), 
     

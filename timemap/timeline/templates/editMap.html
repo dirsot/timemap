@@ -67,7 +67,7 @@ body {
 		var mapOptions = {
 			center : new google.maps.LatLng(51.397, 21.644),
 			zoom : 5,
-			streetViewControl : true,
+			streetViewControl : false,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
 		map = new google.maps.Map(document.getElementById("map_canvas"),
@@ -117,7 +117,6 @@ body {
 					var title = $("#markerInfoDiv #markerTitle").val();
 					marker.setTitle(title);
 					console.log(marker);
-					
 					
 					markers.push(marker);
 					
@@ -391,21 +390,15 @@ body {
 	<textarea id="savedata" rows="2" cols="90"></textarea>
 	<div id="map_canvas" style="width: 800px; height: 500px"></div>
 	
-	    <div id="tl" class="timeline-default" style="height: 200px;">
+	<div id="tl" class="timeline-default" style="height: 200px;">
     </div>
     
     <div style="width: 100%">
         <table style="text-align: center; width: 100%">
             <tr>
-                <td><a href="javascript:centerTimeline(1);">1 AD</a></td>
-                <td><a href="javascript:centerTimeline(250);">250 AD</a></td>
-                <td><a href="javascript:centerTimeline(500);">500 AD</a></td>
-                <td><a href="javascript:centerTimeline(750);">750 AD</a></td>
-                <td><a href="javascript:centerTimeline(1000);">1000 AD</a></td>
-                <td><a href="javascript:centerTimeline(1250);">1250 AD</a></td>
-                <td><a href="javascript:centerTimeline(1500);">1500 AD</a></td>
-                <td><a href="javascript:centerTimeline(1750);">1750 AD</a></td>
-                <td><a href="javascript:centerTimeline(2000);">2000 AD</a></td>
+                <td><a href="javascript:centerTimeline(1910);">1910</a></td>
+                <td><a href="javascript:centerTimeline(1920);">1920</a></td>
+                <td><a href="javascript:centerTimeline(1930);">1930</a></td>
             </tr>
         </table>
     </div>
