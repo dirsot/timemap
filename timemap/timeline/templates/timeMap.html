@@ -43,6 +43,9 @@ $(function() {
     tm = TimeMap.init({
         mapId: "map",               // Id of map div element (required)
         timelineId: "timeline",     // Id of timeline div element (required)
+       	options:{
+       		mapType:google.maps.MapTypeId.SATELLITE 
+       	},
         datasets: [
             {
                 id: "artists",
@@ -147,7 +150,7 @@ Timeline.DateTime.WEEK
     // set the map to our custom style
     var gmap = tm.getNativeMap();
     gmap.mapTypes.set("white", styledMapType);
-    gmap.setMapTypeId("white");
+    //gmap.setMapTypeId("white");
 });
     </script>
     <link href="/site_media/examples.css" type="text/css" rel="stylesheet"/>
