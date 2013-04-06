@@ -1,5 +1,11 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: praca.aux
-A level-1 auxiliary file: rozdzial1.aux
-A level-1 auxiliary file: rozdzial2.aux
+A level-1 auxiliary file: 01_wstep.aux
+A level-1 auxiliary file: 02_state_of_art.aux
+A level-1 auxiliary file: 03_def_problemu.aux
+A level-1 auxiliary file: 04_opis_roz.aux
+A level-1 auxiliary file: 05_przyklad_uzycia.aux
+A level-1 auxiliary file: 06_podsumowanie.aux
 The style file: alpha.bst
 Database file #1: bibliografia.bib
+Warning--I didn't find a database entry for "Dil00"
+(There was 1 warning)

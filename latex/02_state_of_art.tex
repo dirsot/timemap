@@ -1,0 +1,130 @@
+\chapter{State of art}
+\label{cha:State of art}
+20-30
+W rozdziale tym przedstawiono podstawowe informacje dotyczące struktury prostych plików \LaTeX a. Omówiono również metody kompilacji plików z zastosowaniem programów \emph{latex} oraz \emph{pdflatex}.
+
+%---------------------------------------------------------------------------
+
+\section{Rodzaje map}
+\label{sec:Rodzaje map}
+
+Tworząc aplikację która ma dostarczać informacji korzystających z map należy zapoznać się dostępnymi źródłami. Z powodu szrokiego wyboru poniżej omówione zostaną jedynie aplikacje które dostarczają informacji ogólnoświatowych. Na polskim rynku dostępnych jest kilka rozwiązań, ich główną wadą jest ograniczenie do terytorium Polski, dodatkowo często nie dostarczają one obrazów satelitarnych, są to m.in. \underline{\texttt{http://zumi.pl}}
+
+\subsection{Google Maps}
+\label{subsec:Google Maps}
+
+\subsection{Windows Maps}
+\label{subsec:Windows Maps}
+
+\subsection{Apple Maps}
+\label{subsec:Apple Maps}
+
+\section{Google Earth}
+\label{sec:Google Earth}
+
+Ciekawe wykorzystanie obrazów satelitarnych i wskaźnika czasu zostało zaprezentowane w programie Google Earth. W aplikacji tej możemy zobaczyć nie tylko najbardziej aktualne zdjęcia, ale jesteśmy w stanie cofnąć się w czasie i zobaczyć jak wyglądał obszar na który patrzymy w przeszłości.
+
+Przykład takiej sytuacji został przedstawiony na rysunku \ref{fig:lasVegas1}, obraz terenu na którym powstanie miasto Las Vegas w roku 1950. Jak teren ten wyglądał w roku 1977 widzimy na rysunku \ref{fig:lasVegas2}, pomimo widocznych zmian teren ten nadal w dużym stopniu jest pustynny,dopiero na rysunku \ref{fig:lasVegas3} widzimy aktualny stan miasta.
+
+Dzięki funkcji zmiany punktu i kąta patrzenia, pokazywania ciekawych miejsc czy chociażby włączania trybu w którym budynki nabierają formy przestrzennej, 3D, możemy poprzez zabawę i wirtualne wycieczki poszeżać naszą wiedzę o otaczającym nas świecie. 
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=100mm]{ge/01_1950.jpg}
+  \caption{Las Vegas w 1950 roku.}
+  \label{fig:lasVegas1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=100mm]{ge/02_1977.jpg}
+  \caption{Las Vegas w 1950 roku.}
+  \label{fig:lasVegas2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=100mm]{ge/03_2012.jpg}
+  \caption{Las Vegas w 1950 roku.}
+  \label{fig:lasVegas3}
+\end{figure}
+
+\section{Time line}
+\label{sec:Time line}
+
+Plik \LaTeX owy jest plikiem tekstowym, który oprócz tekstu zawiera polecenia formatujące ten tekst (analogicznie do języka HTML). Plik składa się z dwóch części:
+\begin{enumerate}%[1)]
+\item Preambuły -- określającej klasę dokumentu oraz zawierającej m.in. polecenia dołączającej dodatkowe pakiety;
+
+\item Części głównej -- zawierającej zasadniczą treść dokumentu.
+\end{enumerate}
+
+
+\begin{lstlisting}
+\documentclass[a4paper,12pt]{article}      % preambuła
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+
+\begin{document}                           % część główna
+
+\section{Sztuczne życie}
+
+% treść
+% ąśężźćńłóĘŚĄŻŹĆŃÓŁ
+
+\end{document}
+\end{lstlisting}
+
+%---------------------------------------------------------------------------
+
+\section{Kompilacja}
+\label{sec:kompilacja}
+
+\begin{lstlisting}
+latex test.tex
+dvips test.dvi -o test.ps
+ps2pdf test.ps
+\end{lstlisting}
+%
+lub za pomocą PDF\LaTeX:
+\begin{lstlisting}
+pdflatex test.tex
+\end{lstlisting}
+
+%---------------------------------------------------------------------------
+
+\section{Narzędzia}
+\label{sec:narzedzia}
+
+\begin{itemize}
+\item Edit shortcuts -- definiowanie własnych klawiszy skrótu;
+\item Line Tools -- dodatkowe operacje na liniach tekstu;
+\end{itemize}
+
+%---------------------------------------------------------------------------
+
+\section{Przygotowanie dokumentu}
+\label{sec:przygotowanieDokumentu}
+
+Plik źródłowy \LaTeX a jest zwykłym plikiem tekstowym. Przygotowując plik
+źródłowy warto wiedzieć o kilku szczegółach:
+
+\begin{itemize}
+\item
+Poszczególne słowa oddzielamy spacjami, przy czym ilość spacji nie ma znaczenia.
+Po kompilacji wielokrotne spacje i tak będą wyglądały jak pojedyncza spacja.
+Aby uzyskać {\em twardą spację}, zamiast znaku spacji należy użyć znaku {\em
+tyldy}.
+
+\item
+Znakiem końca akapitu jest pusta linia (ilość pusty linii nie ma znaczenia), a
+nie znaki przejścia do nowej linii.
+
+\item
+\LaTeX~sam formatuje tekst. \textbf{Nie starajmy się go poprawiać}, chyba, że
+naprawdę wiemy co robimy.
+\end{itemize}
+
+
