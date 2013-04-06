@@ -183,3 +183,29 @@ function drawLine(tm) {
                             }
                           }
 */
+
+
+
+function drawRectangle(visibleMarkers) {
+  var polygon;
+
+  var polygonCoords = [];
+  for ( var i = 0; i < visibleMarkers.length; i++) {
+	lat = visibleMarkers[i].opts.infoPoint.lat;
+	lng =visibleMarkers[i].opts.infoPoint.lng;
+	polygonCoords.push(new google.maps.LatLng(lat, lng));
+  }
+
+
+  polygon = new google.maps.Polygon({
+    paths: polygonCoords,
+    strokeColor: "#FF0000",
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: "#FF0000",
+    fillOpacity: 0.35
+  });
+
+  polygon.setMap(tm.map.getMap());
+  return polygon;
+}

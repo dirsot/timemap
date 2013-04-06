@@ -477,6 +477,7 @@ TimeMap.prototype = {
             // update map on timeline scroll
             timeline.getBand(0).addOnScrollListener(function() {
                 tm.filter("map");
+				dataRefreshedFunction(tm);
             });
         }
         

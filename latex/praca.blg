@@ -7,5 +7,16 @@ A level-1 auxiliary file: 05_przyklad_uzycia.aux
 A level-1 auxiliary file: 06_podsumowanie.aux
 The style file: alpha.bst
 Database file #1: bibliografia.bib
-Warning--I didn't find a database entry for "Dil00"
-(There was 1 warning)
+Too many commas in name 1 of "Nurseitov N.,Paulson M.,Reynolds R.,Izurieta C." for entry JsonXmlComp
+while executing---line 1185 of file alpha.bst
+Too many commas in name 1 of "Nurseitov N.,Paulson M.,Reynolds R.,Izurieta C." for entry JsonXmlComp
+while executing---line 1185 of file alpha.bst
+Too many commas in name 1 of "Boci Lin,Yan Chen,Xu Chen,Yingying Yu" for entry JsonXmlAjaxComp
+while executing---line 1185 of file alpha.bst
+Too many commas in name 1 of "Boci Lin,Yan Chen,Xu Chen,Yingying Yu" for entry JsonXmlAjaxComp
+while executing---line 1185 of file alpha.bst
+Too many commas in name 1 of "Boci Lin,Yan Chen,Xu Chen,Yingying Yu" for entry JsonXmlAjaxComp
+while executing---line 1250 of file alpha.bst
+Too many commas in name 1 of "Nurseitov N.,Paulson M.,Reynolds R.,Izurieta C." for entry JsonXmlComp
+while executing---line 1250 of file alpha.bst
+(There were 6 error messages)
