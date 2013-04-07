@@ -26,22 +26,20 @@ def showTimeMap(request,fileCode=None):
 def jsonMapData(request,mapCode):
     mapCode = Map.objects.get(code=mapCode)
     markers = Marker.objects.filter(map=mapCode)
-    
-    results={
-'dateTimeFormat': 'iso8601',
-'wikiURL': "http://simile.mit.edu/shelf/",
-'wikiSection': "Simile Cubism Timeline",
-
-'events' : [
-        {'start': '1924',
-        'title': 'Punkt'
-        },
-
-
-        {'start': '1913',
-        'end': '1929',
-        'title': 'Okres'
-        }]}
+    title = 'title'
+    start = 'start'
+    point = 'point'
+    lat = 'lat'
+    lon='lon'
+    polygon='polygon'
+    end='end'
+    results=[{title:'Item 1',start:'1969-12-31T19:00:00-0500',end:'1971',polygon:[
+                                                                       {lat:51.8265678654,lon:12.4885120514},
+                                                                       {lat:51.1265678654,lon:12.4285120514},
+                                                                       {lat:51.4265678654,lon:11.4185120514}
+                                                                       ],
+             'options':{'endpoly':[{lat:51.0265678654,lon:12.04885120514},
+                                                                       {lat:51.8265678654,lon:12.4885120514}]}}]
     
 
     jsonResult = simplejson.dumps(results)

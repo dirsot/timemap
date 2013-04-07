@@ -37,7 +37,7 @@ $(function() {
 				polygon.setMap(null);
 			}
 			console.debug("refresh polygon");
-        	polygon = drawRectangle(newMarkers);
+        	//polygon = drawRectangle(newMarkers);
        	 	renderedMarkers = newMarkers;
         }
     }
@@ -78,7 +78,8 @@ $(function() {
                 
                 options: {
                 	type: "json",
-                	url: "http://www.nickrabinowitz.com/projects/timemap/progsvc.php?start=[start]&end=[end]&callback=?",
+                	url: "/map/jsonmapdata/123456789/",
+                	//url: "http://www.nickrabinowitz.com/projects/timemap/progsvc.php?start=[start]&end=[end]&callback=?",
                     start: "2004-10-15",
                  // lower cutoff date for data
                     dataMinDate: "2004-10-15",
@@ -170,9 +171,77 @@ $(function() {
             //});
             if(renderedMarkers.length != newMarkers.length){
             	console.debug("refresh polygon");
-            	polygon = drawRectangle(newMarkers);
+            	//polygon = drawRectangle(newMarkers);
            	 	renderedMarkers = newMarkers;
             }
+            
+            
+            tm.addFilterChain("polytween",
+                    function(item) {
+                        // create tween if item is visible
+                        if (item.placemarkVisible) {
+                            var theme = item.opts.theme || item.dataset.opts.theme;
+                            var pm = item.placemark;
+                            var ep = item.opts.endpoly;
+                            // get tween percent
+                            var now = item.dataset.timemap.timeline.getBand(0)
+                                .getCenterVisibleDate().getTime();
+                            var start = item.event.getStart().getTime();
+                            var end = item.event.getEnd().getTime();
+                            var percent;
+                            if (now < start) percent = 0;
+                            else if (now > end) percent = 1;
+                            else percent = 1 - ((end - now) / (end - start));
+                            // assume the same number of vertices
+                            var points=[], pt1, pt2;
+                            for (var x=0; x<pm.points.length; x++) {
+                                pt1 = pm.points[x];
+                                pt2 = ep[x];
+                                if(!pt2){
+                                	pt2=pt1;
+                                }
+                                points.push(new mxn.LatLonPoint(
+                                    (pt1.lat + ((parseFloat(pt2.lat) - pt1.lat) * percent)),
+                                    (pt1.lng + ((parseFloat(pt2.lon) - pt1.lng) * percent))
+                                ));
+                                // remove the old tween
+                                if (item.tween) item.map.removePolyline(item.tween);
+                                // hide the real placemark
+                                item.placemark.hide();
+                                // show the new tween
+                                item.tween = new mxn.Polyline(points), 
+                                item.tween.addData({
+                                    color: theme.lineColor, 
+                                    width: theme.lineWeight, 
+                                    opacity: theme.lineOpacity, 
+                                    closed: true, 
+                                    fillColor: theme.fillColor,
+                                    fillOpacity: theme.fillOpacity
+                                });
+                                item.map.addPolyline(item.tween);
+                            }
+                        } else {
+                            // remove tween if any
+                            if (item.tween) {
+                                item.map.removePolyline(item.tween);
+                                item.tween = null;
+                            }
+                        }
+                    },
+                    function(item) {
+                    }
+                );
+                tm.addFilter("polytween", function(item) {
+                    return (item.event && item.placemark &&
+                        !item.event.isInstant() && item.getType() == 'polygon' && 
+                        item.opts.endpoly);
+                });
+                tm.filter("polytween");
+                // update map on timeline scroll
+                tm.timeline.getBand(0).addOnScrollListener(function() {
+                    tm.filter("polytween");
+                });
+            
         }
 
     });
@@ -245,7 +314,7 @@ $(function() {
     <link href="/site_media/examples.css" type="text/css" rel="stylesheet"/>
     <style>
     div#timelinecontainer{ height: 100px; }
-    div#mapcontainer{ height: 300px; }
+    div#mapcontainer{ height: 450px; }
     </style>
   </head>
 
@@ -260,7 +329,6 @@ $(function() {
         </select>
     </form>
     <div id="help">
-    <h1>3</h1>
     
     </div>
     <div id="timemap">
