@@ -1,9 +1,22 @@
+
+\chapter{Rys historyczny}
+\label{sec:hisotryMap}
+
+Pomimo że w obecnych czasach, mapy nie są niczym niezwykłym, i wydają się codziennością nie zawsze tak było. W histori człowieka można znaleść okresy czasu kiedy kartografia była nieznana, lub była bardzo niedokładna.
+
+Pierwsze malowidła które można uznać za graficzną reprezentację otoczenia archeolodzy napotkali w okolicach Pavloc (Czechy), datowaną są one na 25 wiek przed naszą erą \cite{pre2} . Na 14 wiek p.n.e datowane są wykopaliska w Navarre(Hiszpania) obejmujące rysunki na piaskowcu \cite{pre1}.
+
+Jeszcze w XIV kartografia była bardzo ograniczona, mapy którymi posługiwano się nie były zbyt dokłądne. 12 października 1410 gdy Krzysztof Kolumb dotarł do brzegów wyspy San Salvador uznaj ją za jedną z wysp japońskich \cite{columb}. Aby lepiej zrozumieć powód tej pomyłki wystarczy spojrzeć na mapę stworzoną w XV wieku przez kartografa Henricusa Martellusa \ref{fig:worldMap1}. Widzimy na niej że m.in. obie ameryki nie były znane uwczesnym ludzion.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=100mm]{ge/worldMap1.jpg}
+  \caption{Mapa świata z 1489 roku.}
+  \label{fig:worldMap1}
+\end{figure}
+
 \chapter{State of art}
 \label{cha:State of art}
-20-30
-W rozdziale tym przedstawiono podstawowe informacje dotyczące struktury prostych plików \LaTeX a. Omówiono również metody kompilacji plików z zastosowaniem programów \emph{latex} oraz \emph{pdflatex}.
-
-%---------------------------------------------------------------------------
 
 \section{Rodzaje map}
 \label{sec:Rodzaje map}
@@ -14,7 +27,7 @@ Tworząc aplikację która ma dostarczać informacji korzystających z map nale�
 \subsection{Google Maps}
 \label{subsec:Google Maps}
 
-\ref{fig:googleMaps_1}
+Rysunek \ref{fig:googleMaps_1} przedstawia obraz otrzymany w aplikacji Google Maps. Dodatkowo włączona opcja prezentacji natężenia ruchu jedynie potwierdza duże możliwości i łatwość obsługi. Przyjazny interfejs sprawia że praca jest prosta i pozwala na osiągnięcie bardzo dobrych wyników.
 
 \begin{figure}[H]
   \centering
@@ -27,11 +40,7 @@ Tworząc aplikację która ma dostarczać informacji korzystających z map nale�
 \subsection{Windows Maps}
 \label{subsec:Windows Maps}
 
-http://www.flashearth.com/
-
-nie wszystko
-
-\ref{fig:bingMaps_1}
+Rysunek \ref{fig:bingMaps_1} przedstawia obraz otrzymany wykorzystując Bing Maps. W tym konkretnym przykładzie widzimy znaczną różnicę kolorów, obecność chmur pomniejsza wartość tych zdjęć. Należy wspomnieć o znacznie uboższym interfejsie dostarczanym użytkownikowi, interakcja jest w znacznym stopniu uboższa.
 
 \begin{figure}[H]
   \centering
@@ -43,7 +52,7 @@ nie wszystko
 \subsection{Yahoo Maps}
 \label{subsec:Yahoo Maps}
 
-\ref{fig:yahooMaps_1}
+Kolejnym dostarczycielem danych kartograficznym jest Yahoo, przykład znajduje się na rysunku \ref{fig:yahooMaps_1}. Interfejs jest zbliżony do Bing Maps, jednak obszar na którym możemy przedlądać zdjęcia jest mniejszy, obszary oddalone od większych miast nie są w pełni uwzglęnione.
 
 tylko granice krakowa
 
@@ -57,7 +66,7 @@ tylko granice krakowa
 \subsection{Apple Maps}
 \label{subsec:Apple Maps}
 
-Kolejną dużą marką która dostarcza informację jest Apple. Niestety nie ma wersji która pozwalałaby na dostęp do tej usługi z powszechnie używanych komputerów stacjonarnych. 
+Kolejną dużą marką która dostarcza informację jest Apple. Niestety nie ma wersji która pozwalałaby na dostęp do tej usługi z powszechnie używanych komputerów stacjonarnych.
 
 \section{Google Earth}
 \label{sec:Google Earth}
@@ -92,79 +101,10 @@ Dzięki funkcji zmiany punktu i kąta patrzenia, pokazywania ciekawych miejsc cz
 \section{Time line}
 \label{sec:Time line}
 
-Plik \LaTeX owy jest plikiem tekstowym, który oprócz tekstu zawiera polecenia formatujące ten tekst (analogicznie do języka HTML). Plik składa się z dwóch części:
-\begin{enumerate}%[1)]
-\item Preambuły -- określającej klasę dokumentu oraz zawierającej m.in. polecenia dołączającej dodatkowe pakiety;
+Jedną z większych uniedogonień podczas korzystania z map jest ich statyczność. Tradycyjne mapy pozwalają poznać jedynie jedną konkretną sytuację któa panowała na danym obszarze, nawet jeśli nałożymy kilka informacji z różnych okresów na jeden obraz, wynik może przestać być czytely. Korzystając w map dostępnych w internecie zazwyczaj istnieje opcja zmiany widoku. W jednej chwili możemy być na wysokości kilkuset kilometrów nad poziomem morza, aby w kolejnej znaleść się kilkaset metrów nad ziemią.
 
-\item Części głównej -- zawierającej zasadniczą treść dokumentu.
-\end{enumerate}
+Ciekawą opcją jest dostarczana przez Google Earth możliwość zmiany czasu wykonania zdjęć. Niestety jest ona nieprzydatna jeśli chcemy przezentować własne dane.
 
 
-\begin{lstlisting}
-\documentclass[a4paper,12pt]{article}      % preambuła
-\usepackage[polish]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{times}
-
-\begin{document}                           % część główna
-
-\section{Sztuczne życie}
-
-% treść
-% ąśężźćńłóĘŚĄŻŹĆŃÓŁ
-
-\end{document}
-\end{lstlisting}
-
-%---------------------------------------------------------------------------
-
-\section{Kompilacja}
-\label{sec:kompilacja}
-
-\begin{lstlisting}
-latex test.tex
-dvips test.dvi -o test.ps
-ps2pdf test.ps
-\end{lstlisting}
-%
-lub za pomocą PDF\LaTeX:
-\begin{lstlisting}
-pdflatex test.tex
-\end{lstlisting}
-
-%---------------------------------------------------------------------------
-
-\section{Narzędzia}
-\label{sec:narzedzia}
-
-\begin{itemize}
-\item Edit shortcuts -- definiowanie własnych klawiszy skrótu;
-\item Line Tools -- dodatkowe operacje na liniach tekstu;
-\end{itemize}
-
-%---------------------------------------------------------------------------
-
-\section{Przygotowanie dokumentu}
-\label{sec:przygotowanieDokumentu}
-
-Plik źródłowy \LaTeX a jest zwykłym plikiem tekstowym. Przygotowując plik
-źródłowy warto wiedzieć o kilku szczegółach:
-
-\begin{itemize}
-\item
-Poszczególne słowa oddzielamy spacjami, przy czym ilość spacji nie ma znaczenia.
-Po kompilacji wielokrotne spacje i tak będą wyglądały jak pojedyncza spacja.
-Aby uzyskać {\em twardą spację}, zamiast znaku spacji należy użyć znaku {\em
-tyldy}.
-
-\item
-Znakiem końca akapitu jest pusta linia (ilość pusty linii nie ma znaczenia), a
-nie znaki przejścia do nowej linii.
-
-\item
-\LaTeX~sam formatuje tekst. \textbf{Nie starajmy się go poprawiać}, chyba, że
-naprawdę wiemy co robimy.
-\end{itemize}
 
 

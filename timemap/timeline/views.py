@@ -33,13 +33,18 @@ def jsonMapData(request,mapCode):
     lon='lon'
     polygon='polygon'
     end='end'
-    results=[{title:'Item 1',start:'1969-12-31T19:00:00-0500',end:'1971',polygon:[
-                                                                       {lat:51.8265678654,lon:12.4885120514},
-                                                                       {lat:51.1265678654,lon:12.4285120514},
-                                                                       {lat:51.4265678654,lon:11.4185120514}
-                                                                       ],
-             'options':{'endpoly':[{lat:51.0265678654,lon:12.04885120514},
-                                                                       {lat:51.8265678654,lon:12.4885120514}]}}]
+    results=[{
+              title:'Item 1',
+              start:'1969-12-31T19:00:00-0500',
+              end:'1971',
+              polygon:[
+                       {lat:51.8265678654,lon:12.4885120514},
+                       {lat:51.1265678654,lon:12.4285120514},
+                       {lat:51.4265678654,lon:11.4185120514}],
+                       'options':{
+                                  'endpoly':[
+                                             {lat:59.6265678654,lon:12.04885120514},
+                                             {lat:51.8265678654,lon:12.4885120514}]}}]
     
 
     jsonResult = simplejson.dumps(results)
