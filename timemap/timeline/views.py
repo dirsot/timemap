@@ -23,30 +23,51 @@ def showTimeMap(request,fileCode=None):
     return render_to_response('timeMap.html', {},
         context_instance=RequestContext(request))
 
-def jsonMapData(request,mapCode):
-    mapCode = Map.objects.get(code=mapCode)
-    markers = Marker.objects.filter(map=mapCode)
-    title = 'title'
-    start = 'start'
-    point = 'point'
-    lat = 'lat'
-    lon='lon'
-    polygon='polygon'
-    end='end'
+def ValuesQuerySetToDict(vqs):
+    return [item for item in vqs]
+
+def jsonMapData(request,mapId):
+    mapCode = Map.objects.get(code=mapId)
+    fromDate = request.GET[u'start']
+    toDate = request.GET[u'end']
+    polygons= Polygon.objects.filter(map=mapCode,date_from__gte=fromDate,date_from__lte=toDate).values()
+    polygonsList = ValuesQuerySetToDict(polygons)
+    #polygonsList=[]
+    results = []
     results=[{
-              title:'Item 1',
-              start:'1969-12-31T19:00:00-0500',
-              end:'1971',
-              polygon:[
-                       {lat:51.8265678654,lon:12.4885120514},
-                       {lat:51.1265678654,lon:12.4285120514},
-                       {lat:51.4265678654,lon:11.4185120514}],
+              'title':'Item 1',
+              'start':'1969-12-31T19:00:00-0500',
+              'end':'1971',
+              'polygon':[
+                       {'lat':51.8265678654,'lon':12.4885120514},
+                       {'lat':51.1265678654,'lon':12.4285120514},
+                       {'lat':51.4265678654,'lon':11.4185120514}],
                        'options':{
                                   'endpoly':[
-                                             {lat:59.6265678654,lon:12.04885120514},
-                                             {lat:51.8265678654,lon:12.4885120514}]}}]
-    
+                                             {'lat':59.6265678654,'lon':12.04885120514},
+                                             {'lat':51.8265678654,'lon':12.4885120514}]}}]    
+    try:
+        for ith in range(len(polygons)):
+            jsonPolygon = {}
+            poly = polygonsList[ith]
+            jsonPolygon['id']=poly['main_poly']
+            jsonPolygon['id2']=poly['inner_poly']
+            jsonPolygon['title']=poly['text']
+            jsonPolygon['start']='\''+str(poly['date_from'])+'\''
+            jsonPolygon['end']='\''+str(poly['date_to'])+'\''
+            markers= Marker.objects.filter(main_poly=poly['main_poly'],inner_poly=poly['inner_poly']).values()
+            markersList = ValuesQuerySetToDict(markers)
+            jsonPolygon['mc']=len(markers)
+            markersData=[]
+            for ithMarker in range(markers.count()):
+                mar = markers[ithMarker]
+                markersData.append({'lat':mar['lat'],'lon':mar['lon']})
+            jsonPolygon['polygon']=markersData
+            results.append(jsonPolygon)
+    except Exception, e:
+        logger.debug(e)
 
+    
     jsonResult = simplejson.dumps(results)
     return HttpResponse(jsonResult, mimetype='application/json')
 

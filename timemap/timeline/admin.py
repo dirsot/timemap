@@ -17,7 +17,7 @@ class MapAdmin(admin.ModelAdmin):
     
     
 class MarkerAdmin(admin.ModelAdmin):
-    list_display = ('map','title','lon','lat','dateFrom','dateTo')
+    list_display = ('map','lon','lat')
 
 class CircleAdmin(admin.ModelAdmin):
     list_display = ('map','centerLon','centerLat','radius','dateFrom','dateTo')

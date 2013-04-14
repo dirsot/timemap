@@ -78,13 +78,13 @@ $(function() {
                 
                 options: {
                 	type: "json",
-                	url: "/map/jsonmapdata/123456789/",
+                	url: "/map/jsonmapdata/123456789?start=[start]&end=[end]",
                 	//url: "http://www.nickrabinowitz.com/projects/timemap/progsvc.php?start=[start]&end=[end]&callback=?",
-                    start: "2004-10-15",
+                    start: "1786-10-15",
                  // lower cutoff date for data
-                    dataMinDate: "2004-10-15",
+                    dataMinDate: "1786-10-15",
                     // four months in milliseconds
-                    interval: 10368000000,   
+                    interval: 103680000000,   
                     // function to turn date into string appropriate for service
                     formatDate: function(d) {
                         return TimeMap.util.formatDate(d, 1);
@@ -319,15 +319,6 @@ $(function() {
   </head>
 
   <body>
-      <form>
-        <select id="tag_select">
-            <option value="">All tags</option>
-            <option value="painter">painter</option>
-            <option value="sculptor">sculptor</option>
-            <option value="inventor">inventor</option>
-            <option value="patron">patron</option>
-        </select>
-    </form>
     <div id="help">
     
     </div>
