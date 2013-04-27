@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml version="666.0">
+  <Document>
+    <name><![CDATA[US States]]></name>
+    <open>1</open>
+    <Style id="Style_5">
+      <IconStyle>
+        <scale>0.4</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/star.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <color>9900ffff</color>
+        <scale>1</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>990000ff</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>997f7fff</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+
+
+    <Placemark id="pm251">
+      <name><![CDATA[Hawaii (1959)]]></name>
+      <Snippet maxLines="0">empty</Snippet>
+      <description></description>
+      <TimeSpan>
+        <begin>1989</begin>
+      </TimeSpan>
+      <styleUrl>#Style_5</styleUrl>
+      <MultiGeometry>
+        <Point id="g866">
+          <altitudeMode>clampToGround</altitudeMode>
+          <coordinates>
+-156.326917860547,20.2401578536914 -156.326917860547,20.2401578536914</coordinates>
+        </Point>
+        <MultiGeometry>
+          <Polygon id="g867">
+            <altitudeMode>clampToGround</altitudeMode>
+            <outerBoundaryIs>
+              <LinearRing>
+                <coordinates>
+-159.335174733889,21.9483433404175 
+-159.327130348878,22.0446395507162 
+-159.295025589769,22.1248124949548 
+-159.343195828355,22.1970166285359 
+-159.391366885913,22.2291198667724 
+-159.576012589057,22.2131796383001 
+-159.712505933171,22.1490592515515 
+-159.800814224332,22.0366665967853 
+-159.736592652746,21.9644203111023 
+-159.640246973766,21.9483657695954 
+-159.576021285803,21.8841361312636 
+-159.439545188912,21.8680716835921 
+-159.335174733889,21.9483433404175 
+                </coordinates>
+              </LinearRing>
+            </outerBoundaryIs>
+          </Polygon>
+        </MultiGeometry>
+      </MultiGeometry>
+    </Placemark>
+
+  </Document>
+</kml>

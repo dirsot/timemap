@@ -294,13 +294,17 @@ EGeoXml.prototype.createPolygon = function(points,color,width,opacity,fillcolor,
 	  p = {};
 	  p.lat = point.lat();
       p.lon = point.lng();
-      pointsArray.push(p)
+      if(p.lon==null || p.lat == null || isNaN(p.lat) || isNaN(p.lon)){
+    	  console.log("Null points");
+      }else{
+    	  pointsArray.push(p)
+      }
   }
-  item.start=1999;
-  item.end = 2100;
+  item.start="1980-01-02";
+  item.end = "1990-01-02";
   item.polygon = pointsArray;
-  item.title = "test";
-  sessionStorage.polygon = JSON.stringify(item);
+  item.title = "Firenze";
+  sessionStorage.polyline = JSON.stringify(item);
 
   if (this.opts.sidebarid) {
     var n = this.gpolygons.length-1;
