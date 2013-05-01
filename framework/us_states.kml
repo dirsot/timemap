@@ -25,6 +25,27 @@
         <outline>1</outline>
       </PolyStyle>
     </Style>
+	<Style id="Style_4">
+      <IconStyle>
+        <scale>0.4</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/star.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <color>99001111</color>
+        <scale>1</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>99000011</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>99717111</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
 
     <Placemark id="pm251">
       <name><![CDATA[Hawaii (1959)]]></name>
@@ -90,7 +111,7 @@
       <TimeSpan>
         <begin>1959</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g866">
           <altitudeMode>clampToGround</altitudeMode>
@@ -343,7 +364,7 @@
       <TimeSpan>
         <begin>1889</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g874">
           <altitudeMode>clampToGround</altitudeMode>
@@ -5007,7 +5028,7 @@
       <TimeSpan>
         <begin>1787</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g915">
           <altitudeMode>clampToGround</altitudeMode>

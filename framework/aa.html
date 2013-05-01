@@ -47,9 +47,14 @@
         document.getElementById('byte_range').textContent = 
             ['Read bytes: ', start + 1, ' - ', stop + 1,
              ' of ', file.size, ' byte file'].join('');
+		var d = new Date();
+		console.log(d.getTime());
+		
 		exml = new EGeoXml("exml", evt.target.result);	 
 		
 		exml.parse()
+		d = new Date();
+		console.log(d.getTime());
 		
 		console.log(2);
       }
@@ -123,6 +128,42 @@
 	        ],
 	    });
 	    
+		var drawingManager = new google.maps.drawing.DrawingManager({
+  drawingMode: google.maps.drawing.OverlayType.MARKER,
+  drawingControl: true,
+  drawingControlOptions: {
+    position: google.maps.ControlPosition.TOP_CENTER,
+    drawingModes: [
+      google.maps.drawing.OverlayType.MARKER,
+      google.maps.drawing.OverlayType.CIRCLE,
+      google.maps.drawing.OverlayType.POLYGON,
+      google.maps.drawing.OverlayType.POLYLINE,
+      google.maps.drawing.OverlayType.RECTANGLE
+    ]
+  },
+  markerOptions: {
+    icon: 'http://www.example.com/icon.png'
+  },
+		circleOptions : {
+			editable : true,
+			clickable : true,
+			strokeColor : '#FF0000',
+			strokeOpacity : 0.8,
+			strokeWeight : 2,
+			fillColor : '#FF0000',
+			fillOpacity : 0.35,
+		},
+		rectangleOptions : {
+			editable : true
+		},
+		polygonOptions : {
+			editable : true
+		},
+		markerOptions : {
+			editable : true
+		}
+});
+drawingManager.setMap(tm.map.getMap());
 	});
   
 </script>

@@ -1701,6 +1701,7 @@ TimeMapItem = function(data, dataset) {
         start = data.start, 
         end = data.end, 
         eventIcon = theme.eventIcon,
+		fillColor = data.fillColor,
         textColor = theme.eventTextColor,
         title = options.title = data.title || 'Untitled',
         event = null,
@@ -1832,13 +1833,14 @@ TimeMapItem = function(data, dataset) {
                 // make polyline or polygon
                 placemark = new Polyline(points);
                 placemark.addData({
-                    color: theme.lineColor, 
-                    width: theme.lineWeight, 
+                    color: pdata.color, 
+                    width: pdata.width, 
                     opacity: theme.lineOpacity, 
                     closed: isPolygon, 
-                    fillColor: theme.fillColor,
+                    fillColor: pdata.fillcolor,
                     fillOpacity: theme.fillOpacity
                 });
+				//console.log(pdata.color);
                 // set type and point
                 type = isPolygon ? "polygon" : "polyline";
                 point = isPolygon ?
@@ -1883,6 +1885,11 @@ TimeMapItem = function(data, dataset) {
                 // push placemarks into array
                 pdata = {};
                 pdata[type] = data[type];
+				pdata.color = data.color;
+				pdata.width = data.width;
+				pdata.opacity = data.opacity;
+				pdata.fillcolor = data.fillcolor;
+				pdata.fillopacity = data.fillopacity;
                 pdataArr.push(pdata);
             }
         });
