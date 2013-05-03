@@ -114,13 +114,13 @@ Wadą tej pamięci jest jej interfejs. Obecnie przechowywany sposób danych to m
       uzytkonwik.imie='Jan'
       uzytkownik.nazwisko='Kowalski'
       //uzytkownik : Object {imie: "Jan", nazwisko: "Kowalski"}
-      
+
       sessionStorage.u1 = uzytkownik
       //sessionStorage.u1 : "[object Object]"
-      
+
       sessionStorage.u2 = JSON.stringify(uzytkownik)
       //sessionStorage.u2 : "{"imie":"Jan","nazwisko":"Kowalski"}"
-      
+
       uzytkonwik2 = JSON.parse(sessionStorage.u2)
       //uzytkonwik2 : Object {imie: "Jan", nazwisko: "Kowalski"}
 \end{lstlisting}
@@ -132,11 +132,11 @@ Wsparcie dla pamięci Storage nie jest obecne zazwyczaj w nowszych wersach przeg
 \subsection{Web SQL Database}
 \label{subsec:websql}
 
-Koljenym ciekawym rozwiązaniem problemu przechowywania danych po stronie klienta jest Web Sql Database. 
+Koljenym ciekawym rozwiązaniem problemu przechowywania danych po stronie klienta jest Web Sql Database.
 Jest to baza danych która została umieszczona po stronie klienta. Jest to dodatkowa warstwa która korzysta z SQlite.
 Zaletą takiego rozwiązania jest przeżucenie kosztów obliczeniowych na stronę klienta,operacje takie jak sortowanie, filtrowanie na bazie danych wykonywane są przy wykorzystaniu zasobów komuptera klienta.
 
-Nie wątpliwą zaletą w stosunku do omówionej w rozdziale \ref{subsec:storage5} pamięci jest możliwość ustalenia wielkości zalokowanej wielkości pamięci. Dzięki temu nie jesteśmy ograniczenie granicą maksymalnie 5MB w więkoszości przeglądarek. 
+Nie wątpliwą zaletą w stosunku do omówionej w rozdziale \ref{subsec:storage5} pamięci jest możliwość ustalenia wielkości zalokowanej wielkości pamięci. Dzięki temu nie jesteśmy ograniczenie granicą maksymalnie 5MB w więkoszości przeglądarek.
 
 Przykład wykorzystania został zaprezentowany na przykładzie. Po stworzeniu bazy danych o nazwie ExampleDataBase i rozmiarze 2MB możemy korzystać z niej jak z każdej innej bazy danych. Możliwe są m.in. operacje tworzenia table(linie 3-5), wstawiania danych(parametry podajemy po treści zapytania, następnie możemy podać funkcje które zostaną wykonane w momencie sukcesu lub w przypadku wystąpienia błędu). Odczyt danych (linie 13-18) jest analogiczny do pozostałych operacji, dodatkowo pokazano w jaki sposób możliwa jest iteracja po otrzymanych wynikach.
 
@@ -146,17 +146,17 @@ Wadą tego rozwiązania jest jego popularność.Na stronie browser stats  możem
 \label{lis:webSql}
 \begin{lstlisting}[caption=json]
       var db = window.openDatabase("ExampleDataBase", "1.0", "Description", 2 * 1024 * 1024);
-      
+
       db.transaction(function(tx) {
         tx.executeSql("CREATE TABLE TableTest (id REAL UNIQUE, text TEXT)");
       });
-      
+
       db.transaction(function(tx) {
         tx.executeSql("INSERT INTO TableTest (id, text) VALUES (?, ?)", [1, 'test'],
         onSuccess,
         onError);
                 });
-                
+
       db.transaction(function(tx) {
         tx.executeSql("SELECT * FROM TableTest", [], function(tx, result) {
             for (var i = 0, item = null; i < result.rows.length; i++) {
@@ -222,8 +222,8 @@ Dla porównania \ref{fig:tm2} prezentuje o wiele prostszą konfigurację w któr
 Zmniejszanie ilości makretów w zależności od stopnia przyblizenia
 
 
-\section{Parser kml}
-\label{sec:scaner}
+\section{Format danyc}
+\label{sec:dataformat}
 
 
 
@@ -231,9 +231,6 @@ Format KML jest używany do reprezentacji danych graficznych w aplikacjach firmy
 
 
 Aby tworzona aplikacja miała możliwość współpracy ze stworzonymi wczesniej zbiorami danych, mapami mimo faktu iż informacje te nie będą w pełni wykorzystywały możliwości frameworku, stworzony został parser plików kml. Dzięki temu możliwy jest import danych, uzupełnienie ich o dodatkowe informacje i zapis do własnego formatu.
-
-
-
 
 
 

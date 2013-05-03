@@ -118,37 +118,15 @@ TimeMap = function(tElement, mElement, options) {
         mapCenter;
     
     // save DOM elements
-    /**
-     * Map element
-     * @name TimeMap#mElement
-     * @type DOM Element
-     */
+
     tm.mElement = mElement;
-    /**
-     * Timeline element
-     * @name TimeMap#tElement
-     * @type DOM Element
-     */
+
     tm.tElement = tElement;
     
-    /** 
-     * Map of datasets 
-     * @name TimeMap#datasets
-     * @type Object 
-     */
     tm.datasets = {};
-    /**
-     * Filter chains for this timemap 
-     * @name TimeMap#chains
-     * @type Object
-     */
+
     tm.chains = {};
     
-    /** 
-     * Container for optional settings passed in the "options" parameter
-     * @name TimeMap#opts
-     * @type Object
-     */
     tm.opts = options = $.extend(defaults, options);
     
     // allow map center to be specified as a point object

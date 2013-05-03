@@ -6,7 +6,7 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyCOxcWddJh31zOy2xRkZLRVKoGlOx76V9k&&libraries=drawing">
     </script>
-	<script src="./js/egeoxml.js"></script>
+	<script src="./js/kmlparser.js"></script>
 	<script type="text/javascript" src="./js/timemap.2.0.1/lib/jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="./js/timemap.2.0.1/lib/mxn/mxn.js?(googlev3)"></script>
     <script type="text/javascript" src="http://timemap.googlecode.com/svn/tags/2.0.1/lib/timeline-1.2.js"></script>
@@ -47,16 +47,16 @@
         document.getElementById('byte_range').textContent = 
             ['Read bytes: ', start + 1, ' - ', stop + 1,
              ' of ', file.size, ' byte file'].join('');
+			 
 		var d = new Date();
 		console.log(d.getTime());
 		
-		exml = new EGeoXml("exml", evt.target.result);	 
+		exml = new KmlParser( evt.target.result);	 
 		
 		exml.parse()
 		d = new Date();
 		console.log(d.getTime());
-		
-		console.log(2);
+
       }
     };
 
@@ -163,7 +163,7 @@
 			editable : true
 		}
 });
-drawingManager.setMap(tm.map.getMap());
+adrawingManager.setMap(tm.map.getMap());
 	});
   
 </script>
