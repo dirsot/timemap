@@ -4,6 +4,12 @@
     <name><![CDATA[US States]]></name>
     <open>1</open>
     <Style id="Style_5">
+      <IconStyle>
+        <scale>0.4</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/star.png</href>
+        </Icon>
+      </IconStyle>
       <LabelStyle>
         <color>9900ffff</color>
         <scale>1</scale>
@@ -18,7 +24,21 @@
         <outline>1</outline>
       </PolyStyle>
     </Style>
-    <Placemark id="pm251">
+    
+	<Placemark>
+    <name>Simple placemark</name>
+    <description>Attached to the ground. Intelligently places itself 
+       at the height of the underlying terrain.</description>
+	 <styleUrl>#Style_5</styleUrl>
+	 <TimeSpan>
+        <begin>1989</begin>
+      </TimeSpan>
+    <Point>
+      <coordinates>-159.335174733889,21.9483433404175 </coordinates>
+    </Point>
+  </Placemark>
+	
+	<Placemark id="pm251">
       <name><![CDATA[Hawaii (1959)]]></name>
       <Snippet maxLines="0">empty</Snippet>
       <description></description>

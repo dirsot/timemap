@@ -9,7 +9,7 @@
 	<script src="./js/kmlparser.js"></script>
 	<script type="text/javascript" src="./js/timemap.2.0.1/lib/jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="./js/timemap.2.0.1/lib/mxn/mxn.js?(googlev3)"></script>
-    <script type="text/javascript" src="http://timemap.googlecode.com/svn/tags/2.0.1/lib/timeline-1.2.js"></script>
+    <script type="text/javascript" src="./js/timemap.2.0.1/lib/timeline-1.2.js"></script>
     <script src="./js/timemap.2.0.1/src/timemap.js" type="text/javascript"></script>
     <script src="./js/utils.js"></script>
     <script src="http://timemap.googlecode.com/svn/tags/2.0.1/src/loaders/json.js" type="text/javascript"></script>
@@ -99,7 +99,9 @@
 	    tm = TimeMap.init({
 	        mapId: "map",               // Id of map div element (required)
 	        timelineId: "timeline",     // Id of timeline div element (required) 
-
+			options: {
+				theme: "pink"
+			},
 	        datasets: [
 	            {
 	                title: "Photos",
@@ -163,7 +165,7 @@
 			editable : true
 		}
 });
-adrawingManager.setMap(tm.map.getMap());
+//drawingManager.setMap(tm.map.getMap());
 	});
   
 </script>

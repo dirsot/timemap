@@ -47,6 +47,28 @@
       </PolyStyle>
     </Style>
 
+	<Placemark>
+    <name>Uchwalenie konstytucji</name>
+    <description></description>
+	 <styleUrl>#Style_5</styleUrl>
+	 <TimeSpan>
+        <begin>1787</begin>
+      </TimeSpan>
+    <Point>
+      <coordinates>-71.9009419142026,42.7053786149513</coordinates>
+    </Point>
+  </Placemark>
+	<Placemark>
+    <name>Ratyfikacja konstytucji</name>
+    <description> 4 marca 1789 </description>
+	 <styleUrl>#Style_5</styleUrl>
+	 <TimeSpan>
+        <begin>1789-03-4</begin>
+      </TimeSpan>
+    <Point>
+      <coordinates>-79.7632349654056,42.2673270883975 </coordinates>
+    </Point>
+  </Placemark>	
     <Placemark id="pm251">
       <name><![CDATA[Hawaii (1959)]]></name>
       <Snippet maxLines="0">empty</Snippet>
@@ -111,7 +133,7 @@
       <TimeSpan>
         <begin>1959</begin>
       </TimeSpan>
-      <styleUrl>#Style_4</styleUrl>
+      <styleUrl>#Style_5</styleUrl>
       <MultiGeometry>
         <Point id="g866">
           <altitudeMode>clampToGround</altitudeMode>
@@ -364,7 +386,7 @@
       <TimeSpan>
         <begin>1889</begin>
       </TimeSpan>
-      <styleUrl>#Style_4</styleUrl>
+      <styleUrl>#Style_5</styleUrl>
       <MultiGeometry>
         <Point id="g874">
           <altitudeMode>clampToGround</altitudeMode>
@@ -3668,7 +3690,7 @@
       <TimeSpan>
         <begin>1788</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g900">
           <altitudeMode>clampToGround</altitudeMode>
@@ -4205,7 +4227,7 @@
       <TimeSpan>
         <begin>1788</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g904">
           <altitudeMode>clampToGround</altitudeMode>
@@ -4704,7 +4726,7 @@
       <TimeSpan>
         <begin>1788</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g910">
           <altitudeMode>clampToGround</altitudeMode>
@@ -5265,7 +5287,7 @@
       <TimeSpan>
         <begin>1788</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g917">
           <altitudeMode>clampToGround</altitudeMode>
@@ -5388,7 +5410,7 @@
       <TimeSpan>
         <begin>1790</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g919">
           <altitudeMode>clampToGround</altitudeMode>
@@ -5532,7 +5554,7 @@
       <TimeSpan>
         <begin>1787</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g923">
           <altitudeMode>clampToGround</altitudeMode>
@@ -7483,7 +7505,7 @@
       <TimeSpan>
         <begin>1787</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g941">
           <altitudeMode>clampToGround</altitudeMode>
@@ -8083,7 +8105,7 @@
       <TimeSpan>
         <begin>1788</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g945">
           <altitudeMode>clampToGround</altitudeMode>
@@ -9262,7 +9284,7 @@
       <TimeSpan>
         <begin>1788</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g957">
           <altitudeMode>clampToGround</altitudeMode>
@@ -10825,7 +10847,7 @@
       <TimeSpan>
         <begin>1789</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g967">
           <altitudeMode>clampToGround</altitudeMode>
@@ -13436,7 +13458,7 @@
       <TimeSpan>
         <begin>1788</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g989">
           <altitudeMode>clampToGround</altitudeMode>
@@ -13879,7 +13901,7 @@
       <TimeSpan>
         <begin>1788</begin>
       </TimeSpan>
-      <styleUrl>#Style_5</styleUrl>
+      <styleUrl>#Style_4</styleUrl>
       <MultiGeometry>
         <Point id="g992">
           <altitudeMode>clampToGround</altitudeMode>

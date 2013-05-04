@@ -26,7 +26,7 @@ TimeMap.loaders.sessionStorage = function(options) {
 TimeMap.loaders.sessionStorage.parse = function(kmlnode) {
 	sessionStorage.polygon;
     var loader = this,
-        items = [], 
+        items = {}, 
         data, placemarks, nList, coords, pmobj;
     
     // get TimeMap utilty functions
@@ -38,7 +38,8 @@ TimeMap.loaders.sessionStorage.parse = function(kmlnode) {
         makePoly = util.makePoly,
         formatDate = util.formatDate;
 
-    items.push(JSON.parse(sessionStorage.polyline));
+    items.polyline = (JSON.parse(sessionStorage.polyline));
+	items.marker = (JSON.parse(sessionStorage.marker));
 	items2= [
 	                        {
 	                          "start" : "1980-01-02",
@@ -53,5 +54,5 @@ TimeMap.loaders.sessionStorage.parse = function(kmlnode) {
 	                          "title" : "Firenze"
 	                        },
 	                    ]
-    return items[0];
+    return items;
 };

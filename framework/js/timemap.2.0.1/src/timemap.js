@@ -1,39 +1,3 @@
-/*! 
- * Timemap.js Copyright 2008 Nick Rabinowitz.
- * Licensed under the MIT License (see LICENSE.txt)
- */
-
-/**
- * @overview
- *
- * <p>Timemap.js is intended to sync a SIMILE Timeline with a web-based map. 
- * Thanks to Jorn Clausen (http://www.oe-files.de) for initial concept and code.
- * Timemap.js is licensed under the MIT License (see <a href="../LICENSE.txt">LICENSE.txt</a>).</p>
- * <p><strong>Depends on:</strong> 
- *         <a href="http://jquery.com">jQuery</a>, 
- *         <a href="https://github.com/nrabinowitz/mxn"> a customized version of Mapstraction 2.x<a>, 
- *          a map provider of your choice, <a href="code.google.com/p/simile-widgets">SIMILE Timeline v1.2 - 2.3.1.</a>
- * </p>
- * <p><strong>Tested browsers:</strong> Firefox 3.x, Google Chrome, IE7, IE8</p>
- * <p><strong>Tested map providers:</strong> 
- *          <a href="http://code.google.com/apis/maps/documentation/javascript/v2/reference.html">Google v2</a>, 
- *          <a href="http://code.google.com/apis/maps/documentation/javascript/reference.html">Google v3</a>, 
- *          <a href="http://openlayers.org">OpenLayers</a>, 
- *          <a href="http://msdn.microsoft.com/en-us/library/bb429565.aspx">Bing Maps</a>
- * </p>
- * <ul>
- *     <li><a href="http://code.google.com/p/timemap/">Project Homepage</a></li>
- *     <li><a href="http://groups.google.com/group/timemap-development">Discussion Group</a></li>
- *     <li><a href="../examples/index.html">Working Examples</a></li>
- * </ul>
- *
- * @name timemap.js
- * @author Nick Rabinowitz (www.nickrabinowitz.com)
- * @version 2.0.1
- */
-
-// for jslint
-
 (function(){
 // borrowing some space-saving devices from jquery
 var 
@@ -59,45 +23,6 @@ var
     // aliases for class names, allowing munging
     TimeMap, TimeMapFilterChain, TimeMapDataset, TimeMapTheme, TimeMapItem;
 
-/*----------------------------------------------------------------------------
- * TimeMap Class
- *---------------------------------------------------------------------------*/
- 
-/**
- * @class
- * The TimeMap object holds references to timeline, map, and datasets.
- *
- * @constructor
- * This will create the visible map, but not the timeline, which must be initialized separately.
- *
- * @param {DOM Element} tElement     The timeline element.
- * @param {DOM Element} mElement     The map element.
- * @param {Object} [options]       A container for optional arguments
- * @param {TimeMapTheme|String} [options.theme=red] Color theme for the timemap
- * @param {Boolean} [options.syncBands=true]    Whether to synchronize all bands in timeline
- * @param {LatLonPoint} [options.mapCenter=0,0] Point for map center
- * @param {Number} [options.mapZoom=0]          Initial map zoom level
- * @param {String} [options.mapType=physical]   The maptype for the map (see {@link TimeMap.mapTypes} for options)
- * @param {Function|String} [options.mapFilter={@link TimeMap.filters.hidePastFuture}] 
- *                                              How to hide/show map items depending on timeline state;
- *                                              options: keys in {@link TimeMap.filters} or function. Set to 
- *                                              null or false for no filter.
- * @param {Boolean} [options.showMapTypeCtrl=true]  Whether to display the map type control
- * @param {Boolean} [options.showMapCtrl=true]      Whether to show map navigation control
- * @param {Boolean} [options.centerOnItems=true] Whether to center and zoom the map based on loaded item 
- * @param {String} [options.eventIconPath]      Path for directory holding event icons; if set at the TimeMap
- *                                              level, will override dataset and item defaults
- * @param {Boolean} [options.checkResize=true]  Whether to update the timemap display when the window is 
- *                                              resized. Necessary for fluid layouts, but might be better set to
- *                                              false for absolutely-sized timemaps to avoid extra processing
- * @param {Boolean} [options.multipleInfoWindows=false] Whether to allow multiple simultaneous info windows for 
- *                                              map providers that allow this (Google v3, OpenLayers)
- * @param {mixed} [options[...]]                Any of the options for {@link TimeMapDataset}, 
- *                                              {@link TimeMapItem}, or {@link TimeMapTheme} may be set here,
- *                                              to cascade to the entire TimeMap, though they can be overridden
- *                                              at lower levels
- * </pre>
- */
 TimeMap = function(tElement, mElement, options) {
     var tm = this,
         // set defaults for options
@@ -154,11 +79,6 @@ TimeMap = function(tElement, mElement, options) {
  */
 TimeMap.version = "2.0.1";
 
-/**
- * @name TimeMap.util
- * @namespace
- * Namespace for TimeMap utility functions.
- */
 var util = TimeMap.util = {};
 
 // STATIC METHODS
@@ -1413,7 +1333,10 @@ TimeMapDataset.prototype = {
     loadItems: function(data, transform) {
 		if (data) {
 			var ds = this;
-			data.forEach(function(item) {
+			data.marker.forEach(function(item) {
+				ds.loadItem(item, transform);
+			});
+			data.polyline.forEach(function(item) {
 				ds.loadItem(item, transform);
 			});
 			$(ds).trigger(E_ITEMS_LOADED);
@@ -1658,9 +1581,9 @@ TimeMapItem = function(data, dataset) {
         // set defaults for options
         options = $.extend({
                 type: 'none',
-                description: '',
+                description: data.desc,
                 infoPoint: null,
-                infoHtml: '',
+                infoHtml: null,
                 infoUrl: '',
                 openInfoWindow: data.options.infoUrl ? 
                     TimeMapItem.openInfoWindowAjax :
@@ -1678,6 +1601,7 @@ TimeMapItem = function(data, dataset) {
         // settings for timeline event
         start = data.start, 
         end = data.end, 
+		iconUrl = data.iconUrl,
         eventIcon = theme.eventIcon,
 		fillColor = data.fillColor,
         textColor = theme.eventTextColor,
@@ -1708,6 +1632,7 @@ TimeMapItem = function(data, dataset) {
      */
     item.map = tm.map;
     
+	
     /**
      * The timemap's timeline object
      * @name TimeMapItem#timeline
@@ -1789,6 +1714,10 @@ TimeMapItem = function(data, dataset) {
             placemark = new Marker(point);
             placemark.setLabel(pdata.title);
             placemark.addData(theme);
+			if(pdata.iconUrl){
+				placemark.iconUrl= pdata.iconUrl;
+				placemark.iconShadowUrl = "";
+			}
             type = "marker";
         }
         // polyline and polygon placemarks
@@ -1867,6 +1796,7 @@ TimeMapItem = function(data, dataset) {
 				pdata.width = data.width;
 				pdata.opacity = data.opacity;
 				pdata.fillcolor = data.fillcolor;
+				pdata.iconUrl = data.iconUrl;
 				pdata.fillopacity = data.fillopacity;
                 pdataArr.push(pdata);
             }
