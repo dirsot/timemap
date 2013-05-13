@@ -171,6 +171,69 @@ Wadą tego rozwiązania jest jego popularność.Na stronie browser stats  możem
 
 Trzecim rozwiązaniem jest indexDb.
 
+\section{Format danych}
+\label{sec:dataformat}
+
+W poprzednich punktach opisano metody przechwywania danych w pamięci komputera, w szeczólności pamięci tymczasowej którą dostarczają nowoczesne przeglądarki internetowe. Jednak aby móc korzystać z informacji stworzonych przez innego użytkownika, lub nawet pracować nad własnym projektem stworzonym we wcześniejszym czasie niezbednę jest trwałe zapisanie danych. W rozdziale \ref{subsec:htmluse} zostały omówione sposoby które oferują możliwość przchowywania danych, niestety wszystkie te rozwiązania posiadają wspólną wadę, jest to brak mobilności danych. Znajdują się one na dysku jednego komputera a ich przeniesienie na inny pomimo że nie jest nie możliwe, jest bardzo uciążliwe i nie praktyczne. Z tego powodu przeprowadzona została analiza aktualnie używanych formatów danych zapisywanych do zewnętrznych plików.
+
+\subsection{GIS}
+\label{subsec:gis}
+
+GIS(Geographical Information Systems) jest to System Informacji Geograficznych, jest to zbiór wiedzy, informacji do pozyskiwania i analizowania danych przestrzennych. Dane są pobieranie w trakcie naziemnych pomiarów jak i zbierane przy użyciu systemu GPS. Informacje te są następnie zapisywane do określonych formatów,dzięki czemu możliwa jest ich dalsza analiza. \underline{\texttt{http://www.gis-support.pl/co-to-jest-gis/}}
+
+
+\subsection{Wykorzystywany układ współrzędnych}
+\label{subsec:uklad}
+
+Istnieje wiele układów współrzędnych któe służą do opisu pojedyńczego punktu na powierzchni ziemi.Na stronie \underline{\texttt{http://www.spatialreference.org/ref/epsg/}} (dostęp) znajduje się lista zawierająca przykłady zapisu różnych obszarów kuli ziemskiej przy użyciu różnych formatów. Zawierają one niezbędne infomacje w konkretnym zapisie.
+
+Wersją która ma za zadanie być ogólnoświatowym formatem jest WGS(World Geodetic System). Jego ostatnia wersja  WSG84 jest powszechnie używana w urządzeniach do nawigacji.
+Tradycyjny zapis oparty jest na wykorzystaniu stopni,minut i sekunk, jest on obecnie wypierany przez nowszy,łatwiejszy do obliczeń komputerówych. Poniżej zaprezentowano jak wygląda zapis w starszym i nowszym punktu określającego położenie budynku A-0 uczelni AGH.
+
+\begin{itemize}
+
+\item
+Pierwotny zapis
+
+50°03'52.2803", 019°55'23.7968"
+\item
+Zapis unowocześniony
+
+50.06452231874906, 19.923276901245117
+\end{itemize}
+
+Drugi zapis został wykorzystany do przechowywania danych w plikach, tak aby wymiana i wspólna praca była jak najprostsza. Wybór ten sprawił że nie występuje problem konwersji punktu do formatu czytelnego dla komputera, można go bez problemu odczaytać jako liczbę.
+
+\subsection{Format zapisu}
+\label{subsec:zapis}
+
+Istnieje wiele formatów używanyc w zależności od konkretnych potrzeb. Można dokonać ogólnego podziału na dwa rodzaje. Pierwszym są pliki zapisane rastrowo, jest to zapis punktów o określonym kolorze i położeniu na płaszczyźnie. Efektem takiego podejścia jest pogorszenie obrazu w momencie dużego powiększenia. Przykładem są formaty takie jak ADRG,ASC czy RGB.
+Porównanie litery a i jej 7-krotnego powiększenia w tym zapise zaprezentowano na rysunku \ref{fig:rast}
+  \begin{figure}[H]
+  \centering
+    \includegraphics[width=50mm]{ge/a2.jpg}
+  \caption{Zapis rastrowy}
+  \label{fig:rast}
+  \end{figure}
+
+Innym podejściem jest zapis wektorowy. Jest to zapis oparty na formułach matematycznych m.in. proste i łuki. Dzięki takiemu podejściu obraz w dowolnej skali na identyczną jakość, widać to na rysunku \ref{fig:wekt}. Przykładowymi formatami są GML(Geography Markup Language) otwarty standart XML dla wymiany danych GIS,Shapefile czy tradycyjny kartezjański układ współrzędnych.
+
+  \begin{figure}[H]
+  \centering
+    \includegraphics[width=50mm]{ge/a1.jpg}
+  \caption{Zapis wektorowy}
+  \label{fig:wekt}
+  \end{figure}
+
+Do celów projektu zdecydowano się skorzystać z zapisu wektorowego. Oprócz bez problemowej skalowalności, pozwala on również na szeroką i łatwą edycję. W prosty sposób można dodać informacje nie tylko o położeniu, ale inne takie jak słowny opis miejsca lub wydarzenia które miało miejsce w pobliskim rejonie.
+
+Format KML jest używany do reprezentacji danych graficznych w aplikacjach firmy Google, takich jak Google Maps czy Google Earth. Oparty jest na standardzie XML, wrażliwy na wielkość liter, wymusza ścisłą poprawność danych z formatem. Oznacza to że każdy tag, element ma ścisle określone miejsce i nie może pojawić się nigdzie indziej.
+
+Aby tworzona aplikacja miała możliwość współpracy ze stworzonymi wczesniej zbiorami danych, mapami mimo faktu iż informacje te nie będą w pełni wykorzystywały możliwości frameworku, stworzony został parser plików kml. Dzięki temu możliwy jest import danych, uzupełnienie ich o dodatkowe informacje i zapis do własnego formatu.
+
+\section{Parser plików}
+\label{sec:parser}
+
 \section{Oś czasu}
 \label{sec:timeLine}
 
@@ -216,25 +279,8 @@ Dla porównania \ref{fig:tm2} prezentuje o wiele prostszą konfigurację w któr
   \caption{Timeline 2}
   \label{fig:tm2}
 \end{figure}
-\section{Przybliżanie wyników}
-\label{sec:przyblizanie}
-
-Zmniejszanie ilości makretów w zależności od stopnia przyblizenia
-
-
-\section{Format danych}
-\label{sec:dataformat}
-
-
-
-Format KML jest używany do reprezentacji danych graficznych w aplikacjach firmy Google, takich jak Google Maps czy Google Earth. Oparty jest na standardzie XML, wrażliwy na wielkość liter, wymusza ścisłą poprawność danych z formatem. Oznacza to że każdy tag, element ma ścisle określone miejsce i nie może pojawić się nigdzie indziej.
-
-
-Aby tworzona aplikacja miała możliwość współpracy ze stworzonymi wczesniej zbiorami danych, mapami mimo faktu iż informacje te nie będą w pełni wykorzystywały możliwości frameworku, stworzony został parser plików kml. Dzięki temu możliwy jest import danych, uzupełnienie ich o dodatkowe informacje i zapis do własnego formatu.
-
-
 
 \section{Interferjs}
 \label{sec:Interferjs}
 
-
+Aby tworzone rozwiązanie mogło być używane przez szerokie grono odbiorców niezbędnym elementem jest stworznie interfejsu który pozwlałby na edycję danych wczytanych z pliku, lecz także pozwalał na stworzenie nowej mapy. W tym celu stworzono interfejs graficzny do edycji danych.
