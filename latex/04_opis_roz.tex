@@ -3,6 +3,36 @@
 
 W poniższym rozdziale omówione zostaną kroki pracy.
 
+\section{JavaScript}
+\label{sec:javascript}
+
+
+
+Obecnie powstają frameworki których zadaniem jest stworzenie małej, lekkiej aplikacji webowej której stworzenie testowanie i utrzymanie jest proste.\cite{AngularJS} Przykładem takiego rozwiązania jest AngularJs, korzysta on z architekury MVC w której większość pracy została przeniesiona na stronę klienta. Kontroler wykonuje obliczenia w przeglądarce użytkownika, odciąża to główny serwer, pozwala na szybszą i płynniejszą pracę większej ilości osób.
+
+Prosty przykład na stronie \underline{\texttt{http://angularjs.org/}} prezentuje w jak prosty sposób można stworzyć prostą liste rzeczy do zrobienia. Poniżej zaprezentowano fragment odpowiedzialny za wyświetlenie zadań z dodatkowym polem określającym czy zostało już wykonane.
+
+\lstset{language=JavaScript}
+\begin{lstlisting}[caption=AngularJs]
+
+        //fragment kodu html
+      <div ng-controller="TodoCtrl">
+        ...
+        <li ng-repeat="todo in todos">
+          <input type="checkbox" ng-model="todo.done">
+          <span >{{todo.text}}</span>
+        </li>
+        ...
+      </div>
+
+        //kontroler
+        function TodoCtrl($scope) {
+          $scope.todos = [
+            {text:'learn angular', done:true}];
+          ...
+        }
+\end{lstlisting}
+
 \section{Transmisja danych}
 \label{sec:transmisjaDanych}
 
@@ -18,7 +48,7 @@ json - 695  400
 
 \section{Możliwości HTML5}
 \label{sec:html5}
-
+\nocite{proHTML5}
 HyperText Markup Language,  hipertekstowy język znaczników
 Pozwala na opisanie struktury informacji zawartych na stronie internetowej, to dzięki niemu przeglądarka moze rozróżnić takie elementy jak hiperłącze,akapit czy chociażby nagłówek.
 
@@ -169,7 +199,7 @@ Wadą tego rozwiązania jest jego popularność.Na stronie browser stats  możem
 \subsection{IndexedDB}
 \label{subsec:indexDB}
 
-Trzecim rozwiązaniem jest indexDb.
+Trzecim rozwiązaniem jest indexDb. W chwilie pisania tego dokumentu jedynie 4 przeglądarki w najwyższej wersji wspierały tą technologię. Z tego powodu wykorzystanie to ogranicza docelową grupę odbiorców do wąskiego grona.
 
 \section{Format danych}
 \label{sec:dataformat}
@@ -203,6 +233,11 @@ Zapis unowocześniony
 \end{itemize}
 
 Drugi zapis został wykorzystany do przechowywania danych w plikach, tak aby wymiana i wspólna praca była jak najprostsza. Wybór ten sprawił że nie występuje problem konwersji punktu do formatu czytelnego dla komputera, można go bez problemu odczaytać jako liczbę.
+
+\subsection{SVG}
+\label{subsec:svg}
+
+Wstępny etap pracy zakładał wykorzystanie formatu SVG(en. Scalable Vector Graphics) do prezentacji danych, tworzenia animacji płynnych zmian kształtów.
 
 \subsection{Format zapisu}
 \label{subsec:zapis}
