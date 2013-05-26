@@ -6,7 +6,9 @@ W poniższym rozdziale omówione zostaną kroki pracy.
 \section{JavaScript}
 \label{sec:javascript}
 
+Wybór języka JavaScript to tworzenia aplikacji został podyktowany jego dużymy możliwościami na polu tworzenia projektów do użytku na przeglądarkach internetowych.Pozwala na łatwe tworzenie interaktywnych narzędzi nie wymagających ciągłego przełądowywania strony co wpływa na szybkość końcowego produktu.
 
+Prężny rozwój tej technologi gwarantuje że stale będzie wspierane i rozwijana. Możliwośc przeniesienia kosztownych operacji (pod względem czasowym i obliczeniowych) na stronę klienta jest jedną z wielu korzyści.
 
 Obecnie powstają frameworki których zadaniem jest stworzenie małej, lekkiej aplikacji webowej której stworzenie testowanie i utrzymanie jest proste.\cite{AngularJS} Przykładem takiego rozwiązania jest AngularJs, korzysta on z architekury MVC w której większość pracy została przeniesiona na stronę klienta. Kontroler wykonuje obliczenia w przeglądarce użytkownika, odciąża to główny serwer, pozwala na szybszą i płynniejszą pracę większej ilości osób.
 
@@ -48,6 +50,11 @@ json - 695  400
 
 \section{Możliwości HTML5}
 \label{sec:html5}
+\nocite{xml50}
+\nocite{proxml}
+\nocite{pre1}
+\nocite{pre2}
+\nocite{googlemapsbegin}
 \nocite{proHTML5}
 HyperText Markup Language,  hipertekstowy język znaczników
 Pozwala na opisanie struktury informacji zawartych na stronie internetowej, to dzięki niemu przeglądarka moze rozróżnić takie elementy jak hiperłącze,akapit czy chociażby nagłówek.
@@ -237,7 +244,7 @@ Drugi zapis został wykorzystany do przechowywania danych w plikach, tak aby wym
 \subsection{SVG}
 \label{subsec:svg}
 
-Wstępny etap pracy zakładał wykorzystanie formatu SVG(en. Scalable Vector Graphics) do prezentacji danych, tworzenia animacji płynnych zmian kształtów.
+Wstępny etap pracy zakładał wykorzystanie formatu SVG(en. Scalable Vector Graphics) do prezentacji danych, tworzenia animacji płynnych zmian kształtów.\nocite{svgbegin}\nocite{html5canvas}
 
 \subsection{Format zapisu}
 \label{subsec:zapis}
@@ -314,6 +321,54 @@ Dla porównania \ref{fig:tm2} prezentuje o wiele prostszą konfigurację w któr
   \caption{Timeline 2}
   \label{fig:tm2}
 \end{figure}
+
+\section{Less}
+\label{sec:less}
+
+Do stworzenia bardziej zaawansowanych arkuszy stylów CSS (en. Cascading Style Sheets) wykorzystaniu narzedzie które pozwala na łatwe tworzenie i utrzymywanie reguł. Głównymi zaletami są:
+
+\begin{itemize}
+\item
+Deklarowanie zmiennych.
+
+Jeśli chcemy wykorzystać jedną wartość(przykładowo jeden kolor) w wielu miejscach wystarczy w głównym pliku zadeklarować zmienną i wykrzystywać ją w każdym miejscu gdzie chcemy użyć tej wartośći.
+
+Przykładowo chcąc wykorzystać kolor czerwony wykorzystywany w kolorystyce uczelni AGH deklarujemy zmienną @aghRed, następnie w miejscu gdzie chcemy aby pojawił się ten kolor korzystamy z istniejącej zmiennej
+
+\lstset{language=JavaScript}
+\label{lis:webSql}
+\begin{lstlisting}[caption=json]
+@aghRed: #a71930;
+bgcolor: @aghRed;
+\end{lstlisting}
+
+\item
+Mixiny
+
+Możemy tworzyć nowe klasy które będą posiadały właściwości innej, wcześniej zadeklarowanej.Pozwala to na tworzenie kodu bardziej czytelnego, niepowielanie go.
+
+
+\lstset{language=JavaScript}
+\label{lis:webSql}
+\begin{lstlisting}[caption=json]
+.RoundBorders {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+#menu {
+  color: gray;
+  .RoundBorders;
+}
+\end{lstlisting}
+
+\item
+Osadzanie elementów wedlug dziedziczenia
+
+Tworząc zagnieżdzoną strukturę storny często elementy wewnętrzne zależą od elementów nadrzędnych. Wygląd komurki może się różnić w zależości od rodzaju tabeli. W tworzeniu tak zadnieżdżonych struktur pomocna okazuje się omawiana cecha.
+
+\end{itemize}
+
 
 \section{Interferjs}
 \label{sec:Interferjs}
