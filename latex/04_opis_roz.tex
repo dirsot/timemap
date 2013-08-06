@@ -206,7 +206,17 @@ Wadą tego rozwiązania jest jego popularność.Na stronie browser stats  możem
 \subsection{IndexedDB}
 \label{subsec:indexDB}
 
-Trzecim rozwiązaniem jest indexDb. W chwilie pisania tego dokumentu jedynie 4 przeglądarki w najwyższej wersji wspierały tą technologię. Z tego powodu wykorzystanie to ogranicza docelową grupę odbiorców do wąskiego grona.
+Trzecim rozwiązaniem jest indexDb. Jest to szczególnie interesujące rozwiązanie gdyż wykorzystuje podejście nierelacyjnych baz danych(NoSQL).
+
+Tradycyjne podejście do przechowywania danych zakłada wykorzystanie modelu relacyjnego do organizacji danych. Są one grupowane w relacje (zwane tablicami), każda z nich składa się z identycznych rekordów. Przykładem może być tablica przechowywujaca infromacje o osobie, mająca kolumny przeznaczone na dwa imiona i nazwisko. W takiej sytuacji wszyskie rekordy odnoszące się do osoby z jednym imieniem będą miały puste pole z drugim imieniem. Jest to sytuacja względnie nieproblematyczna, dopuszczenie pustych wartości ograniczy niepotrzebny wzrost wielkości bazy.
+W przypadku chęci dodania nowej inforacji, przykładowo daty urodzenia, spowoduje konieczość zmiany struktury bazy danych, dodanie kolumny do istniejącej tabeli lub stworzenie nowej dla dodatkowej wartości.
+
+Kolejną wadą tego podejścia jest bardzo słaba skalowaność rozwiązania(możliwośc pracy na bardzo dużych danych). Korzystanie z wielu złączeń(czasami aby wykonać zapytanie i otrzymać interesujące nas informacje odwołujemy się do wielu tabel).
+W zależności od poziomu izolacji transakcji możemy mieć dane które zostały zmienione w innej tranzakcji przd jej zakończeniem. Jeśli druga tranzakcja zostanie wycofana to w efekcie pobrane dane są nieaktualne.(Read uncommited)
+Przeciwnym rozwiązaniem jest poziom Serializable w którym dane da którym rozpoczęto pracę są niedostępne dla innych tranzakcji, zapewnia to poprawność danych w każdej momencie jednak znacznie obniża wydajność bazy.
+
+
+W chwilie pisania tego dokumentu jedynie 4 przeglądarki w najwyższej wersji wspierały tą technologię. Z tego powodu wykorzystanie to ogranicza docelową grupę odbiorców do wąskiego grona.
 
 \section{Format danych}
 \label{sec:dataformat}
@@ -275,6 +285,8 @@ Aby tworzona aplikacja miała możliwość współpracy ze stworzonymi wczesniej
 
 \section{Parser plików}
 \label{sec:parser}
+
+Aby umożliwoś pracę 
 
 \section{Oś czasu}
 \label{sec:timeLine}
