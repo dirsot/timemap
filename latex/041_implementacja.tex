@@ -1,0 +1,100 @@
+﻿\chapter{Implementacja}
+\label{cha:implementacja}
+
+Działanie programu można podzielić na dwa główne etapy. Pierwszym jest dostarczenie danych zgodnych z formatem apliakacji, drugim jest reprezentacja danych.
+
+\section{Odczyt danych}
+\label{sec:idata}
+
+Tak jak zostało omówione w sekcji \ref{sec:dataformat} do przechowywania danych wybrany został format KML, jego duża popularność sprawia że stworzona aplikacja posiada dużą bazę danych z których może korzystać.
+
+W celu odczytu i konwersji danych z pliku zapisu ich w pamięci sesyjnech przęglądarki omówionej w rozdziale \ref{subsec:storage5} stworzona została klasa KmlParser. Posiada ona jednoargumentowy konstruktor przyjmujący ciąg znakowy.
+
+Ze względów bezpieczeństwa JavaScript nie zezwala na bezpośredni dostęp do plików lokalnych uzytkownika. Jest to pozytywne zachowanie zapewniające że żaden kod nie jest w stanie bezwiednie zmieniać zawartość dysku.
+
+Sytuacja taka wymusza korzystanie z event-ów które będą aktywowane w momecie kiedy plik zostanie wybrany. W momencie zakończenia procesu odczytu zawartość pliku przekazywana jest do parsera który zapisuje dane w pamięci przeglądarki.
+
+\subsection{Wydajność}
+\label{subsec:wydajnosc}
+
+W celach sprawdzenia wydajności zaimplementowanego parsera przeprowadzono testy porównawcze. W pierwszej próbie wykorzystano dwa pliki zawierające dane w formacie który pozwolił na jego analizę, pierwszy "plik1.kml" składał się z jednego obszaru i jednego stylu określającego preferencje graficzne, jego dokładana zawartość została zawarta w załączniku \ref{sec:akml}. Drugi plik "plik2.kml" zawierał informacje o granicy wszystkich stanów USA, na potrzeby badań on również zawierał informacje o jednym stylu.
+Wykonano proces wczytania ich zawartości, mierząc za każdym razem czas potrzebny na zakończenie procesu. Wyniki zamieszczono w zbiorczej tabeli \ref{tab:speedTest}.
+
+Dokładne informacje dotyczące zawartości plików zamieszczono w tabeli \ref{tab:testFile}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    Nazwa pliku & Ilość punktów & Ilość poligonów \\ \hline
+    plik1.kml & 13 & 1 \\ \hline
+    plik2.kml & 13697 & 133 \\ \hline
+
+    \end{tabular}
+    \caption{Pliki testowe}
+    \label{tab:testFile}
+\end{table}
+
+
+\begin{table} [H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    Test & 13 punktów & 12697 punktów \\\hline
+    I & 3 & 343 \\\hline
+    II & 13 & 449 \\\hline
+
+    \end{tabular}
+    \caption{Czas dostępu [ms]}
+    \label{tab:speedTest}
+\end{table}
+
+
+
+\section{Reprezentacja danych}
+\label{sec:datareprezentaction}
+
+Posiadając już informacje należało wybrać najlepszy sposób umożliwiający ich przedstawienie. Wykorzystanie w tym celu możliwości dostarczanych przez HTML5 wydawało się bardzo zachęcające. Przykład przedstawiony na rysunku \ref{fig:canvas1} pokazuje w jak prosty sposób można zaznaczyć okrąg na gotowym obrazie. Niestety ze względu na brak kompatybilności tego rozwiązania z wybranym sposobem dostarczania informacji geograficznych sposób tworzenia kształtów został zmieniony inny.
+
+\subsection{Rysowanie kształtów}
+\label{subsec:drawpoly}
+
+Aplikacja umożliwa tworzenie różnych kształtów i pojedyńczych elementów które można umieścić na mapie. Wykorzystywane są obiekty z pakiety google.maps, zawiera takie elementy jak:
+
+\begin{itemize}
+\item
+Marker
+Pozwala on na umieszczenie pojedyńczego punktu na mapie. Możliwe jest dokładne sprecyzowanie jego wyglądu dzięki czemu możliwe jest aby prezentował on określą ikonę lub symbol.
+\item
+Okrąg
+Pierwszy kształt, tworzy idealy okrąg.
+\item
+Poligon
+Jedna z bardziej przydatnych opcji. Dzięki niemu możemy stworzyć każdy kształt. To ten element został wykorzystany do stwrozenia granicy wyspy zaprzezentowany w załączniku \ref{sec:aresult}.
+\item
+Linia
+Elemnt pozwalający na tworzenie lini, której wygląd możemy swobodnie określać.
+\item
+Prostokąt
+Ostatni element tworzy prostokąty o kątach dokłanie 90 stopni. Kształt ten można próbować stworzyć przy pomocy poligonu, nie będzie on jednak tak dokładny jak przy pomocy tej opcji.
+
+\end{itemize}
+
+\subsection{Dodawanie filtrów}
+\label{subsec:filters}
+
+Rozwinięciem podstawowej możliwości tworzenia prostych kształtów geometrycznych jest opcja tworzenia filtrów które mogą wpływać na prezentację danych. 
+
+Przykładowym użyciem jest możliwość stworzenia animacji płynnego przejścia z jednego kształtu w inny. Proces ten jest wykonany w następujących krokach:
+
+\begin{itemize}
+\item
+Przekazanie do aplikacji kształtu zawierającego informacje o stanie początkowym i końcowym.
+\item
+Dla każdej zmiany daty obliczenie aktualnego procentowego zakończenia procesu transformacji, gdzie pomiędzy startem a końcem okresu zmiany kształtu obecnie się znajdujemy.
+\item
+Oblicznie położenia nowego punktu, tak aby leżał pomiędzy dwoma w stosunku oblicoznym w poprzednim kroku.
+\end{itemize}
+
+Istnieje możliwość tworzenia nowych filtrów dla potrzeb konkretnych map lub danych. Nie stanowi dużym problemem imlementacja takiego rozwiąznaia które w pewnym momencie wyświetliłoby krótki film wideo dostarczający dodatkowych informacji o obserwowanym wydarzeniu. 
+
