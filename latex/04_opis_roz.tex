@@ -3,44 +3,14 @@
 
 W poniższym rozdziale omówione zostaną kroki pracy.
 
-\section{JavaScript}
-\label{sec:javascript}
-
-Wybór języka JavaScript to tworzenia aplikacji został podyktowany jego dużymy możliwościami na polu tworzenia projektów do użytku na przeglądarkach internetowych.Pozwala na łatwe tworzenie interaktywnych narzędzi nie wymagających ciągłego przełądowywania strony co wpływa na szybkość końcowego produktu.
-
-Prężny rozwój tej technologi gwarantuje że stale będzie wspierane i rozwijana. Możliwośc przeniesienia kosztownych operacji (pod względem czasowym i obliczeniowych) na stronę klienta jest jedną z wielu korzyści.
-
-Obecnie powstają frameworki których zadaniem jest stworzenie małej, lekkiej aplikacji webowej której stworzenie testowanie i utrzymanie jest proste.\cite{AngularJS} Przykładem takiego rozwiązania jest AngularJs, korzysta on z architekury MVC w której większość pracy została przeniesiona na stronę klienta. Kontroler wykonuje obliczenia w przeglądarce użytkownika, odciąża to główny serwer, pozwala na szybszą i płynniejszą pracę większej ilości osób.
-
-Prosty przykład na stronie \underline{\texttt{http://angularjs.org/}} prezentuje w jak prosty sposób można stworzyć prostą liste rzeczy do zrobienia. Poniżej zaprezentowano fragment odpowiedzialny za wyświetlenie zadań z dodatkowym polem określającym czy zostało już wykonane.
-
-\lstset{language=JavaScript}
-\begin{lstlisting}[caption=AngularJs]
-
-        //fragment kodu html
-      <div ng-controller="TodoCtrl">
-        ...
-        <li ng-repeat="todo in todos">
-          <input type="checkbox" ng-model="todo.done">
-          <span >{{todo.text}}</span>
-        </li>
-        ...
-      </div>
-
-        //kontroler
-        function TodoCtrl($scope) {
-          $scope.todos = [
-            {text:'learn angular', done:true}];
-          ...
-        }
-\end{lstlisting}
-
 \section{Transmisja danych}
 \label{sec:transmisjaDanych}
 
-Pierwszym aspektem który należy rozwiązać jest sposób przesyłania danych. Problem ten jest szczególnie istotny w omawianej pracy z uwagi na możliwość przesyłania informacji o granica lub innych liniach przezentowanych na mapie. Do opisu kwadratowego obszaru wymagane jest przesłanie informacji o 4 punktach. Jeżeli będziemy chcieli przekazać dokłądniejszy zarys obszaru, zaprezentować granicę państwa lub linię frotnu wojennego linia prosta w większości przypadków będzie zbyt ogólnym przybliżeniem, nie oddającym prawdziwej sytuacji.
+Pierwszym aspektem który należy rozwiązać jest sposób przesyłania danych. Problem ten jest szczególnie istotny w omawianej pracy z uwagi na możliwość przesyłania dużej ilości informacji o granicach lub innych liniach przezentowanych na mapie. Do opisu kwadratowego obszaru wymagane jest przesłanie informacji o minimum 4 punktach. Jeżeli będziemy chcieli przekazać dokłądniejszy zarys obszaru, zaprezentować granicę państwa lub linię frotnu wojennego linia prosta w większości przypadków będzie zbyt ogólnym przybliżeniem, nie oddającym prawdziwej sytuacji.
 
-Z raportu Akamai wynika że śrenia przepływność łączy internetowych dla użytkowników korzystających z puli adresów IP przeznaczonych dla Polski w I kwartale 2012 r. wynosiła 5Mb/s  \underline{\texttt{http://www.rp.pl/artykul/924483.html}} (dostęp 13.04.2014). Jest to bardzo dobry wynik któy plasuje Polskę w czołówce rankingu. Pomimo tego nie można pominąć faktu optymalizacji zapytać i danych przesyłanych, wymieniane dane pomiędzy użytkownikiem a serwerem powinny być jak najmniejsze. Duża popularność urządzeń mobilnych w których dostęp do internetu jest zapewniany często poprzez sieć bezprzewodową a dostęp do interentu nie jest jeszcze tak dogodny jak jest to w przypadku użytkowników stacjonarnych  wymusza optymalizację.
+Projekt zakłada korzystanie z lokalnej pamięci komputera użytkownika podczas pracy, jednak dostarczenie informacji, danych wejściowych nie powinno być ograniczone do wczytania ich z pliku tekstowego, należy pamiętać o możliwości przesłania ich z serwera aplikacji do użytkownika. W sytuacji takiej, gdzie w jednym momencie przesłane zostaja wszystkie informacje na któch będzie zachodzia praca, ilość informacji może być znaczna.
+
+Z raportu Akamai wynika że śrenia przepływność łączy internetowych dla użytkowników korzystających z puli adresów IP przeznaczonych dla Polski w I kwartale 2012 r. wynosiła 5Mb/s  \underline{\texttt{http://www.rp.pl/artykul/924483.html}} (dostęp 13.04.2014). Jest to bardzo dobry wynik który plasuje Polskę w czołówce rankingu. Pomimo tego nie można pominąć faktu optymalizacji zapytać i danych przesyłanych, wymieniane dane pomiędzy użytkownikiem a serwerem powinny być jak najmniejsze. Duża popularność urządzeń mobilnych w których dostęp do internetu jest zapewniany często poprzez sieć bezprzewodową a dostęp do interentu nie jest jeszcze tak dogodny jak jest to w przypadku użytkowników stacjonarnych  wymusza optymalizację.
 
 Kolejnym powodem dla którego odpowiedzi serwera powinny być jak najlżesze jest koszt pracy samego serwera. Jest to szczególnie widoczne w dużych aplikacjach mających wiele urzytkowników, czas jaki jest przeznaczany dla pojedyńczego użytkownika jest mnożony przez ich ilość. Z tego powodu zawsze podczas zwiększania ilości użtkowników korzystających z aplikacji następuje czas w którym należy zacząć korzystać z dodatkowego serwera. Celem programisty tworzącego kod który będzie wykorzystywał zasoby serwera(zarówno czas jak i pamięć) jest dbanie aby moment w którym niezbędne będzie korzystanie z większej ilośći maszym nastąpił przy jak największej ilości użytkowników.
 
@@ -57,20 +27,20 @@ json - 695  400
 \nocite{googlemapsbegin}
 \nocite{proHTML5}
 HyperText Markup Language,  hipertekstowy język znaczników
-Pozwala na opisanie struktury informacji zawartych na stronie internetowej, to dzięki niemu przeglądarka moze rozróżnić takie elementy jak hiperłącze,akapit czy chociażby nagłówek.
+Pozwala na opisanie struktury informacji zawartych na stronie internetowej, to dzięki niemu przeglądarka moze rozróżnić takie elementy jak hiperłącze, akapit czy chociażby nagłówek.
 
 Podobnie jak w przypadku XML, tak i tutaj wymagane jest aby wykorzystywane znaczniki umieszczane były w nawiasach ostrokątnych, a każdy z nich miał swoje domknięcie.
 
-Poprawnym zapisem jest <p>Wiadomość<p> który oznacza pojedyńczy akapit. Zapis <p>Wiadomość<p>, który różni się od poprzedniego brakiem znaku "" w drugim znaczniku, czyni to ten zapis niepoprawnym. Istnieje możliwość aby wykorzystać pojedyńczy znacznik przykładem jest <br> określający nową linię która będzie widoczna na stronie.
+Poprawnym zapisem jest <p>Wiadomość<\textbackslash p> który oznacza pojedyńczy akapit. Zapis <p>Wiadomość<p>, który różni się od poprzedniego brakiem znaku "\textbackslash" w drugim znaczniku, czyni to ten zapis niepoprawnym. Istnieje możliwość aby wykorzystać pojedyńczy znacznik, przykładem jest <br \textbackslash> określający wstawienie nowej lini w miejscu wystąpienia tagu.
 
-Obecnie używany standart HTML4 ma niestety wiele ograniczeń, z tego powodu pracowano nad jego następnikiem. 22 stycznia 2008 W3C opublikował HTML5, wtedy jeszcze jako jedynie szkic.
+Obecnie powszechnie używany standart HTML4 ma niestety wiele ograniczeń, z tego powodu pracowano nad jego następnikiem. 22 stycznia 2008 W3C opublikował HTML5, wtedy jeszcze jako jedynie szkic.
 
 Bardzo ciekawym i wartym zainteresowania dodanym elementem w nowej wersji jest obecność znaczniku canvas. Pozwala on na dynamiczne , skryptowe renderowanie kształtów i obrazów. Dzięki temu obiektowi możliwe stało się tworzenie animacji czy nawet gier działających w przeglądarce bez konieczności używania dodatkowych wtyczek czy programów.
 
 \underline{\texttt{http://techtrendy.pl/title,Pierwsza-gra-3D-napisana-w-HTML5,wid,14102779,wiadomosc.html?ticaid=6107dc}}
 
 Przykładem wielkich możliwości jakie dostarcza udoskonalony język jest fakt iż już w roku 2011 powstała pierwsza trójwymiarowa gra stworzona w całości przy użyciu HTML5. Przykład grafiki widoczny jest na rysunku \ref{fig:html3d}.
-Wcześniej takie efekty możliwe były jednynie przy wykorzystaniu technologi Flash, jej wadą była drudność edycji gotowego produktu, wyganało to specjalnego oprogramowania. Fakt tworzenia pliku wykonywalnego którego nie było możliwości edycji wymuszał dostęp do kodów źródłowych, czyli plików które tworzył autor programu.
+Wcześniej takie efekty możliwe były jednynie przy wykorzystaniu technologi Flash, jej wadą była drudność edycji gotowego produktu, wymagało to specjalnego oprogramowania. Fakt tworzenia pliku wykonywalnego którego nie było możliwości edycji wymuszał dostęp do kodów źródłowych, czyli plików które tworzył autor programu.
 
 \begin{figure}[H]
   \centering
@@ -79,7 +49,7 @@ Wcześniej takie efekty możliwe były jednynie przy wykorzystaniu technologi Fl
   \label{fig:html3d}
 \end{figure}
 
-Konkretną funkcjonalnością która wydaje się być przydatna w omawianym projekcie jest możliwość rysowania kształtów geomeycznych, również na innych obrazach. Przykładem wykorzystania tej technologi jest \ref{fig:canvas1} na którym przy pomocy okręgu zaznaczono rynek główny w Krakowie i jego okolice, możliwość zmiany przejżystości narysowanego kształtu pozwala aby obraz podnim był nadal widoczny.
+Kolejną funkcjonalnością która wydaje się być przydatna w stosunku do omawianego projektu jest możliwość rysowania kształtów geomeycznych, również na innych obrazach. Przykładem wykorzystania tej technologi jest \ref{fig:canvas1} na którym przy pomocy okręgu zaznaczono rynek główny w Krakowie i jego okolice, możliwość zmiany przejżystości narysowanego kształtu pozwala aby obraz podnim był nadal widoczny.
 
   \begin{figure}[H]
   \centering
@@ -106,155 +76,6 @@ Konkretną funkcjonalnością która wydaje się być przydatna w omawianym proj
       imageObj.src = './gm_1.jpg';
 
 \end{lstlisting}
-
-\subsection{Wykorzystanie HTML5}
-\label{subsec:htmluse}
-
-Wstępne założenia zakładały wykorzystanie możliwości rysowania kształtów przy użyciu ogólnodostępnych map. Rozważania w sekcji \ref{sec:Rodzaje map} wskazały że najlepszym wyborem są Google Maps. Niestety opcja rysowania kształtów któa dostarcza HTML5 wymaga uzycia znacznika canvas, nie jest to kompatybilne z metodą wykorzystywania maps dostarczanych od omawianej firmy która wymaga wykorzystanie znacznika div.W momencie tworzenia tej pracy nie ma możliwości współpracy wybranych map z technologią rysowania kształtów geometrycznych. Sytuacja taka wymusza wykorzystanie innego rozwiązania do tworzenia interesujących nas warstw.
-
-\subsection{Storage}
-\label{subsec:storage5}
-Inną ciekawą funkcją omówioną w podręczniku do HTML5  \cite{html5dive} jest Storage. Pozwala on na przechowywanie danych w przeglądarce użytkownika. Różnicą w stosunku do ciasteczek które również potrafią przechowywać informacje o konretnym użytkonwniku jest:
-\begin{itemize}
-\item
-Większy rozmiar dostępnej pamięci m.in. Chrome 5MB \nocite{chrome5mb}, IE 10
-\item
-Informacje przechowywane są po stronie użytkownka, nie są przesyłane za każdym razem do serwera.
-\item
-Informacja może być przechowywana przez długi okres czasu.
-\end{itemize}
-
-
-
-Dodatkowo nie można pominąć faktu istnienia dwóch rodzaii tej pamięci.
-\begin{itemize}
-
-\item
-Session Storage
-Dane przechowywane są w kontekście sesji użytkownika, są one tracone w momencie zamknięcia okna przeglądarki.
-
-\item
-Local Storage
-Teoretycznie dane są przechowywane w nieskończoność, do momentu kiedy użytkonwik nie usunie ich. Zamknięcię sesji nie powoduje czyszczenia danych.
-
-\end{itemize}
-
-Powodem który wymaga wykorzystania tego typu pamięci jest możliwość przechwowywania danych nad którymi użytkonwik pracuje w aktualnym czasie. Nie potrzebuje on informacji które były dla niego istotne podczas poprzedniej wizyty,sesji. Sytuacja ta jednoznacznie wskazuje że lepszym wyborem jest wybór pamięci sesyjnej(Session Storage).
-
-
-Wadą tej pamięci jest jej interfejs. Obecnie przechowywany sposób danych to mapowanie w postaci napis->napis. Wymusza to aby każde dane które chcemy przechować muszą być w formie ciągu znaków. Przykład \ref{lis:storage} przedstawia w jaki sposób możemy obiekt zawierający imię i nazwisko zapisać w pamięci. Linia 4 przedstawia obiekt w postaci któej chcielibyśmy go przechować. Niestety zwykłe przypisanie do zmiennej w pamięci powoduje że jedynie typ instancji zostaje zapisany. Aby móc zapisać w poprawnej formie dane musimy doknać serializacji danych. Czynność tą możemy wykonać przy pomocy metody stringify z obiektu JSON, wynikiem jest ciąg znaków który możemy bez problemu zapisać w pamięci sesyjnej. Do odzyskania pierwotnego obiektu, odtworzenia go z zapisanego napisu wykorzystujemy metodę parse również z obiektu JSON.
-
-\lstset{language=JavaScript}
-\label{lis:storage}
-\begin{lstlisting}[caption=json]
-      uzytkownik={};
-      uzytkonwik.imie='Jan'
-      uzytkownik.nazwisko='Kowalski'
-      //uzytkownik : Object {imie: "Jan", nazwisko: "Kowalski"}
-
-      sessionStorage.u1 = uzytkownik
-      //sessionStorage.u1 : "[object Object]"
-
-      sessionStorage.u2 = JSON.stringify(uzytkownik)
-      //sessionStorage.u2 : "{"imie":"Jan","nazwisko":"Kowalski"}"
-
-      uzytkonwik2 = JSON.parse(sessionStorage.u2)
-      //uzytkonwik2 : Object {imie: "Jan", nazwisko: "Kowalski"}
-\end{lstlisting}
-
-
-
-Wsparcie dla pamięci Storage nie jest obecne zazwyczaj w nowszych wersach przeglądarek. Na stronie \underline{\texttt{http://www.html5rocks.com/en/features/storage}} możemy sprawdzić aktualny stan większości przęglądarek.
-
-\subsection{Web SQL Database}
-\label{subsec:websql}
-
-Koljenym ciekawym rozwiązaniem problemu przechowywania danych po stronie klienta jest Web Sql Database.
-Jest to baza danych która została umieszczona po stronie klienta. Jest to dodatkowa warstwa która korzysta z SQlite.
-Zaletą takiego rozwiązania jest przeżucenie kosztów obliczeniowych na stronę klienta,operacje takie jak sortowanie, filtrowanie na bazie danych wykonywane są przy wykorzystaniu zasobów komuptera klienta.
-
-Nie wątpliwą zaletą w stosunku do omówionej w rozdziale \ref{subsec:storage5} pamięci jest możliwość ustalenia wielkości zalokowanej wielkości pamięci. Dzięki temu nie jesteśmy ograniczenie granicą maksymalnie 5MB w więkoszości przeglądarek.
-
-Przykład wykorzystania został zaprezentowany na przykładzie. Po stworzeniu bazy danych o nazwie ExampleDataBase i rozmiarze 2MB możemy korzystać z niej jak z każdej innej bazy danych. Możliwe są m.in. operacje tworzenia table(linie 3-5), wstawiania danych(parametry podajemy po treści zapytania, następnie możemy podać funkcje które zostaną wykonane w momencie sukcesu lub w przypadku wystąpienia błędu). Odczyt danych (linie 13-18) jest analogiczny do pozostałych operacji, dodatkowo pokazano w jaki sposób możliwa jest iteracja po otrzymanych wynikach.
-
-Wadą tego rozwiązania jest jego popularność.Na stronie browser stats  możemy sprawdzić jaka jest aktualnie popularność poszczególnych przeglądarek na świecie. Porównując te dane z dostępnością Web Sql dostępną na stronie \underline{\texttt{http://www.html5rocks.com/en/features/storage}} (dostęp) możemy wnioskować że prawie 45\% użytkowników( korzystających z IE i Firefox) nie mogą korzystać z tego rozwiązania. Fakt ten dyskfalfikuje je.
-
-\lstset{language=JavaScript}
-\label{lis:webSql}
-\begin{lstlisting}[caption=json]
-      var db = window.openDatabase("ExampleDataBase", "1.0", "Description", 2 * 1024 * 1024);
-
-      db.transaction(function(tx) {
-        tx.executeSql("CREATE TABLE TableTest (id REAL UNIQUE, text TEXT)");
-      });
-
-      db.transaction(function(tx) {
-        tx.executeSql("INSERT INTO TableTest (id, text) VALUES (?, ?)", [1, 'test'],
-        onSuccess,
-        onError);
-                });
-
-      db.transaction(function(tx) {
-        tx.executeSql("SELECT * FROM TableTest", [], function(tx, result) {
-            for (var i = 0, item = null; i < result.rows.length; i++) {
-                ...
-			}
-        });
-      });
-\end{lstlisting}
-
-\subsection{IndexedDB}
-\label{subsec:indexDB}
-
-Trzecim rozwiązaniem jest indexDb. Jest to szczególnie interesujące rozwiązanie gdyż wykorzystuje podejście nierelacyjnych baz danych(NoSQL).
-
-Tradycyjne podejście do przechowywania danych zakłada wykorzystanie modelu relacyjnego do organizacji danych. Są one grupowane w relacje (zwane tablicami), każda z nich składa się z identycznych rekordów. Przykładem może być tablica przechowywujaca infromacje o osobie, mająca kolumny przeznaczone na dwa imiona i nazwisko. W takiej sytuacji wszyskie rekordy odnoszące się do osoby z jednym imieniem będą miały puste pole z drugim imieniem. Jest to sytuacja względnie nieproblematyczna, dopuszczenie pustych wartości ograniczy niepotrzebny wzrost wielkości bazy.
-W przypadku chęci dodania nowej inforacji, przykładowo daty urodzenia, spowoduje konieczość zmiany struktury bazy danych, dodanie kolumny do istniejącej tabeli lub stworzenie nowej dla dodatkowej wartości.
-
-Kolejną wadą tego podejścia jest bardzo słaba skalowaność rozwiązania(możliwośc pracy na bardzo dużych danych). Korzystanie z wielu złączeń(czasami aby wykonać zapytanie i otrzymać interesujące nas informacje odwołujemy się do wielu tabel).
-W zależności od poziomu izolacji transakcji możemy mieć dane które zostały zmienione w innej tranzakcji przd jej zakończeniem. Jeśli druga tranzakcja zostanie wycofana to w efekcie pobrane dane są nieaktualne.(Read uncommited)
-Przeciwnym rozwiązaniem jest poziom Serializable w którym dane da którym rozpoczęto pracę są niedostępne dla innych tranzakcji, zapewnia to poprawność danych w każdej momencie jednak znacznie obniża wydajność bazy.
-
-
-W chwilie pisania tego dokumentu jedynie 4 przeglądarki w najwyższej wersji wspierały tą technologię. Z tego powodu wykorzystanie to ogranicza docelową grupę odbiorców do wąskiego grona.
-
-\section{Format danych}
-\label{sec:dataformat}
-
-W poprzednich punktach opisano metody przechwywania danych w pamięci komputera, w szeczólności pamięci tymczasowej którą dostarczają nowoczesne przeglądarki internetowe. Jednak aby móc korzystać z informacji stworzonych przez innego użytkownika, lub nawet pracować nad własnym projektem stworzonym we wcześniejszym czasie niezbednę jest trwałe zapisanie danych. W rozdziale \ref{subsec:htmluse} zostały omówione sposoby które oferują możliwość przchowywania danych, niestety wszystkie te rozwiązania posiadają wspólną wadę, jest to brak mobilności danych. Znajdują się one na dysku jednego komputera a ich przeniesienie na inny pomimo że nie jest nie możliwe, jest bardzo uciążliwe i nie praktyczne. Z tego powodu przeprowadzona została analiza aktualnie używanych formatów danych zapisywanych do zewnętrznych plików.
-
-\subsection{GIS}
-\label{subsec:gis}
-
-GIS(Geographical Information Systems) jest to System Informacji Geograficznych, jest to zbiór wiedzy, informacji do pozyskiwania i analizowania danych przestrzennych. Dane są pobieranie w trakcie naziemnych pomiarów jak i zbierane przy użyciu systemu GPS. Informacje te są następnie zapisywane do określonych formatów,dzięki czemu możliwa jest ich dalsza analiza. \underline{\texttt{http://www.gis-support.pl/co-to-jest-gis/}}
-
-
-\subsection{Wykorzystywany układ współrzędnych}
-\label{subsec:uklad}
-
-Istnieje wiele układów współrzędnych któe służą do opisu pojedyńczego punktu na powierzchni ziemi.Na stronie \underline{\texttt{http://www.spatialreference.org/ref/epsg/}} (dostęp) znajduje się lista zawierająca przykłady zapisu różnych obszarów kuli ziemskiej przy użyciu różnych formatów. Zawierają one niezbędne infomacje w konkretnym zapisie.
-
-Wersją która ma za zadanie być ogólnoświatowym formatem jest WGS(World Geodetic System). Jego ostatnia wersja  WSG84 jest powszechnie używana w urządzeniach do nawigacji.
-Tradycyjny zapis oparty jest na wykorzystaniu stopni,minut i sekunk, jest on obecnie wypierany przez nowszy,łatwiejszy do obliczeń komputerówych. Poniżej zaprezentowano jak wygląda zapis w starszym i nowszym punktu określającego położenie budynku A-0 uczelni AGH.
-
-\begin{itemize}
-
-\item
-Pierwotny zapis
-
-50°03'52.2803", 019°55'23.7968"
-\item
-Zapis unowocześniony
-
-50.06452231874906, 19.923276901245117
-\end{itemize}
-
-Drugi zapis został wykorzystany do przechowywania danych w plikach, tak aby wymiana i wspólna praca była jak najprostsza. Wybór ten sprawił że nie występuje problem konwersji punktu do formatu czytelnego dla komputera, można go bez problemu odczaytać jako liczbę.
-
-\subsection{SVG}
-\label{subsec:svg}
-
-Wstępny etap pracy zakładał wykorzystanie formatu SVG(en. Scalable Vector Graphics) do prezentacji danych, tworzenia animacji płynnych zmian kształtów.\nocite{svgbegin}\nocite{html5canvas}
 
 \subsection{Format zapisu}
 \label{subsec:zapis}
@@ -286,7 +107,10 @@ Aby tworzona aplikacja miała możliwość współpracy ze stworzonymi wczesniej
 \section{Parser plików}
 \label{sec:parser}
 
-Aby umożliwoś pracę 
+Założenia projektu zapewniają dwa źródła dostarczania informacji niezbędnych do poprawnej pracy frameworka.
+Pierwszym jest przesyłanie infromacji z serwera do urządzenia klienta przy wykorzystaniu formatu JSON, wiadomość taka jest zbudowana w odpowiednią strukturę aby bezpośrednio dokonać konwersji do jegnego ciągu znakowego. W ten sposób możliwe będzie zapewnienie w bardzo szybkim czasie danych pozwalających na pełne wykorzystanie wszystkich możliwości aplikacji.
+
+Dodatkową opcją dostarczania informacji będzie wczytywanie pliku z informacjami opisującymi mapę. Do tego celu stworzono parser plików który pozwala na dokonanie analizy wczytanego pliku i konwersję danych do formatu używanego do przechowywania danych po stronie klienta.
 
 \section{Oś czasu}
 \label{sec:timeLine}
@@ -333,54 +157,6 @@ Dla porównania \ref{fig:tm2} prezentuje o wiele prostszą konfigurację w któr
   \caption{Timeline 2}
   \label{fig:tm2}
 \end{figure}
-
-\section{Less}
-\label{sec:less}
-
-Do stworzenia bardziej zaawansowanych arkuszy stylów CSS (en. Cascading Style Sheets) wykorzystaniu narzedzie które pozwala na łatwe tworzenie i utrzymywanie reguł. Głównymi zaletami są:
-
-\begin{itemize}
-\item
-Deklarowanie zmiennych.
-
-Jeśli chcemy wykorzystać jedną wartość(przykładowo jeden kolor) w wielu miejscach wystarczy w głównym pliku zadeklarować zmienną i wykrzystywać ją w każdym miejscu gdzie chcemy użyć tej wartośći.
-
-Przykładowo chcąc wykorzystać kolor czerwony wykorzystywany w kolorystyce uczelni AGH deklarujemy zmienną @aghRed, następnie w miejscu gdzie chcemy aby pojawił się ten kolor korzystamy z istniejącej zmiennej
-
-\lstset{language=JavaScript}
-\label{lis:webSql}
-\begin{lstlisting}[caption=json]
-@aghRed: #a71930;
-bgcolor: @aghRed;
-\end{lstlisting}
-
-\item
-Mixiny
-
-Możemy tworzyć nowe klasy które będą posiadały właściwości innej, wcześniej zadeklarowanej.Pozwala to na tworzenie kodu bardziej czytelnego, niepowielanie go.
-
-
-\lstset{language=JavaScript}
-\label{lis:webSql}
-\begin{lstlisting}[caption=json]
-.RoundBorders {
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-#menu {
-  color: gray;
-  .RoundBorders;
-}
-\end{lstlisting}
-
-\item
-Osadzanie elementów wedlug dziedziczenia
-
-Tworząc zagnieżdzoną strukturę storny często elementy wewnętrzne zależą od elementów nadrzędnych. Wygląd komurki może się różnić w zależości od rodzaju tabeli. W tworzeniu tak zadnieżdżonych struktur pomocna okazuje się omawiana cecha.
-
-\end{itemize}
-
 
 \section{Interferjs}
 \label{sec:Interferjs}

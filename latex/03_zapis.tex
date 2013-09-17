@@ -1,0 +1,161 @@
+
+
+\section{Przechowywanie i transmisja danych}
+\label{sec:przesyl}
+
+Rozdział ten zawiera informacje związane z analizą wybranych metod przechowywania danych a także możliwości ich transmisji.
+Omawia próbę podjęcia pracy na relacyjnej bazie danych.
+
+\subsection{Format danych}
+\label{sec:format}
+\section{Format danych}
+\label{sec:dataformat}
+
+W poprzednich punktach opisano metody przechwywania danych w pamięci komputera, w szeczólności pamięci tymczasowej którą dostarczają nowoczesne przeglądarki internetowe. Jednak aby móc korzystać z informacji stworzonych przez innego użytkownika, lub nawet pracować nad własnym projektem stworzonym we wcześniejszym czasie niezbednę jest trwałe zapisanie danych. W rozdziale \ref{subsec:htmluse} zostały omówione sposoby które oferują możliwość przchowywania danych, niestety wszystkie te rozwiązania posiadają wspólną wadę, jest to brak mobilności danych. Znajdują się one na dysku jednego komputera a ich przeniesienie na inny pomimo że nie jest nie możliwe, jest bardzo uciążliwe i nie praktyczne. Z tego powodu przeprowadzona została analiza aktualnie używanych formatów danych zapisywanych do zewnętrznych plików.
+
+\subsection{GIS}
+\label{subsec:gis}
+
+GIS(Geographical Information Systems) jest to System Informacji Geograficznych, jest to zbiór wiedzy, informacji do pozyskiwania i analizowania danych przestrzennych. Dane są pobieranie w trakcie naziemnych pomiarów jak i zbierane przy użyciu systemu GPS. Informacje te są następnie zapisywane do określonych formatów,dzięki czemu możliwa jest ich dalsza analiza. \underline{\texttt{http://www.gis-support.pl/co-to-jest-gis/}}
+
+
+\subsection{Wykorzystywany układ współrzędnych}
+\label{subsec:uklad}
+
+Istnieje wiele układów współrzędnych któe służą do opisu pojedyńczego punktu na powierzchni ziemi.Na stronie \underline{\texttt{http://www.spatialreference.org/ref/epsg/}} (dostęp) znajduje się lista zawierająca przykłady zapisu różnych obszarów kuli ziemskiej przy użyciu różnych formatów. Zawierają one niezbędne infomacje w konkretnym zapisie.
+
+Wersją która ma za zadanie być ogólnoświatowym formatem jest WGS(World Geodetic System). Jego ostatnia wersja  WSG84 jest powszechnie używana w urządzeniach do nawigacji.
+Tradycyjny zapis oparty jest na wykorzystaniu stopni, minut i sekunk, jest on obecnie wypierany przez nowszy,łatwiejszy do obliczeń komputerówych. Poniżej zaprezentowano jak wygląda zapis w starszym i nowszym punktu określającego położenie budynku A-0 uczelni AGH.
+
+\begin{itemize}
+
+\item
+Pierwotny zapis
+
+50°03'52.2803", 019°55'23.7968"
+\item
+Zapis unowocześniony
+
+50.06452231874906, 19.923276901245117
+\end{itemize}
+
+Drugi zapis został wykorzystany do przechowywania danych w plikach, tak aby wymiana i wspólna praca była jak najprostsza. Wybór ten sprawił że nie występuje problem konwersji punktu do formatu czytelnego dla komputera, można go bez problemu odczaytać jako liczbę.
+
+\subsection{Relacyjne bazy danych}
+\label{sec:relacyjne}
+
+\subsection{NoSQL}
+\label{sec:nosql}
+
+\subsection{Pamięć lokalna}
+\label{sec:localStorage}
+
+\subsection{Wykorzystanie HTML5}
+\label{subsec:htmluse}
+
+Wstępne założenia zakładały wykorzystanie możliwości rysowania kształtów przy użyciu ogólnodostępnych map. Rozważania w sekcji \ref{sec:Rodzaje map} wskazały że najlepszym wyborem są Google Maps. Niestety opcja rysowania kształtów któa dostarcza HTML5 wymaga uzycia znacznika canvas, nie jest to kompatybilne z metodą wykorzystywania maps dostarczanych od omawianej firmy która wymaga wykorzystanie znacznika div.W momencie tworzenia tej pracy nie ma możliwości współpracy wybranych map z technologią rysowania kształtów geometrycznych. Sytuacja taka wymusza wykorzystanie innego rozwiązania do tworzenia interesujących nas warstw.
+
+\subsection{Storage}
+\label{subsec:storage5}
+Inną ciekawą funkcją omówioną w podręczniku do HTML5  \cite{html5dive} jest Storage. Pozwala on na przechowywanie danych w przeglądarce użytkownika. Różnicą w stosunku do ciasteczek które również potrafią przechowywać informacje o konretnym użytkonwniku jest:
+\begin{itemize}
+\item
+Większy rozmiar dostępnej pamięci m.in. Chrome 5MB \nocite{chrome5mb}, IE 10MB
+\item
+Informacje przechowywane są po stronie użytkownka, nie są przesyłane za każdym razem do serwera.
+\item
+Informacja może być przechowywana przez długi okres czasu.
+\end{itemize}
+
+
+
+Dodatkowo nie można pominąć faktu istnienia dwóch rodzaii tej pamięci.
+\begin{itemize}
+
+\item
+Session Storage
+Dane przechowywane są w kontekście sesji użytkownika, są one tracone w momencie zamknięcia okna przeglądarki.
+
+\item
+Local Storage
+Teoretycznie dane są przechowywane w nieskończoność, do momentu kiedy użytkonwik nie usunie ich. Zamknięcię sesji nie powoduje usunięcia danych.
+
+\end{itemize}
+
+Powodem który wymaga wykorzystania tego typu pamięci jest możliwość przechwowywania danych nad którymi użytkonwik pracuje w aktualnym czasie. Nie potrzebuje on informacji które były dla niego istotne podczas poprzedniej wizyty,sesji. Sytuacja ta jednoznacznie wskazuje że lepszym wyborem jest wybór pamięci sesyjnej(Session Storage).
+
+
+Wadą tej pamięci jest jej interfejs. Obecnie przechowywany sposób danych to mapowanie w postaci napis->napis. Wymusza to aby każde dane które chcemy przechować muszą być w formie ciągu znaków. Przykład \ref{lis:storage} przedstawia w jaki sposób możemy obiekt zawierający imię i nazwisko zapisać w pamięci. Linia 4 przedstawia obiekt w postaci której chcielibyśmy go przechować. Niestety zwykłe przypisanie do zmiennej w pamięci powoduje że jedynie typ instancji zostaje zapisany. Aby móc zapisać w poprawnej formie dane musimy doknać serializacji danych. Czynność tą możemy wykonać przy pomocy metody stringify z obiektu JSON, wynikiem jest ciąg znaków który możemy bez problemu zapisać w pamięci sesyjnej. Do odzyskania pierwotnego obiektu, odtworzenia go z zapisanego napisu wykorzystujemy metodę parse również z obiektu JSON.
+
+\lstset{language=JavaScript}
+\label{lis:storage}
+\begin{lstlisting}[caption=json]
+      uzytkownik={};
+      uzytkonwik.imie='Jan'
+      uzytkownik.nazwisko='Kowalski'
+      //uzytkownik : Object {imie: "Jan", nazwisko: "Kowalski"}
+
+      sessionStorage.u1 = uzytkownik
+      //sessionStorage.u1 : "[object Object]"
+
+      sessionStorage.u2 = JSON.stringify(uzytkownik)
+      //sessionStorage.u2 : "{"imie":"Jan","nazwisko":"Kowalski"}"
+
+      uzytkonwik2 = JSON.parse(sessionStorage.u2)
+      //uzytkonwik2 : Object {imie: "Jan", nazwisko: "Kowalski"}
+\end{lstlisting}
+
+
+
+Wsparcie dla pamięci Storage nie jest obecne zazwyczaj w nowszych wersach przeglądarek. Na stronie \underline{\texttt{http://www.html5rocks.com/en/features/storage}} możemy sprawdzić aktualny stan większości przęglądarek.
+
+\subsection{Web SQL Database}
+\label{subsec:websql}
+
+Koljenym ciekawym rozwiązaniem problemu przechowywania danych po stronie klienta jest Web Sql Database.
+Jest to baza danych która została umieszczona po stronie klienta. Jest to dodatkowa warstwa która korzysta z SQlite.
+Zaletą takiego rozwiązania jest przerzucenie kosztów obliczeniowych na stronę klienta, operacje takie jak sortowanie, filtrowanie na bazie danych wykonywane są przy wykorzystaniu zasobów komuptera klienta.
+
+Nie wątpliwą zaletą w stosunku do omówionej w rozdziale \ref{subsec:storage5} pamięci jest możliwość ustalenia wielkości zalokowanej wielkości pamięci. Dzięki temu nie jesteśmy ograniczeni maksymalną dostępną ilością pamięci jak ma to miejsce w przypadku pamięci omawianej w poprzednim punkcie.
+
+Przykład wykorzystania został zaprezentowany na \ref{lis:webSql}. Po stworzeniu bazy danych o nazwie "NowaBaza" i rozmiarze 2MB możemy korzystać z niej jak z każdej innej bazy danych. Możliwe są m.in. operacje tworzenia table(linie 3-5), wstawiania danych(parametry podajemy po treści zapytania, następnie możemy podać funkcje które zostaną wykonane w momencie sukcesu lub w przypadku wystąpienia błędu). Odczyt danych (linie 13-18) jest analogiczny do pozostałych operacji, dodatkowo pokazano w jaki sposób możliwa jest iteracja po otrzymanych wynikach.
+
+Wadą tego rozwiązania jest jego popularność. Na stronie browser stats  możemy sprawdzić jaka jest popularność poszczególnych przeglądarek na świecie. Porównując te dane z dostępnością Web Sql dostępną na stronie \underline{\texttt{http://www.html5rocks.com/en/features/storage}} możemy wnioskować że prawie 45\% użytkowników( korzystających z IE i Firefox) nie mogą korzystać z tego rozwiązania, fakt ten dyskfalfikuje je.
+
+\lstset{language=JavaScript}
+\label{lis:webSql}
+\begin{lstlisting}[caption=json]
+      var db = window.openDatabase("NewDatabase", "1.0", "Description", 2 * 1024 * 1024);
+
+      db.transaction(function(tx) {
+        tx.executeSql("CREATE TABLE Person (id REAL UNIQUE, name TEXT)");
+      });
+
+      db.transaction(function(tx) {
+        tx.executeSql("INSERT INTO Person (id, name) VALUES (?, ?)", [1, 'Jam'],
+        onSuccess,
+        onError);
+                });
+
+      db.transaction(function(tx) {
+        tx.executeSql("SELECT * FROM Person", [], function(tx, result) {
+            for (var i = 0, item = null; i < result.rows.length; i++) {
+                ...
+			}
+        });
+      });
+\end{lstlisting}
+
+\subsection{IndexedDB}
+\label{subsec:indexDB}
+
+Trzecim rozwiązaniem jest indexDb. Jest to szczególnie interesujące rozwiązanie gdyż wykorzystuje podejście nierelacyjnych baz danych(NoSQL).
+
+Tradycyjne podejście do przechowywania danych zakłada wykorzystanie modelu relacyjnego do organizacji danych. Są one grupowane w relacje (zwane tablicami), każda z nich składa się z identycznych rekordów. Przykładem może być tablica przechowywujaca infromacje o osobie, mająca kolumny przeznaczone na dwa imiona i nazwisko. W takiej sytuacji wszyskie rekordy odnoszące się do osoby z jednym imieniem będą miały puste pole z drugim imieniem. Jest to sytuacja względnie nieproblematyczna, dopuszczenie pustych wartości ograniczy niepotrzebny wzrost wielkości bazy.
+W przypadku chęci dodania nowej informacji, przykładowo daty urodzenia, spowoduje konieczość zmiany struktury bazy danych, dodanie kolumny do istniejącej tabeli lub stworzenie nowej dla dodatkowej wartości.
+
+Kolejną wadą tego podejścia jest bardzo słaba skalowaność rozwiązania(możliwośc pracy na bardzo dużych danych). Korzystanie z wielu złączeń(czasami aby wykonać zapytanie i otrzymać interesujące nas informacje odwołujemy się do wielu tabel).
+W zależności od poziomu izolacji transakcji możemy mieć dane które zostały zmienione w innej tranzakcji przd jej zakończeniem. Jeśli druga tranzakcja zostanie wycofana to w efekcie pobrane dane są nieaktualne.(Read uncommited)
+Przeciwnym rozwiązaniem jest poziom Serializable w którym dane da którym rozpoczęto pracę są niedostępne dla innych tranzakcji, zapewnia to poprawność danych w każdej momencie jednak znacznie obniża wydajność bazy,szybkość odpowiedzi.
+
+W chwilie pisania tego dokumentu jedynie 4 przeglądarki w najwyższej wersji wspierały tą technologię. Z tego powodu wykorzystanie to ogranicza docelową grupę odbiorców do wąskiego grona. 

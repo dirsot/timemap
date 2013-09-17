@@ -5,27 +5,43 @@
 \nocite{webgis}
 \nocite{imprxml}
 \nocite{perfxml}
-http://www.flashearth.com/
 
-2-3 storny\\
-wyraz $\tau$, $\epsilon$, $\chi$\\
-Na stronie \underline{\texttt{http://kile.sourceforge.net/screenshots.php}}\\
+
 %---------------------------------------------------------------------------
 
 \section{Temat pracy}
 \label{sec:tematPracy}
 
-Tematem pracy jest połączenie ogólnodostępnych źródeł informacji jakimi są mapy świata z możliwością zmiany czasu i co się z tym wiąże zmiany prezentowanych informacji.
+Tematem pracy jest połączenie ogólnodostępnych źródeł informacji jakimi są mapy świata z możliwością zmiany czasu i co się z tym wiąże zmiany prezentowanych informacji. Tradycyjne podejście zakłada statyczną prezentację obrazu terenu. Są to często zdjęcia lotnicze które prezentują sytuację w konkretnym czasie. Poniższej pracy podjęto próby stworzenia aplikacji która bedzie rozszeżała tradycyjne podejście, doda czwarty wymiar, czas.
 
 \section{Geneza teamatu}
 \label{sec:geneza}
 
 Mapy są znane człowiekowi od dawna, ich rozwój sprawił że obecnie, szczególnie ich wirtualne wersje zawierają dużą ilość dodatkowych opcji które mają za zadanie dostarczyć jeszcze więcej informacji. Niestety żadko można spotkać funkcjonalność która pozwalałaby na spojżenie w różne okresy czasu, zazwyczaj na jednej mapie znajduje się maksymalnie wąski okres czasu.
 
+Obecny gwałtowny rozwój miast,zmian terytorialnych tworzy potrzebę prezentacji zachodzących zmian. Dodatkowym zastosowaniem może być prezentacja zmian pogodowych takich jak przesuwania się frontów atmosferycznych.
+
 \section{Realizacja pracy}
 \label{sec:realizacja}
 
-Zdecydowano się na stworzenie frameworku, programu który będzie dostarczał intuicyjny interfers do jego obsługi. Aby jego konfiguracja nie zajmowała czasu zrezygnowano z korzystania tradycyjnych baz danych, konieczność ich konfiguracji zniechęcała by nowych użytkowników. Wymaga to wykorzystania innego rozwiązania, które pozwalałoby na przechowywanie danych po stronie klienta, najlepiej w przeglądarkce klienta.
+Praca ma na celu stworzenie aplikacji dodającej do tradycyjnie znanych map dodatkowego wymiaru, czasu i możliwośći jego kontroli. Zadanie to wymaga rozwiązania kilku aspektów, są nimi.
+
+\begin{itemize}
+
+\item
+Przechowywania i przysułu danych, docelowe zbiory danych mogą być duże. Należy zapewnić możliwość ich przechowywania w sposób przyjazny dla użytkownika.
+
+\item
+Wizualizacja danych, aplikacja powinna zapewniać estetyczną prezentację danych.
+
+\item
+Wiarygodność informacji, użytkownik powinien być pewien że informacje z których korzysta są poprawne i nie zmienione przez nieautoryzowane osoby.
+
+\end{itemize} 
+
+Każdemu z nich poświęcony jest odzielny rozdział aby w pełni przeanalizować tematykę.
+
+Zdecydowano się na stworzenie frameworku, programu który dostarczy intuicyjny interfers do jego obsługi. Aby jego konfiguracja nie zajmowała czasu zrezygnowano z korzystania tradycyjnych baz danych, konieczność ich konfiguracji zniechęcała by nowych użytkowników. Wymaga to wykorzystania innego rozwiązania, które pozwalałoby na przechowywanie danych po stronie klienta, najlepiej w przeglądarkce klienta.
 
 W początkowej fazie projektu rozważano możliwość współpracy osi czasu z możliwośćia tworzenia kształtó dostarczana przez HTML5, niestey brak kompatybilności tego rozwiązania z wybranymi mapami wymusił odrzucenie tej koncepcji.
 

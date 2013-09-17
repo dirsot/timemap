@@ -1,0 +1,87 @@
+\section{Wybrane technologie}
+\label{sec:wybranetechnologie}
+
+\section{JavaScript}
+\label{sec:javascript}
+
+Wybór języka JavaScript to tworzenia aplikacji został podyktowany jego dużymi możliwościami na polu tworzenia projektów do użytku na przeglądarkach internetowych.Pozwala na łatwe tworzenie asynchronicznych aplikacji, oznacza to aktualizowanie jedynie wybranych danych na ekranie moniotra bez konieczności przeładowania całej strony. Jest to szczególnie istotne w omawianym przypadku, oznacza to brak potrzeby wczytywania i renderowania całego tła mapy za każdym razem gdy nastąpi nawet małą zmiana.
+
+Język ten po raz pierwszy został zaprezentowany w 1995 \cite{js1995}. Jest wielo paragmatyczny, spełnia założenia wielu wzorców programowania co ułatwia pracę.
+
+Spełnia warunki paradygmatu obiektowego, umożliwia korzystanie z obiektów które mogą odpowiadać pewnej klasie rzeczywistych przedmiotów lub rzeczy, imperatywnego, składa się z komend które zmieniają stan programu jak też funkcyjne, umożliwia tworzenie funkcji które w zależności od podanych argumentów wejściowych dostarczają odpowiednich danych wyjściowych.
+
+Bardzo ważną cechą języka jest fakt jego wykonywania po stronie klienta. Oznacza to wykonywanie obliczeń i korzystanie z pamięci najczęściej na komputerze osoby która korzysta z aplikacji. Pozwala to na zmiejszenie wymagać w stosunku do serwera( wykonyje on mniej operacji i zapisuje mniej danych w swojej pamięci)
+
+Obecnie powstają frameworki których zadaniem jest stworzenie małej, lekkiej aplikacji webowej wykorzystującej w maksymalny sposób omawiany język.\cite{AngularJS} Przykładem takiego rozwiązania jest AngularJs, korzysta on z architekury MVC w której większość pracy została przeniesiona na stronę klienta. Kontroler wykonuje obliczenia w przeglądarce użytkownika, odciąża to główny serwer, pozwala na szybszą i płynniejszą pracę większej ilości osób.
+
+Nie wątpliwą zaletą takiego podejścia jest wzrost opdorności na ataki typu Dos(en. Denial of Service), polega on na przeciążeniu aplikacji dostarczającej określone dane lub usługi do momentu gdy przestaje ona opdowiadać na jakiekolwiek zapytania. Aplikacje które wykonują większość operacji po stronie serwera(różnego typu obliczenia matematyczne, analizę danych) aby sprostać dużej ilośći klientów która występuje w tego typu atakach nakłada duże wymagania w stosunku do wykorzystywanego sprzętu elektrycznego. Przeniesienie ciężaru z serera na końcowego klienta wykonywania większości operacji pozwala nie tylko na obsłużenie większej ilości użytkowników ale także może wpłynąć na zmiejszenie kosztów utrzyamnia serwera.
+
+Prosty przykład na stronie \underline{\texttt{http://angularjs.org/}} prezentuje w jak prosty sposób można stworzyć prostą liste rzeczy do zrobienia. Poniżej zaprezentowano fragment odpowiedzialny za wyświetlenie zadań z dodatkowym polem określającym czy zostało już wykonane.
+
+\lstset{language=JavaScript}
+\begin{lstlisting}[caption=AngularJs]
+
+        //fragment kodu html
+      <div ng-controller="TodoCtrl">
+        ...
+        <li ng-repeat="todo in todos">
+          <input type="checkbox" ng-model="todo.done">
+          <span >{{todo.text}}</span>
+        </li>
+        ...
+      </div>
+
+        //kontroler
+        function TodoCtrl($scope) {
+          $scope.todos = [
+            {text:'learn angular', done:true}];
+          ...
+        }
+\end{lstlisting}
+
+\section{Less}
+\label{sec:less}
+
+Do stworzenia bardziej zaawansowanych arkuszy stylów CSS (en. Cascading Style Sheets) wykorzystaniu narzedzie które pozwala na łatwe tworzenie i utrzymywanie reguł. Głównymi zaletami są:
+
+\begin{itemize}
+\item
+Deklarowanie zmiennych.
+
+Jeśli chcemy wykorzystać jedną wartość(przykładowo jeden kolor) w wielu miejscach wystarczy w głównym pliku zadeklarować zmienną i wykrzystywać ją w każdym miejscu gdzie chcemy użyć tej wartośći.
+
+Przykładowo chcąc wykorzystać kolor czerwony wykorzystywany w kolorystyce uczelni AGH deklarujemy zmienną @aghRed, następnie w miejscu gdzie chcemy aby pojawił się ten kolor korzystamy z istniejącej zmiennej
+
+\lstset{language=JavaScript}
+\label{lis:webSql}
+\begin{lstlisting}[caption=json]
+@aghRed: #a71930;
+bgcolor: @aghRed;
+\end{lstlisting}
+
+\item
+Mixiny
+
+Możemy tworzyć nowe klasy które będą posiadały właściwości innej, wcześniej zadeklarowanej.Pozwala to na tworzenie kodu bardziej czytelnego, niepowielanie go.
+
+
+\lstset{language=JavaScript}
+\label{lis:webSql}
+\begin{lstlisting}[caption=json]
+.RoundBorders {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+#menu {
+  color: gray;
+  .RoundBorders;
+}
+\end{lstlisting}
+
+\item
+Osadzanie elementów wedlug dziedziczenia
+
+Tworząc zagnieżdzoną strukturę storny często elementy wewnętrzne zależą od elementów nadrzędnych. Wygląd komurki może się różnić w zależości od rodzaju tabeli. W tworzeniu tak zadnieżdżonych struktur pomocna okazuje się omawiana cecha.
+
+\end{itemize}
