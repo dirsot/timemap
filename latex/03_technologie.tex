@@ -1,12 +1,11 @@
-\section{Wybrane technologie}
-\label{sec:wybranetechnologie}
+\section{Wykorzystane technologie}
+\label{sec:wykorzystanetechnologie} 
 
-\section{JavaScript}
+\subsection{JavaScript}
 \label{sec:javascript}
 
 Wybór języka JavaScript to tworzenia aplikacji został podyktowany jego dużymi możliwościami na polu tworzenia projektów do użytku na przeglądarkach internetowych.Pozwala na łatwe tworzenie asynchronicznych aplikacji, oznacza to aktualizowanie jedynie wybranych danych na ekranie moniotra bez konieczności przeładowania całej strony. Jest to szczególnie istotne w omawianym przypadku, oznacza to brak potrzeby wczytywania i renderowania całego tła mapy za każdym razem gdy nastąpi nawet małą zmiana.
 
-Język ten po raz pierwszy został zaprezentowany w 1995 \cite{js1995}. Jest wielo paragmatyczny, spełnia założenia wielu wzorców programowania co ułatwia pracę.
 
 Spełnia warunki paradygmatu obiektowego, umożliwia korzystanie z obiektów które mogą odpowiadać pewnej klasie rzeczywistych przedmiotów lub rzeczy, imperatywnego, składa się z komend które zmieniają stan programu jak też funkcyjne, umożliwia tworzenie funkcji które w zależności od podanych argumentów wejściowych dostarczają odpowiednich danych wyjściowych.
 
@@ -39,7 +38,25 @@ Prosty przykład na stronie \underline{\texttt{http://angularjs.org/}} prezentuj
         }
 \end{lstlisting}
 
-\section{Less}
+\subsection{Możliwości HTML5}
+\label{sec:html5}
+\nocite{xml50}
+\nocite{proxml}
+\nocite{pre1}
+\nocite{pre2}
+\nocite{googlemapsbegin}
+\nocite{proHTML5}
+HyperText Markup Language,  hipertekstowy język znaczników
+Pozwala na opisanie struktury informacji zawartych na stronie internetowej, to dzięki niemu przeglądarka moze rozróżnić takie elementy jak hiperłącze, akapit czy chociażby nagłówek.
+
+Podobnie jak w przypadku XML, tak i tutaj wymagane jest aby wykorzystywane znaczniki umieszczane były w nawiasach ostrokątnych, a każdy z nich miał swoje domknięcie.
+
+Poprawnym zapisem jest <p>Wiadomość<\textbackslash p> który oznacza pojedyńczy akapit. Zapis <p>Wiadomość<p>, który różni się od poprzedniego brakiem znaku "\textbackslash" w drugim znaczniku, czyni to ten zapis niepoprawnym. Istnieje możliwość aby wykorzystać pojedyńczy znacznik, przykładem jest <br \textbackslash> określający wstawienie nowej lini w miejscu wystąpienia tagu.
+
+Obecnie powszechnie używany standart HTML4 ma niestety wiele ograniczeń, z tego powodu pracowano nad jego następnikiem. 22 stycznia 2008 W3C opublikował HTML5, wtedy jeszcze jako jedynie szkic.
+
+
+\subsection{Less}
 \label{sec:less}
 
 Do stworzenia bardziej zaawansowanych arkuszy stylów CSS (en. Cascading Style Sheets) wykorzystaniu narzedzie które pozwala na łatwe tworzenie i utrzymywanie reguł. Głównymi zaletami są:

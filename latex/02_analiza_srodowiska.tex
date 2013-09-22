@@ -1,7 +1,7 @@
 ﻿\chapter{Dostępne rozwiązania}
 \label{sec:dostepnerozwiazania}
 
-Przed rozpoczęciem implementacji własnego rozwiązania postanowiono przeprowadzić badania mające na celu analizę aktualnie dostępnych rozwiązań spełniających przynajmniej w części założenia. Proces ten nie ma na celu znalezienie idealnego rozwiazania lecz poznanie różnych podejść do zagadnienia, analiza różnych technologi które mogą być wykorzytane pozwoli na świadome wybranie najlepszych.
+Przed rozpoczęciem implementacji własnego rozwiązania postanowiono przeprowadzić badania mające na celu analizę aktualnie dostępnych rozwiązań spełniających przynajmniej w części założenia. Proces ten nie ma na celu znalezienie idealnego rozwiazania lecz poznanie różnych podejść do zagadnienia. Analiza różnych technologi które mogą być wykorzytane pozwoli na świadome wybranie najlepszych.
 
 
 \section{Google Earth}
@@ -40,9 +40,34 @@ Dzięki funkcji zmiany punktu i kąta patrzenia, pokazywania ciekawych miejsc cz
 \section{Aplikacje wykonane w technologi Flash}
 \label{sec:flashmap}
 
-Podczas prac badawczych natrafiono na kilka aplikacji któych główna część aplikcji została wykonana w technologi flash. Przykładami są interaktywna mapa historii europy \cite{worldology}, mapa prezentująca zmianę granic państw w XX wieku \cite{flashborder}. Oba przykłady zawierają bogatą szatę graficzną, ich wykonanie jest bardzo estetyczne.
+Podczas prac badawczych natrafiono na kilka aplikacji któych główna część aplikcji została wykonana w technologi flash. Przykładami są interaktywna mapa historii europy \cite{worldology}, mapa prezentująca zmianę granic państw w XX wieku \cite{flashborder} przykład na rysunku \ref{fig:flasheurope}. Oba przykłady zawierają bogatą szatę graficzną, ich wykonanie jest bardzo estetyczne. 
+Zaletą wykorzystanie mocy obliczeniowj karty graficznej do wyświetlania obrazów(dostępne od wersji 10.1 \cite{flashfrapghic}), dzięki temu procesor jest może wykonywać inne zadania.
 
-Niewąpliwą wadę aplikacji wykonanych w tej technologi jest utrudniony proces wprowadzania zmian. Ze względu na obecność pliku wykonywalnego wymagane jest korzystanie ze specjalnych narzędzi.
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=100mm]{ge/archives.jpg}
+  \caption{Europa w latach 30.}
+  \label{fig:flasheurope}
+\end{figure}
+
+
+Wykorzystanie tej technologii wydaje się dobrym wyborem, niestety posiada kilka wad które ja eleiminują. Pierwszą z nich jest brak wsparcia technicznego na wszystkich urządzeniach mobilnych, przez co jej wykorzystanie ogranicza rynek docelowy.
+Wymagana jest instalacja detykowanego odtwarzacza który umożliwia na korzystanie z programów stworzonych w tym języku.
+Ponieważ tworzona aplikacja jest jednym komponentem wymagane jest jest ściągnięcie z serwera na lokalny komputer aby można było z niej korzystać. Ostatnim aspektem jest brak kompatybilności elementów flash-owych z głównymi wyszukiwarkami internetowymi, ich indeksacja jest utrudniona(możliwe wykorzystanie tagów) a ich zawartość całkowicie niewidoczna w procesie tym. Z uwagi na powyższe wady technologia nie została wykorzystana w omawianej pracy. 
 
 \section{Wybrane technologie}
 \label{sec:technologie}
+
+Po analizie dostęnych rozwiązań zdecydowano się na wykorzystanie w pracy następujących technologi.
+\begin{itemize}
+
+\item
+HTML 5 - budulec każdej strony internetowej
+
+\item
+JavaScript - zapewnienie interakcji i zmiany konkentu bez konieczności odświeżania całej strony 
+
+\item
+Less - agrgacja i uporządkowanie stylów CSS
+
+\end{itemize}

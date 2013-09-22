@@ -18,64 +18,7 @@ xml - 729  557
 json - 695  400
 
 
-\section{Możliwości HTML5}
-\label{sec:html5}
-\nocite{xml50}
-\nocite{proxml}
-\nocite{pre1}
-\nocite{pre2}
-\nocite{googlemapsbegin}
-\nocite{proHTML5}
-HyperText Markup Language,  hipertekstowy język znaczników
-Pozwala na opisanie struktury informacji zawartych na stronie internetowej, to dzięki niemu przeglądarka moze rozróżnić takie elementy jak hiperłącze, akapit czy chociażby nagłówek.
 
-Podobnie jak w przypadku XML, tak i tutaj wymagane jest aby wykorzystywane znaczniki umieszczane były w nawiasach ostrokątnych, a każdy z nich miał swoje domknięcie.
-
-Poprawnym zapisem jest <p>Wiadomość<\textbackslash p> który oznacza pojedyńczy akapit. Zapis <p>Wiadomość<p>, który różni się od poprzedniego brakiem znaku "\textbackslash" w drugim znaczniku, czyni to ten zapis niepoprawnym. Istnieje możliwość aby wykorzystać pojedyńczy znacznik, przykładem jest <br \textbackslash> określający wstawienie nowej lini w miejscu wystąpienia tagu.
-
-Obecnie powszechnie używany standart HTML4 ma niestety wiele ograniczeń, z tego powodu pracowano nad jego następnikiem. 22 stycznia 2008 W3C opublikował HTML5, wtedy jeszcze jako jedynie szkic.
-
-Bardzo ciekawym i wartym zainteresowania dodanym elementem w nowej wersji jest obecność znaczniku canvas. Pozwala on na dynamiczne , skryptowe renderowanie kształtów i obrazów. Dzięki temu obiektowi możliwe stało się tworzenie animacji czy nawet gier działających w przeglądarce bez konieczności używania dodatkowych wtyczek czy programów.
-
-\underline{\texttt{http://techtrendy.pl/title,Pierwsza-gra-3D-napisana-w-HTML5,wid,14102779,wiadomosc.html?ticaid=6107dc}}
-
-Przykładem wielkich możliwości jakie dostarcza udoskonalony język jest fakt iż już w roku 2011 powstała pierwsza trójwymiarowa gra stworzona w całości przy użyciu HTML5. Przykład grafiki widoczny jest na rysunku \ref{fig:html3d}.
-Wcześniej takie efekty możliwe były jednynie przy wykorzystaniu technologi Flash, jej wadą była drudność edycji gotowego produktu, wymagało to specjalnego oprogramowania. Fakt tworzenia pliku wykonywalnego którego nie było możliwości edycji wymuszał dostęp do kodów źródłowych, czyli plików które tworzył autor programu.
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=100mm]{ge/html5_3d.jpg}
-  \caption{Pierwsza gra 3D w html5.}
-  \label{fig:html3d}
-\end{figure}
-
-Kolejną funkcjonalnością która wydaje się być przydatna w stosunku do omawianego projektu jest możliwość rysowania kształtów geomeycznych, również na innych obrazach. Przykładem wykorzystania tej technologi jest \ref{fig:canvas1} na którym przy pomocy okręgu zaznaczono rynek główny w Krakowie i jego okolice, możliwość zmiany przejżystości narysowanego kształtu pozwala aby obraz podnim był nadal widoczny.
-
-  \begin{figure}[H]
-  \centering
-    \includegraphics[width=100mm]{ge/canvas1.jpg}
-  \caption{P.}
-  \label{fig:canvas1}
-\end{figure}
-
-\lstset{language=JavaScript}
-\begin{lstlisting}[caption=json]
-
-      var canvas = document.getElementById('myCanvas');
-      var context = canvas.getContext('2d');
-      var imageObj = new Image();
-	
-      imageObj.onload = function() {
-      context.drawImage(imageObj, 69, 50);
-	  context.beginPath();
-      context.arc(canvas.width / 2, canvas.height / 2, 90, 0, 2 * Math.PI, false);
-      context.fillStyle = "rgba(255, 0, 0, 0.5)";
-      context.fill();
-      context.stroke();
-      };
-      imageObj.src = './gm_1.jpg';
-
-\end{lstlisting}
 
 \subsection{Format zapisu}
 \label{subsec:zapis}

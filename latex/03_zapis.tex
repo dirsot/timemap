@@ -1,17 +1,7 @@
-
-
 \section{Przechowywanie i transmisja danych}
 \label{sec:przesyl}
 
 Rozdział ten zawiera informacje związane z analizą wybranych metod przechowywania danych a także możliwości ich transmisji.
-Omawia próbę podjęcia pracy na relacyjnej bazie danych.
-
-\subsection{Format danych}
-\label{sec:format}
-\section{Format danych}
-\label{sec:dataformat}
-
-W poprzednich punktach opisano metody przechwywania danych w pamięci komputera, w szeczólności pamięci tymczasowej którą dostarczają nowoczesne przeglądarki internetowe. Jednak aby móc korzystać z informacji stworzonych przez innego użytkownika, lub nawet pracować nad własnym projektem stworzonym we wcześniejszym czasie niezbednę jest trwałe zapisanie danych. W rozdziale \ref{subsec:htmluse} zostały omówione sposoby które oferują możliwość przchowywania danych, niestety wszystkie te rozwiązania posiadają wspólną wadę, jest to brak mobilności danych. Znajdują się one na dysku jednego komputera a ich przeniesienie na inny pomimo że nie jest nie możliwe, jest bardzo uciążliwe i nie praktyczne. Z tego powodu przeprowadzona została analiza aktualnie używanych formatów danych zapisywanych do zewnętrznych plików.
 
 \subsection{GIS}
 \label{subsec:gis}
@@ -19,7 +9,7 @@ W poprzednich punktach opisano metody przechwywania danych w pamięci komputera,
 GIS(Geographical Information Systems) jest to System Informacji Geograficznych, jest to zbiór wiedzy, informacji do pozyskiwania i analizowania danych przestrzennych. Dane są pobieranie w trakcie naziemnych pomiarów jak i zbierane przy użyciu systemu GPS. Informacje te są następnie zapisywane do określonych formatów,dzięki czemu możliwa jest ich dalsza analiza. \underline{\texttt{http://www.gis-support.pl/co-to-jest-gis/}}
 
 
-\subsection{Wykorzystywany układ współrzędnych}
+\subsubsection{Wykorzystywany układ współrzędnych}
 \label{subsec:uklad}
 
 Istnieje wiele układów współrzędnych któe służą do opisu pojedyńczego punktu na powierzchni ziemi.Na stronie \underline{\texttt{http://www.spatialreference.org/ref/epsg/}} (dostęp) znajduje się lista zawierająca przykłady zapisu różnych obszarów kuli ziemskiej przy użyciu różnych formatów. Zawierają one niezbędne infomacje w konkretnym zapisie.
@@ -41,23 +31,9 @@ Zapis unowocześniony
 
 Drugi zapis został wykorzystany do przechowywania danych w plikach, tak aby wymiana i wspólna praca była jak najprostsza. Wybór ten sprawił że nie występuje problem konwersji punktu do formatu czytelnego dla komputera, można go bez problemu odczaytać jako liczbę.
 
-\subsection{Relacyjne bazy danych}
-\label{sec:relacyjne}
-
-\subsection{NoSQL}
-\label{sec:nosql}
-
-\subsection{Pamięć lokalna}
-\label{sec:localStorage}
-
-\subsection{Wykorzystanie HTML5}
-\label{subsec:htmluse}
-
-Wstępne założenia zakładały wykorzystanie możliwości rysowania kształtów przy użyciu ogólnodostępnych map. Rozważania w sekcji \ref{sec:Rodzaje map} wskazały że najlepszym wyborem są Google Maps. Niestety opcja rysowania kształtów któa dostarcza HTML5 wymaga uzycia znacznika canvas, nie jest to kompatybilne z metodą wykorzystywania maps dostarczanych od omawianej firmy która wymaga wykorzystanie znacznika div.W momencie tworzenia tej pracy nie ma możliwości współpracy wybranych map z technologią rysowania kształtów geometrycznych. Sytuacja taka wymusza wykorzystanie innego rozwiązania do tworzenia interesujących nas warstw.
-
 \subsection{Storage}
 \label{subsec:storage5}
-Inną ciekawą funkcją omówioną w podręczniku do HTML5  \cite{html5dive} jest Storage. Pozwala on na przechowywanie danych w przeglądarce użytkownika. Różnicą w stosunku do ciasteczek które również potrafią przechowywać informacje o konretnym użytkonwniku jest:
+Aby stworzyć framework któy był by w stanie działać przy minimalnej konieczności konfiguracji dodatkowych środowisk postanowiono aby dane w pierwszej kolejności były przechowywane po stronie klienta. Do tego celu nadaje się funkcją stworzona w ostatniej wersji HTML którą jest Storage. Jest ona dokładniej omówiona w podręczniku do HTML5  \cite{html5dive}. Pozwala on na przechowywanie danych w przeglądarce użytkownika. Różnicą w stosunku do ciasteczek które również potrafią przechowywać informacje o konretnym użytkonwniku jest:
 \begin{itemize}
 \item
 Większy rozmiar dostępnej pamięci m.in. Chrome 5MB \nocite{chrome5mb}, IE 10MB
@@ -109,53 +85,39 @@ Wadą tej pamięci jest jej interfejs. Obecnie przechowywany sposób danych to m
 
 Wsparcie dla pamięci Storage nie jest obecne zazwyczaj w nowszych wersach przeglądarek. Na stronie \underline{\texttt{http://www.html5rocks.com/en/features/storage}} możemy sprawdzić aktualny stan większości przęglądarek.
 
-\subsection{Web SQL Database}
-\label{subsec:websql}
 
-Koljenym ciekawym rozwiązaniem problemu przechowywania danych po stronie klienta jest Web Sql Database.
-Jest to baza danych która została umieszczona po stronie klienta. Jest to dodatkowa warstwa która korzysta z SQlite.
-Zaletą takiego rozwiązania jest przerzucenie kosztów obliczeniowych na stronę klienta, operacje takie jak sortowanie, filtrowanie na bazie danych wykonywane są przy wykorzystaniu zasobów komuptera klienta.
+\subsection{Relacyjne bazy danych}
+\label{sec:relacyjne}
 
-Nie wątpliwą zaletą w stosunku do omówionej w rozdziale \ref{subsec:storage5} pamięci jest możliwość ustalenia wielkości zalokowanej wielkości pamięci. Dzięki temu nie jesteśmy ograniczeni maksymalną dostępną ilością pamięci jak ma to miejsce w przypadku pamięci omawianej w poprzednim punkcie.
+Początkowo zakładano wykorzystanie relacyjnej bazy danych do przechowywania danych.
+Zdecydowaną się na MySqL(z uwagi na jej powrzechne wykorzystanie i brak opłat licencyjnych),jedną z table wypełniono testowymi danymi w ilości 1 miliona rekordów o strukturze zbioru punktów o określonym czasie trwania zawierała kolumny takie jak data początkowa i końcowa występowania, dwie współrzędne. W celach optymalizacyjnych koszt zapytań zastosowano indeks na pola po któych wykonywane będzię wyszukiwanie danych.
+Stworzona została prosta aplikacja napisana w języku Python przy pomocy frameworka Django v.2.1, miałą ona na celu wysłanie wysłanie zapytania o konkretne punkty które zawierały się w okreśłonym przedziale czasie(ich czas trwania zawierał się w szukanym zakresie) a następnie otrzymane punkty rysowała na ekranie. Na tak przygotowanym środowisku przeprowadzono testy sprawdzające czas potrzebny na pobranie i wyświetleie danych.
 
-Przykład wykorzystania został zaprezentowany na \ref{lis:webSql}. Po stworzeniu bazy danych o nazwie "NowaBaza" i rozmiarze 2MB możemy korzystać z niej jak z każdej innej bazy danych. Możliwe są m.in. operacje tworzenia table(linie 3-5), wstawiania danych(parametry podajemy po treści zapytania, następnie możemy podać funkcje które zostaną wykonane w momencie sukcesu lub w przypadku wystąpienia błędu). Odczyt danych (linie 13-18) jest analogiczny do pozostałych operacji, dodatkowo pokazano w jaki sposób możliwa jest iteracja po otrzymanych wynikach.
+Zadowalające wyniki otrzymywano gdy ilość elementów nie przekraczała 10 tysięcy punktów. Gdy zwiększono szukany zakres dat, tym samym zwiększono ilość punktów do wyświetlenia czas potrzebny do wyświetlenia danych wynosił ponad jedną sekundę. Z uwagi na dużą ilość danych które towarzyszą informacjom mapowym(docelowa baza będzie zawierała więcej danych a ilość jednorazowo wyciąganych informacji może być większa) zdecydowano się nie kontynuować prób z wykorzystaniem tego typu baz danych.
 
-Wadą tego rozwiązania jest jego popularność. Na stronie browser stats  możemy sprawdzić jaka jest popularność poszczególnych przeglądarek na świecie. Porównując te dane z dostępnością Web Sql dostępną na stronie \underline{\texttt{http://www.html5rocks.com/en/features/storage}} możemy wnioskować że prawie 45\% użytkowników( korzystających z IE i Firefox) nie mogą korzystać z tego rozwiązania, fakt ten dyskfalfikuje je.
+\subsection{NoSQL}
+\label{sec:nosql}
+
+W celu pernamentnego przechowywania i rozpowszechniania danych pomiędzy różnymi użytkownikami postanowiono wykorzystać nierelacyjną bazę danych jaką jest MongoDB. Posiada ona interfejsc służący do komunikacji z JavaScript-em, możliwe jest wykonywanie skryptów które bezpośrednio połączą się i uzyskają dane\cite{mongojs}. W omawianym projekcie nie jest to możliwe, nawet przy użyciu zapytań Ajax-owych nie będzie możliwe zapewnienie bezpieczeństwa danym pozwalającym na połączenie a w efekcjie edycję danych bezpośrednio w bazie danych.
+Postanowiono aby aplikacji która będzie korzystała z tworzonego frawerork-a dostarczała metod zapewniających dostęp do bazy danych. Zachowanie takie spełnia założenia projektu, infromacje i wszelkie zmiany dokonane na nich są przechowywane w lokalnej pamięci z możliwością eksportu ich do pliku tekstowego bez konieczności ingerencji w aplikację nadrzęczną. W przypadku chęci posiadania błyskawicznej możliwości dzielenia się informacjami i dokonywanymi zmianami należy zapewnić interfejs do tego celu. Przykładową implementację takiego rozwiązania stworzono w języku PHP. Powstała strona która korzystała z opracowanego framework-u, dla celów komunikacji z bazą danych udostępniała adres ./resources/mongodb który na zapytanie przesłane w metodzie POST wykonywała zwracała dane dla podanych warunków. Adres ten dla odpowiednich danych potrafił dokonać zmian(edytować lub usunąć dane).
+Ponieżej zaprezntowano listening prezentujący minimalne obiekty które nalezy wysłać na przygotowany adres aby wykonać odpowiednie akcje. Pierwszy ma za zadanie wykonać akcję select pobierający wszystkie dane należące do mapy od numerze "123" które zaszły w podanym zakresie czasu. Drugi obiekt odnosi się do akcji aktualizacji danych, zmienia położenia punktu o id równym 234,jego tytuł a także poziomy na których będzie on widoczny, funkcjonalnośc ta została opisana w sekcji  \ref{sec:wizualizacja}.
 
 \lstset{language=JavaScript}
-\label{lis:webSql}
-\begin{lstlisting}[caption=json]
-      var db = window.openDatabase("NewDatabase", "1.0", "Description", 2 * 1024 * 1024);
+\begin{lstlisting}[caption=caption2]
+Object {method: "select", mapId: "123", fromDate: "2013-01-01 12:30", toDate: "2013-01-31"}
 
-      db.transaction(function(tx) {
-        tx.executeSql("CREATE TABLE Person (id REAL UNIQUE, name TEXT)");
-      });
 
-      db.transaction(function(tx) {
-        tx.executeSql("INSERT INTO Person (id, name) VALUES (?, ?)", [1, 'Jam'],
-        onSuccess,
-        onError);
-                });
+Object{}
+YCord: "19.9232769"
+mapId: "123"
+pointId: "234"
+method: "update"
+showFrom: "1"
+showTo: "8"
+title: "Lepszy tytuł"
+xCord: "50.0645223187"
 
-      db.transaction(function(tx) {
-        tx.executeSql("SELECT * FROM Person", [], function(tx, result) {
-            for (var i = 0, item = null; i < result.rows.length; i++) {
-                ...
-			}
-        });
-      });
 \end{lstlisting}
 
-\subsection{IndexedDB}
-\label{subsec:indexDB}
 
-Trzecim rozwiązaniem jest indexDb. Jest to szczególnie interesujące rozwiązanie gdyż wykorzystuje podejście nierelacyjnych baz danych(NoSQL).
 
-Tradycyjne podejście do przechowywania danych zakłada wykorzystanie modelu relacyjnego do organizacji danych. Są one grupowane w relacje (zwane tablicami), każda z nich składa się z identycznych rekordów. Przykładem może być tablica przechowywujaca infromacje o osobie, mająca kolumny przeznaczone na dwa imiona i nazwisko. W takiej sytuacji wszyskie rekordy odnoszące się do osoby z jednym imieniem będą miały puste pole z drugim imieniem. Jest to sytuacja względnie nieproblematyczna, dopuszczenie pustych wartości ograniczy niepotrzebny wzrost wielkości bazy.
-W przypadku chęci dodania nowej informacji, przykładowo daty urodzenia, spowoduje konieczość zmiany struktury bazy danych, dodanie kolumny do istniejącej tabeli lub stworzenie nowej dla dodatkowej wartości.
-
-Kolejną wadą tego podejścia jest bardzo słaba skalowaność rozwiązania(możliwośc pracy na bardzo dużych danych). Korzystanie z wielu złączeń(czasami aby wykonać zapytanie i otrzymać interesujące nas informacje odwołujemy się do wielu tabel).
-W zależności od poziomu izolacji transakcji możemy mieć dane które zostały zmienione w innej tranzakcji przd jej zakończeniem. Jeśli druga tranzakcja zostanie wycofana to w efekcie pobrane dane są nieaktualne.(Read uncommited)
-Przeciwnym rozwiązaniem jest poziom Serializable w którym dane da którym rozpoczęto pracę są niedostępne dla innych tranzakcji, zapewnia to poprawność danych w każdej momencie jednak znacznie obniża wydajność bazy,szybkość odpowiedzi.
-
-W chwilie pisania tego dokumentu jedynie 4 przeglądarki w najwyższej wersji wspierały tą technologię. Z tego powodu wykorzystanie to ogranicza docelową grupę odbiorców do wąskiego grona. 
