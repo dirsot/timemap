@@ -3,6 +3,60 @@
 
 Działanie programu można podzielić na dwa główne etapy. Pierwszym jest dostarczenie danych zgodnych z formatem apliakacji, drugim jest reprezentacja danych.
 
+\section{Minimalna konfiguracja}
+\label{sec:minimum}
+
+Do rozpoczęcia korzystania z gotowej aplikacji należy zapewnić obecność konfiguracji niezbędnej do jej konfiguracji na docelowej stronie. Przykład minimalnej strony która spełnia wymagane został pokazany w listinu \ref{lst:minconf}. 
+
+Każdy dokument stworzony w HTML sklada się z 3 części:
+
+
+-lini zawierającej informację o używanej wersji HTML, w poniższym przykładzie dotyczy ona HTML5
+
+-deklarację sekcji header, zawiera odwołania do zewnętrzych plików i delkaracje funcji, styli 
+
+-część właściwa strony która zawiera infromacje właściwe, widoczne dla użytkownika storny.
+
+Linie 5-7 mają za zadanie wczytanie zewnętrzych plików zawierające delkaracje metod w JS. 8 wczytuje plik zawierający główną klasę frameworku, poniżej znajduje się wczytanie niezbędnych styli CSS dla działąnia osi czasu. 13-23 jest to opis metody która inicjuje działanie mapy, jest ona wykonywana po załadowaniu statycznych fragmentów strony.  
+
+\lstset{language=JavaScript}
+\begin{lstlisting}[label={lst:minconf},caption={Minimalna konfiguracja.}]
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&key={KEY_ID}">
+    <script type="text/javascript" src="./js/specialMap/lib/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="./js/specialMap/lib/mxn/mxn.js?(googlev3)"></script>
+    <script type="text/javascript" src="./js/specialMap/lib/timeline-1.2.js"></script>
+    <script type="text/javascript" src="./js/specialMap/src/timemap.js"></script>
+    <script type="text/javascript" src="./js/specialMap/src/utils.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="./css/examples.css"/>
+    
+    <script>
+    var sm;
+    $(function() {
+        tm = SpecialMap.init({
+            mapDivId: "mapId", 
+            timeDivId: "timeId",
+            dataType: "sessionStorage", 
+            bandIntervals: [
+	            Timeline.DateTime.YEAR
+	        ],
+        });
+    });
+  </head>
+  <body>
+        <div id="specialMap">
+            <div id="timeId"></div>
+            <div id="mapId"></div>
+        </div>
+  </body>
+</html>
+\end{lstlisting}/
+
+
 \section{Odczyt danych}
 \label{sec:idata}
 
@@ -13,6 +67,225 @@ W celu odczytu i konwersji danych z pliku zapisu ich w pamięci sesyjnech przęg
 Ze względów bezpieczeństwa JavaScript nie zezwala na bezpośredni dostęp do plików lokalnych uzytkownika. Jest to pozytywne zachowanie zapewniające że żaden kod nie jest w stanie bezwiednie zmieniać zawartość dysku.
 
 Sytuacja taka wymusza korzystanie z event-ów które będą aktywowane w momecie kiedy plik zostanie wybrany. W momencie zakończenia procesu odczytu zawartość pliku przekazywana jest do parsera który zapisuje dane w pamięci przeglądarki.
+
+\lstset{language=JavaScript}
+\begin{lstlisting}[label={lst:utils},caption={Minimalna konfiguracja.}]
+
+var exml;
+function readFile(file,start,stop){
+	var reader = new FileReader();
+    reader.onloadend = function(evt) {
+      if (evt.target.readyState == FileReader.DONE) {
+		exml = new KmlParser( evt.target.result);	
+		exml.parse()
+      }
+    };
+	
+	var blob = file.slice(start, stop);
+    reader.readAsBinaryString(blob);
+}
+
+
+\end{lstlisting}/
+
+
+\lstset{language=JavaScript}
+\begin{lstlisting}[label={lst:minconf},caption={Minimalna konfiguracja.}]
+
+KmlParser.value = function(e) {
+	a = GXml.value(e);
+	a = a.replace(/^\s*/, "");
+	a = a.replace(/\s*$/, "");
+	return a;
+}
+
+KmlParser.prototype.createMarker = function(point,begin, end, name, desc, style, iconUrl) {
+	var icon = {};
+	var markeroptions = this.opts.markeroptions || {};
+	var icontype = this.opts.icontype || "style";
+	if (icontype == "style") {
+		if (!!this.styles[style]) {
+			icon = this.styles[style];
+		}
+	}
+	if (!markeroptions.icon) {
+		markeroptions.icon = icon;
+	}
+	var m = new google.maps.Marker(point, markeroptions);
+
+	if (this.opts.elabelclass) {
+		var l = new ELabel(point, name, this.opts.elabelclass,
+				this.opts.elabeloffset, this.elabelopacity, true);
+	}
+	this.gmarkers.push(m);
+	item = {};
+	item.start = begin;
+	item.end = begin;
+	item.title = name;
+	item.desc = desc;
+	item.iconUrl = iconUrl;
+	p = {};
+	p.lat = point.lat();
+	p.lon = point.lng();
+	item.point = p
+	return item;
+}
+
+KmlParser.prototype.createPolyline = function(points, color, width, opacity,
+		name, desc) {
+	var polylineoptions = this.opts.polylineoptions || {};
+	var p = new GPolyline(points, color, width, opacity, polylineoptions);
+	this.gpolylines.push(p);
+
+KmlParser.prototype.createPolygon = function(points, id, pId, begin, end, color,
+		width, opacity, fillcolor, fillopacity, name, desc) {
+
+	pointsArray = []
+	item = {};
+	for ( var i = 0; i < points.length; i++) {
+		point = points[i];
+		p = {};
+		p.lat = point.lat();
+		p.lon = point.lng();
+		if (p.lon == null || p.lat == null || isNaN(p.lat) || isNaN(p.lon)) {
+			console.log("Null points");
+		} else {
+			pointsArray.push(p)
+		}
+	}
+	item.start = begin;
+	item.end = end;
+	item.polygon = pointsArray;
+	item.title = name;
+	item.mId = id;
+	item.pId = pId;
+	item.color = color;
+	item.width = width;
+	item.opacity = opacity;
+	item.fillcolor = fillcolor;
+	item.name = name;
+	item.desc = desc;
+
+	return item;
+}
+
+KmlParser.prototype.processing = function(doc) {
+	var that = this;
+	var xmlDoc = GXml.parse(doc)
+	
+	var styles = xmlDoc.documentElement.getElementsByTagName("Style");
+	for ( var i = 0; i < styles.length; i++) {
+			//wczytanie styli
+	}
+
+	var placemarks = xmlDoc.documentElement.getElementsByTagName("Placemark");
+	items = [];
+	itemsMarkers = [];
+	for ( var i = 0; i < placemarks.length; i++) {
+		var id = placemarks[i].getAttribute('id');
+		var timeSpan = placemarks[i].getElementsByTagName("TimeSpan")[0];
+		var begin = KmlParser.value(timeSpan.getElementsByTagName('begin')[0])
+		var end = KmlParser.value(timeSpan.getElementsByTagName('end')[0])
+		var name = KmlParser.value(placemarks[i].getElementsByTagName("name")[0]);
+		var desc = KmlParser.value(placemarks[i]
+				.getElementsByTagName("description")[0]);
+		if (desc == "") {
+			var desc = KmlParser
+					.value(placemarks[i].getElementsByTagName("text")[0]);
+			desc = desc.replace(/\$\[name\]/, name);
+			desc = desc.replace(/\$\[geDirections\]/, "");
+		}
+		if (desc.match(/^http:\/\//i)) {
+			desc = '<a href="' + desc + '">' + desc + '</a>';
+		}
+		if (desc.match(/^https:\/\//i)) {
+			desc = '<a href="' + desc + '">' + desc + '</a>';
+		}
+		var style = KmlParser.value(placemarks[i]
+				.getElementsByTagName("styleUrl")[0]);
+		var coords = GXml.value(placemarks[i]
+				.getElementsByTagName("coordinates")[0]);
+
+		var path = coords.split(" ");
+
+		multiGeometry = getChildrenTag(placemarks[i], 'MultiGeometry')[0];
+		if(multiGeometry){
+			allPolygons = multiGeometry.getElementsByTagName("Polygon")
+		}else{
+			allPolygons = {};
+		}
+		
+		onePoint = getChildrenTag(placemarks[i], 'Point')[0];
+		if (!!that.styles[style]) {
+					var width = that.styles[style].width;
+					var color = that.styles[style].color;
+					var opacity = that.styles[style].opacity;
+					var fillopacity = that.styles[style].fillopacity;
+					var fillcolor = that.styles[style].fillcolor;
+					var iconUrl = that.styles[style].iconUrl;
+				} else {
+					var width = 5;
+					var color = "#0000ff";
+					var opacity = 0.45;
+					var fillopacity = 0.25;
+					var fillcolor = "#0055ff";
+				}
+		
+		if(onePoint){
+			coords = GXml.value(onePoint.getElementsByTagName("coordinates")[0]);
+				var bits = coords.split(",");
+				var point = new google.maps.LatLng(parseFloat(bits[1]),
+						parseFloat(bits[0]));
+				that.bounds.extend(point);
+					itemsMarkers.push(that.createMarker(point ,begin,end, name, desc, style, iconUrl));
+		}
+		
+		for ( var j = 0; j < allPolygons.length; j++) {
+			polygon = allPolygons[j];
+			coords = GXml.value(polygon.getElementsByTagName("coordinates")[0]);
+			path = coords.split(" ");
+
+			if (path.length > 1) {
+				var points = [];
+				var pId = polygon.getAttribute('id');
+				for ( var p = 0; p < path.length; p++) {
+					var bits = path[p].split(",");
+					if (parseFloat(bits[1]) == null
+							|| parseFloat(bits[0]) == null
+							|| isNaN(parseFloat(bits[1]))
+							|| isNaN(parseFloat(bits[0]))) {
+					} else {
+						var point = new google.maps.LatLng(parseFloat(bits[1]),
+								parseFloat(bits[0]));
+						points.push(point);
+					}
+				}
+				this.pointsCount  = this.pointsCount + points.length;
+				var linestring = placemarks[i]
+						.getElementsByTagName("LineString");
+				if (linestring.length) {
+						that.createPolyline(points, color, width, opacity,
+								name, desc);
+				}
+
+				var polygons = placemarks[i].getElementsByTagName("Polygon");
+				items.push(that.createPolygon(points, id, pId, begin, end,
+						color, width, opacity, fillcolor, fillopacity,
+						name, desc));
+			} else {
+				var bits = path[0].split(",");
+				var point = new google.maps.LatLng(parseFloat(bits[1]),
+						parseFloat(bits[0]));
+				that.bounds.extend(point);
+					that.createMarker(point, name, desc, style);
+			}
+		}
+	}
+	sessionStorage.polyline = JSON.stringify(items);
+	sessionStorage.marker = JSON.stringify(itemsMarkers);
+}
+
+\end{lstlisting}/
 
 \subsection{Wydajność}
 \label{subsec:wydajnosc}

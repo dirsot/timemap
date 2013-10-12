@@ -196,4 +196,13 @@ Intuicyjna i szybka edycja danych jest zapewniona poprzez udostępnianie klasy "
 \subsubsection{Aktualizacja struktury DOM}
 \label{subsubsec:dom}
 
-Wszystkie elementy znajdujące się na stronie internetowej tworzą struktutę drzewa DOM(en.Document Object Model). Określa ono wzajemne położenie poszczególnych elementów pozwalając na edycję jedynie wybranych fragmentów strony. 
+Wszystkie elementy znajdujące się na stronie internetowej tworzą struktutę drzewa DOM(en.Document Object Model). Określa ono wzajemne położenie poszczególnych elementów, przy wykorzystaniu JavaScript-u możliwe jest akutalizowanie poszczególnych fragmentów strony bez konieczności renderowania wszystkich elementów.
+
+Na rysunku \ref{fig:domtree} zaprezentowano minimalną struktturę wymaganą do poprawego korzystania z tworzonego projektu. W części head dodane są niezbędne odwołania do skttyptów które są odpowiedzialne za prawidłowe funkcjownowanie frameworku, do elementu body dołączono elementy ktore zapewniają miejsce dla wizualnej części, zdefiniowany rozmiar pozwala na precyzyjne wkompnowanie. 
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=100mm]{ge/htmltree2.jpg}
+  \caption{Drzewo DOM}
+  \label{fig:domtree}
+\end{figure}
