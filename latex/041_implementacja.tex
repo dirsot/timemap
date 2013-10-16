@@ -3,21 +3,53 @@
 
 Działanie programu można podzielić na dwa główne etapy. Pierwszym jest dostarczenie danych zgodnych z formatem apliakacji, drugim jest reprezentacja danych.
 
+\section{Struktura}
+\label{sec:structure}
+
+Struktura klas w aplikacji została stworzona w oparciu o wzorzec projektowy MVC(en. Model–view–controller). Zakłada on podział na 3 główne warstwy, są nimi:
+
+\begin{itemize}
+\item
+Controller - jego zadaniem jest przyjmowanie danych wejściowych i na ich podstawie odpowiednia reakcja, która może być aktualizają modelu lub warstwy prezentacyjenj.  W aplikacji funkcję tą spełniają servisy i kontrolery.
+\item
+View - warstwa prezentacyjna, zapewnia wizualiną prezentację infrmacji. Rolę tą w omwianym projekcie spełnia HTML i CSS.
+\item
+Model - przechowuje dane, stanowi bazę danych. Jego rola została przeniesiona na natywne rozwiązanie jakim jest Storage.
+\end{itemize}
+ 
+Założenia nie zostały spełnione wszystkie założenia jednak stworzono podstawy do rozwoju i prostej adaptacji rozwiązania do potrzeb konkretnego klienta.
+
+
+
+Zastosowano również paradygmat odwrócenia sterowania(en. Inversion of control,IoC) polegający na przeniesieniu poza obiekt metod służących do kontroli poszczególnych obiektów. Główną zaletą tego podejścia jest uproszczona kongiguracja i adaptacja programu do specyficznych potrzeb. Przykładem jego zastosowania jest metoda korzystania z filtrów w aplikacji, które mogą być tworzone przez użytkownika. Ich potencjalnie duża ilość wczytywana jednocześnie podczas startu generowałaby zbędne obciążenie, obecnie są one pomijane podczas inicjacji i wczytywane pojedyńczo jedynie wtedy gdy ich obecność jest niezbędna.
+
+
+Struktura klas obecnych w aplikacji została zaperzentowana na rysunku \ref{fig:classDiagram2}.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+     \includegraphics[angle=270,origin=c,width=130mm]{ge/smieci/ClassDiagram.png}
+      \caption{Diagram klas.}
+       \label{fig:classDiagram2}
+\end{figure}
+\end{center}
+
 \section{Minimalna konfiguracja}
 \label{sec:minimum}
 
-Do rozpoczęcia korzystania z gotowej aplikacji należy zapewnić obecność konfiguracji niezbędnej do jej konfiguracji na docelowej stronie. Przykład minimalnej strony która spełnia wymagane został pokazany w listinu \ref{lst:minconf}. 
+Do rozpoczęcia korzystania z gotowej aplikacji należy zapewnić obecność konfiguracji niezbędnej do jej konfiguracji na docelowej stronie. Przykład minimalnej strony która spełnia wymagane został pokazany w listinu \ref{lst:minconf}.
 
 Każdy dokument stworzony w HTML sklada się z 3 części:
 
 
 -lini zawierającej informację o używanej wersji HTML, w poniższym przykładzie dotyczy ona HTML5
 
--deklarację sekcji header, zawiera odwołania do zewnętrzych plików i delkaracje funcji, styli 
+-deklarację sekcji header, zawiera odwołania do zewnętrzych plików i delkaracje funcji, styli
 
 -część właściwa strony która zawiera infromacje właściwe, widoczne dla użytkownika storny.
 
-Linie 5-7 mają za zadanie wczytanie zewnętrzych plików zawierające delkaracje metod w JS. 8 wczytuje plik zawierający główną klasę frameworku, poniżej znajduje się wczytanie niezbędnych styli CSS dla działąnia osi czasu. 13-23 jest to opis metody która inicjuje działanie mapy, jest ona wykonywana po załadowaniu statycznych fragmentów strony.  
+Linie 5-7 mają za zadanie wczytanie zewnętrzych plików zawierające delkaracje metod w JS. 8 wczytuje plik zawierający główną klasę frameworku, poniżej znajduje się wczytanie niezbędnych styli CSS dla działąnia osi czasu. 13-23 jest to opis metody która inicjuje działanie mapy, jest ona wykonywana po załadowaniu statycznych fragmentów strony.
 
 \lstset{language=JavaScript}
 \begin{lstlisting}[label={lst:minconf},caption={Minimalna konfiguracja.}]
@@ -33,14 +65,14 @@ Linie 5-7 mają za zadanie wczytanie zewnętrzych plików zawierające delkaracj
     <script type="text/javascript" src="./js/specialMap/src/utils.js"></script>
 
     <link type="text/css" rel="stylesheet" href="./css/examples.css"/>
-    
+
     <script>
     var sm;
     $(function() {
         tm = SpecialMap.init({
-            mapDivId: "mapId", 
+            mapDivId: "mapId",
             timeDivId: "timeId",
-            dataType: "sessionStorage", 
+            dataType: "sessionStorage",
             bandIntervals: [
 	            Timeline.DateTime.YEAR
 	        ],
@@ -55,6 +87,26 @@ Linie 5-7 mają za zadanie wczytanie zewnętrzych plików zawierające delkaracj
   </body>
 </html>
 \end{lstlisting}/
+
+
+\section{Interfers do map}
+\label{sec:mxn}
+
+W procesie badań literaturowych podjęto decyzję aby jako głównego źródła map wykorzystać Google Maps \ref{subsec:Rodzaje map}. Niestety omawiane rozwiązania posiadają różne, często niekompatybilne interfejsy do ich obsługi. Implementacja tworzonego frameworku pod wybrany typ map uniemożliwiłoby wykorzystanie innych rodzajów. Aby zaoferować możliwość wyboru zdecydowano się na wykorzystanie Mapstraction, biblioteki któej zadaniem jest płynne przechodzenie pomiędzy różnymi dostarczycielami i ich interfejsami.
+
+Listening \ref{lst:mapstraction} pokazuję przykład wykorzystania biblioteki. Stworzenie instancji Mapstraction polega na wywołaniu konstruktora z podaniem id elementu który znajduje się na stronie i będzie używany jako nasza mapa a także typ mapy. Rezultatem jest obiekt kóry posiada wspólny interjeft dla różnych dostarzcycieli danych.
+
+\lstset{language=JavaScript}
+\begin{lstlisting}[label={lst:mapstraction},caption={Wykorzystanie Mapstraction.}]
+
+var map = new Mapstraction(mapId, 'google');
+
+var point = new mxn.LatLonPoint(0,0);
+var marker = new mxn.Marker(point);
+map.addMarker(marker);
+
+\end{lstlisting}/
+
 
 
 \section{Odczyt danych}
@@ -368,6 +420,24 @@ Dla każdej zmiany daty obliczenie aktualnego procentowego zakończenia procesu 
 \item
 Oblicznie położenia nowego punktu, tak aby leżał pomiędzy dwoma w stosunku oblicoznym w poprzednim kroku.
 \end{itemize}
+
+\lstset{language=JavaScript}
+\begin{lstlisting}[label={lst:minconf},caption={Minimalna konfiguracja.}]
+
+var percent;
+if (now < start) percent = 0;
+else if (now > end) percent = 1;
+else percent = 1 - ((end - now) / (end - start));
+
+for (var x=0; x<pm.points.length; x++) {
+    pt1 = pm.points[x];
+    pt2 = ep[x];
+    points.push(new mxn.LatLonPoint(
+        (pt1.lat + ((parseFloat(pt2.lat) - pt1.lat) * percent)),
+        (pt1.lng + ((parseFloat(pt2.lon) - pt1.lng) * percent))
+    ));
+
+\end{lstlisting}/
 
 Istnieje możliwość tworzenia nowych filtrów dla potrzeb konkretnych map lub danych. Nie stanowi dużym problemem imlementacja takiego rozwiąznaia które w pewnym momencie wyświetliłoby krótki film wideo dostarczający dodatkowych informacji o obserwowanym wydarzeniu.
 
