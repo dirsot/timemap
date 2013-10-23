@@ -1,9 +1,10 @@
 ﻿\chapter{Implementacja}
 \label{cha:implementacja}
 
-Działanie programu można podzielić na dwa główne etapy. Pierwszym jest dostarczenie danych zgodnych z formatem apliakacji, drugim jest reprezentacja danych.
+W działaniu programu można wyodrębnić 2 główne etapy, jest to dostarczenie danych zgonych formatem aplikacji a następnie ich wyświetlenie. Zapewniono obsługę zewnętrznych plików, zarówno zapisanych w standardzie KML jak i jego rozszeżenia stworzonego na potrzeby projektu. Interpretacja graficzna danych została zoptymalizowana na potrzeby pracy z dużymi zbiorami danych, tak aby wyświetlenie nawet dużej ilości informacji umożliwiało dalszą pracę.
 
-\section{Struktura}
+
+\section{Struktura projektu}
 \label{sec:structure}
 
 Struktura klas w aplikacji została stworzona w oparciu o wzorzec projektowy MVC(en. Model–view–controller). Zakłada on podział na 3 główne warstwy, są nimi:
@@ -16,12 +17,11 @@ View - warstwa prezentacyjna, zapewnia wizualiną prezentację infrmacji. Rolę 
 \item
 Model - przechowuje dane, stanowi bazę danych. Jego rola została przeniesiona na natywne rozwiązanie jakim jest Storage.
 \end{itemize}
- 
-Założenia nie zostały spełnione wszystkie założenia jednak stworzono podstawy do rozwoju i prostej adaptacji rozwiązania do potrzeb konkretnego klienta.
+
+Założenia wzorca nie zostały w pełni spełnione, jego adaptacja została wykonana na potrzeby omawianego projektu. Stworzono podstawy do rozwoju i prostej adaptacji rozwiązania do potrzeb konkretnego klienta, w bardzo prosty sposób można zmienić między innymi sposób przechowywania danych aby spełnić wymagania klienta.
 
 
-
-Zastosowano również paradygmat odwrócenia sterowania(en. Inversion of control,IoC) polegający na przeniesieniu poza obiekt metod służących do kontroli poszczególnych obiektów. Główną zaletą tego podejścia jest uproszczona kongiguracja i adaptacja programu do specyficznych potrzeb. Przykładem jego zastosowania jest metoda korzystania z filtrów w aplikacji, które mogą być tworzone przez użytkownika. Ich potencjalnie duża ilość wczytywana jednocześnie podczas startu generowałaby zbędne obciążenie, obecnie są one pomijane podczas inicjacji i wczytywane pojedyńczo jedynie wtedy gdy ich obecność jest niezbędna.
+Zastosowano również paradygmat odwrócenego sterowania(en. Inversion of control,IoC) polegający na przeniesieniu poza obiekt metod służących do kontroli jego poszczególnych elementów. Główną zaletą tego podejścia jest uproszczona kongiguracja programu do potrzeb użytkownika. Przykładem zastosowania jest metoda korzystania z filtrów w aplikacji, które mogą być tworzone przez użytkownika. Ich potencjalnie duża ilość wczytywana jednocześnie podczas startu generowałaby zbędne obciążenie, obecnie są one pomijane podczas inicjacji i wczytywane pojedyńczo jedynie wtedy gdy ich obecność jest niezbędna.
 
 
 Struktura klas obecnych w aplikacji została zaperzentowana na rysunku \ref{fig:classDiagram2}.
@@ -38,14 +38,14 @@ Struktura klas obecnych w aplikacji została zaperzentowana na rysunku \ref{fig:
 \section{Minimalna konfiguracja}
 \label{sec:minimum}
 
-Do rozpoczęcia korzystania z gotowej aplikacji należy zapewnić obecność konfiguracji niezbędnej do jej konfiguracji na docelowej stronie. Przykład minimalnej strony która spełnia wymagane został pokazany w listinu \ref{lst:minconf}.
+Do rozpoczęcia korzystania z gotowej aplikacji należy zapewnić obecność konfiguracji niezbędnej do jej konfiguracji na docelowej stronie. Przykład minimalnej wersji która spełnia wymagane został pokazany w listinu \ref{lst:minconf}.
 
-Każdy dokument stworzony w HTML sklada się z 3 części:
+Z uwagi na naturę projektu, aplikacja wykorzystywana w przeglądarce, jak każdy dokument stworzony w HTML musi składać się z 3 głównych części:
 
 
 -lini zawierającej informację o używanej wersji HTML, w poniższym przykładzie dotyczy ona HTML5
 
--deklarację sekcji header, zawiera odwołania do zewnętrzych plików i delkaracje funcji, styli
+-deklaracji sekcji header, zawiera odwołania do zewnętrzych plików i delkaracje funcji, styli
 
 -część właściwa strony która zawiera infromacje właściwe, widoczne dla użytkownika storny.
 
@@ -92,7 +92,7 @@ Linie 5-7 mają za zadanie wczytanie zewnętrzych plików zawierające delkaracj
 \section{Interfers do map}
 \label{sec:mxn}
 
-W procesie badań literaturowych podjęto decyzję aby jako głównego źródła map wykorzystać Google Maps \ref{subsec:Rodzaje map}. Niestety omawiane rozwiązania posiadają różne, często niekompatybilne interfejsy do ich obsługi. Implementacja tworzonego frameworku pod wybrany typ map uniemożliwiłoby wykorzystanie innych rodzajów. Aby zaoferować możliwość wyboru zdecydowano się na wykorzystanie Mapstraction, biblioteki któej zadaniem jest płynne przechodzenie pomiędzy różnymi dostarczycielami i ich interfejsami.
+W procesie badań literaturowych podjęto decyzję aby jako głównego źródła map wykorzystać Google Maps \ref{subsec:Rodzaje map}.Postanowiono jednocześnie umożliwić użytkownikowi możliwość zmiany i wyboru innego dostarczyciela danych. Niestety nawet krótka analiza interfejsów dostarczaych do pracy nad różnymi typami map wskazuje na brak kompatybilności pomiędzy nimi, oznacza to brak możliwości stworzenia jednej implementacji działąjącej na różnych typach. Problem ten rozwiazano potrzez wykorzystanie Mapstraction, biblioteki której zadaniem jest płynne przechodzenie pomiędzy różnymi dostarczycielami i ich interfejsami.
 
 Listening \ref{lst:mapstraction} pokazuję przykład wykorzystania biblioteki. Stworzenie instancji Mapstraction polega na wywołaniu konstruktora z podaniem id elementu który znajduje się na stronie i będzie używany jako nasza mapa a także typ mapy. Rezultatem jest obiekt kóry posiada wspólny interjeft dla różnych dostarzcycieli danych.
 
@@ -112,13 +112,24 @@ map.addMarker(marker);
 \section{Odczyt danych}
 \label{sec:idata}
 
-Tak jak zostało omówione w sekcji \ref{sec:dataformat} do przechowywania danych wybrany został format KML, jego duża popularność sprawia że stworzona aplikacja posiada dużą bazę danych z których może korzystać.
+Tak jak zostało omówione w sekcji \ref{sec:dataformat} do przechowywania danych stworzono format rozszeżający istniejący obecnie KML.Takie podejście pozwala na swobodne tworzenie i edycję plików wejsciowych, brak ograniczeń. Jednocześnie zachowując minimalną strukturę obecnie istniejącego formatu pozwala na dostęp od dużej bazy istniejących informacji.
 
-W celu odczytu i konwersji danych z pliku zapisu ich w pamięci sesyjnech przęglądarki omówionej w rozdziale \ref{subsec:storage5} stworzona została klasa KmlParser. Posiada ona jednoargumentowy konstruktor przyjmujący ciąg znakowy.
+W celu odczytu i konwersji danych z pliku zapisu ich w pamięci sesyjnech przęglądarki omówionej w rozdziale \ref{subsec:storage5} stworzona została klasa FileParser. Posiada ona jednoargumentowy konstruktor przyjmujący ciąg znakowy będący zawartośćią pliku .
 
 Ze względów bezpieczeństwa JavaScript nie zezwala na bezpośredni dostęp do plików lokalnych uzytkownika. Jest to pozytywne zachowanie zapewniające że żaden kod nie jest w stanie bezwiednie zmieniać zawartość dysku.
 
-Sytuacja taka wymusza korzystanie z event-ów które będą aktywowane w momecie kiedy plik zostanie wybrany. W momencie zakończenia procesu odczytu zawartość pliku przekazywana jest do parsera który zapisuje dane w pamięci przeglądarki.
+Wymusza to korzystanie z event-ów które będą aktywowane w momecie kiedy plik zostanie wybrany. W momencie zakończenia procesu odczytu zawartość pliku przekazywana jest do parsera który zapisuje dane w pamięci przeglądarki.
+
+W przeciwieństwie do języków które posiadają klasyczną koncepcję klasy JavaScript posiada jedynie obiekt, z uwagi na ten fakt tworzenie metod i procedur następuje odmiennie. Istnieją 3 podstawowe sposby:
+
+\begin{itemize}
+\item
+Wykorzystanie globalnej funkcji. Tworzony obiekt zawiera odowłanie do ciała metody, które jest globalne. Wadą takiego rozwiązania jest tworzenie wielu globalnym funkcji których nazwa może kolidować z nazwazmi w wykorzystywanych bibliotekach.
+\item
+Stworzenie funkcji wewnętrzej. Podobnie jak w poprzednim przypadku tworzona jest funkcja , tym razem jej ciało znajduje się w obiekcie. Minusem jest konieczność odtwarzania metody przy każdej sytuacji tworzenia obiektu. Operacja taka może być kosztowna i negatywnie wpływać na pracę aplikacji.
+\item
+Protototypowanie. Posiadając definicję obiektu możemy dodać do niego metodę. Sposób ten nie posiada wad opisanych powyżej, z tego powodu podejście zostało wykorzystane w stworzonej aplikacji. Przykład można zaobserwować w listeninu \ref{lst:svgImpl}.
+\end{itemize}
 
 \lstset{language=JavaScript}
 \begin{lstlisting}[label={lst:utils},caption={Minimalna konfiguracja.}]
@@ -128,7 +139,7 @@ function readFile(file,start,stop){
 	var reader = new FileReader();
     reader.onloadend = function(evt) {
       if (evt.target.readyState == FileReader.DONE) {
-		exml = new KmlParser( evt.target.result);	
+		exml = new FileParser( evt.target.result);	
 		exml.parse()
       }
     };
@@ -142,7 +153,7 @@ function readFile(file,start,stop){
 
 
 \lstset{language=JavaScript}
-\begin{lstlisting}[label={lst:minconf},caption={Minimalna konfiguracja.}]
+\begin{lstlisting}[label={lst:minconf},caption={Parser plików.}]
 
 KmlParser.value = function(e) {
 	a = GXml.value(e);
@@ -339,74 +350,8 @@ KmlParser.prototype.processing = function(doc) {
 
 \end{lstlisting}/
 
-\subsection{Wydajność}
-\label{subsec:wydajnosc}
-
-W celach sprawdzenia wydajności zaimplementowanego parsera przeprowadzono testy porównawcze. W pierwszej próbie wykorzystano dwa pliki zawierające dane w formacie który pozwolił na jego analizę, pierwszy "plik1.kml" składał się z jednego obszaru i jednego stylu określającego preferencje graficzne, jego dokładana zawartość została zawarta w załączniku \ref{sec:akml}. Drugi plik "plik2.kml" zawierał informacje o granicy wszystkich stanów USA, na potrzeby badań on również zawierał informacje o jednym stylu.
-Wykonano proces wczytania ich zawartości, mierząc za każdym razem czas potrzebny na zakończenie procesu. Wyniki zamieszczono w zbiorczej tabeli \ref{tab:speedTest}.
-
-Dokładne informacje dotyczące zawartości plików zamieszczono w tabeli \ref{tab:testFile}
-
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|l|l|l|}
-    \hline
-    Nazwa pliku & Ilość punktów & Ilość poligonów \\ \hline
-    plik1.kml & 13 & 1 \\ \hline
-    plik2.kml & 13697 & 133 \\ \hline
-
-    \end{tabular}
-    \caption{Pliki testowe}
-    \label{tab:testFile}
-\end{table}
-
-
-\begin{table} [H]
-    \centering
-    \begin{tabular}{|l|l|l|}
-    \hline
-    Test & 13 punktów & 12697 punktów \\\hline
-    I & 3 & 343 \\\hline
-    II & 13 & 449 \\\hline
-
-    \end{tabular}
-    \caption{Czas dostępu [ms]}
-    \label{tab:speedTest}
-\end{table}
-
-
-
-\section{Reprezentacja danych}
-\label{sec:datareprezentaction}
-
-Posiadając już informacje należało wybrać najlepszy sposób umożliwiający ich przedstawienie. Wykorzystanie w tym celu możliwości dostarczanych przez HTML5 wydawało się bardzo zachęcające. Przykład przedstawiony na rysunku \ref{fig:canvas1} pokazuje w jak prosty sposób można zaznaczyć okrąg na gotowym obrazie. Niestety ze względu na brak kompatybilności tego rozwiązania z wybranym sposobem dostarczania informacji geograficznych sposób tworzenia kształtów został zmieniony inny.
-
-\subsection{Rysowanie kształtów}
-\label{subsec:drawpoly}
-
-Aplikacja umożliwa tworzenie różnych kształtów i pojedyńczych elementów które można umieścić na mapie. Wykorzystywane są obiekty z pakiety google.maps, zawiera takie elementy jak:
-
-\begin{itemize}
-\item
-Marker
-Pozwala on na umieszczenie pojedyńczego punktu na mapie. Możliwe jest dokładne sprecyzowanie jego wyglądu dzięki czemu możliwe jest aby prezentował on określą ikonę lub symbol.
-\item
-Okrąg
-Pierwszy kształt, tworzy idealy okrąg.
-\item
-Poligon
-Jedna z bardziej przydatnych opcji. Dzięki niemu możemy stworzyć każdy kształt. To ten element został wykorzystany do stwrozenia granicy wyspy zaprzezentowany w załączniku \ref{sec:aresult}.
-\item
-Linia
-Elemnt pozwalający na tworzenie lini, której wygląd możemy swobodnie określać.
-\item
-Prostokąt
-Ostatni element tworzy prostokąty o kątach dokłanie 90 stopni. Kształt ten można próbować stworzyć przy pomocy poligonu, nie będzie on jednak tak dokładny jak przy pomocy tej opcji.
-
-\end{itemize}
-
-\subsection{Dodawanie filtrów}
-\label{subsec:filters}
+\section{Dodawanie filtrów}
+\label{sec:filters}
 
 Rozwinięciem podstawowej możliwości tworzenia prostych kształtów geometrycznych jest opcja tworzenia filtrów które mogą wpływać na prezentację danych.
 
@@ -416,18 +361,21 @@ Przykładowym użyciem jest możliwość stworzenia animacji płynnego przejści
 \item
 Przekazanie do aplikacji kształtu zawierającego informacje o stanie początkowym i końcowym.
 \item
-Dla każdej zmiany daty obliczenie aktualnego procentowego zakończenia procesu transformacji, gdzie pomiędzy startem a końcem okresu zmiany kształtu obecnie się znajdujemy.
+Dla każdej zmiany daty obliczenie aktualnego procentowego zakończenia procesu transformacji.
 \item
-Oblicznie położenia nowego punktu, tak aby leżał pomiędzy dwoma w stosunku oblicoznym w poprzednim kroku.
+Oblicznie położenia nowego punktu, tak aby leżał pomiędzy dwoma w odpowiednim stosunku obliczonym w poprzednim kroku.
 \end{itemize}
 
 \lstset{language=JavaScript}
-\begin{lstlisting}[label={lst:minconf},caption={Minimalna konfiguracja.}]
+\begin{lstlisting}[label={lst:minconf},caption={Filt animujący.}]
 
 var percent;
 if (now < start) percent = 0;
 else if (now > end) percent = 1;
 else percent = 1 - ((end - now) / (end - start));
+
+var pm = item.placemark;
+var points=[], pt1, pt2;
 
 for (var x=0; x<pm.points.length; x++) {
     pt1 = pm.points[x];
@@ -437,9 +385,132 @@ for (var x=0; x<pm.points.length; x++) {
         (pt1.lng + ((parseFloat(pt2.lon) - pt1.lng) * percent))
     ));
 
+    if (item.tween) item.map.removePolyline(item.tween);
+    item.placemark.hide();
+    item.tween = new mxn.Polyline(points),
+    item.tween.addData({
+    color: theme.lineColor,
+    width: theme.lineWeight,
+    opacity: theme.lineOpacity,
+    closed: true,
+    fillColor: theme.fillColor,
+    fillOpacity: theme.fillOpacity
+    });
+item.map.addPolyline(item.tween);
 \end{lstlisting}/
 
-Istnieje możliwość tworzenia nowych filtrów dla potrzeb konkretnych map lub danych. Nie stanowi dużym problemem imlementacja takiego rozwiąznaia które w pewnym momencie wyświetliłoby krótki film wideo dostarczający dodatkowych informacji o obserwowanym wydarzeniu.
+Istnieje możliwość tworzenia nowych filtrów dla potrzeb konkretnych map lub danych.
 
-\subsubsection{Google DrawingManager}
-\label{subsubsec:svg}
+\subsection{SVG}
+\label{subsec:svgImpl}
+
+Zapewniono aby użytkownik miał możliwość dodawania własnych elementów stworzonych w SVG do aplikacji, klasa SGSObject ma za zadanie przechowywanie informacji o nim i zapewnienie niezbędnych metod. Stworzony konstruktor przyjmuje dwa punkty które określają skrajne punkty prostokątnego obszaru w którym będzie wyświetlany obraz, zdecydowano aby były to północno-wschodni i południowo-zachodni.
+
+
+\lstset{language=JavaScript}
+\begin{lstlisting}[label={lst:svgImpl},caption={Klasa do obsługi SVG}]
+
+function SGSObject(swBound, neBound, elements, map) {
+
+  this.swBound_ = swBound;
+  this.neBound_ = neBound;
+  this.elements_ = elements;
+  this.map_ = map;
+
+  this.div_ = null;
+
+  this.setMap(map);
+}
+
+USGSOverlay.prototype.onAdd = function() {
+
+  var div = document.createElement('div');
+  div.style.border = 'none';
+  div.style.borderWidth = '0px';
+  div.style.position = 'absolute';
+
+  var svgHolder = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svgHolder.setAttribute("version", "1.2");
+
+  for ( el in elements ) {
+	createSVGElement(el.type,el.properties,svgHolder);
+  }
+
+  div.appendChild(svgHolder);
+
+  this.div_ = div;
+
+  var panes = this.getPanes();
+  panes.mapPane.appendChild(this.div_);
+};
+
+USGSOverlay.prototype.draw = function() {
+
+  var overlayProjection = this.getProjection();
+
+  var sw = overlayProjection.fromLatLngToDivPixel(this.swBound);
+  var ne = overlayProjection.fromLatLngToDivPixel(this.neBound);
+
+  var div = this.div_;
+  div.style.left = sw.x + 'px';
+  div.style.top = ne.y + 'px';
+  div.style.width = (ne.x - sw.x) + 'px';
+  div.style.height = (sw.y - ne.y) + 'px';
+};
+
+USGSOverlay.prototype.onRemove = function() {
+  this.div_.parentNode.removeChild(this.div_);
+};
+
+USGSOverlay.prototype.hide = function() {
+  if (this.div_) {
+    this.div_.style.visibility = 'hidden';
+  }
+};
+
+USGSOverlay.prototype.show = function() {
+  if (this.div_) {
+    this.div_.style.visibility = 'visible';
+  }
+};
+
+function createSVGElement( eltType, properties,svgElement) {
+  var elt = document.createElementNS('http://www.w3.org/2000/svg', eltType);
+  for ( prop in properties ) {
+    elt.setAttribute(prop, properties[prop]);
+    }
+  svgElement.appendChild(elt);
+}
+
+\end{lstlisting}/
+
+\subsection{Zdjęcia}
+\label{subsec:pictures}
+
+Aby zapewnić jak największą funkcjonalność zapewniono możliwość dodawania zewnętrznych plików graficznych.
+Podobnie jak w przypadku SVG stworzono klasę która zapewnia metody to jej prawidłowej pracy. Główną różnicą jest zmiana w klasie odpowiedzialnej za stworzenie podstawowego elementu przechowywującego obraz. Fragment odpowiedzialny za tworzenie obiektu SVG został zastąpiony kodem który ma za zadanie dla podanej ścieżki do pliku graficznego dodaniem tagu img, który powszechnie przechowuje tego typu informacje.
+
+\lstset{language=JavaScript}
+\begin{lstlisting}[label={lst:svgImpl},caption={Klasa do obsługi SVG}]
+
+PictureObject.prototype.onAdd = function() {
+
+  var div = document.createElement('div');
+  div.style.borderStyle = 'none';
+  div.style.borderWidth = '0px';
+  div.style.position = 'absolute';
+
+  var img = document.createElement('img');
+  img.src = this.image_;
+  img.style.width = '100%';
+  img.style.height = '100%';
+  img.style.position = 'absolute';
+  div.appendChild(img);
+
+  this.div_ = div;
+
+  var panes = this.getPanes();
+  panes.mapPane.appendChild(div);
+};
+
+\end{lstlisting}/

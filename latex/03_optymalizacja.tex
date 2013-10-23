@@ -3,3 +3,38 @@
 
 \subsection{Funkcje haszujące}
 \label{sec:hashfunction}
+
+\subsection{Wydajność parsera}
+\label{subsec:wydajnosc}
+
+W celach sprawdzenia wydajności zaimplementowanego parsera przeprowadzono testy porównawcze. W pierwszej próbie wykorzystano dwa pliki zawierające dane w formacie który pozwolił na jego analizę, pierwszy "plik1.kml" składał się z jednego obszaru i jednego stylu określającego preferencje graficzne, jego dokładana zawartość została zawarta w załączniku \ref{sec:akml}. Drugi plik "plik2.kml" zawierał informacje o granicy wszystkich stanów USA, na potrzeby badań on również zawierał informacje o jednym stylu.
+Wykonano proces wczytania ich zawartości, mierząc za każdym razem czas potrzebny na zakończenie procesu. Wyniki zamieszczono w zbiorczej tabeli \ref{tab:speedTest}.
+
+Dokładne informacje dotyczące zawartości plików zamieszczono w tabeli \ref{tab:testFile}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    Nazwa pliku & Ilość punktów & Ilość poligonów \\ \hline
+    plik1.kml & 13 & 1 \\ \hline
+    plik2.kml & 13697 & 133 \\ \hline
+
+    \end{tabular}
+    \caption{Pliki testowe}
+    \label{tab:testFile}
+\end{table}
+
+
+\begin{table} [H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    Test & 13 punktów & 12697 punktów \\\hline
+    I & 3 & 343 \\\hline
+    II & 13 & 449 \\\hline
+
+    \end{tabular}
+    \caption{Czas dostępu [ms]}
+    \label{tab:speedTest}
+\end{table}

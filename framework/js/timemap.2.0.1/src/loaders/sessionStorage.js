@@ -37,9 +37,18 @@ TimeMap.loaders.sessionStorage.parse = function(kmlnode) {
         makePoint = util.makePoint,
         makePoly = util.makePoly,
         formatDate = util.formatDate;
+	if(sessionStorage.polyline){
+	items.polyline = (JSON.parse(sessionStorage.polyline));
+	}else{
+	items.polyline = [];
+	}
 
-    items.polyline = (JSON.parse(sessionStorage.polyline));
+	if(sessionStorage.marker){
 	items.marker = (JSON.parse(sessionStorage.marker));
+	}else{
+	items.marker = [];
+	}
+	
 	items2= [
 	                        {
 	                          "start" : "1980-01-02",
