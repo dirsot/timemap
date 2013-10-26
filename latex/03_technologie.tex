@@ -1,19 +1,16 @@
 \section{Wykorzystane technologie}
-\label{sec:wykorzystanetechnologie} 
+\label{sec:wykorzystanetechnologie}
 
 \subsection{JavaScript}
 \label{sec:javascript}
 
 Wybór języka JavaScript to tworzenia aplikacji został podyktowany jego dużymi możliwościami na polu tworzenia projektów do użytku na przeglądarkach internetowych.Pozwala na łatwe tworzenie asynchronicznych aplikacji, oznacza to aktualizowanie jedynie wybranych danych na ekranie moniotra bez konieczności przeładowania całej strony. Jest to szczególnie istotne w omawianym przypadku, oznacza to brak potrzeby wczytywania i renderowania całego tła mapy za każdym razem gdy nastąpi nawet małą zmiana.
 
-
-Spełnia warunki paradygmatu obiektowego, umożliwia korzystanie z obiektów które mogą odpowiadać pewnej klasie rzeczywistych przedmiotów lub rzeczy, imperatywnego, składa się z komend które zmieniają stan programu jak też funkcyjne, umożliwia tworzenie funkcji które w zależności od podanych argumentów wejściowych dostarczają odpowiednich danych wyjściowych.
-
 Bardzo ważną cechą języka jest fakt jego wykonywania po stronie klienta. Oznacza to wykonywanie obliczeń i korzystanie z pamięci najczęściej na komputerze osoby która korzysta z aplikacji. Pozwala to na zmiejszenie wymagać w stosunku do serwera( wykonyje on mniej operacji i zapisuje mniej danych w swojej pamięci)
 
 Obecnie powstają frameworki których zadaniem jest stworzenie małej, lekkiej aplikacji webowej wykorzystującej w maksymalny sposób omawiany język.\cite{AngularJS} Przykładem takiego rozwiązania jest AngularJs, korzysta on z architekury MVC w której większość pracy została przeniesiona na stronę klienta. Kontroler wykonuje obliczenia w przeglądarce użytkownika, odciąża to główny serwer, pozwala na szybszą i płynniejszą pracę większej ilości osób.
 
-Nie wątpliwą zaletą takiego podejścia jest wzrost opdorności na ataki typu Dos(en. Denial of Service), polega on na przeciążeniu aplikacji dostarczającej określone dane lub usługi do momentu gdy przestaje ona opdowiadać na jakiekolwiek zapytania. Aplikacje które wykonują większość operacji po stronie serwera(różnego typu obliczenia matematyczne, analizę danych) aby sprostać dużej ilośći klientów która występuje w tego typu atakach nakłada duże wymagania w stosunku do wykorzystywanego sprzętu elektrycznego. Przeniesienie ciężaru z serera na końcowego klienta wykonywania większości operacji pozwala nie tylko na obsłużenie większej ilości użytkowników ale także może wpłynąć na zmiejszenie kosztów utrzyamnia serwera.
+Nie wątpliwą zaletą takiego podejścia jest wzrost opdorności na ataki typu Dos(en. Denial of Service), polega on na przeciążeniu aplikacji dostarczającej określone dane lub usługi do momentu gdy przestaje ona opdowiadać na jakiekolwiek zapytania. Aplikacje które wykonują większość operacji po stronie serwera(różnego typu obliczenia matematyczne, analizę danych) aby sprostać dużej ilośći klientów która występuje w tego typu atakach nakłada duże wymagania w stosunku do wykorzystywanego sprzętu elektronicznego. Przeniesienie ciężaru z serera na końcowego klienta wykonywania większości operacji pozwala nie tylko na obsłużenie większej ilości użytkowników ale także może wpłynąć na zmiejszenie kosztów utrzyamnia serwera.
 
 Prosty przykład na stronie \underline{\texttt{http://angularjs.org/}} prezentuje w jak prosty sposób można stworzyć prostą liste rzeczy do zrobienia. Poniżej zaprezentowano fragment odpowiedzialny za wyświetlenie zadań z dodatkowym polem określającym czy zostało już wykonane.
 
@@ -53,21 +50,21 @@ Podobnie jak w przypadku XML, tak i tutaj wymagane jest aby wykorzystywane znacz
 
 Poprawnym zapisem jest <p>Wiadomość<\textbackslash p> który oznacza pojedyńczy akapit. Zapis <p>Wiadomość<p>, który różni się od poprzedniego brakiem znaku "\textbackslash" w drugim znaczniku, czyni to ten zapis niepoprawnym. Istnieje możliwość aby wykorzystać pojedyńczy znacznik, przykładem jest <br \textbackslash> określający wstawienie nowej lini w miejscu wystąpienia tagu.
 
-Obecnie powszechnie używany standart HTML4 ma niestety wiele ograniczeń, z tego powodu pracowano nad jego następnikiem. 22 stycznia 2008 W3C opublikował HTML5, wtedy jeszcze jako jedynie szkic.
+Obecnie powszechnie używany standart HTML w wersji czwarte ma wiele ograniczeń, z tego powodu pracowano nad jego następnikiem. 22 stycznia 2008 W3C opublikował HTML5, następna posiada wiele dodatkowych rozwiązań pomocnych w pracy. Posiada wiele dodatkowych znaczników ułatwiających pracę takich jak audio,video przechowywujących odpowiednio pliki muzyczne i wideo, może dokonywać wstępnej walidacji formularzy, nie tylko sprawdzać obecność danych wejściowych ale także ich zgodność z wyrazeniami regularnymi. Umożliwia przechowywanie danych nie tylko w postaci ciasteczek ale większych strukturach nazwanych Storage, dokałdny opis został zawarty w sekcji  \ref{subsec:storage5}.
 
 
 \subsection{Less}
 \label{sec:less}
 
-Do stworzenia bardziej zaawansowanych arkuszy stylów CSS (en. Cascading Style Sheets) wykorzystaniu narzedzie które pozwala na łatwe tworzenie i utrzymywanie reguł. Głównymi zaletami są:
+Do stworzenia bardziej zaawansowanych arkuszy stylów CSS (en. Cascading Style Sheets) wykorzystano narzedzie które pozwala na łatwe tworzenie i utrzymywanie reguł któym jest Less,jego głównymi zaletami są:
 
 \begin{itemize}
 \item
 Deklarowanie zmiennych.
 
-Jeśli chcemy wykorzystać jedną wartość(przykładowo jeden kolor) w wielu miejscach wystarczy w głównym pliku zadeklarować zmienną i wykrzystywać ją w każdym miejscu gdzie chcemy użyć tej wartośći.
+Jeśli chcemy wykorzystać jedną wartość(np. jeden kolor) i wykorzystywać ją wielokrotnie wystarczy w głównym pliku zadeklarować zmienną i wykrzystywać ją w każdym miejscu gdzie chcemy użyć tej wartośći.
 
-Przykładowo chcąc wykorzystać kolor czerwony wykorzystywany w kolorystyce uczelni AGH deklarujemy zmienną @aghRed, następnie w miejscu gdzie chcemy aby pojawił się ten kolor korzystamy z istniejącej zmiennej
+Przykładowo chcąc wykorzystać kolor czerwony zawarty w kolorystyce uczelni AGH deklarujemy zmienną @aghRed, następnie w miejscu gdzie chcemy go wykorzystać korzystamy z istniejącej zmiennej
 
 \lstset{language=JavaScript}
 \label{lis:webSql}
@@ -79,7 +76,7 @@ bgcolor: @aghRed;
 \item
 Mixiny
 
-Możemy tworzyć nowe klasy które będą posiadały właściwości innej, wcześniej zadeklarowanej.Pozwala to na tworzenie kodu bardziej czytelnego, niepowielanie go.
+Możemy tworzyć nową klasę posiadającą określone włąściwości która będzie posiadały właściwości innej, wcześniej zadeklarowanej.Pozwala to na tworzenie kodu bardziej czytelnego, unikanie powtórzeń.
 
 
 \lstset{language=JavaScript}
@@ -99,6 +96,6 @@ Możemy tworzyć nowe klasy które będą posiadały właściwości innej, wcze�
 \item
 Osadzanie elementów wedlug dziedziczenia
 
-Tworząc zagnieżdzoną strukturę storny często elementy wewnętrzne zależą od elementów nadrzędnych. Wygląd komurki może się różnić w zależości od rodzaju tabeli. W tworzeniu tak zadnieżdżonych struktur pomocna okazuje się omawiana cecha.
+Tworząc zagnieżdzoną strukturę storny często elementy wewnętrzne zależą od elementów nadrzędnych. Wygląd komurki może się różnić w zależości od miejsca w tabeli. W tworzeniu tak zagnieżdżonych struktur pomocna okazuje się omawiana cecha.
 
 \end{itemize}

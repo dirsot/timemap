@@ -9,7 +9,7 @@ Przed rozpoczęciem implementacji własnego rozwiązania postanowiono przeprowad
 
 Funkcjonalnośc interaktywnych map można znaleść w aplikacji stworzonej przez firmę Google. Program ten jest napisany przy użyciu języka C++, nie służy on do tworznia aplikacji mobilnych, dlatego nie został on wybrany jako kandydat do naszej pracy.
 
-Wykorzystuje ono statyczne obrazy będące zdjęciami satelitarnymi dla obrazów w dużej wysokośći lub zdjęciami wykonanymi z pokładów samolotów. Pomimo duzej atrakcyjności ma ono bardzo ograniczoną możliwośći zmiany oglądanych danych, ograniczone do ilości wykonanych zdjęć, dodatkowo większość punktów najstarsze dane ma z lat 50 XX w.
+Wykorzystuje on statyczne obrazy będące zdjęciami satelitarnymi w przypadku obrazów z dużej wysokośći lub zdjęciami wykonanymi z pokładów samolotów. Pomimo duzej atrakcyjności ma ono bardzo ograniczoną możliwośći zmiany oglądanych danych, ograniczone do ilości wykonanych zdjęć, dodatkowo większość danych pochodzi z okresu ostatnich 60 lat.
 
 Przykład takiej sytuacji został przedstawiony na rysunku \ref{fig:lasVegas1}, obraz terenu na którym powstanie miasto Las Vegas w roku 1950. Jak teren ten wyglądał w roku 1977 widzimy na rysunku \ref{fig:lasVegas2}, pomimo widocznych zmian teren ten nadal w dużym stopniu jest pustynny,dopiero na rysunku \ref{fig:lasVegas3} widzimy aktualny stan miasta.
 
@@ -40,8 +40,8 @@ Dzięki funkcji zmiany punktu i kąta patrzenia, pokazywania ciekawych miejsc cz
 \section{Aplikacje wykonane w technologi Flash}
 \label{sec:flashmap}
 
-Podczas prac badawczych natrafiono na kilka aplikacji któych główna część aplikcji została wykonana w technologi flash. Przykładami są interaktywna mapa historii europy \cite{worldology}, mapa prezentująca zmianę granic państw w XX wieku \cite{flashborder} przykład na rysunku \ref{fig:flasheurope}. Oba przykłady zawierają bogatą szatę graficzną, ich wykonanie jest bardzo estetyczne. 
-Zaletą wykorzystanie mocy obliczeniowj karty graficznej do wyświetlania obrazów(dostępne od wersji 10.1 \cite{flashfrapghic}), dzięki temu procesor jest może wykonywać inne zadania.
+Podczas prac badawczych natrafiono na kilka aplikacji któych główna część aplikcji została wykonana w technologi flash. Przykładami są interaktywna mapa historii europy \cite{worldology}, mapa prezentująca zmianę granic państw w XX wieku \cite{flashborder} przykład na rysunku \ref{fig:flasheurope}. Oba projekty zawierają bogatą szatę graficzną, ich wykonanie jest bardzo estetyczne.
+Zaletą tworzenia programów w tej technologi jest wykorzystanie mocy obliczeniowj karty graficznej do wyświetlania obrazów(dostępne od wersji 10.1 \cite{flashfrapghic}), dzięki temu procesor jest może wykonywać inne zadania.
 
 \begin{figure}[H]
   \centering
@@ -51,9 +51,9 @@ Zaletą wykorzystanie mocy obliczeniowj karty graficznej do wyświetlania obraz�
 \end{figure}
 
 
-Wykorzystanie tej technologii wydaje się dobrym wyborem, niestety posiada kilka wad które ja eleiminują. Pierwszą z nich jest brak wsparcia technicznego na wszystkich urządzeniach mobilnych, przez co jej wykorzystanie ogranicza rynek docelowy.
+Wykorzystanie języka ActionScript wydaje się dobrym wyborem, niestety posiada kilka wad które ja eleiminują. Pierwszą z nich jest brak wsparcia technicznego dla wszystkich urządzeń mobilnych, przez co jej wykorzystanie ogranicza rynek docelowy.
 Wymagana jest instalacja detykowanego odtwarzacza który umożliwia na korzystanie z programów stworzonych w tym języku.
-Ponieważ tworzona aplikacja jest jednym komponentem wymagane jest jest ściągnięcie z serwera na lokalny komputer aby można było z niej korzystać. Ostatnim aspektem jest brak kompatybilności elementów flash-owych z głównymi wyszukiwarkami internetowymi, ich indeksacja jest utrudniona(możliwe wykorzystanie tagów) a ich zawartość całkowicie niewidoczna w procesie tym. Z uwagi na powyższe wady technologia nie została wykorzystana w omawianej pracy. 
+Ponieważ tworzona aplikacja jest jednym komponentem wymagane jest całkowite ściągnięcie z serwera na lokalny komputer aby można było z niej korzystać. Ostatnim aspektem jest brak kompatybilności elementów flash-owych z głównymi wyszukiwarkami internetowymi, ich indeksacja jest utrudniona(możliwe jest jedyni wykorzystanie tagów) a ich zawartość całkowicie niewidoczna w procesie indeksowania. Z uwagi na powyższe wady technologia nie została wykorzystana w omawianej pracy.
 
 \section{Wybrane technologie}
 \label{sec:technologie}
@@ -62,12 +62,12 @@ Po analizie dostęnych rozwiązań zdecydowano się na wykorzystanie w pracy nas
 \begin{itemize}
 
 \item
-HTML 5 - budulec każdej strony internetowej
+HTML 5 - język HTML jest budulcem każdej strony internetowej, w wersji piątej zostały dodane rozwiązania które zwiększają jego możliwości
 
 \item
-JavaScript - zapewnienie interakcji i zmiany konkentu bez konieczności odświeżania całej strony 
+JavaScript - umożliwia interakcję użytkownika ze stroną internetową  i zmiany konkentu bez konieczności odświeżania całej zawartości
 
 \item
-Less - agrgacja i uporządkowanie stylów CSS
+Less - agrgeguje i porządkuje style CSS
 
 \end{itemize}

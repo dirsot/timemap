@@ -1,21 +1,17 @@
 \section{Przechowywanie i transmisja danych}
 \label{sec:przesyl}
 
-Rozdział ten zawiera informacje związane z analizą wybranych metod przechowywania danych a także możliwości ich transmisji.
-
 \subsection{GIS}
 \label{subsec:gis}
 
 GIS(Geographical Information Systems) jest to System Informacji Geograficznych, jest to zbiór wiedzy, informacji do pozyskiwania i analizowania danych przestrzennych. Dane są pobieranie w trakcie naziemnych pomiarów jak i zbierane przy użyciu systemu GPS. Informacje te są następnie zapisywane do określonych formatów,dzięki czemu możliwa jest ich dalsza analiza. \underline{\texttt{http://www.gis-support.pl/co-to-jest-gis/}}
 
-
 \subsubsection{Wykorzystywany układ współrzędnych}
 \label{subsec:uklad}
 
-Istnieje wiele układów współrzędnych któe służą do opisu pojedyńczego punktu na powierzchni ziemi.Na stronie \underline{\texttt{http://www.spatialreference.org/ref/epsg/}} (dostęp) znajduje się lista zawierająca przykłady zapisu różnych obszarów kuli ziemskiej przy użyciu różnych formatów. Zawierają one niezbędne infomacje w konkretnym zapisie.
+Istnieje wiele układów współrzędnych któe służą do opisu pojedyńczego punktu na powierzchni ziemi.Na stronie \underline{\texttt{http://www.spatialreference.org/ref/epsg/}} (dostęp 20.08.2013) znajduje się lista zawierająca przykłady zapisu punktu na kuli ziemskiej przy użyciu różnych formatów, zawierają one niezbędne infomacje do poprawnego zapisu danych w określonym formacie.
 
-Wersją która ma za zadanie być ogólnoświatowym formatem jest WGS(World Geodetic System). Jego ostatnia wersja  WSG84 jest powszechnie używana w urządzeniach do nawigacji.
-Tradycyjny zapis oparty jest na wykorzystaniu stopni, minut i sekunk, jest on obecnie wypierany przez nowszy,łatwiejszy do obliczeń komputerówych. Poniżej zaprezentowano jak wygląda zapis w starszym i nowszym punktu określającego położenie budynku A-0 uczelni AGH.
+Tradycyjny zapis oparty jest na wykorzystaniu stopni, minut i sekunk, jest on obecnie wypierany przez nowszy,łatwiejszy do obliczeń komputerówych. Wersją która ma za zadanie być ogólnoświatowym formatem jest WGS(World Geodetic System). Jego ostatnia wersja  WSG84 jest powszechnie używana w urządzeniach do nawigacji. Poniżej zaprezentowano jak wygląda zapis w starszym i nowszym punktu określającego położenie budynku A-0 uczelni AGH.
 
 \begin{itemize}
 
@@ -31,9 +27,63 @@ Zapis unowocześniony
 
 Drugi zapis został wykorzystany do przechowywania danych w plikach, tak aby wymiana i wspólna praca była jak najprostsza. Wybór ten sprawił że nie występuje problem konwersji punktu do formatu czytelnego dla komputera, można go bez problemu odczaytać jako liczbę.
 
+\subsection{Format zapisu}
+\label{subsec:zapisWektorowy}
+
+W celu przechowywania obiektu graficznych zdecydowano się na wykorzystanie grafiki wektorowerj.  Oprócz bez problemowej skalowalności, pozwala on również na szeroką i łatwą edycję. W prosty sposób można dodać informacje nie tylko o położeniu, ale inne takie jak słowny opis miejsca lub wydarzenia które miało miejsce w pobliskim rejonie.
+Obraz jest w tym przypadku przechowywany jako zbiór formuł matematycznych m.in. proste i łuki. Dzięki takiemu podejściu obraz w dowolnej skali na identyczną jakość, widać to na rysunku \ref{fig:wekt}. Przykładowymi formatami są GML(Geography Markup Language) otwarty standart XML dla wymiany danych GIS, Shapefile czy tradycyjny kartezjański układ współrzędnych.
+
+  \begin{figure}[H]
+  \centering
+    \includegraphics[width=50mm]{ge/a1.jpg}
+  \caption{Zapis wektorowy}
+  \label{fig:wekt}
+  \end{figure}
+
+Przeciwnym podejściem jest grafika rastrowa, jest to zapis punktów o określonym kolorze i położeniu na płaszczyźnie. Efektem takiego podejścia jest pogorszenie obrazu w momencie dużego powiększenia. Przykładem są formaty takie jak ADRG,ASC czy RGB.
+Porównanie litery a i jej 7-krotnego powiększenia w tym zapise zaprezentowano na rysunku \ref{fig:rast}
+  \begin{figure}[H]
+  \centering
+    \includegraphics[width=50mm]{ge/a2.jpg}
+  \caption{Zapis rastrowy}
+  \label{fig:rast}
+  \end{figure}
+
+\subsection{Format pliku}
+\label{subsec:fileformat}
+
+W celu wypełnienia założeń projektu jakim jest umożliwienie przechowywania danych w zewnętrznym pliku przeprowadzono analizę dostępnych foramtów zapisu danych kartograficznych.
+
+\begin{itemize}
+
+\item
+SWDE(Standard Wymiany Danych Ewidencyjnych) - polski format służący głównie do wymiany danych ewidencyjnych gruntów i budynków
+
+\item
+SWING(Standard Wymiany INformacji Geodezyjnych) - format danych geodezyjnych służący do wymiany danych pomiędzy bazami danych systemów informatycznych SIT(wikipedia.pl)
+
+\item
+KML(Keyhole Markup Language) - otwarty standart oparty na XML-u, stworzony głównie dla potrzeb GoogleEarth
+
+\item
+GML(Geography Markup Language) - stworzony przez OGC(Open Geospatial Consortium),międzynarodową organizację założoną w celu tworzenia i rozpowszechniania standarów związanych z informacjami dotyczących geograficznych i geoprzestrzennych danych
+
+\end{itemize}
+
+Dwa polskie formaty są stosunkowo mało popularne, są one głównie wykorzystywane w celu kompunikacji pomiędzy rządowymi bazami danych. Zawierają one bardzo określone typy danych co sprawia że są mało przydatne dla omawianego projetku. KML jest foramtem który posiada szeroki wachlarz dostępnych znaczników a jego duża popularność dostarcza dużą bazę plików gotowych do wykorzystania. Niestety został on stworzony by współpracować z określonym programem, zaimplementowane zostały jedynie elementy które mogą zostać wykorzystane w nim. Ostani przykład został stworzony w uniwersalnym celu do ogólnego użytku, posiada on bardzo dużo możliwości, apadtacji do konkretnych rozwiązań\cite{gml}, z uwagi na ten fakt zdecydowano się na wybór tego rozwiąznia. Nie zostaną wykorzystane jego pełne możliwości, jedynie te które są przydatne w projektowanej aplikacji.  
+
+
+\subsection{Parser plików}
+\label{subsec:parser}
+
+Założenia projektu zapewniają dwa źródła dostarczania informacji niezbędnych do poprawnej pracy frameworka.
+Pierwszym jest przesyłanie infromacji z serwera do urządzenia klienta przy wykorzystaniu formatu JSON, wiadomość taka jest zbudowana w odpowiednią strukturę aby bezpośrednio dokonać konwersji do jegnego ciągu znakowego. W ten sposób możliwe będzie zapewnienie w bardzo szybkim czasie danych pozwalających na pełne wykorzystanie wszystkich możliwości aplikacji.
+
+Dodatkową opcją dostarczania informacji będzie wczytywanie pliku z informacjami opisującymi mapę. Do tego celu stworzono parser plików który pozwala na dokonanie analizy wczytanego pliku i konwersję danych do formatu używanego do przechowywania danych po stronie klienta.
+
 \subsection{Storage}
 \label{subsec:storage5}
-Aby stworzyć framework któy był by w stanie działać przy minimalnej konieczności konfiguracji dodatkowych środowisk postanowiono aby dane w pierwszej kolejności były przechowywane po stronie klienta. Do tego celu nadaje się funkcją stworzona w ostatniej wersji HTML którą jest Storage. Jest ona dokładniej omówiona w podręczniku do HTML5  \cite{html5dive}. Pozwala on na przechowywanie danych w przeglądarce użytkownika. Różnicą w stosunku do ciasteczek które również potrafią przechowywać informacje o konretnym użytkonwniku jest:
+Aby stworzyć framework któy był by w stanie działać przy minimalnej konieczności konfiguracji dodatkowych środowisk postanowiono aby dane w pierwszej kolejności były przechowywane po stronie klienta. Do tego celu nadaje się funkcjonalność stworzona w ostatniej wersji HTML którą jest Storage. Pozwala on na przechowywanie danych w przeglądarce użytkownika \cite{html5dive}. Różnicą w stosunku do ciasteczek które również potrafią przechowywać informacje o konretnym użytkonwniku jest:
 \begin{itemize}
 \item
 Większy rozmiar dostępnej pamięci m.in. Chrome 5MB \nocite{chrome5mb}, IE 10MB
@@ -43,9 +93,9 @@ Informacje przechowywane są po stronie użytkownka, nie są przesyłane za każ
 Informacja może być przechowywana przez długi okres czasu.
 \end{itemize}
 
+Wadą tego typu pamięci jest jej interfejs. Obecnie przechowywany sposób danych to mapowanie w postaci napis->napis. Wymusza to aby każde dane które chcemy przechować muszą być ciągiem znaków. Przykład \ref{lis:storage} przedstawia w jaki sposób możemy obiekt zawierający imię i nazwisko zapisać w pamięci. Linia 4 przedstawia obiekt w postaci której chcielibyśmy go przechować. Niestety zwykłe przypisanie do zmiennej w pamięci powoduje że jedynie typ instancji zostaje zapisany. Aby móc zapisać w poprawnej formie dane musimy doknać serializacji danych. Czynność tą możemy wykonać przy pomocy metody stringify z obiektu JSON, wynikiem jest ciąg znaków który możemy bez problemu zapisać w pamięci sesyjnej. Do odzyskania pierwotnego obiektu, odtworzenia go z zapisanego napisu wykorzystujemy metodę parse również z obiektu JSON.
 
-
-Dodatkowo nie można pominąć faktu istnienia dwóch rodzaii tej pamięci.
+Dodatkowo nie można pominąć faktu istnienia dwóch typów.
 \begin{itemize}
 
 \item
@@ -58,10 +108,7 @@ Teoretycznie dane są przechowywane w nieskończoność, do momentu kiedy użytk
 
 \end{itemize}
 
-Powodem który wymaga wykorzystania tego typu pamięci jest możliwość przechwowywania danych nad którymi użytkonwik pracuje w aktualnym czasie. Nie potrzebuje on informacji które były dla niego istotne podczas poprzedniej wizyty,sesji. Sytuacja ta jednoznacznie wskazuje że lepszym wyborem jest wybór pamięci sesyjnej(Session Storage).
-
-
-Wadą tej pamięci jest jej interfejs. Obecnie przechowywany sposób danych to mapowanie w postaci napis->napis. Wymusza to aby każde dane które chcemy przechować muszą być w formie ciągu znaków. Przykład \ref{lis:storage} przedstawia w jaki sposób możemy obiekt zawierający imię i nazwisko zapisać w pamięci. Linia 4 przedstawia obiekt w postaci której chcielibyśmy go przechować. Niestety zwykłe przypisanie do zmiennej w pamięci powoduje że jedynie typ instancji zostaje zapisany. Aby móc zapisać w poprawnej formie dane musimy doknać serializacji danych. Czynność tą możemy wykonać przy pomocy metody stringify z obiektu JSON, wynikiem jest ciąg znaków który możemy bez problemu zapisać w pamięci sesyjnej. Do odzyskania pierwotnego obiektu, odtworzenia go z zapisanego napisu wykorzystujemy metodę parse również z obiektu JSON.
+Zapisywanie informacji po stronie klienta ma na celu zachowanie aktualnego stanu mapy, dokonanych zmian i naniesionych poprawek, informacje o poprzednich są zbędne. Sytuacja ta jednoznacznie wskazuje że lepszym wyborem jest pamięć sesyjna(Session Storage).
 
 \lstset{language=JavaScript}
 \label{lis:storage}
@@ -82,9 +129,20 @@ Wadą tej pamięci jest jej interfejs. Obecnie przechowywany sposób danych to m
 \end{lstlisting}
 
 
+Podsumowanie dostępne na stornie \underline{\texttt{http://www.html5rocks.com/en/features/storage}}(dostęp 31.10.2013) pozwala na sprawdzenie minimalnej wersji przęglądarki od któej wspierane jest to rozwiązanie. Wskazuje ono na największą dostępność spośród ponadych sposobów przechowywania informacji po stornie klienta. 
 
-Wsparcie dla pamięci Storage nie jest obecne zazwyczaj w nowszych wersach przeglądarek. Na stronie \underline{\texttt{http://www.html5rocks.com/en/features/storage}} możemy sprawdzić aktualny stan większości przęglądarek.
+\subsection{Transmisja danych}
+\label{subsec:transmisjaDanych}
 
+Ważnym aspektem który należy rozwiązać jest sposób przesyłania danych. Problem ten jest szczególnie istotny w omawianej pracy z uwagi na możliwość przesyłania dużej ilości informacji o granicach lub innych liniach przezentowanych na mapie. Do opisu kwadratowego obszaru wymagane jest przesłanie informacji o minimum 4 punktach. Jeżeli będziemy chcieli przekazać dokłądniejszy zarys obszaru, zaprezentować granicę państwa lub linię frotnu wojennego linia prosta w większości przypadków będzie zbyt ogólnym przybliżeniem, nie oddającym prawdziwej sytuacji.
+
+Projekt zakłada korzystanie z lokalnej pamięci komputera użytkownika podczas pracy, jednak dostarczenie informacji, danych wejściowych nie powinno być ograniczone do wczytania ich z pliku tekstowego, należy pamiętać o możliwości przesłania ich z serwera aplikacji do użytkownika. W sytuacji takiej, gdzie w jednym momencie przesłane zostaja wszystkie informacje na któch będzie zachodzia praca, ilość informacji może być znaczna.
+
+Z raportu Akamai wynika że śrenia przepływność łączy internetowych dla użytkowników korzystających z puli adresów IP przeznaczonych dla Polski w I kwartale 2012 r. wynosiła 5Mb/s  \underline{\texttt{http://www.rp.pl/artykul/924483.html}} (dostęp 13.04.2014). Jest to bardzo dobry wynik który plasuje Polskę w czołówce rankingu. Pomimo tego nie można pominąć faktu optymalizacji zapytać i danych przesyłanych, wymieniane dane pomiędzy użytkownikiem a serwerem powinny być jak najmniejsze. Duża popularność urządzeń mobilnych w których dostęp do internetu jest zapewniany często poprzez sieć bezprzewodową a dostęp do interentu nie jest jeszcze tak dogodny jak jest to w przypadku użytkowników stacjonarnych  wymusza optymalizację.
+
+Kolejnym powodem dla którego odpowiedzi serwera powinny być jak najlżesze jest koszt pracy samego serwera. Jest to szczególnie widoczne w dużych aplikacjach mających wiele urzytkowników, czas jaki jest przeznaczany dla pojedyńczego użytkownika jest mnożony przez ich ilość. Z tego powodu zawsze podczas zwiększania ilości użtkowników korzystających z aplikacji następuje czas w którym należy zacząć korzystać z dodatkowego serwera. Celem programisty tworzącego kod który będzie wykorzystywał zasoby serwera(zarówno czas jak i pamięć) jest dbanie aby moment w którym niezbędne będzie korzystanie z większej ilośći maszym nastąpił przy jak największej ilości użytkowników.
+
+Z uwagi na omówione aspekty zdecydowano się aby w przypadku korzystania z bazy danych przesyłane dane dotyczyły mapy w określonym okresie czasu. Pozwoli to na transmisję danych któe mogą być interesujące dla uzytkownika unikając przysyłania informacji dla nie istotnego okresu czasu. Dodatkowo nie będą one podlegały analizie i dodatkowemu przetwarzaniu po stronie serwera, któego zadaniem będzie jedynie przesłanie ich z bazy danych do użytkownika.
 
 \subsection{Relacyjne bazy danych}
 \label{sec:relacyjne}
@@ -114,7 +172,7 @@ pointId: "234"
 method: "update"
 showFrom: "1"
 showTo: "8"
-title: "Lepszy tytuł"
+title: "Nowy tytuł"
 xCord: "50.0645223187"
 
 \end{lstlisting}
