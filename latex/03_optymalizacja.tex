@@ -38,3 +38,29 @@ Dokładne informacje dotyczące zawartości plików zamieszczono w tabeli \ref{t
     \caption{Czas dostępu [ms]}
     \label{tab:speedTest}
 \end{table}
+
+\subsection{Reprezentacja graficzna}
+\label{subsec:showing}
+
+W celu optymalizacji działania aplikacji zastosowano kilka rozwiązań mających na celu przyścieszenie działania. Dotyczą one sposobu w jaki aplikacja renderuje graficzna częśc projektu.
+
+
+\begin{description}
+\item[Stopniowa generacja obiektów]\hfill \\
+Nie wszystkie obiekty dotyczące mapy są renderowane podczas jej inicjalizacji. Wstępna konfiguracja pozwala na stworzenie mapy z osią czasu nie pokazującą całego przedziału czasowego do któego odwołują się informacje wejściowe, możliwe jest ustawienie aby na ekranie pojawiły się informacje dotyczące wydarzeń z jednoego dnia podczas gdy dane mogą zawierać informacje z okresu kilku lat. Stworzony algorytm można przedstwić w najstępujących krokach.
+
+\begin{enumerate}
+\item
+Renderowanie jedynie elementów widocznych na ekranie (mających miejsce w widocznym okresie czasu).
+
+\item
+Renderowanie dodatkowych elementów zawierających się w otoczeniu wynoszącym 10\% aktualnego okresu a następnie ukrycie ich. Takie rozwiązanie pozwala, w większości przypadków, na rederowanie nawet dużych i skomplikowanych obiektów bez wpływu na działanie użytkownika(posiada on dane wygenerowane w pkt. 1 i nie oczekuje na wygenerowanie kolejnych).
+
+\item
+Podczas przesunięcia lini czasu w pierwszym momencie elementom w najbliższym sąsiedztwie ustawiana jest flaga widoczności, jeśli zmiana okresu była niewielka akcja ta jest wystarczająca aby pokazać wszystkie wyamgane elementy, w przeciwnym przypadku nastepuje generacja brakujacych. W obu przypadkach po zakończniu powtarzay jest pkt 2. Obiekty które nie powinny być widoczne nie są niszczone jedynie chowane.
+
+\end{enumerate}
+
+\item[różne poziomy]\hfill \\
+
+\end{description}
