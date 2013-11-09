@@ -29,7 +29,7 @@ Dane dostarczane przez zewnętrzny serwer powinny być wiarygodne. Użytkonwik p
 \item
 Optymalizacja rozwiązania
 
-test
+Aplikacja musi w każdym momencie zapewniać płynną pracę.
 
 \end{itemize}
 
@@ -57,7 +57,7 @@ Użytkownik z najmniejszymy uprawnieniami, jedynie do przeglądania mapy.
 System umożliwia moderatorowi:
 \begin{itemize}
 \item
-Tworzenie i edycję zestawów danych przechowywanych w bazie danych 
+Tworzenie i edycję zestawów danych przechowywanych w bazie danych
 
 \end{itemize}
 
@@ -121,7 +121,7 @@ parsowanie danych z formatu xml to pamięci storage
 Tworzenie interaktywnych filtów
 \begin{itemize}
 \item
-filtry obsługjące zminę czasu 
+filtry obsługjące zminę czasu
 
 \item
 filtry obsługujące zmianę mapy
@@ -146,24 +146,41 @@ filtry obsługujące zmianę mapy
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|l|l|}
+    \begin{tabular}{|l<{\raggedright}|p{3in}|}
     \hline
-    Nazwa przypadku użycia & fggg  \\ \hline
-    Typ przypadku użycia  & Ogólny  \\ \hline
-    Aktorzy   & ~     \\ \hline
-    Warunki wstępne   & ~     \\ \hline
-    Warunku końcowe dla sukcesu   & ~     \\ \hline
-    Warunki końcowe dla niepowodzenia   & ~     \\ \hline
-    Scenariusz główny   & ~     \\ \hline
-    Scenariusz alternatywny   & ~     \\ \hline
+    Nazwa przypadku uzycia & Wczytanie danych z pliku  \\ \hline
+    Typ przypadku uzycia  & Ogólny  \\ \hline
+    Aktorzy   & Uczen    \\ \hline
+    Warunki wstepne   & Brak     \\ \hline
+    Warunku koncowe dla sukcesu   & Dane zostaja zapisane w pamieci lokalnej przegladarki    \\ \hline
+    Warunki koncowe dla niepowodzenia   & Dane nie sa poprawnie odczytane.     \\ \hline
+    Scenariusz glówny   &
+
+    \begin{enumerate}
+    \itemsep0em
+        \item Uzytkownik wybiera plik.
+        \item Dane podlegaja parsowaniu.
+        \item Poprawnie odczytane dane zostaja zapisane w Storage.
+    \end{enumerate}
+     \\ \hline
+    Scenariusz alternatywny   &
+
+    \begin{enumerate}
+    \itemsep0em
+        \item Uzytkownik wybiera plik.
+        \item Dane podlegaja parsowaniu.
+        \item Dane nie zostaja odczytane poprawnie.
+        \item Uzytkownik zostaje poinformowany o zainstnialym bledzie.
+    \end{enumerate}
+         \\ \hline
     \end{tabular}
-    \caption{Przypadek ...}
+    \caption{Przypadek wczytania danych}
     \label{tab:caseuse1}
 \end{table}
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|l|l|}
+    \begin{tabular}{|l<{\raggedright}|p{3in}|}
     \hline
     Nazwa przypadku użycia & fggg  \\ \hline
     Typ przypadku użycia  & Ogólny  \\ \hline
@@ -171,8 +188,25 @@ filtry obsługujące zmianę mapy
     Warunki wstępne   & ~     \\ \hline
     Warunku końcowe dla sukcesu   & ~     \\ \hline
     Warunki końcowe dla niepowodzenia   & ~     \\ \hline
-    Scenariusz główny   & ~     \\ \hline
-    Scenariusz alternatywny   & ~     \\ \hline
+   Scenariusz glówny   &
+
+    \begin{enumerate}
+    \itemsep0em
+        \item Uzytkownik wybiera plik.
+        \item Dane podlegaja parsowaniu.
+        \item Poprawnie odczytane dane zostaja zapisane w Storage.
+    \end{enumerate}
+     \\ \hline
+    Scenariusz alternatywny   &
+
+    \begin{enumerate}
+    \itemsep0em
+        \item Uzytkownik wybiera plik.
+        \item Dane podlegaja parsowaniu.
+        \item Dane nie zostaja odczytane poprawnie.
+        \item Uzytkownik zostaje poinformowany o zainstnialym bledzie.
+    \end{enumerate}
+         \\ \hline
     \end{tabular}
     \caption{Przypadek 2...}
     \label{tab:caseuse2}
@@ -180,7 +214,7 @@ filtry obsługujące zmianę mapy
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|l|l|}
+    \begin{tabular}{|l<{\raggedright}|p{3in}|}
     \hline
     Nazwa przypadku użycia & fggg  \\ \hline
     Typ przypadku użycia  & Ogólny  \\ \hline
@@ -188,8 +222,25 @@ filtry obsługujące zmianę mapy
     Warunki wstępne   & ~     \\ \hline
     Warunku końcowe dla sukcesu   & ~     \\ \hline
     Warunki końcowe dla niepowodzenia   & ~     \\ \hline
-    Scenariusz główny   & ~     \\ \hline
-    Scenariusz alternatywny   & ~     \\ \hline
+   Scenariusz glówny   &
+
+    \begin{enumerate}
+    \itemsep0em
+        \item Uzytkownik wybiera plik.
+        \item Dane podlegaja parsowaniu.
+        \item Poprawnie odczytane dane zostaja zapisane w Storage.
+    \end{enumerate}
+     \\ \hline
+    Scenariusz alternatywny   &
+
+    \begin{enumerate}
+    \itemsep0em
+        \item Uzytkownik wybiera plik.
+        \item Dane podlegaja parsowaniu.
+        \item Dane nie zostaja odczytane poprawnie.
+        \item Uzytkownik zostaje poinformowany o zainstnialym bledzie.
+    \end{enumerate}
+         \\ \hline
     \end{tabular}
     \caption{Przypadek 2...}
     \label{tab:caseuse2}
@@ -202,10 +253,10 @@ Oprócz wymagań dotyczących prawidłowego funkcjonowania aplikacji, wymagane j
 aby zapewnione były poniższe punkty.
 
 \begin{itemize}
-\item 
+\item
 The first item
 
-\item 
+\item
 System powinien być skalowalny, powinien umożliwiać dostęp wielu użytkownikom równocześnie przy zachowaniu wymagań wydajnościowych.
 
 \item
