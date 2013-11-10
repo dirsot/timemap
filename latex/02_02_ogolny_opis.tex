@@ -14,12 +14,12 @@ Celem projektu jest stworzenie aplikacji internetowej dodającej do tradycyjnych
 \item
 Przechowywanie i transmisja danych
 
-test
+Nie jest określony jeden format danych który będzie używany w aplikacji. Oprócz informacji opisujących położenie punktów zawarte również będą szczegółowe dane dotyczące ich wyglądu i zachowania, również obrazy graficzne mogą się znajdować w opisie mapy.
 
 \item
 Wizualizacja
 
-Szeroki zakres informacji który może opisywać mapę musi być odpowiednio wyświetlany, w sposób czytelny i ułatwiający analizę dużych zbiorów danych.
+Szeroki zakres informacji który może opisywać mapę musi być odpowiednio wyświetlany, w sposób czytelny i ułatwiający analizę dużych zbiorów danych. W jednym miejscu zostaną zebrane różnego rodzaju dane które muszą współpracować ze sobą tworząc spójną kompozycję.
 
 \item
 Bezpieczeństwo
@@ -29,7 +29,7 @@ Dane dostarczane przez zewnętrzny serwer powinny być wiarygodne. Użytkonwik p
 \item
 Optymalizacja rozwiązania
 
-Aplikacja musi w każdym momencie zapewniać płynną pracę.
+Aplikacja musi w każdym momencie zapewniać płynną pracę. Praca  ze szczegółową mapą posiadającą wiele informacji musi przebiegać płynnie, bez dużych opóźnień.
 
 \end{itemize}
 
@@ -57,7 +57,13 @@ Użytkownik z najmniejszymy uprawnieniami, jedynie do przeglądania mapy.
 System umożliwia moderatorowi:
 \begin{itemize}
 \item
-Tworzenie i edycję zestawów danych przechowywanych w bazie danych
+Tworzenie i edycję zestawów danych przechowywanych na serwerze
+
+\item 
+Tworzenie własnych filtrów edytujących mapę w zależności od jej położenia lub czasu
+
+\item
+Zapis informacji o mapie do pliku na dysku lokalnym
 
 \end{itemize}
 
@@ -68,6 +74,10 @@ Przeglądanie gotowych map
 
 \item
 Pracę bez konieczności stałego dostępu do internetu.
+
+\item
+Sprawdzanie autentyczności pliku przy pomocy obliczania sumy kontrolnej
+
 \end{itemize}
 
 System nie umożliwia:
@@ -83,13 +93,10 @@ Wykorzystywania plików video
 Praca z mapami w trybie offline
 \begin{itemize}
 \item
-wczytywanie plików
+Wczytywanie pliku - dane używane w aplikacji mogą zostać wczytane z dwóch źródeł. Z lokalnego dysku lub zaimportowane z serwera.
 
 \item
-przechywanie danych po stornie klienta
-
-\item
-
+Przechywanie danych po stornie klienta 
 
 \end{itemize}
 
@@ -99,50 +106,55 @@ Szeroki wachlarz dostęnych sposobów wizualizacji danych
 Korzystanie z grafiki wektorowej
 
 \item
-współpraca z plikami graficznymi
+Współpraca z plikami graficznymi
 
 \item
-obśługa animacji poprzez svg
-
-\item
-aproksymacja danych
+Obsługa animacji poprzez svg
 
 \end{itemize}
 
 Współpraca z zewętrznymi aplikacjami
 \begin{itemize}
 \item
-obłsuga plików xklllll
+Obłsuga plików GML
 
 \item
-parsowanie danych z formatu xml to pamięci storage
+Parsowanie danych z formatu xml to pamięci storage
+
 \end{itemize}
 
 Tworzenie interaktywnych filtów
 \begin{itemize}
 \item
-filtry obsługjące zminę czasu
+Filtry obsługjące zminę czasu
 
 \item
-filtry obsługujące zmianę mapy
+Filtry obsługujące zmianę mapy
 
 \end{itemize}
+
+test
 
 \section{Specyfikacja wymagań}
 \label{sec:specyfikacja wymagan}
 
 \subsection{Ogólny diagram przypadków użycia}
-
 \label{sec:diagramcaseuse}
+
+
+\begin{center}
 \begin{figure}[H]
-  \centering
-    \includegraphics[width=\textwidth]{ge/caseuse.jpg}
-  \caption{Case use.}
-  \label{fig:caseuse}
+\centering
+     \includegraphics[origin=c,width=130mm]{ge/caseuse.jpg}
+      \caption{Case use.}
+       \label{fig:caseuse}
 \end{figure}
+\end{center}
 
 \subsection{Definicje przypadków użycia}
 \label{sec:defCaseuse}
+
+Poniżej znajduje się opis trzech podstawowych przypadków użycia występujących w aplikacji. Opisane zostały warunki rozpoczęcia każdego z nich i ich zakończenia, zarówno pozytywnego jak i negatywnego.
 
 \begin{table}[H]
     \centering
@@ -150,7 +162,7 @@ filtry obsługujące zmianę mapy
     \hline
     Nazwa przypadku uzycia & Wczytanie danych z pliku  \\ \hline
     Typ przypadku uzycia  & Ogólny  \\ \hline
-    Aktorzy   & Uczen    \\ \hline
+    Aktorzy   & Uczeń    \\ \hline
     Warunki wstepne   & Brak     \\ \hline
     Warunku koncowe dla sukcesu   & Dane zostaja zapisane w pamieci lokalnej przegladarki    \\ \hline
     Warunki koncowe dla niepowodzenia   & Dane nie sa poprawnie odczytane.     \\ \hline
@@ -182,33 +194,32 @@ filtry obsługujące zmianę mapy
     \centering
     \begin{tabular}{|l<{\raggedright}|p{3in}|}
     \hline
-    Nazwa przypadku użycia & fggg  \\ \hline
+    Nazwa przypadku użycia & Wyświetlenie danych \\ \hline
     Typ przypadku użycia  & Ogólny  \\ \hline
-    Aktorzy   & ~     \\ \hline
-    Warunki wstępne   & ~     \\ \hline
-    Warunku końcowe dla sukcesu   & ~     \\ \hline
-    Warunki końcowe dla niepowodzenia   & ~     \\ \hline
+    Aktorzy   & Uczeń     \\ \hline
+    Warunki wstępne   & Dane znajdują się w pamięci lokalnej     \\ \hline
+    Warunku końcowe dla sukcesu   & Dane zostają wyświetlone     \\ \hline
+    Warunki końcowe dla niepowodzenia   & Mapa nie jest aktualizowana     \\ \hline
    Scenariusz glówny   &
 
     \begin{enumerate}
     \itemsep0em
-        \item Uzytkownik wybiera plik.
-        \item Dane podlegaja parsowaniu.
-        \item Poprawnie odczytane dane zostaja zapisane w Storage.
+        \item Uzytkownik wybiera punkt w czasie.
+        \item Dane dla wybranego okresu zostają wyrenderowane i pokazane.
+        \item Informacje dla najbliższego otoczenia podlegają generacji i ukryciu.
     \end{enumerate}
      \\ \hline
     Scenariusz alternatywny   &
 
     \begin{enumerate}
     \itemsep0em
-        \item Uzytkownik wybiera plik.
-        \item Dane podlegaja parsowaniu.
-        \item Dane nie zostaja odczytane poprawnie.
-        \item Uzytkownik zostaje poinformowany o zainstnialym bledzie.
+        \item Uzytkownik wybiera punkt w czasie.
+        \item Dane dla wybranego okresu nie zostają odnalezione
+        \item Nie aktualne dane zostają schowane.
     \end{enumerate}
          \\ \hline
     \end{tabular}
-    \caption{Przypadek 2...}
+    \caption{Przypadek wyświetlenia danych}
     \label{tab:caseuse2}
 \end{table}
 
@@ -216,29 +227,30 @@ filtry obsługujące zmianę mapy
     \centering
     \begin{tabular}{|l<{\raggedright}|p{3in}|}
     \hline
-    Nazwa przypadku użycia & fggg  \\ \hline
+    Nazwa przypadku użycia & Walidacja autentyczności pliku  \\ \hline
     Typ przypadku użycia  & Ogólny  \\ \hline
-    Aktorzy   & ~     \\ \hline
-    Warunki wstępne   & ~     \\ \hline
-    Warunku końcowe dla sukcesu   & ~     \\ \hline
-    Warunki końcowe dla niepowodzenia   & ~     \\ \hline
+    Aktorzy   & Uczeń    \\ \hline
+    Warunki wstępne   & Uczeń posiada plik na dysku i jego sumę kontrolną z serwera    \\ \hline
+    Warunku końcowe dla sukcesu   & Pojawienie się komunikatu o autentyczności pliku    \\ \hline
+    Warunki końcowe dla niepowodzenia   & Ostrzeżenie o dokonaniu zmian w pliku     \\ \hline
    Scenariusz glówny   &
 
     \begin{enumerate}
     \itemsep0em
-        \item Uzytkownik wybiera plik.
-        \item Dane podlegaja parsowaniu.
-        \item Poprawnie odczytane dane zostaja zapisane w Storage.
+        \item Uzytkownik wybiera zakładkę do walidacji pliku.
+        \item Podanie ścieszki do pliku i sumy kontolnej.
+        \item Obliczenie aktualnej sumy dla pliku i porównanie go z podanym.
+        \item Uzytkownik zostaje poinformowany o poprawności pliku.
     \end{enumerate}
      \\ \hline
     Scenariusz alternatywny   &
 
     \begin{enumerate}
     \itemsep0em
-        \item Uzytkownik wybiera plik.
-        \item Dane podlegaja parsowaniu.
-        \item Dane nie zostaja odczytane poprawnie.
-        \item Uzytkownik zostaje poinformowany o zainstnialym bledzie.
+        \item Uzytkownik wybiera zakładkę do walidacji pliku.
+        \item Podanie ścieszki do pliku i sumy kontolnej.
+        \item Obliczenie aktualnej sumy dla pliku i porównanie go z podanym.
+        \item Uzytkownik zostaje poinformowany o zmianach w pliku.
     \end{enumerate}
          \\ \hline
     \end{tabular}

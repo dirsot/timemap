@@ -1,3 +1,5 @@
+\clearpage
+\newpage
 \section{Przechowywanie i transmisja danych}
 \label{sec:przesyl}
 
@@ -70,7 +72,7 @@ GML(Geography Markup Language) - stworzony przez OGC(Open Geospatial Consortium)
 
 \end{itemize}
 
-Dwa polskie formaty są stosunkowo mało popularne, są one głównie wykorzystywane w celu kompunikacji pomiędzy rządowymi bazami danych. Zawierają one bardzo określone typy danych co sprawia że są mało przydatne dla omawianego projetku. KML jest foramtem który posiada szeroki wachlarz dostępnych znaczników a jego duża popularność dostarcza dużą bazę plików gotowych do wykorzystania. Niestety został on stworzony by współpracować z określonym programem, zaimplementowane zostały jedynie elementy które mogą zostać wykorzystane w nim. Ostani przykład został stworzony w uniwersalnym celu do ogólnego użytku, posiada on bardzo dużo możliwości, apadtacji do konkretnych rozwiązań\cite{gml}, z uwagi na ten fakt zdecydowano się na wybór tego rozwiąznia. Nie zostaną wykorzystane jego pełne możliwości, jedynie te które są przydatne w projektowanej aplikacji.  
+Dwa polskie formaty są stosunkowo mało popularne, są one głównie wykorzystywane w celu kompunikacji pomiędzy rządowymi bazami danych. Zawierają one bardzo określone typy danych co sprawia że są mało przydatne dla omawianego projetku. KML jest foramtem który posiada szeroki wachlarz dostępnych znaczników a jego duża popularność dostarcza dużą bazę plików gotowych do wykorzystania. Niestety został on stworzony by współpracować z określonym programem, zaimplementowane zostały jedynie elementy które mogą zostać wykorzystane w nim. Ostani przykład został stworzony w uniwersalnym celu do ogólnego użytku, posiada on bardzo dużo możliwości, apadtacji do konkretnych rozwiązań\cite{gml}, z uwagi na ten fakt zdecydowano się na wybór tego rozwiąznia. Nie zostaną wykorzystane jego pełne możliwości, jedynie te które są przydatne w projektowanej aplikacji.
 
 
 \subsection{Parser plików}
@@ -129,7 +131,7 @@ Zapisywanie informacji po stronie klienta ma na celu zachowanie aktualnego stanu
 \end{lstlisting}
 
 
-Podsumowanie dostępne na stornie \underline{\texttt{http://www.html5rocks.com/en/features/storage}}(dostęp 31.10.2013) pozwala na sprawdzenie minimalnej wersji przęglądarki od któej wspierane jest to rozwiązanie. Wskazuje ono na największą dostępność spośród ponadych sposobów przechowywania informacji po stornie klienta. 
+Podsumowanie dostępne na stornie \underline{\texttt{http://www.html5rocks.com/en/features/storage}}(dostęp 31.10.2013) pozwala na sprawdzenie minimalnej wersji przęglądarki od któej wspierane jest to rozwiązanie. Wskazuje ono na największą dostępność spośród ponadych sposobów przechowywania informacji po stornie klienta.
 
 \subsection{Transmisja danych}
 \label{subsec:transmisjaDanych}
@@ -142,40 +144,6 @@ Z raportu Akamai wynika że śrenia przepływność łączy internetowych dla u�
 
 Kolejnym powodem dla którego odpowiedzi serwera powinny być jak najlżesze jest koszt pracy samego serwera. Jest to szczególnie widoczne w dużych aplikacjach mających wiele urzytkowników, czas jaki jest przeznaczany dla pojedyńczego użytkownika jest mnożony przez ich ilość. Z tego powodu zawsze podczas zwiększania ilości użtkowników korzystających z aplikacji następuje czas w którym należy zacząć korzystać z dodatkowego serwera. Celem programisty tworzącego kod który będzie wykorzystywał zasoby serwera(zarówno czas jak i pamięć) jest dbanie aby moment w którym niezbędne będzie korzystanie z większej ilośći maszym nastąpił przy jak największej ilości użytkowników.
 
-Z uwagi na omówione aspekty zdecydowano się aby w przypadku korzystania z bazy danych przesyłane dane dotyczyły mapy w określonym okresie czasu. Pozwoli to na transmisję danych któe mogą być interesujące dla uzytkownika unikając przysyłania informacji dla nie istotnego okresu czasu. Dodatkowo nie będą one podlegały analizie i dodatkowemu przetwarzaniu po stronie serwera, któego zadaniem będzie jedynie przesłanie ich z bazy danych do użytkownika.
+Z uwagi na omówione aspekty zdecydowano się aby w przypadku korzystania z danych nie znajdujacych się na lokalnym dysku komputera wszystkie infromacje dotyczące mapy zostały przesłane jako plik w okreśłonym formacjie. Zostałby on zapisany w pamięci komputera użytkownika i podlegał dalszej pracy. Takie podejście minimalizuje wymagania nakładane na serwer i czas zajęcia procesowa.  
 
-\subsection{Relacyjne bazy danych}
-\label{sec:relacyjne}
-
-Początkowo zakładano wykorzystanie relacyjnej bazy danych do przechowywania danych.
-Zdecydowaną się na MySqL(z uwagi na jej powrzechne wykorzystanie i brak opłat licencyjnych),jedną z table wypełniono testowymi danymi w ilości 1 miliona rekordów o strukturze zbioru punktów o określonym czasie trwania zawierała kolumny takie jak data początkowa i końcowa występowania, dwie współrzędne. W celach optymalizacyjnych koszt zapytań zastosowano indeks na pola po któych wykonywane będzię wyszukiwanie danych.
-Stworzona została prosta aplikacja napisana w języku Python przy pomocy frameworka Django v.2.1, miałą ona na celu wysłanie wysłanie zapytania o konkretne punkty które zawierały się w okreśłonym przedziale czasie(ich czas trwania zawierał się w szukanym zakresie) a następnie otrzymane punkty rysowała na ekranie. Na tak przygotowanym środowisku przeprowadzono testy sprawdzające czas potrzebny na pobranie i wyświetleie danych.
-
-Zadowalające wyniki otrzymywano gdy ilość elementów nie przekraczała 10 tysięcy punktów. Gdy zwiększono szukany zakres dat, tym samym zwiększono ilość punktów do wyświetlenia czas potrzebny do wyświetlenia danych wynosił ponad jedną sekundę. Z uwagi na dużą ilość danych które towarzyszą informacjom mapowym(docelowa baza będzie zawierała więcej danych a ilość jednorazowo wyciąganych informacji może być większa) zdecydowano się nie kontynuować prób z wykorzystaniem tego typu baz danych.
-
-\subsection{NoSQL}
-\label{sec:nosql}
-
-W celu pernamentnego przechowywania i rozpowszechniania danych pomiędzy różnymi użytkownikami postanowiono wykorzystać nierelacyjną bazę danych jaką jest MongoDB. Posiada ona interfejsc służący do komunikacji z JavaScript-em, możliwe jest wykonywanie skryptów które bezpośrednio połączą się i uzyskają dane\cite{mongojs}. W omawianym projekcie nie jest to możliwe, nawet przy użyciu zapytań Ajax-owych nie będzie możliwe zapewnienie bezpieczeństwa danym pozwalającym na połączenie a w efekcjie edycję danych bezpośrednio w bazie danych.
-Postanowiono aby aplikacji która będzie korzystała z tworzonego frawerork-a dostarczała metod zapewniających dostęp do bazy danych. Zachowanie takie spełnia założenia projektu, infromacje i wszelkie zmiany dokonane na nich są przechowywane w lokalnej pamięci z możliwością eksportu ich do pliku tekstowego bez konieczności ingerencji w aplikację nadrzęczną. W przypadku chęci posiadania błyskawicznej możliwości dzielenia się informacjami i dokonywanymi zmianami należy zapewnić interfejs do tego celu. Przykładową implementację takiego rozwiązania stworzono w języku PHP. Powstała strona która korzystała z opracowanego framework-u, dla celów komunikacji z bazą danych udostępniała adres ./resources/mongodb który na zapytanie przesłane w metodzie POST wykonywała zwracała dane dla podanych warunków. Adres ten dla odpowiednich danych potrafił dokonać zmian(edytować lub usunąć dane).
-Ponieżej zaprezntowano listening prezentujący minimalne obiekty które nalezy wysłać na przygotowany adres aby wykonać odpowiednie akcje. Pierwszy ma za zadanie wykonać akcję select pobierający wszystkie dane należące do mapy od numerze "123" które zaszły w podanym zakresie czasu. Drugi obiekt odnosi się do akcji aktualizacji danych, zmienia położenia punktu o id równym 234,jego tytuł a także poziomy na których będzie on widoczny, funkcjonalnośc ta została opisana w sekcji  \ref{sec:wizualizacja}.
-
-\lstset{language=JavaScript}
-\begin{lstlisting}[caption=caption2]
-Object {method: "select", mapId: "123", fromDate: "2013-01-01 12:30", toDate: "2013-01-31"}
-
-
-Object{}
-YCord: "19.9232769"
-mapId: "123"
-pointId: "234"
-method: "update"
-showFrom: "1"
-showTo: "8"
-title: "Nowy tytuł"
-xCord: "50.0645223187"
-
-\end{lstlisting}
-
-
-
+\newpage

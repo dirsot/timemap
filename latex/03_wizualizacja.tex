@@ -1,5 +1,5 @@
-DOM
-
+\clearpage
+\newpage
 \section{Wizualizacja}
 \label{sec:wizualizacja}
 
@@ -195,8 +195,45 @@ Pakiet google.maps zawiera kilka klas których zadaniem jest generowanie adekwat
 Intuicyjna i szybka edycja danych jest zapewniona poprzez udostępnianie klasy "DrawingManager". Tworzy ona dodatkowy element na ekranie użytkownika służący do pracy z wartwami znajdujacymi się na ekranie. Komponent ten wymaga jedynie wybrania odpowiedniego elementu a następnie wyznaczenie wymaganych informacji,zazwyczaj są to jeden lub dwa punkty niezbędne do stworzenia elementu. Pozostałe właściwości mogą być edytowane w dalszym etapie prac według wymagać.
 
 
-\subsubsection{Oś czasu}
-\label{subsubsec:os}
+\subsection{Przybliżanie danych}
+\label{subsec:aproksymacja}
+
+Do wyznaczenia zamkniętego obszaru należy podać wszyskie punkty określające jego granice. Używając komputerów możliwy jest jedynie dyskretny zapis danych, oznacza to że tylko niektóre punkty zostają określone a odcinki pomiędzy nimi musi zostać zastąpiony danymi wygenerowanymi. Najprostrzą metodą jest połączenie poszczególnych punktów liniami prostymi otrzymując proste kształty geometryczne, przy jej pomocy posiadając 3 punkty na płaszczyźnie możliwe jest otrzymanie trójkąta. Rozwiązanie takie jest wystarczające przy tworzeniu prostych figur, posiadających małą ilość wirzchołków. Przy tworzeniu bardziej skomplikowanych staje się ono niepraktyczne, określenie setek punktów dla nieregularnego obszaru byłoby czasochłonne przez co stałoby się nieefektywne. Rozwiązaniem tego problemu jest oszcowanie danych, określenie rozwiązania przybliżonego na podstawie znanych danych.
+
+
+
+Można rozróżnić dwa rodzaje wyznaczanie wyniku quasi-otpymalnego:
+
+\begin{description}
+\item[Aproksymacja] \hfill \\
+    Wygenerowany wynik jest przybliżeniem punktów wyjściowych, stworzona linia nie  musi przechodzić prze przez nie.
+
+\item[Interpolacja] \hfill \\
+    Wygenerowana funkcja iterpolacyjna przez wszystkie punkty określony w zbiorze wejściowym, jest jego dokładnym otworzeniem.Z tego powodu nadaje się lepiej do omawianegego celu.
+    
+\end{description}
+
+
+Najprostrzym rodzajem jest interpolacja funkcji sklejonych stopnia pierwszego. Określa ona zbiór prostych odcinków łączących pary poszczególnych punktów. To dzięki niej przy użyciu 3 punktów możliwe jest stwrozenie trójkąta.
+
+Interpolacja wielomianowa  polega na  określeniu jednej funkcji przechodzącej przez pożądane punkty posiadającej okeślone paramety. Złożoność tego zadania wzrasta drastycznie wraz z rozmiarem zbioru wejściowego z tego powodu nie została ona używa w omawianym przypadku.
+
+Jednym z rozwiązań powyższego problemu jest skorzystanie z krzywej Beziera. Rysunek \ref{fig:bezier} przedstawia prosty przykład pokazujący niezbędne informacje do jej stworzenia dla zbioru dwu-elementowego. Dodane zostały dwa punkty kontrolne, mają one za zadanie określić zachowanie ścieszki.
+
+Jego wzór dla podanego przykładu to:
+\begin{eqnarray}
+P(t) &= A (1-t)^{3} + 3 B t(1-t)^{2} + 3 C t^{2} (1-t) + D t^{3} \; \textrm{ dla } \; 0 \geq t \geq 1\;  
+\end{eqnarray}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=100mm]{ge/bezier.png}
+  \caption{Krzywa Beziera}
+  \label{fig:bezier}
+\end{figure}
+
+\subsection{Oś czasu}
+\label{subsec:os}
 
 Tematem pracy oprócz wykorzystania i prezentacji danych na bazie informacji geograficznych jest ich połączenie z osią czasu, która pozwoliłaby na zmianę prezentowanych danych ze względu na interesujący nas okres czasu.
 
@@ -242,8 +279,8 @@ Dla porównania \ref{fig:tm2} prezentuje o wiele prostszą konfigurację w któr
   \label{fig:tm2}
 \end{figure}
 
-\subsubsection{Aktualizacja struktury DOM}
-\label{subsubsec:dom}
+\subsection{Aktualizacja struktury DOM}
+\label{subsec:dom}
 
 Wszystkie elementy znajdujące się na stronie internetowej tworzą struktutę drzewa DOM(en.Document Object Model). Określa ono wzajemne położenie poszczególnych elementów, przy wykorzystaniu JavaScript-u możliwe jest akutalizowanie poszczególnych fragmentów strony bez konieczności renderowania wszystkich elementów.
 
