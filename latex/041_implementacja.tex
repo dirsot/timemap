@@ -1,7 +1,7 @@
 ﻿\chapter{Implementacja}
 \label{cha:implementacja}
 
-W działaniu programu można wyodrębnić 2 główne etapy, jest to dostarczenie danych zgonych formatem aplikacji a następnie ich wyświetlenie. Zapewniono obsługę zewnętrznych plików, zarówno zapisanych w standardzie KML jak i jego rozszeżenia stworzonego na potrzeby projektu. Interpretacja graficzna danych została zoptymalizowana na potrzeby pracy z dużymi zbiorami danych, tak aby wyświetlenie nawet dużej ilości informacji umożliwiało dalszą pracę.
+W działaniu programu można wyodrębnić 2 główne etapy, jest to dostarczenie danych zgonych z formatem aplikacji a następnie ich wyświetlenie. Zapewniono obsługę zewnętrznych plików, części formatu GML który jest bardzo obszerny i może symulować inne. Interpretacja graficzna danych została zoptymalizowana na potrzeby pracy z dużymi zbiorami danych, tak aby wyświetlenie nawet dużej ilości informacji umożliwiało dalszą pracę.
 
 
 \section{Struktura projektu}
@@ -18,10 +18,10 @@ View - warstwa prezentacyjna, zapewnia wizualiną prezentację infrmacji. Rolę 
 Model - przechowuje dane, stanowi bazę danych. Jego rola została przeniesiona na natywne rozwiązanie jakim jest Storage.
 \end{itemize}
 
-Założenia wzorca nie zostały w pełni spełnione, jego adaptacja została wykonana na potrzeby omawianego projektu. Stworzono podstawy do rozwoju i prostej adaptacji rozwiązania do potrzeb konkretnego klienta, w bardzo prosty sposób można zmienić między innymi sposób przechowywania danych aby spełnić wymagania klienta.
+Założenia wzorca nie zostały w pełni spełnione, jego adaptacja została wykonana na potrzeby omawianego projektu. Stworzono podstawy do rozwoju i prostego przystosowania rozwiązania do potrzeb konkretnego klienta, w bardzo prosty sposób można zmienić między innymi sposób przechowywania danych aby spełnić wymagania klienta.
 
 
-Zastosowano również paradygmat odwrócenego sterowania(en. Inversion of control,IoC) polegający na przeniesieniu poza obiekt metod służących do kontroli jego poszczególnych elementów. Główną zaletą tego podejścia jest uproszczona kongiguracja programu do potrzeb użytkownika. Przykładem zastosowania jest metoda korzystania z filtrów w aplikacji, które mogą być tworzone przez użytkownika. Ich potencjalnie duża ilość wczytywana jednocześnie podczas startu generowałaby zbędne obciążenie, obecnie są one pomijane podczas inicjacji i wczytywane pojedyńczo jedynie wtedy gdy ich obecność jest niezbędna.
+Zastosowano również paradygmat odwrócenego sterowania(en. Inversion of control,IoC) polegający na przeniesieniu poza obiekt metod służących do kontroli jego poszczególnych elementów. Główną zaletą tego podejścia jest uproszczona konfiguracja programu do potrzeb użytkownika. Przykładem zastosowania jest metoda korzystania z filtrów w aplikacji, które mogą być tworzone przez użytkownika. Ich potencjalnie duża ilość wczytywana jednocześnie podczas startu generowałaby zbędne obciążenie, obecnie są one pomijane podczas inicjalizacji i wczytywane pojedyńczo jedynie wtedy gdy ich obecność jest niezbędna.
 
 
 Struktura klas obecnych w aplikacji została zaperzentowana na rysunku \ref{fig:classDiagram2}.
@@ -92,7 +92,7 @@ Linie 5-7 mają za zadanie wczytanie zewnętrzych plików zawierające delkaracj
 \section{Interfers do map}
 \label{sec:mxn}
 
-W procesie badań literaturowych podjęto decyzję aby jako głównego źródła map wykorzystać Google Maps \ref{subsec:Rodzaje map}.Postanowiono jednocześnie umożliwić użytkownikowi możliwość zmiany i wyboru innego dostarczyciela danych. Niestety nawet krótka analiza interfejsów dostarczaych do pracy nad różnymi typami map wskazuje na brak kompatybilności pomiędzy nimi, oznacza to brak możliwości stworzenia jednej implementacji działąjącej na różnych typach. Problem ten rozwiazano potrzez wykorzystanie Mapstraction, biblioteki której zadaniem jest płynne przechodzenie pomiędzy różnymi dostarczycielami i ich interfejsami.
+W procesie badań literaturowych podjęto decyzję aby jako głównego źródła map wykorzystać Google Maps \ref{subsec:Rodzaje map}. Postanowiono jednocześnie umożliwić użytkownikowi możliwość zmiany i wyboru innego dostarczyciela danych. Niestety nawet krótka analiza interfejsów dostarczaych do pracy nad różnymi typami map wskazuje na brak kompatybilności pomiędzy nimi, oznacza to brak możliwości stworzenia jednej implementacji działąjącej na różnych typach. Problem ten rozwiazano potrzez wykorzystanie Mapstraction, biblioteki której zadaniem jest płynne przechodzenie pomiędzy różnymi dostarczycielami i ich interfejsami.
 
 Listening \ref{lst:mapstraction} pokazuję przykład wykorzystania biblioteki. Stworzenie instancji Mapstraction polega na wywołaniu konstruktora z podaniem id elementu który znajduje się na stronie i będzie używany jako nasza mapa a także typ mapy. Rezultatem jest obiekt kóry posiada wspólny interjeft dla różnych dostarzcycieli danych.
 
@@ -105,30 +105,32 @@ var point = new mxn.LatLonPoint(0,0);
 var marker = new mxn.Marker(point);
 map.addMarker(marker);
 
-\end{lstlisting}/
-
-
+\end{lstlisting}
 
 \section{Odczyt danych}
 \label{sec:idata}
 
-Tak jak zostało omówione w sekcji \ref{sec:dataformat} do przechowywania danych stworzono format rozszeżający istniejący obecnie KML.Takie podejście pozwala na swobodne tworzenie i edycję plików wejsciowych, brak ograniczeń. Jednocześnie zachowując minimalną strukturę obecnie istniejącego formatu pozwala na dostęp od dużej bazy istniejących informacji.
+Zgodnie z wnioskami omówionymi w sekcji \ref{subsec:fileformat} do przechowywania danych stworzono format GML. Takie podejście pozwala na swobodne tworzenie i edycję plików wejsciowych.
 
-W celu odczytu i konwersji danych z pliku zapisu ich w pamięci sesyjnech przęglądarki omówionej w rozdziale \ref{subsec:storage5} stworzona została klasa FileParser. Posiada ona jednoargumentowy konstruktor przyjmujący ciąg znakowy będący zawartośćią pliku .
+W celu odczytu i konwersji danych z pliku zapisu ich w pamięci sesyjnech przęglądarki omówionej w rozdziale \ref{subsec:storage5} stworzona została klasa FileParser. Posiada ona jednoargumentowy konstruktor przyjmujący ciąg znakowy będący zawartośćią pliku.
 
-Ze względów bezpieczeństwa JavaScript nie zezwala na bezpośredni dostęp do plików lokalnych uzytkownika. Jest to pozytywne zachowanie zapewniające że żaden kod nie jest w stanie bezwiednie zmieniać zawartość dysku.
-
-Wymusza to korzystanie z event-ów które będą aktywowane w momecie kiedy plik zostanie wybrany. W momencie zakończenia procesu odczytu zawartość pliku przekazywana jest do parsera który zapisuje dane w pamięci przeglądarki.
+Ze względów bezpieczeństwa JavaScript nie zezwala na bezpośredni dostęp do plików lokalnych uzytkownika. Jest to pozytywne zachowanie zapewniające że żaden kod nie jest w stanie bezwiednie zmieniać zawartość dysku.Wymusza to korzystanie z event-ów które będą aktywowane w momecie kiedy plik zostanie wybrany. W momencie zakończenia procesu odczytu zawartość pliku przekazywana jest do parsera który zapisuje dane w pamięci przeglądarki.
 
 W przeciwieństwie do języków które posiadają klasyczną koncepcję klasy JavaScript posiada jedynie obiekt, z uwagi na ten fakt tworzenie metod i procedur następuje odmiennie. Istnieją 3 podstawowe sposby:
 
 \begin{itemize}
 \item
-Wykorzystanie globalnej funkcji. Tworzony obiekt zawiera odowłanie do ciała metody, które jest globalne. Wadą takiego rozwiązania jest tworzenie wielu globalnym funkcji których nazwa może kolidować z nazwazmi w wykorzystywanych bibliotekach.
+Wykorzystanie globalnej funkcji.
+
+Tworzony obiekt zawiera odowłanie do ciała metody, które jest globalne. Wadą takiego rozwiązania jest tworzenie wielu globalnym funkcji których nazwa może kolidować z nazwazmi w wykorzystywanych bibliotekach.
 \item
-Stworzenie funkcji wewnętrzej. Podobnie jak w poprzednim przypadku tworzona jest funkcja , tym razem jej ciało znajduje się w obiekcie. Minusem jest konieczność odtwarzania metody przy każdej sytuacji tworzenia obiektu. Operacja taka może być kosztowna i negatywnie wpływać na pracę aplikacji.
+Stworzenie funkcji wewnętrzej. 
+
+Podobnie jak w poprzednim przypadku tworzona jest funkcja , tym razem jej ciało znajduje się w obiekcie. Minusem jest konieczność odtwarzania metody przy każdej sytuacji tworzenia obiektu. Operacja taka może być kosztowna i negatywnie wpływać na pracę aplikacji.
 \item
-Protototypowanie. Posiadając definicję obiektu możemy dodać do niego metodę. Sposób ten nie posiada wad opisanych powyżej, z tego powodu podejście zostało wykorzystane w stworzonej aplikacji. Przykład można zaobserwować w listeninu \ref{lst:svgImpl}.
+Protototypowanie. 
+
+Posiadając definicję obiektu możemy dodać do niego metodę. Sposób ten nie posiada wad opisanych powyżej, z tego powodu podejście zostało wykorzystane w stworzonej aplikacji. Przykład można zaobserwować w listeninu \ref{lst:svgImpl}.
 \end{itemize}
 
 \lstset{language=JavaScript}
@@ -348,7 +350,7 @@ KmlParser.prototype.processing = function(doc) {
 	sessionStorage.marker = JSON.stringify(itemsMarkers);
 }
 
-\end{lstlisting}/
+\end{lstlisting}
 
 \subsection{Dodawanie filtrów}
 \label{subsec:filters}
@@ -397,7 +399,7 @@ for (var x=0; x<pm.points.length; x++) {
     fillOpacity: theme.fillOpacity
     });
 item.map.addPolyline(item.tween);
-\end{lstlisting}/
+\end{lstlisting}
 
 Istnieje możliwość tworzenia nowych filtrów dla potrzeb konkretnych map lub danych.
 
@@ -482,7 +484,7 @@ function createSVGElement( eltType, properties,svgElement) {
   svgElement.appendChild(elt);
 }
 
-\end{lstlisting}/
+\end{lstlisting}
 
 \subsection{Zdjęcia}
 \label{subsec:pictures}
@@ -513,7 +515,7 @@ PictureObject.prototype.onAdd = function() {
   panes.mapPane.appendChild(div);
 };
 
-\end{lstlisting}/
+\end{lstlisting}
 
 
 \section{Krzywa Bezier-a}
@@ -526,7 +528,6 @@ B(t) &= \sum\limits_{i=1}^n B_{n,k} (t) p_{k} \\
 B_{n,k}(t) &=\binom{n}{k} t^k(1-t)^{n-k}
 \end{eqnarray}
 
-d
 
 \lstset{language=JavaScript}
 \begin{lstlisting}[label={lst:aproks},caption={Aproksymacja danych}]
@@ -560,4 +561,4 @@ combination=function(n,m){
   return factorial(n)/(factorial(m)*(factorial(n-m)));
 }
 
-\end{lstlisting}/
+\end{lstlisting}

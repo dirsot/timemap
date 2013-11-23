@@ -4,13 +4,13 @@
 \subsection{JavaScript}
 \label{sec:javascript}
 
-Wybór języka JavaScript to tworzenia aplikacji został podyktowany jego dużymi możliwościami na polu tworzenia projektów do użytku na przeglądarkach internetowych.Pozwala na łatwe tworzenie asynchronicznych aplikacji, oznacza to aktualizowanie jedynie wybranych danych na ekranie moniotra bez konieczności przeładowania całej strony. Jest to szczególnie istotne w omawianym przypadku, oznacza to brak potrzeby wczytywania i renderowania całego tła mapy za każdym razem gdy nastąpi nawet małą zmiana.
+Wybór języka JavaScript do tworzenia aplikacji został podyktowany jego dużymi możliwościami na polu tworzenia projektów do użytku na przeglądarkach internetowych. Pozwala na łatwe tworzenie asynchronicznych aplikacji, oznacza to aktualizowanie jedynie wybranych danych na ekranie moniotra bez konieczności przeładowania całej strony. Jest to szczególnie istotne w omawianym przypadku, oznacza to brak potrzeby wczytywania i renderowania całego tła mapy za każdym razem gdy nastąpi nawet mała zmiana.
 
-Bardzo ważną cechą języka jest fakt jego wykonywania po stronie klienta. Oznacza to wykonywanie obliczeń i korzystanie z pamięci najczęściej na komputerze osoby która korzysta z aplikacji. Pozwala to na zmiejszenie wymagać w stosunku do serwera( wykonyje on mniej operacji i zapisuje mniej danych w swojej pamięci)
+Bardzo ważną cechą języka jest fakt jego wykonywania po stronie klienta. Oznacza to wykonywanie obliczeń i korzystanie z pamięci znajdującej się na komputerze osoby która korzysta z aplikacji. Pozwala to na zmiejszenie wymagań w stosunku do serwera (wykonuje on mniej operacji i zapisuje mniej danych w swojej pamięci)
 
 Obecnie powstają frameworki których zadaniem jest stworzenie małej, lekkiej aplikacji webowej wykorzystującej w maksymalny sposób omawiany język.\cite{AngularJS} Przykładem takiego rozwiązania jest AngularJs, korzysta on z architekury MVC w której większość pracy została przeniesiona na stronę klienta. Kontroler wykonuje obliczenia w przeglądarce użytkownika, odciąża to główny serwer, pozwala na szybszą i płynniejszą pracę większej ilości osób.
 
-Nie wątpliwą zaletą takiego podejścia jest wzrost opdorności na ataki typu Dos(en. Denial of Service), polega on na przeciążeniu aplikacji dostarczającej określone dane lub usługi do momentu gdy przestaje ona opdowiadać na jakiekolwiek zapytania. Aplikacje które wykonują większość operacji po stronie serwera(różnego typu obliczenia matematyczne, analizę danych) aby sprostać dużej ilośći klientów która występuje w tego typu atakach nakłada duże wymagania w stosunku do wykorzystywanego sprzętu elektronicznego. Przeniesienie ciężaru z serera na końcowego klienta wykonywania większości operacji pozwala nie tylko na obsłużenie większej ilości użytkowników ale także może wpłynąć na zmiejszenie kosztów utrzyamnia serwera.
+Nie wątpliwą zaletą takiego podejścia jest wzrost opdorności na ataki typu Dos(en. Denial of Service), polega on na przeciążeniu aplikacji dostarczającej określone dane lub usługi do momentu gdy przestaje ona opdowiadać na jakiekolwiek zapytania. Aplikacje które wykonują większość operacji po stronie serwera(różnego typu obliczenia matematyczne, analizę danych) aby sprostać dużej ilośći klientów która występuje w tego typu atakach nakłada duże wymagania w stosunku do wykorzystywanego sprzętu elektronicznego. Przeniesienie ciężaru z serwera na końcowego klienta wykonywania większości operacji pozwala nie tylko na obsłużenie większej ilości użytkowników ale także może wpłynąć na zmiejszenie kosztów utrzyamnia serwera.
 
 Prosty przykład na stronie \underline{\texttt{http://angularjs.org/}} prezentuje w jak prosty sposób można stworzyć prostą liste rzeczy do zrobienia. Poniżej zaprezentowano fragment odpowiedzialny za wyświetlenie zadań z dodatkowym polem określającym czy zostało już wykonane.
 
@@ -43,28 +43,27 @@ Prosty przykład na stronie \underline{\texttt{http://angularjs.org/}} prezentuj
 \nocite{pre2}
 \nocite{googlemapsbegin}
 \nocite{proHTML5}
-HyperText Markup Language,  hipertekstowy język znaczników
-Pozwala na opisanie struktury informacji zawartych na stronie internetowej, to dzięki niemu przeglądarka moze rozróżnić takie elementy jak hiperłącze, akapit czy chociażby nagłówek.
+HyperText Markup Language, hipertekstowy język znaczników, pozwala na opisanie struktury informacji zawartych na stronie internetowej, to dzięki niemu przeglądarka moze rozróżnić takie elementy jak hiperłącze, akapit czy chociażby nagłówek.
 
-Podobnie jak w przypadku XML, tak i tutaj wymagane jest aby wykorzystywane znaczniki umieszczane były w nawiasach ostrokątnych, a każdy z nich miał swoje domknięcie.
+Podobnie jak w przypadku XML, tak i tutaj wymagane jest aby wykorzystywane znaczniki umieszczane były w nawiasach ostrokątnych a każdy z nich miał swoje domknięcie.
 
-Poprawnym zapisem jest <p>Wiadomość<\textbackslash p> który oznacza pojedyńczy akapit. Zapis <p>Wiadomość<p>, który różni się od poprzedniego brakiem znaku "\textbackslash" w drugim znaczniku, czyni to ten zapis niepoprawnym. Istnieje możliwość aby wykorzystać pojedyńczy znacznik, przykładem jest <br \textbackslash> określający wstawienie nowej lini w miejscu wystąpienia tagu.
+Poprawnym zapisem jest <p>Wiadomość<\textbackslash p> który oznacza pojedyńczy akapit. Zapis <p>Wiadomość<p>, który różni się od poprzedniego brakiem znaku "\textbackslash" w drugim znaczniku czyni ten zapis niepoprawnym. Istnieje możliwość aby wykorzystać pojedyńczy znacznik, przykładem jest <br \textbackslash> określający wstawienie nowej lini w miejscu wystąpienia tagu.
 
-Obecnie powszechnie używany standart HTML w wersji czwarte ma wiele ograniczeń, z tego powodu pracowano nad jego następnikiem. 22 stycznia 2008 W3C opublikował HTML5, następna posiada wiele dodatkowych rozwiązań pomocnych w pracy. Posiada wiele dodatkowych znaczników ułatwiających pracę takich jak audio,video przechowywujących odpowiednio pliki muzyczne i wideo, może dokonywać wstępnej walidacji formularzy, nie tylko sprawdzać obecność danych wejściowych ale także ich zgodność z wyrazeniami regularnymi. Umożliwia przechowywanie danych nie tylko w postaci ciasteczek ale większych strukturach nazwanych Storage, dokałdny opis został zawarty w sekcji  \ref{subsec:storage5}.
+Obecnie powszechnie używany standart HTML w wersji czwartej ma wiele ograniczeń, z tego powodu pracowano nad jego następcą. 22 stycznia 2008 W3C opublikował HTML5, następca posiada wiele dodatkowych rozwiązań pomocnych w pracy. Posiada dodatkowe znaczniki ułatwiające pracę takie jak audio, video przechowywujące odpowiednio pliki muzyczne i wideo. Może dokonywać wstępnej walidacji formularzy, nie tylko sprawdzać obecność danych wejściowych ale także ich zgodność z wyrażeniami regularnymi. Umożliwia przechowywanie danych nie tylko w postaci ciasteczek ale większych strukturach nazywanych Storage, dokałdny opis tej funkcjonalności został zawarty w sekcji  \ref{subsec:storage5}.
 
 
 \subsection{Less}
 \label{sec:less}
 
-Do stworzenia bardziej zaawansowanych arkuszy stylów CSS (en. Cascading Style Sheets) wykorzystano narzedzie które pozwala na łatwe tworzenie i utrzymywanie reguł któym jest Less,jego głównymi zaletami są:
+Do stworzenia bardziej zaawansowanych arkuszy stylów CSS (en. Cascading Style Sheets) wykorzystano narzędzie które pozwala na łatwe tworzenie i utrzymywanie reguł którym jest Less,jego głównymi zaletami są:
 
 \begin{itemize}
 \item
 Deklarowanie zmiennych.
 
-Jeśli chcemy wykorzystać jedną wartość(np. jeden kolor) i wykorzystywać ją wielokrotnie wystarczy w głównym pliku zadeklarować zmienną i wykrzystywać ją w każdym miejscu gdzie chcemy użyć tej wartośći.
+Jeśli chcemy aby jedna wartość(np. kolor) była wykorzystana w kilku miejscach możemy zadeklarować ją w głównym pliku  a następnie używać zmiennej zamiast wartości, pozwala to na szybką i bezproblemową edycję.
 
-Przykładowo chcąc wykorzystać kolor czerwony zawarty w kolorystyce uczelni AGH deklarujemy zmienną @aghRed, następnie w miejscu gdzie chcemy go wykorzystać korzystamy z istniejącej zmiennej
+Chcąc wykorzystać kolor czerwony zawarty w kolorystyce uczelni AGH deklarujemy zmienną @aghRed, następnie w miejscu gdzie chcemy go wykorzystać używamy istnejącą zmienną
 
 \lstset{language=JavaScript}
 \label{lis:webSql}
@@ -76,7 +75,7 @@ bgcolor: @aghRed;
 \item
 Mixiny
 
-Możemy tworzyć nową klasę posiadającą określone włąściwości która będzie posiadały właściwości innej, wcześniej zadeklarowanej.Pozwala to na tworzenie kodu bardziej czytelnego, unikanie powtórzeń.
+Możliwe jest tworzenie klas posiadających określone włąściwości które będą posiadały właściwości innej, wcześniej zadeklarowanej.Pozwala to na tworzenie kodu bardziej czytelnego, unikanie powtórzeń.
 
 
 \lstset{language=JavaScript}
@@ -94,7 +93,7 @@ Możemy tworzyć nową klasę posiadającą określone włąściwości która b�
 \end{lstlisting}
 
 \item
-Osadzanie elementów wedlug dziedziczenia
+Osadzanie elementów według dziedziczenia
 
 Tworząc zagnieżdzoną strukturę storny często elementy wewnętrzne zależą od elementów nadrzędnych. Wygląd komurki może się różnić w zależości od miejsca w tabeli. W tworzeniu tak zagnieżdżonych struktur pomocna okazuje się omawiana cecha.
 

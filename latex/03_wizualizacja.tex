@@ -9,27 +9,12 @@ Poniższa sekcja zawiera próbę analizy dostępnych metod prezentacji danych za
 \subsection{Rodzaje map}
 \label{subsec:Rodzaje map}
 
-Tworząc aplikację która ma dostarczać informacji korzystających z map należy zapoznać się dostępnymi źródłami. Z powodu szrokiego wyboru poniżej omówione zostały jedynie aplikacje które dostarczają informacji ogólnoświatowych. Na polskim rynku dostępnych jest kilka rozwiązań, ich główną wadą jest ograniczenie do terytorium Polski, dodatkowo często nie dostarczają one obrazów satelitarnych, są to m.in. \underline{\texttt{http://zumi.pl}}
-\ref{}
-
-\subsubsection{Google Maps}
-\label{subsubsec:Google Maps}
-\nocite{googlemapsbegin}
-Rysunek \ref{fig:googleMaps_1} przedstawia obraz otrzymany w aplikacji Google Maps. Dodatkowo włączona opcja prezentacji natężenia ruchu jedynie potwierdza duże możliwości i łatwość obsługi. Przyjazny interfejs sprawia że praca jest prosta i pozwala na osiągnięcie bardzo dobrych wyników.
-
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=100mm]{ge/gm_1.jpg}
-  \caption{Google Maps.}
-  \label{fig:googleMaps_1}
-\end{figure}
-
+Tworząc aplikację która ma dostarczać informacji korzystających z map należy zapoznać się dostępnymi źródłami. Z powodu szrokiego wyboru poniżej omówione zostały jedynie aplikacje które dostarczają informacji ogólnoświatowych. Na polskim rynku dostępnych jest kilka rozwiązań, ich główną wadą jest ograniczenie terytorialne, dodatkowo często nie dostarczają one obrazów satelitarnych, przykładem jest zumi (\underline{\texttt{http://zumi.pl}}).
 
 \subsubsection{Windows Maps}
 \label{subsubsec:Windows Maps}
 
-Rysunek \ref{fig:bingMaps_1} przedstawia obraz otrzymany wykorzystując Bing Maps. W tym konkretnym przykładzie widzimy znaczną różnicę kolorów, obecność chmur pomniejsza wartość tych zdjęć. Należy wspomnieć o znacznie uboższym interfejsie dostarczanym użytkownikowi, interakcja jest w znacznym stopniu uboższa.
+Rysunek \ref{fig:bingMaps_1} przedstawia obraz otrzymany wykorzystując Bing Maps. W tym konkretnym przykładzie widzimy znaczną różnicę kolorów, obecność chmur pomniejsza wartość tych zdjęć. Należy wspomnieć o znacznie uboższym interfejsie dostarczanym użytkownikowi, interfejs jest w uboższy.
 
 \begin{figure}[H]
   \centering
@@ -41,7 +26,7 @@ Rysunek \ref{fig:bingMaps_1} przedstawia obraz otrzymany wykorzystując Bing Map
 \subsubsection{Yahoo Maps}
 \label{subsubsec:Yahoo Maps}
 
-Kolejnym dostarczycielem danych kartograficznym jest Yahoo, przykład znajduje się na rysunku \ref{fig:yahooMaps_1}. Interfejs jest zbliżony do Bing Maps, jednak obszar na którym możemy przedlądać zdjęcia jest mniejszy, obszary oddalone od większych miast nie są w pełni uwzglęnione. Z tego powodu nie stanowi w pełni akceptowalnej alterantywy.
+Kolejnym dostarczycielem danych kartograficznym jest Yahoo, przykład znajduje się na rysunku \ref{fig:yahooMaps_1}. Interfejs jest zbliżony do Bing Maps, jednak obszar na którym możemy przedlądać zdjęcia jest mniejszy, tereny oddalone od większych miast nie są w pełni uwzglęnione. Z tego powodu nie stanowi w pełni akceptowalnego rozwiązania.
 
 \begin{figure}[H]
   \centering
@@ -54,8 +39,20 @@ Kolejnym dostarczycielem danych kartograficznym jest Yahoo, przykład znajduje s
 \subsubsection{Apple Maps}
 \label{subsubsec:Apple Maps}
 
-Kolejną dużą marką która dostarcza informację jest Apple. Niestety nie ma wersji która pozwalałaby na dostęp do tej usługi z powszechnie używanych komputerów stacjonarnych. Dodatkowo jakość dostarczanych informacji jest bardzo złej jakości.
+Kolejną dużą marką która dostarcza informację jest Apple. Niestety nie ma wersji która pozwalałaby na dostęp do tej usługi z powszechnie używanych komputerów stacjonarnych. Dodatkowo jakość dostarczanych informacji jest złej jakości.
 
+\subsubsection{Google Maps}
+\label{subsubsec:Google Maps}
+\nocite{googlemapsbegin}
+Rysunek \ref{fig:googleMaps_1} przedstawia obraz otrzymany w aplikacji Google Maps. Dodatkowo włączona opcja prezentacji natężenia ruchu jedynie potwierdza duże możliwości i łatwość obsługi. Przyjazny interfejs sprawia że praca jest prosta i pozwala na osiągnięcie bardzo dobrych wyników. Z uwagi na wielkie korzyści i duże możliwości konfiguracji rozwiązanie to zostało wybrane jako bazowe w tworzonej pracy.
+
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=100mm]{ge/gm_1.jpg}
+  \caption{Google Maps.}
+  \label{fig:googleMaps_1}
+\end{figure}
 
 \subsection{Metody prezentacji}
 \label{subsec:presentation}
@@ -67,13 +64,13 @@ Poniższa sekcja zawiera opis dostępnych metod służących do prezentacji dany
 \label{subsubsec:graphicFlash}
 
 
-Wadą tego rozwiązania wynikająca ze specyfikacji całego języka jest bardzo słaba integracja z dokumentami HTML, nie możliwa jest pełna iterakcja z pozostałymi elementani na stronie. Problem ten nie dotyczy kolejnego podejścia \ref{subsec:svg}
+Wadą tego rozwiązania wynikająca ze specyfikacji całego języka jest bardzo słaba integracja z dokumentami HTML, nie możliwa jest pełna iterakcja z pozostałymi elementani na stronie. Problem ten nie dotyczy kolejnego podejścia.
 
 \subsubsection{Canvas}
 \label{subsubsec:canvas}
 
 
-Bardzo ciekawym i wartym zainteresowania dodanym elementem w nowej wersji HTML jest obecność znaczniku canvas. Pozwala on na dynamiczne , skryptowe renderowanie kształtów i obrazów. Dzięki temu obiektowi możliwe stało się tworzenie animacji czy nawet gier działających w przeglądarce bez konieczności używania dodatkowych wtyczek czy programów.
+Bardzo ciekawym i wartym zainteresowania dodanym elementem w nowej wersji HTML jest obecność znaczniku canvas. Pozwala on na dynamiczne, skryptowe renderowanie kształtów i obrazów. Dzięki temu możliwe stało się tworzenie animacji czy nawet gier działających w przeglądarce bez konieczności używania dodatkowych wtyczek czy programów.
 
 \underline{\texttt{http://techtrendy.pl/title, Pierwsza-gra-3D-napisana-w-HTML5,wid,14102779,wiadomosc.html?ticaid=6107dc}}
 
@@ -82,11 +79,11 @@ Przykładem wielkich możliwości jakie dostarcza udoskonalony język jest fakt 
 \begin{figure}[H]
   \centering
     \includegraphics[width=100mm]{ge/html5_3d.jpg}
-  \caption{Pierwsza gra 3D w html5.}
+  \caption{Pierwsza gra 3D w HTML5.}
   \label{fig:html3d}
 \end{figure}
 
-Funkcjonalnością która wydaje się być szczególnie przydatna w stosunku do omawianego projektu jest możliwość rysowania kształtów geomeycznych. Przykładem wykorzystania tej technologi jest \ref{fig:canvas1} na którym przy pomocy okręgu zaznaczono rynek główny w Krakowie i jego okolice, możliwość zmiany transparentości narysowanego kształtu pozwala aby obraz podnim był nadal widoczny.
+Funkcjonalnością która wydaje się być szczególnie przydatna w stosunku do omawianego projektu jest możliwość rysowania kształtów geometrycznych. Przykładem wykorzystania zaprezentowano na rysunku \ref{fig:canvas1} na którym przy pomocy okręgu zaznaczono rynek główny w Krakowie i jego okolice, możliwość zmiany transparentości narysowanego kształtu pozwala aby obraz podnim był nadal widoczny.
 
 Niestety rozwiązanie to nie może zostać wykorzystane wraz z wybranym modelem prezentacji danych geograficznych. Rysunek \ref{fig:canvas1} prezentuje potencjlne możliwośći jednak nawet analiza kodu \ref{lst:canvas} wskazuje podstawowe wymaganie wykorzystanie tego rozwiązania. Bazowy element w obrębie którego możliwa jest akcja musi być elementem canvas.
 Otrzymany efekt jest wynikiem wykorzystania statycznego obrazu który został zaimportowany z pamięci komputera i wykorzystany jako tło. Zabieg ten pozwala na zaprezentowanie możliwości rozwiąznia ale uniemżliwia wykorzystanie funkcjonalności które dostarczane są przez Google Maps(zmiana punktu patrzenia, stopnia przybliżenia i inne). Z tego powodu zdecydowano się na zaprzestanie prac z tym konketnym rozwiązaniem i nie wykorzystanie go w docelowej aplikacji.
@@ -127,11 +124,11 @@ Otrzymany efekt jest wynikiem wykorzystania statycznego obrazu który został za
 SVG(en. Scalable Vector Graphics) służy do prezentacji danych, tworzenia animacji i płynnych zmian kształtów. Jest to powszechnie dostępny format zapisu grafiki wektorowej który oprócz prostych kształtów geometrycznych pozwala na korzystanie z zaawansowanych filtrów i efektów.
 
 Wykorzystywany jest wektorowy format zapisu danych, został on dokładniej omówiony w sekcji \ref{subsec:zapisWektorowy}.
-W wyniku takiego zabiegu plik svg opisujący obraz graficzny ma znacznie mniejszy rozmiar od oryginalnego, jednocześnie niezależnie od wielkości jego jakość jest taka sama.
+W wyniku takiego zabiegu plik svg opisujący obraz graficzny może mieć mniejszy rozmiar od zapisu rastrowego, jednocześnie niezależnie od wielkości jego jakość jest taka sama.
 
-Autorzy artykułu "Zastosowanie języka SVG do wizualizacji danych geoprzestrzennych" \cite{svgUse} zwracają również uwagę na tekstwoy format zapisu, jest on mniej oszczędny niż binarny ale pozwala na edycję dowolnym edytorem tekstu co pozwala na przeszukiwanie zawartości np. wyszikiwarkom internetowym.
+Autorzy artykułu " Zastosowanie języka SVG do wizualizacji danych geoprzestrzennych" \cite{svgUse} zwracają również uwagę na tekstwoy format zapisu, jest on mniej oszczędny niż binarny ale pozwala na edycję dowolnym edytorem tekstu co pozwala na przeszukiwanie zawartości np. wyszukiwarkom internetowym.
 
-W celach porównawczych wykorzystano logo AGH \ref{fig:aghlogo} o rozmiarach 305x591 pikseli o gęstości 150 dpi (en. Dots per inch, określa ilość indywidualnych punktów na odcinu jednego cala, 2.54cm), po zapisie na dysku twardym zajmował on 75 KB pamięci. Następnie wykoano zapis grafiki w testowanym formacie zajmował on 3KB , efekt został przedstawiony w listingu \ref{lst:logoaghsvg}.
+W celach porównawczych wykorzystano logo AGH (rys. \ref{fig:aghlogo}) o rozmiarach 305x591 pikseli o gęstości 150 dpi (en. Dots per inch, określa ilość indywidualnych punktów na odcinu jednego cala, 2.54cm), po zapisie na dysku twardym zajmował on 75 KB pamięci. Następnie wykoano zapis grafiki w testowanym formacie zajmował on 3KB , efekt został przedstawiony w listingu \ref{lst:logoaghsvg}.
 
 
 
@@ -179,7 +176,7 @@ Pakiet google.maps zawiera kilka klas których zadaniem jest generowanie adekwat
   Linia stworzona z dwóch lub więcej punktów. Tworzone odcinki mogą być liniami prostymi lub przedstawiać zakrzywienie ziemi, nie jest możliwe tworzenie bardziej skomplikowanych łuków.
 
 \item[Polygon] \hfill \\
-  Twrzy ciąg połączonych ze sobą punktów w określonej kolejności które tworzą zamknięty obszar. Określają obszar terenu który znajduje się wewnątrz figury.
+  Tworzy ciąg połączonych ze sobą punktów w określonej kolejności które tworzą zamknięty obszar. Określają obszar terenu który znajduje się wewnątrz figury.
 
 \item[Circle] \hfill \\
   Na podstawie środka i jego promienia tworzy okrąg z obszarem wewnętrznym.
@@ -192,7 +189,7 @@ Pakiet google.maps zawiera kilka klas których zadaniem jest generowanie adekwat
 
 \end{description}
 
-Intuicyjna i szybka edycja danych jest zapewniona poprzez udostępnianie klasy "DrawingManager". Tworzy ona dodatkowy element na ekranie użytkownika służący do pracy z wartwami znajdujacymi się na ekranie. Komponent ten wymaga jedynie wybrania odpowiedniego elementu a następnie wyznaczenie wymaganych informacji,zazwyczaj są to jeden lub dwa punkty niezbędne do stworzenia elementu. Pozostałe właściwości mogą być edytowane w dalszym etapie prac według wymagać.
+Intuicyjna i szybka edycja danych jest zapewniona poprzez udostępnianie klasy "DrawingManager". Tworzy ona dodatkowy element na ekranie użytkownika służący do pracy z wartwami znajdujacymi się na ekranie. Komponent ten wymaga jedynie wybrania odpowiedniego elementu a następnie wyznaczenie wymaganych informacji,zazwyczaj są to jeden lub dwa punkty niezbędne do stworzenia elementu. Pozostałe właściwości mogą być edytowane w dalszym etapie prac według potrzeb.
 
 
 \subsection{Przybliżanie danych}
@@ -206,23 +203,23 @@ Można rozróżnić dwa rodzaje wyznaczanie wyniku quasi-otpymalnego:
 
 \begin{description}
 \item[Aproksymacja] \hfill \\
-    Wygenerowany wynik jest przybliżeniem punktów wyjściowych, stworzona linia nie  musi przechodzić prze przez nie.
+    Wygenerowany wynik jest przybliżeniem punktów wyjściowych, stworzona linia nie  musi przechodzić przez nie.
 
 \item[Interpolacja] \hfill \\
-    Wygenerowana funkcja iterpolacyjna przez wszystkie punkty określony w zbiorze wejściowym, jest jego dokładnym otworzeniem.Z tego powodu nadaje się lepiej do omawianegego celu.
-    
+    Wygenerowana funkcja iterpolacyjna przechodzi przez wszystkie punkty określony w zbiorze wejściowym, jest jego dokładnym otworzeniem. Z tego powodu nadaje się lepiej do omawianegego celu.
+
 \end{description}
 
 
-Najprostrzym rodzajem jest interpolacja funkcji sklejonych stopnia pierwszego. Określa ona zbiór prostych odcinków łączących pary poszczególnych punktów. To dzięki niej przy użyciu 3 punktów możliwe jest stwrozenie trójkąta.
+Najprostrzym rodzajem jest interpolacja funkcji sklejonych stopnia pierwszego. Określa ona zbiór prostych odcinków łączących pary poszczególnych punktów. To dzięki niej przy użyciu 3 punktów możliwe jest stworzenie trójkąta.
 
 Interpolacja wielomianowa  polega na  określeniu jednej funkcji przechodzącej przez pożądane punkty posiadającej okeślone paramety. Złożoność tego zadania wzrasta drastycznie wraz z rozmiarem zbioru wejściowego z tego powodu nie została ona używa w omawianym przypadku.
 
-Jednym z rozwiązań powyższego problemu jest skorzystanie z krzywej Beziera. Rysunek \ref{fig:bezier} przedstawia prosty przykład pokazujący niezbędne informacje do jej stworzenia dla zbioru dwu-elementowego. Dodane zostały dwa punkty kontrolne, mają one za zadanie określić zachowanie ścieszki.
+Kolejnym z rozwiązań jest skorzystanie z krzywej Beziera. Rysunek \ref{fig:bezier} przedstawia prosty przykład pokazujący niezbędne informacje do jej stworzenia dla zbioru cztero-elementowego. Dwa punkty kontrolne, mają  za zadanie określić zachowanie ścieszki.
 
 Jego wzór dla podanego przykładu to:
 \begin{eqnarray}
-P(t) &= A (1-t)^{3} + 3 B t(1-t)^{2} + 3 C t^{2} (1-t) + D t^{3} \; \textrm{ dla } \; 0 \geq t \geq 1\;  
+P(t) &= A (1-t)^{3} + 3 B t(1-t)^{2} + 3 C t^{2} (1-t) + D t^{3} \; \textrm{ dla } \; 0 \geq t \geq 1\;
 \end{eqnarray}
 
 \begin{figure}[H]
@@ -246,22 +243,22 @@ Przeprowadzając badania rozwiązań głównymi aspektami na które zwrócono uw
 
 \item
 
-Typ licencji
-Niezwykle ważne jest aby końcowy projekt był całkowicie otwarty dla dalszego rozwoju, pozwalał użytkownikom na adaptację rozwiązań dla swoich potrzeb. Z uwagi na to licencja musi pozwalać na nieograniczoną modyfikację kodu źródłowego.
+Typ licencji 
+
+Niezwykle ważne jest aby końcowy projekt był całkowicie otwarty dla dalszego rozwoju, pozwalał użytkownikom na adaptację rozwiązań dla swoich potrzeb. Z uwagi na to licencja musi pozwalać na modyfikację kodu źródłowego.
 
 \item
 
 Wykorzystywane technologie
+
 Pamiętając że efektem końcowym powinien być framework odpowiadający szerokiemu gronowi odbiorców, będący jednocześnie darmowym ważne aby języki programowania wykorzystane przy jego tworzeniu też taki były. Oznacza to nie korzystanie z płatnych, wymagających licencji oprogramowań. Używane standarty powinny być rozpropagowane i używane przez szerokie grono obiorców.
 
 \end{itemize}
 
 Po analizie dostępnych rozwiązań zdecydowano skorzystać z widget-u o nazwie Timeline który został stworzony przej projekt SIMILE działający na uczelni MIT. Pozwala on na bardzo dużą konfigurowalność dzięki czemu jego modyfikacja, nawet bez ingerencji w kod źródłowy jest bardzo prosta.
-Projekt jest w stanie stworzyć kilka pasm któe będą określały interwały czasu. Pozwala to aby wynik końcowy był przejrzysty bez względu czy prezentujemy wydarzenia które miały miejsce w okresie kilku minut czy setek lat.
+Projekt jest w stanie stworzyć kilka pasm które będą określały interwały czasu. Pozwala to aby wynik końcowy był przejrzysty bez względu czy prezentujemy wydarzenia które miały miejsce w okresie kilku minut czy setek lat.
 
-Problemem który pojawił się było połączenie wybranego sposobu prezentacji osi czasu z mapą i elementami które powinny zmieniać się wraz z upływem czasu.
-
-Rysunek \ref{fig:tm1} prezentuje możliwości tego projektu. Pasmo odpowiadają zakresom czasu, nie muszą on jednak być jednakowe w każdym miejscu. W zaprezentowanym przykładie dzień 23 listpoada uznany został za warty dokładniejszemu przyjżeniu,łatwo możemy z dokładnością co do godziny zmieniać zakres czasu.Natomiast kolejny miesiąc może być o wiele mniej ciekawy, a obszar przeznaczony dla niego być mniejszy niż ten posiadany przez wymieniony powyżej dzień.
+Rysunek \ref{fig:tm1} prezentuje przykładową oś. Pasma odpowiadają zakresom czasu, nie muszą być jednakowe w każdym miejscu. W zaprezentowanym przykładie dzień 23 listpoada uznany został za warty dokładniejszemu przyjżeniu, łatwo możemy z dokładnością co do godziny zmieniać zakres czasu.Natomiast kolejny miesiąc może być o wiele mniej ciekawy, a obszar przeznaczony dla niego być mniejszy niż ten posiadany przez wymieniony powyżej dzień.
 
 Dla porównania \ref{fig:tm2} prezentuje o wiele prostszą konfigurację w której dolne pasmo podzielone jest przez miesiące, natomiast góre przez tygodnie.
 
