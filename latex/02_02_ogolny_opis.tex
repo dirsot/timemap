@@ -4,7 +4,7 @@
 \section{Cel projektu}
 \label{sec:celProjektu}
 
-Celem projektu jest stworzenie aplikacji internetowej dodającej do tradycyjnych map dodatkowego wymiaru, czasu. Powinna dostarczać możliwości obserwowania zmian zachodzących na określonym terenie w danym okresie. Dodana oś czasu będzie miała za zadanie kontrolowanie okresu dla którego widoczne będą dane. Dostarczone dane przez użytkownika będą przedstawiane jemu w czytelny i umożliwiający szybką analizę sposób. Przykładowe dane wejściowe to zmiany terytorialne w przeszłości, ukazanie rozowuju miast. Końcowa wizualizacja danych oprócz prostych kształtów geometrycznych musi zapewniać obsłógę zewnętrznych plików graficznych jak i najnowszych rozwiązań służących do obsługi grafiki.
+Celem projektu jest stworzenie aplikacji internetowej dodającej do tradycyjnych map dodatkowego wymiaru, czasu. Powinna dostarczać możliwości obserwowania zmian zachodzących na określonym terenie w danym okresie. Dodana oś czasu będzie miała za zadanie kontrolowanie okresu dla którego widoczne będą dane. Dostarczone dane przez użytkownika będą przedstawiane w czytelny i umożliwiający szybką analizę sposób. Przykładowe dane wejściowe to zmiany terytorialne w przeszłości, ukazanie rozowuju miast. Końcowa wizualizacja danych oprócz prostych kształtów geometrycznych musi zapewniać obsłógę zewnętrznych plików graficznych jak i najnowszych rozwiązań służących do obsługi grafiki.
 
 \section{Problemy do rozwiązania}
 \label{sec:problemy}
@@ -40,7 +40,8 @@ Aplikacja musi w każdym momencie zapewniać płynną pracę. Praca  ze szczegó
 \item
 Administrator
 
-Osoba która posiada dostęp do serwera na krórym działa aplikacja korzystająca z omawianego frameworku. Ponieważ tworzony program jest jedynie narzędziem służącym do pracy z interaktywnymi mapami, a jednym z założeń jest jak największa adaptabliność i mozliwość działania na różnych środowiskach wymagana jest osoba która doda do działającej strony aplikację.
+Osoba która posiada dostęp do serwera na krórym działa aplikacja korzystająca z omawianego frameworku. Ponieważ tworzony program jest jedynie narzędziem służącym do pracy z mapami, a jednym z założeń jest jak największa adaptowalność i możliwość działania na różnych środowiskach wymagana jest osoba która skonfiguruje współpracę z zewnętrzną stroną.
+
 \item
 Moderator
 
@@ -59,8 +60,8 @@ System umożliwia moderatorowi:
 \item
 Tworzenie i edycję zestawów danych przechowywanych na serwerze
 
-\item 
-Tworzenie własnych filtrów edytujących mapę w zależności od jej położenia lub czasu
+\item
+Tworzenie własnych filtrów edytujących mapę w zależności od zmiany położenia lub czasu
 
 \item
 Zapis informacji o mapie do pliku na dysku lokalnym
@@ -76,7 +77,7 @@ Przeglądanie gotowych map
 Pracę bez konieczności stałego dostępu do internetu.
 
 \item
-Sprawdzanie autentyczności pliku przy pomocy obliczania sumy kontrolnej
+Sprawdzanie autentyczności pliku 
 
 \end{itemize}
 
@@ -96,7 +97,7 @@ Praca z mapami w trybie offline
 Wczytywanie pliku - dane używane w aplikacji mogą zostać wczytane z dwóch źródeł. Z lokalnego dysku lub zaimportowane z serwera.
 
 \item
-Przechywanie danych po stornie klienta 
+Przechywanie danych po stornie klienta
 
 \end{itemize}
 
@@ -133,7 +134,6 @@ Filtry obsługujące zmianę mapy
 
 \end{itemize}
 
-test
 
 \section{Specyfikacja wymagań}
 \label{sec:specyfikacja wymagan}
@@ -170,7 +170,7 @@ Poniżej znajduje się opis trzech podstawowych przypadków użycia występując
 
     \begin{enumerate}
     \itemsep0em
-        \item Uzytkownik wybiera plik.
+        \item Użytkownik wybiera plik.
         \item Dane podlegaja parsowaniu.
         \item Poprawnie odczytane dane zostaja zapisane w Storage.
     \end{enumerate}
@@ -179,10 +179,10 @@ Poniżej znajduje się opis trzech podstawowych przypadków użycia występując
 
     \begin{enumerate}
     \itemsep0em
-        \item Uzytkownik wybiera plik.
+        \item Użytkownik wybiera plik.
         \item Dane podlegaja parsowaniu.
-        \item Dane nie zostaja odczytane poprawnie.
-        \item Uzytkownik zostaje poinformowany o zainstnialym bledzie.
+        \item Dane nie zostają odczytane poprawnie.
+        \item Uzytkownik zostaje poinformowany o zainstniałym błędzie.
     \end{enumerate}
          \\ \hline
     \end{tabular}
@@ -204,7 +204,7 @@ Poniżej znajduje się opis trzech podstawowych przypadków użycia występując
 
     \begin{enumerate}
     \itemsep0em
-        \item Uzytkownik wybiera punkt w czasie.
+        \item Użytkownik wybiera punkt w czasie.
         \item Dane dla wybranego okresu zostają wyrenderowane i pokazane.
         \item Informacje dla najbliższego otoczenia podlegają generacji i ukryciu.
     \end{enumerate}
@@ -213,7 +213,7 @@ Poniżej znajduje się opis trzech podstawowych przypadków użycia występując
 
     \begin{enumerate}
     \itemsep0em
-        \item Uzytkownik wybiera punkt w czasie.
+        \item Użytkownik wybiera punkt w czasie.
         \item Dane dla wybranego okresu nie zostają odnalezione
         \item Nie aktualne dane zostają schowane.
     \end{enumerate}
@@ -237,7 +237,7 @@ Poniżej znajduje się opis trzech podstawowych przypadków użycia występując
 
     \begin{enumerate}
     \itemsep0em
-        \item Uzytkownik wybiera zakładkę do walidacji pliku.
+        \item Użytkownik wybiera zakładkę do walidacji pliku.
         \item Podanie ścieszki do pliku i sumy kontolnej.
         \item Obliczenie aktualnej sumy dla pliku i porównanie go z podanym.
         \item Uzytkownik zostaje poinformowany o poprawności pliku.
@@ -247,14 +247,14 @@ Poniżej znajduje się opis trzech podstawowych przypadków użycia występując
 
     \begin{enumerate}
     \itemsep0em
-        \item Uzytkownik wybiera zakładkę do walidacji pliku.
+        \item Użytkownik wybiera zakładkę do walidacji pliku.
         \item Podanie ścieszki do pliku i sumy kontolnej.
         \item Obliczenie aktualnej sumy dla pliku i porównanie go z podanym.
-        \item Uzytkownik zostaje poinformowany o zmianach w pliku.
+        \item Użytkownik zostaje poinformowany o zmianach w pliku.
     \end{enumerate}
          \\ \hline
     \end{tabular}
-    \caption{Przypadek 2...}
+    \caption{Przypadek kontroli pliku}
     \label{tab:caseuse2}
 \end{table}
 
@@ -265,9 +265,6 @@ Oprócz wymagań dotyczących prawidłowego funkcjonowania aplikacji, wymagane j
 aby zapewnione były poniższe punkty.
 
 \begin{itemize}
-\item
-The first item
-
 \item
 System powinien być skalowalny, powinien umożliwiać dostęp wielu użytkownikom równocześnie przy zachowaniu wymagań wydajnościowych.
 

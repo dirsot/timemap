@@ -516,66 +516,48 @@ PictureObject.prototype.onAdd = function() {
 \end{lstlisting}/
 
 
-\section{Kontrola autentyczności pliku}
-\label{sec:walidacjaPliku}
-
-\lstset{language=JavaScript}
-\begin{lstlisting}[label={lst:aproks},caption={Aproksymacja danych}]
-
-smieci
-
-bezier = function(t, p0, p1, p2, p3){
-      var cX = 3 * (p1.x - p0.x),
-          bX = 3 * (p2.x - p1.x) - cX,
-          aX = p3.x - p0.x - cX - bX;
-
-      var cY = 3 * (p1.y - p0.y),
-          bY = 3 * (p2.y - p1.y) - cY,
-          aY = p3.y - p0.y - cY - bY;
-
-      var x = (aX * Math.pow(t, 3)) + (bX * Math.pow(t, 2)) + (cX * t) + p0.x;
-      var y = (aY * Math.pow(t, 3)) + (bY * Math.pow(t, 2)) + (cY * t) + p0.y;
-
-      return {x: x, y: y};
-    }
-    
-    p0 = {x: 10, y: 10},
-          p1 = {x: 50, y: 100},
-          p2 = {x: 150, y: 200},
-          p3 = {x: 200, y: 75};
-          
-          bezier(0, p0, p1, p2, p3);
-
-\end{lstlisting}/
-
-\section{Implementacja bezier}
+\section{Krzywa Bezier-a}
 \label{sec:bezierimpl}
 
+Stworzona została implementacja obliczająca położenie punktów dla krzywej Bezier-a.
+
+\begin{eqnarray}
+B(t) &= \sum\limits_{i=1}^n B_{n,k} (t) p_{k} \\
+B_{n,k}(t) &=\binom{n}{k} t^k(1-t)^{n-k}
+\end{eqnarray}
+
+d
+
 \lstset{language=JavaScript}
 \begin{lstlisting}[label={lst:aproks},caption={Aproksymacja danych}]
 
-smieci
+bezier = function(t, points){
+	var _x = 0;
+	var _y = 0;
+	var length = points.length;
+	for (var i = 0; i < length; i++) {
+		_x += points[i].x * bernstein(length-1,i,t);
+		_y += points[i].y * bernstein(length-1,i,t);
+	}
+	return {x: x, y: y};
+}
 
-bezier = function(t, p0, p1, p2, p3){
-      var cX = 3 * (p1.x - p0.x),
-          bX = 3 * (p2.x - p1.x) - cX,
-          aX = p3.x - p0.x - cX - bX;
+bernstein = function(n,m,t){
+  return combination(n,m)*Math.pow(t,m)*(Math.pow((1-t),(n-m)));
+}
 
-      var cY = 3 * (p1.y - p0.y),
-          bY = 3 * (p2.y - p1.y) - cY,
-          aY = p3.y - p0.y - cY - bY;
+factorial=function(n){
+  wynik = 1;
+  while (n > 0)
+  {
+    wynik = wynik * n ;
+    n -- ;
+  }
+  return wynik;
+}
 
-      var x = (aX * Math.pow(t, 3)) + (bX * Math.pow(t, 2)) + (cX * t) + p0.x;
-      var y = (aY * Math.pow(t, 3)) + (bY * Math.pow(t, 2)) + (cY * t) + p0.y;
-
-      return {x: x, y: y};
-    }
-
-    p0 = {x: 10, y: 10},
-          p1 = {x: 50, y: 100},
-          p2 = {x: 150, y: 200},
-          p3 = {x: 200, y: 75};
-
-          bezier(0, p0, p1, p2, p3);
+combination=function(n,m){
+  return factorial(n)/(factorial(m)*(factorial(n-m)));
+}
 
 \end{lstlisting}/
