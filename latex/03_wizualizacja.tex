@@ -126,7 +126,7 @@ SVG(en. Scalable Vector Graphics) służy do prezentacji danych, tworzenia anima
 Wykorzystywany jest wektorowy format zapisu danych, został on dokładniej omówiony w sekcji \ref{subsec:zapisWektorowy}.
 W wyniku takiego zabiegu plik svg opisujący obraz graficzny może mieć mniejszy rozmiar od zapisu rastrowego, jednocześnie niezależnie od wielkości jego jakość jest taka sama.
 
-Autorzy artykułu " Zastosowanie języka SVG do wizualizacji danych geoprzestrzennych" \cite{svgUse} zwracają również uwagę na tekstwoy format zapisu, jest on mniej oszczędny niż binarny ale pozwala na edycję dowolnym edytorem tekstu co pozwala na przeszukiwanie zawartości np. wyszukiwarkom internetowym.
+Autorzy artykułu ``Zastosowanie języka SVG do wizualizacji danych geoprzestrzennych'' \cite{svgUse} zwracają również uwagę na tekstwoy format zapisu, jest on mniej oszczędny niż binarny ale pozwala na edycję dowolnym edytorem tekstu co pozwala na przeszukiwanie zawartości np. wyszukiwarkom internetowym.
 
 W celach porównawczych wykorzystano logo AGH (rys. \ref{fig:aghlogo}) o rozmiarach 305x591 pikseli o gęstości 150 dpi (en. Dots per inch, określa ilość indywidualnych punktów na odcinu jednego cala, 2.54cm), po zapisie na dysku twardym zajmował on 75 KB pamięci. Następnie wykoano zapis grafiki w testowanym formacie zajmował on 3KB , efekt został przedstawiony w listingu \ref{lst:logoaghsvg}.
 
@@ -229,6 +229,8 @@ P(t) &= A (1-t)^{3} + 3 B t(1-t)^{2} + 3 C t^{2} (1-t) + D t^{3} \; \textrm{ dla
   \label{fig:bezier}
 \end{figure}
 
+test smieci
+
 \subsection{Oś czasu}
 \label{subsec:os}
 
@@ -243,7 +245,7 @@ Przeprowadzając badania rozwiązań głównymi aspektami na które zwrócono uw
 
 \item
 
-Typ licencji 
+Typ licencji
 
 Niezwykle ważne jest aby końcowy projekt był całkowicie otwarty dla dalszego rozwoju, pozwalał użytkownikom na adaptację rozwiązań dla swoich potrzeb. Z uwagi na to licencja musi pozwalać na modyfikację kodu źródłowego.
 
@@ -276,16 +278,3 @@ Dla porównania \ref{fig:tm2} prezentuje o wiele prostszą konfigurację w któr
   \label{fig:tm2}
 \end{figure}
 
-\subsection{Aktualizacja struktury DOM}
-\label{subsec:dom}
-
-Wszystkie elementy znajdujące się na stronie internetowej tworzą struktutę drzewa DOM(en.Document Object Model). Określa ono wzajemne położenie poszczególnych elementów, przy wykorzystaniu JavaScript-u możliwe jest akutalizowanie poszczególnych fragmentów strony bez konieczności renderowania wszystkich elementów.
-
-Na rysunku \ref{fig:domtree} zaprezentowano minimalną struktturę wymaganą do poprawego korzystania z tworzonego projektu. W części head dodane są niezbędne odwołania do skttyptów które są odpowiedzialne za prawidłowe funkcjownowanie frameworku, do elementu body dołączono elementy ktore zapewniają miejsce dla wizualnej części, zdefiniowany rozmiar pozwala na precyzyjne wkompnowanie.
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=100mm]{ge/htmltree2.jpg}
-  \caption{Drzewo DOM}
-  \label{fig:domtree}
-\end{figure}

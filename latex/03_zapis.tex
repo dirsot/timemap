@@ -6,7 +6,7 @@
 \subsection{GIS}
 \label{subsec:gis}
 
-GIS(Geographical Information Systems) jest to System Informacji Geograficznych, zbiór wiedzy, informacji do pozyskiwania i analizowania danych przestrzennych. Dane są pobieranie w trakcie naziemnych pomiarów jak i zbierane przy użyciu systemu GPS. Informacje te są następnie zapisywane do określonych formatów dzięki czemu możliwa jest ich dalsza analiza. 
+GIS(Geographical Information Systems) jest to System Informacji Geograficznych, zbiór wiedzy, informacji do pozyskiwania i analizowania danych przestrzennych. Dane są pobieranie w trakcie naziemnych pomiarów jak i zbierane przy użyciu systemu GPS. Informacje te są następnie zapisywane do określonych formatów dzięki czemu możliwa jest ich dalsza analiza.
 
 \subsubsection{Wykorzystywany układ współrzędnych}
 \label{subsec:uklad}
@@ -32,7 +32,7 @@ Drugi zapis został wykorzystany do przechowywania danych w plikach, tak aby wym
 \subsection{Format zapisu}
 \label{subsec:zapisWektorowy}
 
-W celu przechowywania obiektów graficznych zdecydowano się na wykorzystanie grafiki wektorowerj. Oprócz bezproblemowej skalowalności, pozwala ona również na szeroką i łatwą edycję. 
+W celu przechowywania obiektów graficznych zdecydowano się na wykorzystanie grafiki wektorowerj. Oprócz bezproblemowej skalowalności, pozwala ona również na szeroką i łatwą edycję.
 Obraz jest w tym przypadku przechowywany jako zbiór formuł matematycznych m.in. proste i łuki. Dzięki takiemu podejściu obraz w dowolnej skali na identyczną jakość, widać to na rysunku \ref{fig:wekt}. Przykładowymi formatami są GML(Geography Markup Language) otwarty standart XML dla wymiany danych GIS, Shapefile czy tradycyjny kartezjański układ współrzędnych.
 
   \begin{figure}[H]
@@ -78,10 +78,9 @@ Dwa polskie formaty są stosunkowo mało popularne, są one głównie wykorzysty
 \subsection{Parser plików}
 \label{subsec:parser}
 
-Założenia projektu zapewniają dwa źródła dostarczania informacji niezbędnych do poprawnej pracy frameworka.
-Pierwszym jest przesyłanie infromacji z serwera do urządzenia klienta przy wykorzystaniu formatu JSON, wiadomość taka jest zbudowana w odpowiednią strukturę aby bezpośrednio dokonać konwersji do jegnego ciągu znakowego. W ten sposób możliwe będzie zapewnienie w bardzo szybkim czasie danych pozwalających na pełne wykorzystanie wszystkich możliwości aplikacji.
-
-Dodatkową opcją dostarczania informacji będzie wczytywanie pliku z informacjami opisującymi mapę. Do tego celu stworzono parser plików który pozwala na dokonanie analizy wczytanego pliku i konwersję danych do formatu używanego do przechowywania danych po stronie klienta.
+Założenia projektu zakładają dostarczanie wstępnego zestawu danych opisujących mapę poprzez plik tekstowy zawierający dane w okrślonym formacie. Może on znajdować się na zewnętrznym serwerze lub dysku lokalnym. W pierwszym przypadku zostanie on najpierw ściągnięty do pamięci lokalnej aby następnie mógł być wykorzystany, w drugim po podaniu ścieżki dostępu do niego  od razu nastąpi jego analiza. Aby było to możliwe stworzony został parser którego zadaniem jest odczytanie danych i przygotowanie ich aby możliwe było ich wykorzystanie w dalszej pracy aplikacji.
+Wybrany format danych wybrany podczas prac badawczych, GML, zawiera bardzo obszerny zbiór elementów pozwalających opisywać bardzo szeroki wachlarz obiektów, takich jak mosty, budynki pojazdy. Taka dokładność nie jest wymagana w tym przypadku z tego powodu parser nie obsługuje całego języka.
+Wczytane informacje podlegają przetworzniu ze składni XML, na którym bazuje GML do notacji JSON która jest używana podczas pracy map.
 
 \subsection{Storage}
 \label{subsec:storage5}
@@ -101,12 +100,12 @@ Dodatkowo nie można pominąć faktu istnienia dwóch typów.
 \begin{itemize}
 
 \item
-Session Storage 
+Session Storage
 
 Dane przechowywane są w kontekście sesji użytkownika, są one tracone w momencie zamknięcia okna przeglądarki.
 
 \item
-Local Storage 
+Local Storage
 
 Teoretycznie dane są przechowywane w nieskończoność, do momentu kiedy użytkonwik nie usunie ich. Zamknięcię sesji nie powoduje usunięcia danych.
 

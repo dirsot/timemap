@@ -5,7 +5,7 @@
 
 Tworząc aplikację która będzie używana przez duża grupę obiorców, oprócz osób z pełnymi uprawnieniami do dowolnej akcji również osoby które nie powinny mieć możliwości zmiany danych należy przewidzieć i przygotować odpowiedni zbiór ról i uprawnień. Dostęp do dostarczanych funkcjonalności należy zapewnić poprzez zbiór ról i uprawnień, zostały one opisane w sekcji \ref{sec:uzytkownicy}.
 
-Niezwykle ważne jest aby pamiętać o strukturze aplikacji i ograniczeniach jakie niosą za sobą wykorzystane technologie. Każdy użytkownik uczeń według nomenklatury opisanej powyżej jest w posiadaniu pliku którego edycja powinna być zachowana jedynie dla moderatora. Niestety nie jest możliwe zapewnienie nieedytowalności pliku, z tego powodu nawet bez dostępu do uprawnień edycyjnych dostarczanych przez framework każdy może edytować plik w edytorze tektsowym, zmienić granice obszarów czy chociażby przedziały czasowe. Aby użytkownicy mieli pewność że plik z któego korzystają i mapa stworzona na jego podstawie jest wiarygodna i posiada poprawne dane proponowanym rozwiązaniem jest wykorzystanie jednego z algorytmu tworzących skrót z dowolnego ciągu danych, jednym z najczęściej wykorzystanym do takich celów jest MD5. Otrzymany wynik można zamieścić w widoczny miejscu obok pliku z danymi w miejscu gdzie jedynie moderator ma dostęp. Dzięki takiej operacji użytkownik będzie mógł porównać wygenerowany skrót pliku którego chce użyć z wartością na stronie, identyczne wartości potwierdzą autentyczność danych.
+Niezwykle ważne jest aby pamiętać o strukturze aplikacji i ograniczeniach jakie niosą za sobą wykorzystane technologie. Każdy użytkownik uczeń według nomenklatury opisanej powyżej jest w posiadaniu pliku którego edycja powinna być zachowana jedynie dla moderatora. Niestety nie jest możliwe zapewnienie nieedytowalności pliku, z tego powodu nawet bez dostępu do uprawnień edycyjnych dostarczanych przez framework każdy może edytować plik w edytorze tektsowym, zmienić granice obszarów czy chociażby przedziały czasowe. Aby użytkownicy mieli pewność że plik z któego korzystają i mapa stworzona na jego podstawie jest wiarygodna i posiada poprawne dane proponowanym rozwiązaniem jest wykorzystanie jednego z algorytmu tworzących skrót z dowolnego ciągu danych, jednym z najczęściej wykorzystanym do takich celów jest MD5. Otrzymany wynik można zamieścić na serwerze w widoczny miejscu obok pliku z danymi w miejscu gdzie jedynie moderator ma dostęp. Dzięki takiej operacji użytkownik będzie mógł porównać wygenerowany skrót pliku którego chce użyć z wartością na stronie, identyczne wartości potwierdzą autentyczność danych.
 
 \subsection{Funkcje haszujące}
 \label{sec:hashfunction}
@@ -21,7 +21,8 @@ Istnieje wiele funkcji haszujących, wybór konkretnej z nich zależy od celu u�
 \begin{itemize}
 \item
 MD5
-Opracowany w 1991 roku przez Rona Rivesta, z dowolnego ciągu danych generuje 128-bitowy sktót,pozwala to na utworzenie 32 znakowego ciągu w systemie szesnastkwoym. Ważną cechą jest zmiana skróty w przypadku najmniejszej edycji wejściowych danych. Tabela \ref{tab:hashresult},stowrzona przy pomocy strony \underline{\texttt{http://www.sha1-online.com/}}, prezentuje przykład zmiany jednej litery, wygenerowany skrót dla tej wartości jest zupełnie inny.
+
+Opracowany w 1991 roku przez Rona Rivesta, z dowolnego ciągu danych generuje 128-bitowy sktót, pozwala to na utworzenie 32 znakowego ciągu w systemie szesnastkwoym. Ważną cechą jest zmiana skróty w przypadku najmniejszej edycji wejściowych danych. Tabela \ref{tab:hashresult},stowrzona przy pomocy strony \underline{\texttt{http://www.sha1-online.com/}}, prezentuje przykład zmiany jednej litery, wygenerowany skrót dla tej wartości jest zupełnie inny.
 Z uwagi na szybkość działania jest powszechnie używana, jednym z zastosowań jest ukrywanie haseł w bazie danych.
 
 \item
@@ -31,7 +32,8 @@ Przedstawiciel funckji z rodziny SHA, opublikowany w 1995 roku. Wprzeciwieństiw
 
 \item
 SHA-2
-Określenie czterech wariantów zastępujących SHA-1. Wersją zapewniającą najwyższą obecnie niezawodność i bezpieczeństwo jest SHA-512, do zapisu wykorzystuje 512 bitów co pozwala na otrzymanie 128 znakowego skrótu.
+
+Zbiór czterech wariantów zastępujących SHA-1. Wersją zapewniającą najwyższą obecnie niezawodność i bezpieczeństwo jest SHA-512, do zapisu wykorzystuje 512 bitów co pozwala na otrzymanie 128 znakowego skrótu.
 
 \end{itemize}
 
@@ -51,4 +53,5 @@ Określenie czterech wariantów zastępujących SHA-1. Wersją zapewniającą na
     \label{tab:hashresult}
 \end{table}
 
-http://eprint.iacr.org/2008/469.pdf
+\subsection{Zastosowanie}
+\label{sec:zastosowanie}

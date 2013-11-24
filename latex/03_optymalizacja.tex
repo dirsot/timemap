@@ -2,14 +2,12 @@
 \newpage
 \section{Optymalizacja rozwiązania}
 \label{sec:optymalizacja}
-
-\subsection{Funkcje haszujące}
-\label{sec:hashfunction}
+ 
 
 \subsection{Wydajność parsera}
 \label{subsec:wydajnosc}
 
-W celach sprawdzenia wydajności zaimplementowanego parsera przeprowadzono testy porównawcze. W pierwszej próbie wykorzystano dwa pliki zawierające dane w formacie który pozwolił na jego analizę, pierwszy "plik1.kml" składał się z jednego obszaru i jednego stylu określającego preferencje graficzne, jego dokładana zawartość została zawarta w załączniku \ref{sec:akml}. Drugi plik "plik2.kml" zawierał informacje o granicy wszystkich stanów USA, na potrzeby badań on również zawierał informacje o jednym stylu.
+W celach sprawdzenia wydajności zaimplementowanego parsera przeprowadzono testy porównawcze. W pierwszej próbie wykorzystano dwa pliki zawierające dane w formacie który pozwolił na jego analizę, pierwszy ``plik1.kml''  składał się z jednego obszaru i jednego stylu określającego preferencje graficzne, jego dokładana zawartość została zawarta w załączniku \ref{sec:akml}. Drugi plik ``plik2.kml'' zawierał informacje o granicy wszystkich stanów USA, na potrzeby badań on również zawierał informacje o jednym stylu.
 Wykonano proces wczytania ich zawartości, mierząc za każdym razem czas potrzebny na zakończenie procesu. Wyniki zamieszczono w zbiorczej tabeli \ref{tab:speedTest}.
 
 Dokładne informacje dotyczące zawartości plików zamieszczono w tabeli \ref{tab:testFile}
@@ -49,7 +47,7 @@ W celu optymalizacji działania aplikacji zastosowano kilka rozwiązań mającyc
 
 \begin{description}
 \item[Stopniowa generacja obiektów]\hfill \\
-Nie wszystkie obiekty dotyczące mapy są renderowane podczas jej inicjalizacji. Wstępna konfiguracja pozwala na stworzenie mapy z osią czasu nie pokazującą całego przedziału czasowego do któego odwołują się informacje wejściowe, możliwe jest ustawienie aby na ekranie pojawiły się informacje dotyczące wydarzeń z jednoego dnia podczas gdy dane mogą zawierać informacje z okresu kilku lat. Stworzony algorytm można przedstwić w najstępujących krokach.
+Nie wszystkie obiekty dotyczące mapy są renderowane podczas jej inicjalizacji. Wstępna konfiguracja pozwala na stworzenie mapy z osią czasu nie pokazującą całego przedziału czasowego do którego odwołują się informacje wejściowe, możliwe jest ustawienie aby na ekranie pojawiły się informacje dotyczące wydarzeń z jednoego dnia podczas gdy dane mogą zawierać informacje z okresu kilku lat. Stworzony algorytm można przedstwić w najstępujących krokach.
 
 \begin{enumerate}
 \item
