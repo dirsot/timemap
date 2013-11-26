@@ -110,9 +110,7 @@ map.addMarker(marker);
 \section{Odczyt danych}
 \label{sec:idata}
 
-Zgodnie z wnioskami omówionymi w sekcji \ref{subsec:fileformat} do przechowywania danych stworzono format GML. Takie podejście pozwala na swobodne tworzenie i edycję plików wejsciowych.
-
-W celu odczytu i konwersji danych z pliku zapisu ich w pamięci sesyjnech przęglądarki omówionej w rozdziale \ref{subsec:storage5} stworzona została klasa FileParser. Posiada ona jednoargumentowy konstruktor przyjmujący ciąg znakowy będący zawartośćią pliku.
+Zgodnie z wnioskami omówionymi w sekcji \ref{subsec:fileformat} do przechowywania danych wykorzystano format GML. Wykorzystanie pliku teksto pozwala na swobodne tworzenie i edycję plików wejsciowych. W celu odczytu  danych z pliku i zapisu ich w pamięci sesyjnech przęglądarki(Storage) stworzona została klasa FileParser. Posiada ona jednoargumentowy konstruktor przyjmujący ciąg znakowy będący zawartośćią pliku.
 
 Ze względów bezpieczeństwa JavaScript nie zezwala na bezpośredni dostęp do plików lokalnych uzytkownika. Jest to pozytywne zachowanie zapewniające że żaden kod nie jest w stanie bezwiednie zmieniać zawartość dysku.Wymusza to korzystanie z event-ów które będą aktywowane w momecie kiedy plik zostanie wybrany. W momencie zakończenia procesu odczytu zawartość pliku przekazywana jest do parsera który zapisuje dane w pamięci przeglądarki.
 
@@ -124,11 +122,11 @@ Wykorzystanie globalnej funkcji.
 
 Tworzony obiekt zawiera odowłanie do ciała metody, które jest globalne. Wadą takiego rozwiązania jest tworzenie wielu globalnym funkcji których nazwa może kolidować z nazwazmi w wykorzystywanych bibliotekach.
 \item
-Stworzenie funkcji wewnętrzej. 
+Stworzenie funkcji wewnętrzej.
 
 Podobnie jak w poprzednim przypadku tworzona jest funkcja , tym razem jej ciało znajduje się w obiekcie. Minusem jest konieczność odtwarzania metody przy każdej sytuacji tworzenia obiektu. Operacja taka może być kosztowna i negatywnie wpływać na pracę aplikacji.
 \item
-Protototypowanie. 
+Protototypowanie.
 
 Posiadając definicję obiektu możemy dodać do niego metodę. Sposób ten nie posiada wad opisanych powyżej, z tego powodu podejście zostało wykorzystane w stworzonej aplikacji. Przykład można zaobserwować w listeninu \ref{lst:svgImpl}.
 \end{itemize}
@@ -521,7 +519,9 @@ PictureObject.prototype.onAdd = function() {
 \section{Krzywa Bezier-a}
 \label{sec:bezierimpl}
 
-Stworzona została implementacja obliczająca położenie punktów dla krzywej Bezier-a.
+Aby umożliwić moderatorowi sprawną pracę podczas towrzenia i edycji zbioru danych, możliwość dodawania płynnych krzywych bez konieczności wyznaczania wielu puktów stworzono implementację algorytmu wyznaczania punktów leżących na krzywej Bezier-a.
+
+Przedstawiono wzory matematyczne które zostały użyte do obliczenia położnia w miejscu $t$. Główna metoda $bezier$ posiada 2 argumenty wejściowe, pierwszym jest wartość z przedziału od 0 do 1 określający procentowe położenie pomiędzy położeniem  startowym a końcowym, drugim jest tablica punktów.
 
 \begin{eqnarray}
 B(t) &= \sum\limits_{i=1}^n B_{n,k} (t) p_{k} \\
@@ -531,7 +531,6 @@ B_{n,k}(t) &=\binom{n}{k} t^k(1-t)^{n-k}
 
 \lstset{language=JavaScript}
 \begin{lstlisting}[label={lst:aproks},caption={Aproksymacja danych}]
-
 bezier = function(t, points){
 	var _x = 0;
 	var _y = 0;
