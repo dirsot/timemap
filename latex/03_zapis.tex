@@ -73,13 +73,13 @@ GML(Geography Markup Language) - stworzony przez OGC(Open Geospatial Consortium)
 \end{itemize}
 
 Dwa polskie formaty są stosunkowo mało popularne, są one głównie wykorzystywane w celu kompunikacji pomiędzy rządowymi bazami danych. Zawierają one bardzo określone typy danych co sprawia że są mało przydatne dla omawianego projetku. KML jest foramtem który posiada szeroki wachlarz dostępnych znaczników a jego duża popularność dostarcza dużą bazę plików gotowych do wykorzystania. Niestety został on stworzony by współpracować z określonym programem, zaimplementowane zostały jedynie elementy które mogą zostać wykorzystane w nim. Ostani przykład został stworzony w uniwersalnym celu do ogólnego użytku, posiada on bardzo dużo możliwości, apadtacji do konkretnych rozwiązań\cite{gml} z uwagi na ten fakt zdecydowano się na wybór tego rozwiąznia. Nie zostaną wykorzystane jego pełne możliwości, jedynie te które są przydatne w projektowanej aplikacji.
-
+Jedną z ciekawych i przydatnych możliwości podczas jego wykorzystania jest zgodność z formatem KML na bazie którego powstało wiele zbiorów danych gotowych do wykorzystania.
 
 \subsection{Parser plików}
 \label{subsec:parser}
 
 Założenia projektu zakładają dostarczanie wstępnego zestawu danych opisujących mapę poprzez plik tekstowy zawierający dane w okrślonym formacie. Może on znajdować się na zewnętrznym serwerze lub dysku lokalnym. W pierwszym przypadku zostanie on najpierw ściągnięty do pamięci lokalnej aby następnie mógł być wykorzystany, w drugim po podaniu ścieżki dostępu do niego  od razu nastąpi jego analiza. Aby było to możliwe stworzony został parser którego zadaniem jest odczytanie danych i przygotowanie ich aby możliwe było ich wykorzystanie w dalszej pracy aplikacji.
-Wybrany format danych wybrany podczas prac badawczych, GML, zawiera bardzo obszerny zbiór elementów pozwalających opisywać bardzo szeroki wachlarz obiektów, takich jak mosty, budynki pojazdy. Taka dokładność nie jest wymagana w tym przypadku z tego powodu parser nie obsługuje całego języka.
+Wybrany format danych wybrany podczas prac badawczych, GML, zawiera bardzo obszerny zbiór elementów pozwalających opisywać bardzo szeroki wachlarz obiektów, takich jak mosty, budynki pojazdy. Taka dokładność nie jest wymagana w tym przypadku z tego powodu parser nie obsługuje całego języka. Ponieważ można przygotować plik w formacie GML w taki sposób aby przypominał zapis KML zdecydowano się zwrócić szczgólną uwagę aby parser poprawnie rozpoznawał i dekodował dane również z tej postaci, pozwoli to na dostęp do dużej bazy gotowych informacji.
 Wczytane informacje podlegają przetworzniu ze składni XML, na którym bazuje GML do notacji JSON która jest używana podczas pracy map.
 
 \subsection{Storage}
