@@ -4,7 +4,7 @@
 \subsection{JavaScript}
 \label{sec:javascript}
 
-Wybór języka JavaScript do tworzenia aplikacji został podyktowany jego dużymi możliwościami na polu tworzenia projektów do użytku na przeglądarkach internetowych. Pozwala na łatwe tworzenie asynchronicznych aplikacji, oznacza to aktualizowanie jedynie wybranych danych na ekranie moniotra bez konieczności przeładowania całej strony. Jest to szczególnie istotne w omawianym przypadku, oznacza to brak potrzeby wczytywania i renderowania całego tła mapy za każdym razem gdy nastąpi nawet mała zmiana.
+Wybór języka JavaScript do tworzenia aplikacji został podyktowany jego dużymi możliwościami na polu tworzenia projektów do użytku na przeglądarkach internetowych. Pozwala na łatwe aktualizowanie jedynie wybranych danych na ekranie moniotra bez konieczności przeładowania całej strony. Jest to szczególnie istotne w omawianym przypadku, oznacza to brak potrzeby wczytywania i renderowania całego tła mapy za każdym razem gdy nastąpi nawet mała zmiana.
 
 Bardzo ważną cechą języka jest fakt jego wykonywania po stronie klienta. Oznacza to wykonywanie obliczeń i korzystanie z pamięci znajdującej się na komputerze osoby która korzysta z aplikacji. Pozwala to na zmiejszenie wymagań w stosunku do serwera (wykonuje on mniej operacji i zapisuje mniej danych w swojej pamięci)
 
@@ -55,7 +55,7 @@ Obecnie powszechnie używany standart HTML w wersji czwartej ma wiele ogranicze�
 \subsection{Less}
 \label{sec:less}
 
-Do stworzenia bardziej zaawansowanych arkuszy stylów CSS (en. Cascading Style Sheets) wykorzystano narzędzie które pozwala na łatwe tworzenie i utrzymywanie reguł którym jest Less,jego głównymi zaletami są:
+Do stworzenia bardziej zaawansowanych arkuszy stylów CSS (en. Cascading Style Sheets) wykorzystano narzędzie które pozwala na łatwe tworzenie i utrzymywanie reguł którym jest Less, jego głównymi zaletami są:
 
 \begin{itemize}
 \item
@@ -67,20 +67,21 @@ Chcąc wykorzystać kolor czerwony zawarty w kolorystyce uczelni AGH deklarujemy
 
 \lstset{language=JavaScript}
 \label{lis:webSql}
-\begin{lstlisting}[caption=json]
+\begin{lstlisting}[caption=Deklaracja zmiennych]
 @aghRed: #a71930;
+
 bgcolor: @aghRed;
 \end{lstlisting}
 
 \item
 Mixiny
 
-Możliwe jest tworzenie klas posiadających określone włąściwości które będą posiadały właściwości innej, wcześniej zadeklarowanej.Pozwala to na tworzenie kodu bardziej czytelnego, unikanie powtórzeń.
+Możliwe jest tworzenie klas posiadających  właściwości które będą okrślone w innej, wcześniej zadeklarowanej. Pozwala to na tworzenie kodu bardziej czytelnego, unikanie powtórzeń.
 
 
 \lstset{language=JavaScript}
 \label{lis:webSql}
-\begin{lstlisting}[caption=json]
+\begin{lstlisting}[caption=Mixin]
 .RoundBorders {
   border-radius: 5px;
   -moz-border-radius: 5px;
@@ -95,6 +96,6 @@ Możliwe jest tworzenie klas posiadających określone włąściwości które b�
 \item
 Osadzanie elementów według dziedziczenia
 
-Tworząc zagnieżdzoną strukturę storny często elementy wewnętrzne zależą od elementów nadrzędnych. Wygląd komurki może się różnić w zależości od miejsca w tabeli. W tworzeniu tak zagnieżdżonych struktur pomocna okazuje się omawiana cecha.
+Tworząc zagnieżdzoną strukturę strony często elementy wewnętrzne zależą od elementów nadrzędnych. Wygląd komórki może się różnić w zależości od miejsca w tabeli. W tworzeniu tak zagnieżdżonych struktur pomocna okazuje się omawiana cecha.
 
 \end{itemize}

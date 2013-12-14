@@ -9,12 +9,12 @@ Poniższa sekcja zawiera próbę analizy dostępnych metod prezentacji danych za
 \subsection{Rodzaje map}
 \label{subsec:Rodzaje map}
 
-Tworząc aplikację która ma dostarczać informacji korzystających z map należy zapoznać się dostępnymi źródłami. Z powodu szrokiego wyboru poniżej omówione zostały jedynie aplikacje które dostarczają informacji ogólnoświatowych. Na polskim rynku dostępnych jest kilka rozwiązań, ich główną wadą jest ograniczenie terytorialne, dodatkowo często nie dostarczają one obrazów satelitarnych, przykładem jest zumi (\underline{\texttt{http://zumi.pl}}).
+Tworząc aplikację która ma dostarczać informacji korzystających z map należy zapoznać się dostępnymi źródłami. Z powodu szerokiego wyboru poniżej omówione zostały jedynie aplikacje które dostarczają informacji ogólnoświatowych. Na polskim rynku dostępnych jest kilka rozwiązań, ich główną wadą jest ograniczenie terytorialne, dodatkowo często nie dostarczają one obrazów satelitarnych, przykładem jest zumi (\underline{\texttt{http://zumi.pl}}).
 
 \subsubsection{Windows Maps}
 \label{subsubsec:Windows Maps}
 
-Rysunek \ref{fig:bingMaps_1} przedstawia obraz otrzymany wykorzystując Bing Maps. W tym konkretnym przykładzie widzimy znaczną różnicę kolorów, obecność chmur pomniejsza wartość tych zdjęć. Należy wspomnieć o znacznie uboższym interfejsie dostarczanym użytkownikowi, interfejs jest w uboższy.
+Rysunek \ref{fig:bingMaps_1} przedstawia obraz otrzymany wykorzystując Bing Maps. W tym konkretnym przykładzie widzimy znaczną różnicę kolorów, obecność chmur pomniejsza wartość tych zdjęć. Należy wspomnieć o ubogim interfejsie dostarczanym użytkownikowi.
 
 \begin{figure}[H]
   \centering
@@ -72,9 +72,7 @@ Wadą tego rozwiązania wynikająca ze specyfikacji całego języka jest bardzo 
 
 Bardzo ciekawym i wartym zainteresowania dodanym elementem w nowej wersji HTML jest obecność znaczniku canvas. Pozwala on na dynamiczne, skryptowe renderowanie kształtów i obrazów. Dzięki temu możliwe stało się tworzenie animacji czy nawet gier działających w przeglądarce bez konieczności używania dodatkowych wtyczek czy programów.
 
-\underline{\texttt{http://techtrendy.pl/title, Pierwsza-gra-3D-napisana-w-HTML5,wid,14102779,wiadomosc.html?ticaid=6107dc}}
-
-Przykładem wielkich możliwości jakie dostarcza udoskonalony język jest fakt iż już w roku 2011 powstała pierwsza trójwymiarowa gra stworzona w całości przy użyciu HTML5. Przykład grafiki widoczny jest na rysunku \ref{fig:html3d}.
+Przykładem wielkich możliwości jakie dostarcza udoskonalony język jest fakt iż już w roku 2011 powstała pierwsza trójwymiarowa gra stworzona w całości przy użyciu HTML5 \cite{HtmlGame}. Przykład grafiki widoczny jest na rysunku \ref{fig:html3d}.
 
 \begin{figure}[H]
   \centering
@@ -85,8 +83,8 @@ Przykładem wielkich możliwości jakie dostarcza udoskonalony język jest fakt 
 
 Funkcjonalnością która wydaje się być szczególnie przydatna w stosunku do omawianego projektu jest możliwość rysowania kształtów geometrycznych. Przykładem wykorzystania zaprezentowano na rysunku \ref{fig:canvas1} na którym przy pomocy okręgu zaznaczono rynek główny w Krakowie i jego okolice, możliwość zmiany transparentości narysowanego kształtu pozwala aby obraz podnim był nadal widoczny.
 
-Niestety rozwiązanie to nie może zostać wykorzystane wraz z wybranym modelem prezentacji danych geograficznych. Rysunek \ref{fig:canvas1} prezentuje potencjlne możliwośći jednak nawet analiza kodu \ref{lst:canvas} wskazuje podstawowe wymaganie wykorzystanie tego rozwiązania. Bazowy element w obrębie którego możliwa jest akcja musi być elementem canvas.
-Otrzymany efekt jest wynikiem wykorzystania statycznego obrazu który został zaimportowany z pamięci komputera i wykorzystany jako tło. Zabieg ten pozwala na zaprezentowanie możliwości rozwiąznia ale uniemżliwia wykorzystanie funkcjonalności które dostarczane są przez Google Maps(zmiana punktu patrzenia, stopnia przybliżenia i inne). Z tego powodu zdecydowano się na zaprzestanie prac z tym konketnym rozwiązaniem i nie wykorzystanie go w docelowej aplikacji.
+Niestety rozwiązanie to nie może zostać wykorzystane wraz z wybranym modelem prezentacji danych geograficznych. Rysunek \ref{fig:canvas1} prezentuje potencjlne możliwośći jednak nawet analiza kodu \ref{lst:canvas} wskazuje podstawowe wymaganie wykorzystanie tego rozwiązania. Bazowy element w obrębie którego możliwa jest akcja musi być elementem typu canvas.
+Otrzymany efekt jest wynikiem wykorzystania statycznego obrazu który został zaimportowany z pamięci komputera i wykorzystany jako tło. Zabieg ten pozwala na zaprezentowanie możliwości rozwiąznia ale uniemożliwia wykorzystanie funkcjonalności które dostarczane są przez Google Maps(zmiana punktu patrzenia, stopnia przybliżenia i inne). Z tego powodu zdecydowano się na zaprzestanie prac z tym konketnym rozwiązaniem i nie wykorzystanie go w docelowej aplikacji.
 
   \begin{figure}[H]
   \centering
@@ -96,7 +94,7 @@ Otrzymany efekt jest wynikiem wykorzystania statycznego obrazu który został za
 \end{figure}
 
 \lstset{language=JavaScript}
-\begin{lstlisting}[label={lst:canvas},caption={json}]
+\begin{lstlisting}[label={lst:canvas},caption={Canvas}]
 
       var canvas = document.getElementById('myCanvas');
       var context = canvas.getContext('2d');
@@ -128,7 +126,7 @@ W wyniku takiego zabiegu plik svg opisujący obraz graficzny może mieć mniejsz
 
 Autorzy artykułu ``Zastosowanie języka SVG do wizualizacji danych geoprzestrzennych'' \cite{svgUse} zwracają również uwagę na tekstwoy format zapisu, jest on mniej oszczędny niż binarny ale pozwala na edycję dowolnym edytorem tekstu co pozwala na przeszukiwanie zawartości np. wyszukiwarkom internetowym.
 
-W celach porównawczych wykorzystano logo AGH (rys. \ref{fig:aghlogo}) o rozmiarach 305x591 pikseli o gęstości 150 dpi (en. Dots per inch, określa ilość indywidualnych punktów na odcinu jednego cala, 2.54cm), po zapisie na dysku twardym zajmował on 75 KB pamięci. Następnie wykoano zapis grafiki w testowanym formacie zajmował on 3KB , efekt został przedstawiony w listingu \ref{lst:logoaghsvg}.
+W celach porównawczych wykorzystano logo AGH (rys. \ref{fig:aghlogo}) o rozmiarach 305x591 pikseli o gęstości 150 dpi (en. Dots per inch, określa ilość indywidualnych punktów na odcinku jednego cala, 2.54cm), po zapisie na dysku twardym zajmował on 75 KB pamięci. Następnie wykonano zapis grafiki w testowanym formacie zajmował on 3KB , efekt został przedstawiony w listingu \ref{lst:logoaghsvg}.
 
 
 
@@ -176,26 +174,26 @@ Pakiet google.maps zawiera kilka klas których zadaniem jest generowanie adekwat
   Linia stworzona z dwóch lub więcej punktów. Tworzone odcinki mogą być liniami prostymi lub przedstawiać zakrzywienie ziemi, nie jest możliwe tworzenie bardziej skomplikowanych łuków.
 
 \item[Polygon] \hfill \\
-  Tworzy ciąg połączonych ze sobą punktów w określonej kolejności które tworzą zamknięty obszar. Określają obszar terenu który znajduje się wewnątrz figury.
+  Tworzy ciąg  punktów które w określonej kolejności tworzą zamknięty obszar.
 
 \item[Circle] \hfill \\
-  Na podstawie środka i jego promienia tworzy okrąg z obszarem wewnętrznym.
+  Na podstawie środka i jego promienia tworzy okrąg z posiadajacy obszar wewnętrzny o określonych cechach.
 
 \item[Rectangle] \hfill \\
-  Tworzy prostokąt posiadający przeciwległe boki w określonych punktach. Podobnie jak Polygon i Circle posiada obszar wewnętrzy którego właściwości graficzne można dowolnie definiować.
+  Tworzy prostokąt posiadający przeciwległe boki w określonych punktach.
 
 \item[OverlayView] \hfill \\
-  Specjalna klasa służąca do wyświetlania własnych wartsw graficznych, takich jak zewnętrzny plik graficzny. Pozwala na łatwe łączenie ogólnodostępych danych jakimi są mapy z własnymi zdjęciami, rysunkami itp.
+  Specjalna klasa służąca do wyświetlania własnych wartswt graficznych, takich jak zewnętrzny plik graficzny. Pozwala na łatwe łączenie ogólnodostępych danych jakimi są mapy z własnymi zdjęciami, rysunkami itp.
 
 \end{description}
 
 Intuicyjna i szybka edycja danych jest zapewniona poprzez udostępnianie klasy "DrawingManager". Tworzy ona dodatkowy element na ekranie użytkownika służący do pracy z wartwami znajdujacymi się na ekranie. Komponent ten wymaga jedynie wybrania odpowiedniego elementu a następnie wyznaczenie wymaganych informacji,zazwyczaj są to jeden lub dwa punkty niezbędne do stworzenia elementu. Pozostałe właściwości mogą być edytowane w dalszym etapie prac według potrzeb.
 
 
-\subsection{Przybliżanie danych}
+\subsection{Przybliżanie zbiorów danych}
 \label{subsec:aproksymacja}
 
-Do wyznaczenia zamkniętego obszaru należy podać wszyskie punkty określające jego granice. Używając komputerów możliwy jest jedynie dyskretny zapis danych, oznacza to że tylko niektóre punkty zostają określone a odcinki pomiędzy nimi musi zostać zastąpiony danymi wygenerowanymi. Najprostrzą metodą jest połączenie poszczególnych punktów liniami prostymi otrzymując proste kształty geometryczne, przy jej pomocy posiadając 3 punkty na płaszczyźnie możliwe jest otrzymanie trójkąta. Rozwiązanie takie jest wystarczające przy tworzeniu prostych figur, posiadających małą ilość wirzchołków. Przy tworzeniu bardziej skomplikowanych staje się ono niepraktyczne, określenie setek punktów dla nieregularnego obszaru byłoby czasochłonne przez co stałoby się nieefektywne. Rozwiązaniem tego problemu jest oszcowanie danych, określenie rozwiązania przybliżonego na podstawie znanych danych.
+Do wyznaczenia zamkniętego obszaru należy podać wszyskie punkty określające jego granice. Używając komputerów możliwy jest jedynie dyskretny zapis danych, oznacza to że tylko niektóre punkty zostają określone a odcinki pomiędzy nimi musi zostać zastąpiony danymi wygenerowanymi. Najprostrzą metodą jest połączenie poszczególnych punktów liniami prostymi otrzymując proste kształty geometryczne, przy jej pomocy posiadając 3 punkty na płaszczyźnie możliwe jest otrzymanie trójkąta. Rozwiązanie takie jest wystarczające przy tworzeniu prostych figur, posiadających małą ilość wirzchołków. Przy tworzeniu bardziej skomplikowanych staje się ono niepraktyczne, określenie setek punktów dla nieregularnego obszaru byłoby czasochłonne przez co jest nieefektywne. Rozwiązaniem tego problemu jest oszcowanie danych, określenie rozwiązania przybliżonego na podstawie znanych danych.
 
 
 
@@ -215,7 +213,7 @@ Najprostrzym rodzajem jest interpolacja funkcji sklejonych stopnia pierwszego. O
 
 Interpolacja wielomianowa  polega na  określeniu jednej funkcji przechodzącej przez pożądane punkty posiadającej okeślone paramety. Złożoność tego zadania wzrasta drastycznie wraz z rozmiarem zbioru wejściowego z tego powodu nie została ona używa w omawianym przypadku.
 
-Kolejnym z rozwiązań jest skorzystanie z krzywej Beziera. Rysunek \ref{fig:bezier} przedstawia prosty przykład pokazujący niezbędne informacje do jej stworzenia dla zbioru cztero-elementowego. Dwa punkty kontrolne, mają  za zadanie określić zachowanie ścieszki.
+Kolejnym z rozwiązań jest skorzystanie z krzywej Beziera. Rysunek \ref{fig:bezier} przedstawia prosty przykład pokazujący niezbędne informacje do jej stworzenia dla zbioru cztero-elementowego. Dwa punkty kontrolne, mają  za zadanie określić zachowanie ścieszki. Prosta implementacja czyni to rozwiązanie dobrym wyborem omawianego problemu.
 
 Jego wzór dla podanego przykładu to:
 \begin{eqnarray}
@@ -229,14 +227,13 @@ P(t) &= A (1-t)^{3} + 3 B t(1-t)^{2} + 3 C t^{2} (1-t) + D t^{3} \; \textrm{ dla
   \label{fig:bezier}
 \end{figure}
 
-test smieci
 
 \subsection{Oś czasu}
 \label{subsec:os}
 
 Tematem pracy oprócz wykorzystania i prezentacji danych na bazie informacji geograficznych jest ich połączenie z osią czasu, która pozwoliłaby na zmianę prezentowanych danych ze względu na interesujący nas okres czasu.
 
-Ponieważ własna implementacja osi czasu która nieograniczałaby użytkownika, pozwala mu w pełni korzystać z możliwości pełnej aplikacji, która tylko w części składa się z możliwości manipulacji czasem postanowiono wykorzystać istniejące rozwiązanie.
+Ponieważ własna implementacja osi czasu która nieograniczałaby użytkownika, pozwalałaby mu w pełni korzystać  możliwości gotowej aplikacji jest zbędna w sytuacji obecności wielu tego typu rozwiązań, postanowiono wykorzystać istniejące rozwiązanie.
 
 Przeprowadzając badania rozwiązań głównymi aspektami na które zwrócono uwagę było:
 
@@ -253,7 +250,7 @@ Niezwykle ważne jest aby końcowy projekt był całkowicie otwarty dla dalszego
 
 Wykorzystywane technologie
 
-Pamiętając że efektem końcowym powinien być framework odpowiadający szerokiemu gronowi odbiorców, będący jednocześnie darmowym ważne aby języki programowania wykorzystane przy jego tworzeniu też taki były. Oznacza to nie korzystanie z płatnych, wymagających licencji oprogramowań. Używane standarty powinny być rozpropagowane i używane przez szerokie grono obiorców.
+Pamiętając że efektem końcowym powinien być framework odpowiadający szerokiemu gronowi odbiorców, będący jednocześnie darmowym ważne aby języki programowania wykorzystane przy jego tworzeniu też taki były. Oznacza to nie korzystanie z płatnych, wymagających licencji oprogramowań. Używane standardy powinny być rozpropagowane i używane przez szerokie grono obiorców.
 
 \end{itemize}
 
@@ -274,7 +271,7 @@ Dla porównania \ref{fig:tm2} prezentuje o wiele prostszą konfigurację w któr
   \begin{figure}[H]
   \centering
     \includegraphics[width=150mm]{ge/tm2.jpg}
-  \caption{Timeline 2}
+  \caption{Timeline - prosty przykład}
   \label{fig:tm2}
 \end{figure}
 

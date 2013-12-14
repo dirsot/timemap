@@ -3,16 +3,15 @@
 \section{Bezpieczeństwo danych i aplikacji}
 \label{sec:bezpieczenstwo}
 
-Tworząc aplikację która będzie używana przez duża grupę obiorców, oprócz osób z pełnymi uprawnieniami do dowolnej akcji również osoby które nie powinny mieć możliwości zmiany danych należy przewidzieć i przygotować odpowiedni zbiór ról i uprawnień. Dostęp do dostarczanych funkcjonalności należy zapewnić poprzez zbiór ról i uprawnień, zostały one opisane w sekcji \ref{sec:uzytkownicy}.
+Tworząc aplikację która będzie używana przez dużą grupę obiorców, oprócz osób z pełnymi uprawnieniami do dowolnej akcji również osoby które nie powinny mieć możliwości zmiany danych należy przewidzieć i przygotować odpowiednie zabezpieczenia. Dostęp do dostarczanych funkcjonalności należy zapewnić poprzez zbiór ról i uprawnień, zostały one opisane w sekcji \ref{sec:uzytkownicy}.
 
-Niezwykle ważne jest aby pamiętać o strukturze aplikacji i ograniczeniach jakie niosą za sobą wykorzystane technologie. Każdy użytkownik uczeń według nomenklatury opisanej powyżej jest w posiadaniu pliku którego edycja powinna być zachowana jedynie dla moderatora. Niestety nie jest możliwe zapewnienie nieedytowalności pliku, z tego powodu nawet bez dostępu do uprawnień edycyjnych dostarczanych przez framework każdy może edytować plik w edytorze tektsowym, zmienić granice obszarów czy chociażby przedziały czasowe. Aby użytkownicy mieli pewność że plik z któego korzystają i mapa stworzona na jego podstawie jest wiarygodna i posiada poprawne dane proponowanym rozwiązaniem jest wykorzystanie jednego z algorytmu tworzących skrót z dowolnego ciągu danych, jednym z najczęściej wykorzystanym do takich celów jest MD5. Otrzymany wynik można zamieścić na serwerze w widoczny miejscu obok pliku z danymi w miejscu gdzie jedynie moderator ma dostęp. Dzięki takiej operacji użytkownik będzie mógł porównać wygenerowany skrót pliku którego chce użyć z wartością na stronie, identyczne wartości potwierdzą autentyczność danych.
+Niezwykle ważne jest aby pamiętać o strukturze aplikacji i ograniczeniach jakie niosą za sobą wykorzystane technologie. Każdy użytkownik ``uczeń'' według nomenklatury opisanej powyżej jest w posiadaniu pliku którego edycja powinna być zachowana jedynie dla moderatora. Niestety nie jest możliwe zapewnienie nieedytowalności pliku tekstowego, z tego powodu nawet bez dostępu do uprawnień edycyjnych dostarczanych przez framework każdy może edytować plik w edytorze tektsowym, zmienić granice obszarów czy chociażby przedziały czasowe. Aby użytkownicy mieli pewność że plik z którego korzystają i mapa stworzona na jego podstawie jest wiarygodna i posiada poprawne dane proponowanym rozwiązaniem jest wykorzystanie jednego z algorytmu tworzących skrót z dowolnego ciągu danych, jednym z najczęściej wykorzystanym do takich celów jest MD5. Otrzymany wynik można zamieścić na serwerze w widoczny miejscu obok pliku z danymi w miejscu gdzie jedynie moderator ma dostęp. Dzięki takiej operacji użytkownik będzie mógł porównać wygenerowany skrót pliku którego chce użyć z wartością na stronie, identyczne wartości potwierdzą autentyczność danych.
 
 \subsection{Funkcje haszujące}
 \label{sec:hashfunction}
 
-W pewnych sytuacjach nie potrzebujemy lub nie chcemy przechowywać oryginalnego pliku lub ciągu znaków. Częstym wykorzystaniem jest utworzenie sktótu hasła w module logowania do różnych aplikacji. Czynność ta utrudnia poznanie rzeczywistych wartości w momencie dostępu do nich przez nieuprawnione osoby. Jedną z cech dobrej funkcji haszującej jest
+W pewnych sytuacjach nie potrzebujemy lub nie chcemy przechowywać oryginalnego pliku lub ciągu znaków. Częstym wykorzystaniem jest utworzenie skrótu hasła w module logowania do różnych aplikacji. Czynność ta utrudnia poznanie rzeczywistych wartości w momencie dostępu do nich przez nieuprawnione osoby. Jedną z cech dobrej funkcji haszującej jest
 spełnienie wymagań dla funkcji jednokierunkowej. Wymagane jest aby funkcja była łatwa do obliczenia ale trudna, lub wręcz niemożliwa do odwrócenia.
-Do poznania wartości dla której został wygeneorany skrót można wykorzystać m.in. metodę słownikową, oznacza to wykonanie operacji haszującej dla dużego zbioru danych i odnalezienie szukanego sktótu w otrzymanych wynikach.
 
 Innym częstym wykorzystaniem, zaproponowanym w poprzedniej sekcji, jest weryfikacja integralności pliku lub wiadomości. Umieszczenie w jedym miejscu pliku i jego skrótu umożliwia sprawdzenie czy plik który posiadamy jest identyczny z tym znajdującym się na stronie, w przypadku braku zgodności możliwe jest ściągnięci poprawnej wersji, w pozostałych sytuacjach posiadamy pewność autentyczności danych bez potrzeby każdorazowego ściągania pliku z serwera, oszcędzamy przez to czas poświęcony na ściągnięcie pliku, który może zajmować wiele megabajtów.
 
@@ -22,13 +21,12 @@ Istnieje wiele funkcji haszujących, wybór konkretnej z nich zależy od celu u�
 \item
 MD5
 
-Opracowany w 1991 roku przez Rona Rivesta, z dowolnego ciągu danych generuje 128-bitowy sktót, pozwala to na utworzenie 32 znakowego ciągu w systemie szesnastkwoym. Ważną cechą jest zmiana skróty w przypadku najmniejszej edycji wejściowych danych. Tabela \ref{tab:hashresult},stowrzona przy pomocy strony \underline{\texttt{http://www.sha1-online.com/}}, prezentuje przykład zmiany jednej litery, wygenerowany skrót dla tej wartości jest zupełnie inny.
-Z uwagi na szybkość działania jest powszechnie używana, jednym z zastosowań jest ukrywanie haseł w bazie danych.
+Opracowany w 1991 roku przez Rona Rivesta, z dowolnego ciągu danych generuje 128-bitowy sktót, pozwala to na utworzenie 32 znakowego ciągu w systemie szesnastkwoym. Ważną cechą jest zmiana skróty w przypadku najmniejszej edycji wejściowych danych. Tabela \ref{tab:hashresult},stowrzona przy pomocy strony \underline{\texttt{http://www.sha1-online.com/}}, prezentuje przykład zmiany jednej litery, zmiany ``ó'' na ``o'' w słowie Kraków. Wygenerowany skrót dla tej wartości jest zupełnie inny.Z uwagi na szybkość działania jest powszechnie używana.
 
 \item
 SHA-1
 
-Przedstawiciel funckji z rodziny SHA, opublikowany w 1995 roku. Wprzeciwieństiw do MD5 do zapisu skrótu korzysta z 160-bitów, oznacza do 40 znaków w systemie heksadecymalnym.
+Przedstawiciel funckji z rodziny SHA, opublikowany w 1995 roku. W przeciwieństie do MD5 przy zapisie skrótu korzysta z 160-bitów, oznacza do 40 znaków w systemie heksadecymalnym.
 
 \item
 SHA-2
@@ -53,5 +51,3 @@ Zbiór czterech wariantów zastępujących SHA-1. Wersją zapewniającą najwyż
     \label{tab:hashresult}
 \end{table}
 
-\subsection{Zastosowanie}
-\label{sec:zastosowanie}

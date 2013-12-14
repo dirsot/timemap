@@ -1,7 +1,7 @@
 ﻿\chapter{Implementacja}
 \label{cha:implementacja}
 
-W działaniu programu można wyodrębnić 2 główne etapy, jest to dostarczenie danych zgonych z formatem aplikacji a następnie ich wyświetlenie. Zapewniono obsługę zewnętrznych plików, części formatu GML który jest bardzo obszerny i może symulować inne. Interpretacja graficzna danych została zoptymalizowana na potrzeby pracy z dużymi zbiorami danych, tak aby wyświetlenie nawet dużej ilości informacji umożliwiało dalszą pracę.
+W działaniu programu można wyodrębnić 2 główne etapy, jest to dostarczenie danych zgonych z formatem aplikacji a następnie ich wyświetlenie. Zapewniono obsługę zewnętrznych plików, części formatu GML który jest bardzo obszerny i może symulować inne. Interpretacja graficzna danych została zoptymalizowana na potrzeby pracy z dużymi zbiorami danych, tak aby wyświetlenie nawet dużej ilości informacji umożliwiało płynną pracę.
 
 
 \section{Struktura projektu}
@@ -11,17 +11,17 @@ Struktura klas w aplikacji została stworzona w oparciu o wzorzec projektowy MVC
 
 \begin{itemize}
 \item
-Controller - jego zadaniem jest przyjmowanie danych wejściowych i na ich podstawie odpowiednia reakcja, która może być aktualizają modelu lub warstwy prezentacyjenj.  W aplikacji funkcję tą spełniają servisy i kontrolery.
+Controller - jego zadaniem jest przyjmowanie danych wejściowych i na ich podstawie odpowiednia reakcja, która może być aktualizają modelu lub warstwy prezentacyjenj.  W aplikacji funkcję tą spełniają serwisy i kontrolery.
 \item
 View - warstwa prezentacyjna, zapewnia wizualiną prezentację infrmacji. Rolę tą w omwianym projekcie spełnia HTML i CSS.
 \item
 Model - przechowuje dane, stanowi bazę danych. Jego rola została przeniesiona na natywne rozwiązanie jakim jest Storage.
 \end{itemize}
 
-Założenia wzorca nie zostały w pełni spełnione, jego adaptacja została wykonana na potrzeby omawianego projektu. Stworzono podstawy do rozwoju i prostego przystosowania rozwiązania do potrzeb konkretnego klienta, w bardzo prosty sposób można zmienić między innymi sposób przechowywania danych aby spełnić wymagania klienta.
+Założenia wzorca nie zostały w pełni spełnione, jego adaptacja została wykonana na potrzeby projektu. Stworzono podstawy do rozwoju i prostego przystosowania rozwiązania do wymagań klienta, w bardzo prosty sposób można zmienić między innymi sposób przechowywania danych aby spełnić.
 
 
-Zastosowano również paradygmat odwrócenego sterowania(en. Inversion of control,IoC) polegający na przeniesieniu poza obiekt metod służących do kontroli jego poszczególnych elementów. Główną zaletą tego podejścia jest uproszczona konfiguracja programu do potrzeb użytkownika. Przykładem zastosowania jest metoda korzystania z filtrów w aplikacji, które mogą być tworzone przez użytkownika. Ich potencjalnie duża ilość wczytywana jednocześnie podczas startu generowałaby zbędne obciążenie, obecnie są one pomijane podczas inicjalizacji i wczytywane pojedyńczo jedynie wtedy gdy ich obecność jest niezbędna.
+Zastosowano również paradygmat odwrócenego sterowania(en. Inversion of control, IoC) polegający na przeniesieniu poza obiekt metod służących do kontroli jego poszczególnych elementów. Główną zaletą tego podejścia jest uproszczona konfiguracja programu do potrzeb użytkownika. Przykładem zastosowania jest metoda korzystania z filtrów w aplikacji, które mogą być tworzone przez użytkownika. Ich potencjalnie duża ilość wczytywana jednocześnie podczas startu generowałaby zbędne obciążenie, obecnie są one pomijane podczas inicjalizacji i wczytywane pojedyńczo jedynie wtedy gdy ich obecność jest niezbędna.
 
 
 Struktura klas obecnych w aplikacji została zaperzentowana na rysunku \ref{fig:classDiagram2}.
@@ -38,7 +38,7 @@ Struktura klas obecnych w aplikacji została zaperzentowana na rysunku \ref{fig:
 \section{Minimalna konfiguracja}
 \label{sec:minimum}
 
-Do rozpoczęcia korzystania z gotowej aplikacji należy zapewnić obecność konfiguracji niezbędnej do jej konfiguracji na docelowej stronie. Przykład minimalnej wersji która spełnia wymagane został pokazany w listinu \ref{lst:minconf}.
+Do rozpoczęcia korzystania z gotowej aplikacji należy zapewnić obecność konfiguracji niezbędnej do jej pracy na docelowej stronie. Przykład minimalnej wersji która spełnia wymagane został pokazany w listingu \ref{lst:minconf}.
 
 Z uwagi na naturę projektu, aplikacja wykorzystywana w przeglądarce, jak każdy dokument stworzony w HTML musi składać się z 3 głównych części:
 
@@ -49,7 +49,7 @@ Z uwagi na naturę projektu, aplikacja wykorzystywana w przeglądarce, jak każd
 
 -część właściwa strony która zawiera infromacje właściwe, widoczne dla użytkownika storny.
 
-Linie 5-7 mają za zadanie wczytanie zewnętrzych plików zawierające delkaracje metod w JS. 8 wczytuje plik zawierający główną klasę frameworku, poniżej znajduje się wczytanie niezbędnych styli CSS dla działąnia osi czasu. 13-23 jest to opis metody która inicjuje działanie mapy, jest ona wykonywana po załadowaniu statycznych fragmentów strony.
+Linie 5-7 mają za zadanie wczytanie zewnętrzych plików zawierające delkaracje metod w JS. 8 wczytuje plik zawierający główną klasę frameworku, poniżej znajduje się wczytanie niezbędnych styli CSS dla działania osi czasu. 13-23 jest to opis metody która inicjuje działanie mapy, jest ona wykonywana po załadowaniu statycznych fragmentów strony.
 
 \lstset{language=JavaScript}
 \begin{lstlisting}[label={lst:minconf},caption={Minimalna konfiguracja.}]
@@ -86,7 +86,7 @@ Linie 5-7 mają za zadanie wczytanie zewnętrzych plików zawierające delkaracj
         </div>
   </body>
 </html>
-\end{lstlisting}/
+\end{lstlisting}
 
 
 \section{Interfers do map}
@@ -94,7 +94,7 @@ Linie 5-7 mają za zadanie wczytanie zewnętrzych plików zawierające delkaracj
 
 W procesie badań literaturowych podjęto decyzję aby jako głównego źródła map wykorzystać Google Maps \ref{subsec:Rodzaje map}. Postanowiono jednocześnie umożliwić użytkownikowi możliwość zmiany i wyboru innego dostarczyciela danych. Niestety nawet krótka analiza interfejsów dostarczaych do pracy nad różnymi typami map wskazuje na brak kompatybilności pomiędzy nimi, oznacza to brak możliwości stworzenia jednej implementacji działąjącej na różnych typach. Problem ten rozwiazano potrzez wykorzystanie Mapstraction, biblioteki której zadaniem jest płynne przechodzenie pomiędzy różnymi dostarczycielami i ich interfejsami.
 
-Listening \ref{lst:mapstraction} pokazuję przykład wykorzystania biblioteki. Stworzenie instancji Mapstraction polega na wywołaniu konstruktora z podaniem id elementu który znajduje się na stronie i będzie używany jako nasza mapa a także typ mapy. Rezultatem jest obiekt kóry posiada wspólny interjeft dla różnych dostarzcycieli danych.
+Listening \ref{lst:mapstraction} pokazuję przykład wykorzystania biblioteki. Stworzenie instancji Mapstraction polega na wywołaniu konstruktora z podaniem id elementu który znajduje się na stronie i będzie używany jako nasza mapa a także typ mapy. Rezultatem jest obiekt kóry posiada wspólny interfejs dla różnych dostarzcycieli danych.
 
 \lstset{language=JavaScript}
 \begin{lstlisting}[label={lst:mapstraction},caption={Wykorzystanie Mapstraction.}]
@@ -110,7 +110,7 @@ map.addMarker(marker);
 \section{Odczyt danych}
 \label{sec:idata}
 
-Zgodnie z wnioskami omówionymi w sekcji \ref{subsec:fileformat} do przechowywania danych wykorzystano format GML. Wykorzystanie pliku teksto pozwala na swobodne tworzenie i edycję plików wejsciowych. W celu odczytu  danych z pliku i zapisu ich w pamięci sesyjnech przęglądarki(Storage) stworzona została klasa FileParser. Posiada ona jednoargumentowy konstruktor przyjmujący ciąg znakowy będący zawartośćią pliku.
+Zgodnie z wnioskami omówionymi w sekcji \ref{subsec:fileformat} do przechowywania danych wykorzystano format GML. Wykorzystanie pliku tekstowego pozwala na swobodne tworzenie i edycję plików wejsciowych. W celu odczytu  danych z pliku i zapisu ich w pamięci sesyjnech przęglądarki(Storage) stworzona została klasa FileParser. Posiada ona jednoargumentowy konstruktor przyjmujący ciąg znakowy będący zawartośćią pliku.
 
 Ze względów bezpieczeństwa JavaScript nie zezwala na bezpośredni dostęp do plików lokalnych uzytkownika. Jest to pozytywne zachowanie zapewniające że żaden kod nie jest w stanie bezwiednie zmieniać zawartość dysku.Wymusza to korzystanie z event-ów które będą aktywowane w momecie kiedy plik zostanie wybrany. W momencie zakończenia procesu odczytu zawartość pliku przekazywana jest do parsera który zapisuje dane w pamięci przeglądarki.
 
@@ -120,27 +120,27 @@ W przeciwieństwie do języków które posiadają klasyczną koncepcję klasy Ja
 \item
 Wykorzystanie globalnej funkcji.
 
-Tworzony obiekt zawiera odowłanie do ciała metody, które jest globalne. Wadą takiego rozwiązania jest tworzenie wielu globalnym funkcji których nazwa może kolidować z nazwazmi w wykorzystywanych bibliotekach.
+Tworzony obiekt zawiera odowłanie do ciała metody, które jest globalne. Wadą takiego rozwiązania jest tworzenie wielu globalnym funkcji których nazwa może kolidować z innymi elementami, naprzykład  wykorzystywanymi w bibliotekach.
 \item
 Stworzenie funkcji wewnętrzej.
 
-Podobnie jak w poprzednim przypadku tworzona jest funkcja , tym razem jej ciało znajduje się w obiekcie. Minusem jest konieczność odtwarzania metody przy każdej sytuacji tworzenia obiektu. Operacja taka może być kosztowna i negatywnie wpływać na pracę aplikacji.
+Podobnie jak w poprzednim przypadku tworzona jest funkcja, tym razem jej ciało znajduje się w obiekcie. Minusem jest konieczność odtwarzania metody przy każdej sytuacji tworzenia obiektu. Operacja taka może być kosztowna i negatywnie wpływać na pracę aplikacji.
 \item
 Protototypowanie.
 
-Posiadając definicję obiektu możemy dodać do niego metodę. Sposób ten nie posiada wad opisanych powyżej, z tego powodu podejście zostało wykorzystane w stworzonej aplikacji. Przykład można zaobserwować w listeninu \ref{lst:svgImpl}.
+Posiadając definicję obiektu możemy dodać do niego metodę. Sposób ten nie posiada wad opisanych powyżej, z tego powodu podejście zostało wykorzystane w stworzonej aplikacji. Przykład można zaobserwować w listeninu \ref{lst:minconf}.
 \end{itemize}
 
 \lstset{language=JavaScript}
-\begin{lstlisting}[label={lst:utils},caption={Minimalna konfiguracja.}]
+\begin{lstlisting}[label={lst:utils},caption={Odczyt pliku}]
 
-var exml;
+var gml;
 function readFile(file,start,stop){
 	var reader = new FileReader();
     reader.onloadend = function(evt) {
       if (evt.target.readyState == FileReader.DONE) {
-		exml = new FileParser( evt.target.result);	
-		exml.parse()
+		gml = new FileParser( evt.target.result);	
+		gml.parse()
       }
     };
 	
@@ -149,37 +149,29 @@ function readFile(file,start,stop){
 }
 
 
-\end{lstlisting}/
+\end{lstlisting}
 
 
 \lstset{language=JavaScript}
 \begin{lstlisting}[label={lst:minconf},caption={Parser plików.}]
 
-KmlParser.value = function(e) {
+GmlParser.value = function(e) {
 	a = GXml.value(e);
 	a = a.replace(/^\s*/, "");
 	a = a.replace(/\s*$/, "");
 	return a;
 }
 
-KmlParser.prototype.createMarker = function(point,begin, end, name, desc, style, iconUrl) {
-	var icon = {};
-	var markeroptions = this.opts.markeroptions || {};
-	var icontype = this.opts.icontype || "style";
-	if (icontype == "style") {
-		if (!!this.styles[style]) {
-			icon = this.styles[style];
-		}
-	}
+GmlParser.prototype.createMarker = function(point,begin, end, name, desc, style, iconUrl) {
+	var markeroptions = this.opts.markeroptions;
+	var icontype = this.opts.icontype;
+	var icon = this.styles[style];
+
 	if (!markeroptions.icon) {
 		markeroptions.icon = icon;
 	}
-	var m = new google.maps.Marker(point, markeroptions);
+	var m = new mxn.Marker(point, markeroptions);
 
-	if (this.opts.elabelclass) {
-		var l = new ELabel(point, name, this.opts.elabelclass,
-				this.opts.elabeloffset, this.elabelopacity, true);
-	}
 	this.gmarkers.push(m);
 	item = {};
 	item.start = begin;
@@ -194,13 +186,13 @@ KmlParser.prototype.createMarker = function(point,begin, end, name, desc, style,
 	return item;
 }
 
-KmlParser.prototype.createPolyline = function(points, color, width, opacity,
+GmlParser.prototype.createPolyline = function(points, color, width, opacity,
 		name, desc) {
-	var polylineoptions = this.opts.polylineoptions || {};
+	var polylineoptions = this.opts.polylineoptions;
 	var p = new GPolyline(points, color, width, opacity, polylineoptions);
 	this.gpolylines.push(p);
 
-KmlParser.prototype.createPolygon = function(points, id, pId, begin, end, color,
+GmlParser.prototype.createPolygon = function(points, id, pId, begin, end, color,
 		width, opacity, fillcolor, fillopacity, name, desc) {
 
 	pointsArray = []
@@ -232,13 +224,13 @@ KmlParser.prototype.createPolygon = function(points, id, pId, begin, end, color,
 	return item;
 }
 
-KmlParser.prototype.processing = function(doc) {
+GmlParser.prototype.processing = function(doc) {
 	var that = this;
 	var xmlDoc = GXml.parse(doc)
 	
 	var styles = xmlDoc.documentElement.getElementsByTagName("Style");
 	for ( var i = 0; i < styles.length; i++) {
-			//wczytanie styli
+			readStyle(stles[i]);
 	}
 
 	var placemarks = xmlDoc.documentElement.getElementsByTagName("Placemark");
@@ -247,24 +239,18 @@ KmlParser.prototype.processing = function(doc) {
 	for ( var i = 0; i < placemarks.length; i++) {
 		var id = placemarks[i].getAttribute('id');
 		var timeSpan = placemarks[i].getElementsByTagName("TimeSpan")[0];
-		var begin = KmlParser.value(timeSpan.getElementsByTagName('begin')[0])
-		var end = KmlParser.value(timeSpan.getElementsByTagName('end')[0])
-		var name = KmlParser.value(placemarks[i].getElementsByTagName("name")[0]);
-		var desc = KmlParser.value(placemarks[i]
+		var begin = GmlParser.value(timeSpan.getElementsByTagName('begin')[0])
+		var end = GmlParser.value(timeSpan.getElementsByTagName('end')[0])
+		var name = GmlParser.value(placemarks[i].getElementsByTagName("name")[0]);
+		var desc = GmlParser.value(placemarks[i]
 				.getElementsByTagName("description")[0]);
 		if (desc == "") {
-			var desc = KmlParser
+			var desc = GmlParser
 					.value(placemarks[i].getElementsByTagName("text")[0]);
 			desc = desc.replace(/\$\[name\]/, name);
 			desc = desc.replace(/\$\[geDirections\]/, "");
 		}
-		if (desc.match(/^http:\/\//i)) {
-			desc = '<a href="' + desc + '">' + desc + '</a>';
-		}
-		if (desc.match(/^https:\/\//i)) {
-			desc = '<a href="' + desc + '">' + desc + '</a>';
-		}
-		var style = KmlParser.value(placemarks[i]
+		var style = GmlParser.value(placemarks[i]
 				.getElementsByTagName("styleUrl")[0]);
 		var coords = GXml.value(placemarks[i]
 				.getElementsByTagName("coordinates")[0]);
@@ -279,25 +265,18 @@ KmlParser.prototype.processing = function(doc) {
 		}
 		
 		onePoint = getChildrenTag(placemarks[i], 'Point')[0];
-		if (!!that.styles[style]) {
-					var width = that.styles[style].width;
-					var color = that.styles[style].color;
-					var opacity = that.styles[style].opacity;
-					var fillopacity = that.styles[style].fillopacity;
-					var fillcolor = that.styles[style].fillcolor;
-					var iconUrl = that.styles[style].iconUrl;
-				} else {
-					var width = 5;
-					var color = "#0000ff";
-					var opacity = 0.45;
-					var fillopacity = 0.25;
-					var fillcolor = "#0055ff";
-				}
+		var width = that.styles[style].width;
+		var color = that.styles[style].color;
+		var opacity = that.styles[style].opacity;
+		var fillopacity = that.styles[style].fillopacity;
+		var fillcolor = that.styles[style].fillcolor;
+		var iconUrl = that.styles[style].iconUrl;
+
 		
 		if(onePoint){
 			coords = GXml.value(onePoint.getElementsByTagName("coordinates")[0]);
 				var bits = coords.split(",");
-				var point = new google.maps.LatLng(parseFloat(bits[1]),
+				var point = new mxn.LatLng(parseFloat(bits[1]),
 						parseFloat(bits[0]));
 				that.bounds.extend(point);
 					itemsMarkers.push(that.createMarker(point ,begin,end, name, desc, style, iconUrl));
@@ -318,7 +297,7 @@ KmlParser.prototype.processing = function(doc) {
 							|| isNaN(parseFloat(bits[1]))
 							|| isNaN(parseFloat(bits[0]))) {
 					} else {
-						var point = new google.maps.LatLng(parseFloat(bits[1]),
+						var point = new mxn.LatLng(parseFloat(bits[1]),
 								parseFloat(bits[0]));
 						points.push(point);
 					}
@@ -337,7 +316,7 @@ KmlParser.prototype.processing = function(doc) {
 						name, desc));
 			} else {
 				var bits = path[0].split(",");
-				var point = new google.maps.LatLng(parseFloat(bits[1]),
+				var point = new mxn.LatLng(parseFloat(bits[1]),
 						parseFloat(bits[0]));
 				that.bounds.extend(point);
 					that.createMarker(point, name, desc, style);
@@ -410,7 +389,7 @@ Zapewniono aby użytkownik miał możliwość dodawania własnych elementów stw
 \lstset{language=JavaScript}
 \begin{lstlisting}[label={lst:svgImpl},caption={Klasa do obsługi SVG}]
 
-function SGSObject(swBound, neBound, elements, map) {
+function SVGObject(swBound, neBound, elements, map) {
 
   this.swBound_ = swBound;
   this.neBound_ = neBound;
@@ -422,7 +401,7 @@ function SGSObject(swBound, neBound, elements, map) {
   this.setMap(map);
 }
 
-USGSOverlay.prototype.onAdd = function() {
+SVGObject.prototype.onAdd = function() {
 
   var div = document.createElement('div');
   div.style.border = 'none';
@@ -444,7 +423,7 @@ USGSOverlay.prototype.onAdd = function() {
   panes.mapPane.appendChild(this.div_);
 };
 
-USGSOverlay.prototype.draw = function() {
+SVGObject.prototype.draw = function() {
 
   var overlayProjection = this.getProjection();
 
@@ -458,17 +437,17 @@ USGSOverlay.prototype.draw = function() {
   div.style.height = (sw.y - ne.y) + 'px';
 };
 
-USGSOverlay.prototype.onRemove = function() {
+SVGObject.prototype.onRemove = function() {
   this.div_.parentNode.removeChild(this.div_);
 };
 
-USGSOverlay.prototype.hide = function() {
+SVGObject.prototype.hide = function() {
   if (this.div_) {
     this.div_.style.visibility = 'hidden';
   }
 };
 
-USGSOverlay.prototype.show = function() {
+SVGObject.prototype.show = function() {
   if (this.div_) {
     this.div_.style.visibility = 'visible';
   }

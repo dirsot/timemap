@@ -4,7 +4,7 @@
 \section{Cel projektu}
 \label{sec:celProjektu}
 
-Celem projektu jest stworzenie aplikacji internetowej dodającej do tradycyjnych map dodatkowego wymiaru, czasu. Powinna dostarczać możliwości obserwowania zmian zachodzących na określonym terenie w danym okresie. Dodana oś czasu będzie miała za zadanie kontrolowanie okresu dla którego widoczne będą dane. Dostarczone dane przez użytkownika będą przedstawiane w czytelny i umożliwiający szybką analizę sposób. Przykładowe dane wejściowe to zmiany terytorialne w przeszłości, ukazanie rozowuju miast. Końcowa wizualizacja danych oprócz prostych kształtów geometrycznych musi zapewniać obsłógę zewnętrznych plików graficznych jak i najnowszych rozwiązań służących do obsługi grafiki.
+Celem projektu jest stworzenie aplikacji internetowej dodającej do tradycyjnych map dodatkowego wymiaru, czasu. Powinna dostarczać możliwości obserwowania zmian zachodzących na określonym terenie w danym okresie. Dodana oś czasu będzie miała za zadanie kontrolowanie okresu dla którego widoczne będą dane. Dostarczone informacje przez użytkownika będą przedstawiane w czytelny i umożliwiający szybką analizę sposób. Przykładowe dane wejściowe to zmiany terytorialne w przeszłości, ukazanie rozowuju miast. Końcowa wizualizacja danych oprócz prostych kształtów geometrycznych musi zapewniać obsłógę zewnętrznych plików graficznych jak i najnowszych rozwiązań służących do obsługi grafiki.
 
 \section{Problemy do rozwiązania}
 \label{sec:problemy}
@@ -66,6 +66,9 @@ Tworzenie własnych filtrów edytujących mapę w zależności od zmiany położ
 \item
 Zapis informacji o mapie do pliku na dysku lokalnym
 
+\item
+Zmiana typu mapy
+
 \end{itemize}
 
 System umożliwia uczniowi:
@@ -95,10 +98,10 @@ Wykorzystywania plików video
 Praca z mapami w trybie offline
 \begin{itemize}
 \item
-Wczytywanie pliku - dane używane w aplikacji mogą zostać wczytane z dwóch źródeł. Z lokalnego dysku lub zaimportowane z serwera.
+Wczytywanie pliku - dane używane w aplikacji mogą zostać wczytane z dwóch źródeł, z lokalnego dysku lub zaimportowane z serwera.
 
 \item
-Przechywanie danych po stornie klienta
+Przechywanie danych po stronie klienta
 
 \end{itemize}
 
@@ -128,10 +131,10 @@ Parsowanie danych z formatu xml to pamięci storage
 Tworzenie interaktywnych filtów
 \begin{itemize}
 \item
-Filtry obsługjące zminę czasu
+Filtry obsługujące zmianę czasu
 
 \item
-Filtry obsługujące zmianę mapy
+Filtry obsługujące zmianę wysokości nad ziemią
 
 \end{itemize}
 
@@ -157,7 +160,7 @@ Filtry obsługujące zmianę mapy
 \subsection{Definicje przypadków użycia}
 \label{sec:defCaseuse}
 
-Poniżej znajduje się opis trzech podstawowych przypadków użycia występujących w aplikacji. Opisane zostały warunki rozpoczęcia każdego z nich i ich zakończenia, zarówno pozytywnego jak i negatywnego.
+Poniżej znajduje się opis trzech podstawowych przypadków użycia występujących w aplikacji. Opisane zostały warunki rozpoczęcia każdego z nich i zakończenia, zarówno pozytywnego jak i negatywnego.
 
 \begin{table}[H]
     \centering
@@ -166,9 +169,9 @@ Poniżej znajduje się opis trzech podstawowych przypadków użycia występując
     Nazwa przypadku uzycia & Wczytanie danych z pliku  \\ \hline
     Typ przypadku uzycia  & Ogólny  \\ \hline
     Aktorzy   & Uczeń    \\ \hline
-    Warunki wstepne   & Brak     \\ \hline
-    Warunku koncowe dla sukcesu   & Dane zostaja zapisane w pamieci lokalnej przegladarki    \\ \hline
-    Warunki koncowe dla niepowodzenia   & Dane nie sa poprawnie odczytane.     \\ \hline
+    Warunki wstępne   & Brak     \\ \hline
+    Warunku końcowe dla sukcesu   & Dane zostają zapisane w pamieci lokalnej przeglądarki    \\ \hline
+    Warunki końcowe dla niepowodzenia   & Dane nie sa poprawnie odczytane.     \\ \hline
     Scenariusz glówny   &
 
     \begin{enumerate}
