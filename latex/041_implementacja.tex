@@ -395,9 +395,7 @@ function SVGObject(swBound, neBound, elements, map) {
   this.neBound_ = neBound;
   this.elements_ = elements;
   this.map_ = map;
-
   this.div_ = null;
-
   this.setMap(map);
 }
 
@@ -412,13 +410,11 @@ SVGObject.prototype.onAdd = function() {
   svgHolder.setAttribute("version", "1.2");
 
   for ( el in elements ) {
-	createSVGElement(el.type,el.properties,svgHolder);
+	  createSVGElement(el.type,el.properties,svgHolder);
   }
 
   div.appendChild(svgHolder);
-
   this.div_ = div;
-
   var panes = this.getPanes();
   panes.mapPane.appendChild(this.div_);
 };
@@ -498,7 +494,7 @@ PictureObject.prototype.onAdd = function() {
 \section{Krzywa Bezier-a}
 \label{sec:bezierimpl}
 
-Aby umożliwić moderatorowi sprawną pracę podczas towrzenia i edycji zbioru danych, możliwość dodawania płynnych krzywych bez konieczności wyznaczania wielu puktów stworzono implementację algorytmu wyznaczania punktów leżących na krzywej Bezier-a.
+Aby umożliwić moderatorowi sprawną pracę podczas tworzenia i edycji zbioru danych, możliwość dodawania płynnych krzywych bez konieczności wyznaczania wielu puktów stworzono implementację algorytmu wyznaczania punktów leżących na krzywej Bezier-a.
 
 Przedstawiono wzory matematyczne które zostały użyte do obliczenia położnia w miejscu $t$. Główna metoda $bezier$ posiada 2 argumenty wejściowe, pierwszym jest wartość z przedziału od 0 do 1 określający procentowe położenie pomiędzy położeniem  startowym a końcowym, drugim jest tablica punktów.
 
