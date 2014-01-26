@@ -63,6 +63,7 @@ Poniższa sekcja zawiera opis dostępnych metod służących do prezentacji dany
 \subsubsection{Flash}
 \label{subsubsec:graphicFlash}
 
+Technologia pozwalająca na tworzenie interaktywnych rozwiązań posiadających bogatą szatę graficzną.
 
 Wadą tego rozwiązania wynikająca ze specyfikacji całego języka jest bardzo słaba integracja z dokumentami HTML, nie możliwa jest pełna iterakcja z pozostałymi elementani na stronie. Problem ten nie dotyczy kolejnego podejścia.
 
@@ -83,7 +84,7 @@ Przykładem wielkich możliwości jakie dostarcza udoskonalony język jest fakt 
 
 Funkcjonalnością która wydaje się być szczególnie przydatna w stosunku do omawianego projektu jest możliwość rysowania kształtów geometrycznych. Przykładem wykorzystania zaprezentowano na rysunku \ref{fig:canvas1} na którym przy pomocy okręgu zaznaczono rynek główny w Krakowie i jego okolice, możliwość zmiany transparentości narysowanego kształtu pozwala aby obraz podnim był nadal widoczny.
 
-Niestety rozwiązanie to nie może zostać wykorzystane wraz z wybranym modelem prezentacji danych geograficznych. Rysunek \ref{fig:canvas1} prezentuje potencjlne możliwośći jednak nawet analiza kodu \ref{lst:canvas} wskazuje podstawowe wymaganie wykorzystanie tego rozwiązania. Bazowy element w obrębie którego możliwa jest akcja musi być elementem typu canvas.
+Niestety rozwiązanie to nie może zostać wykorzystane wraz z wybranym modelem prezentacji danych geograficznych. Rysunek \ref{fig:canvas1} prezentuje potencjalne możliwośći jednak nawet analiza kodu \ref{lst:canvas} wskazuje podstawowe wymaganie wykorzystanie tego rozwiązania. Bazowy element w obrębie którego możliwa jest akcja musi być elementem typu canvas.
 Otrzymany efekt jest wynikiem wykorzystania statycznego obrazu który został zaimportowany z pamięci komputera i wykorzystany jako tło. Zabieg ten pozwala na zaprezentowanie możliwości rozwiąznia ale uniemożliwia wykorzystanie funkcjonalności które dostarczane są przez Google Maps(zmiana punktu patrzenia, stopnia przybliżenia i inne). Z tego powodu zdecydowano się na zaprzestanie prac z tym konketnym rozwiązaniem i nie wykorzystanie go w docelowej aplikacji.
 
   \begin{figure}[H]
@@ -204,7 +205,7 @@ Można rozróżnić dwa rodzaje wyznaczanie wyniku quasi-otpymalnego:
     Wygenerowany wynik jest przybliżeniem punktów wyjściowych, stworzona linia nie  musi przechodzić przez nie.
 
 \item[Interpolacja] \hfill \\
-    Wygenerowana funkcja iterpolacyjna przechodzi przez wszystkie punkty określony w zbiorze wejściowym, jest jego dokładnym otworzeniem. Z tego powodu nadaje się lepiej do omawianegego celu.
+    Wygenerowana funkcja iterpolacyjna przechodzi przez wszystkie punkty określone w zbiorze wejściowym, jest jego dokładnym otworzeniem. Z tego powodu nadaje się lepiej do omawianegego celu.
 
 \end{description}
 

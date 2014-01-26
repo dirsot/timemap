@@ -7,7 +7,7 @@ Przed rozpoczęciem implementacji własnego rozwiązania postanowiono przeprowad
 \section{Google Earth}
 \label{sec:Google Earth}
 
-Funkcjonalnośc interaktywnych map można znaleść w aplikacji stworzonej przez firmę Google. Program ten jest napisany przy użyciu języka C++, nie służy on do tworznia aplikacji mobilnych, dlatego nie został on wybrany jako kandydat do naszej pracy.
+Funkcjonalnośc interaktywnych map można znaleść w aplikacji stworzonej przez firmę Google. Program ten jest napisany przy użyciu języka C++, nie służy on do tworznia aplikacji mobilnych, dlatego nie został on wybrany jako kandydat do tworzonej pracy.
 
 Aplikacja wykorzystuje statyczne obrazy będące zdjęciami satelitarnymi w przypadku obrazów z dużej wysokośći lub zdjęciami wykonanymi z pokładów samolotów. Pomimo duzej atrakcyjności ma ono bardzo ograniczoną możliwośći zmiany oglądanych danych, ograniczone do ilości wykonanych zdjęć, dodatkowo większość danych pochodzi z okresu ostatnich 60 lat.
 
@@ -26,21 +26,21 @@ Dzięki funkcji zmiany punktu i kąta patrzenia, pokazywania ciekawych miejsc cz
 \begin{figure}[H]
   \centering
     \includegraphics[width=100mm]{ge/02_1977.jpg}
-  \caption{Las Vegas w 1950 roku.}
+  \caption{Las Vegas w 1977 roku.}
   \label{fig:lasVegas2}
 \end{figure}
 
 \begin{figure}[H]
   \centering
     \includegraphics[width=100mm]{ge/03_2012.jpg}
-  \caption{Las Vegas w 1950 roku.}
+  \caption{Las Vegas w 2012 roku.}
   \label{fig:lasVegas3}
 \end{figure}
 
 \section{Aplikacje wykonane w technologi Flash}
 \label{sec:flashmap}
 
-Podczas prac badawczych natrafiono na kilka aplikacji któych główna część aplikcji została wykonana w technologi flash. Przykładami są interaktywna mapa historii europy \cite{worldology} czy mapa prezentująca zmianę granic państw w XX wieku \cite{flashborder} przykład na rysunku \ref{fig:flasheurope}. Oba projekty zawierają bogatą szatę graficzną, ich wykonanie jest bardzo estetyczne.
+Podczas prac badawczych natrafiono na kilka aplikacji których główna część aplikcji została wykonana w technologi flash. Przykładami są interaktywna mapa historii europy \cite{worldology} czy mapa prezentująca zmianę granic państw w XX wieku \cite{flashborder} przykład na rysunku \ref{fig:flasheurope}. Oba projekty zawierają bogatą szatę graficzną, ich wykonanie jest bardzo estetyczne.
 Zaletą tworzenia programów w tej technologi jest wykorzystanie mocy obliczeniowj karty graficznej do wyświetlania obrazów(dostępne od wersji 10.1 \cite{flashfrapghic}), dzięki temu procesor jest może wykonywać inne zadania.
 
 \begin{figure}[H]
@@ -51,14 +51,14 @@ Zaletą tworzenia programów w tej technologi jest wykorzystanie mocy obliczenio
 \end{figure}
 
 
-Wykorzystanie języka ActionScript wydaje się dobrym wyborem, niestety posiada kilka wad które go eleiminują. Pierwszą z nich jest brak wsparcia technicznego dla wszystkich urządzeń mobilnych, przez co jej wykorzystanie ogranicza rynek docelowy.
+Wykorzystanie języka ActionScript wydaje się dobrym wyborem, niestety posiada kilka wad które go eliminują. Pierwszą z nich jest brak wsparcia technicznego dla wszystkich urządzeń mobilnych, przez co jej wykorzystanie ogranicza rynek docelowy.
 Wymagana jest instalacja detykowanego odtwarzacza który pozwala na korzystanie z programów stworzonych w tym języku.
 Ponieważ tworzona aplikacja jest jednym komponentem wymagane jest całkowite ściągnięcie z serwera na lokalny komputer aby można było z niej korzystać. Ostatnim aspektem jest brak kompatybilności elementów flash-owych z głównymi wyszukiwarkami internetowymi, ich indeksacja jest utrudniona(możliwe jest jedynie wykorzystanie tagów) a ich zawartość całkowicie niewidoczna w procesie indeksowania. Z uwagi na powyższe wady technologia nie została wykorzystana w omawianej pracy.
 
 \section{Wykorzystanie JavaScript}
 \label{sec:pref}
 
-Częśc aplikacji pracujących na danych geograficznych jest tworzona przy uzyciu skryptowego języka jakim jest JS. Przykład zastosowania jest widoczny w bibiotece ``maMap'' \cite{jsmapapp}. Pozwala ona na proste pisanie rozwiązań w których zapewniona interakcja z użytwonikiem podnosi wartość programu. Przykład mapy z osią czasu przedstawiony na rysunku \ref{fig:jsheatmap} wskazuje rozkład średniej rocznej temepratury w stanach ameryki północnej na w przeciągu ostatnich 50 lat.
+Częśc aplikacji pracujących na danych geograficznych jest tworzona przy uzyciu skryptowego języka jakim jest JS. Przykład zastosowania jest widoczny w bibiotece ``maMap'' \cite{jsmapapp}. Pozwala ona na proste pisanie rozwiązań w których zapewniona interakcja z użytkownikiem podnosi wartość programu. Przykład mapy z osią czasu przedstawiony na rysunku \ref{fig:jsheatmap} wskazuje rozkład średniej rocznej temepratury w stanach ameryki północnej na w przeciągu ostatnich 50 lat.
 
 \begin{figure}[H]
   \centering
