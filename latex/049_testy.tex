@@ -1,2 +1,41 @@
 \chapter{Testy porównawcze}
 \label{cha:comparisonTests}
+
+Poniższy rozdział został stworzony w celu porówniania parametrów stworzonego rozwiąznia w stosunku do obecnie istniejących rozwiązań dostarczających podobnych funkcjonalności.
+
+\section{Rozmiar danych}
+\label{sec:dataSize}
+
+Przedstawione aplikacje w rozdziale \ref{cha:dostepnerozwiazania} wykorzystują różne sposoby przechowywania danych. Google Earth stosuje głównie detykowany format kml, aplikaje flash-owe zgodnie z oficjalną dokumentacją \cite{flashFormats} nie mogą korzystać bezpośrednio z formatu svg, mogą odczytywać pliki xml. Trzeci przedstawiony przykład, oparty na bibliotece amMap korzysta z plików svg.
+
+Do analizy wielkości plików z których korzystają powyższe aplikacje wykorzystano ogólnodostępne dane określające granice wszystkich państw \cite{kmlExample}, \cite{svgExample}. Dane kml zostały odpowiednio uproszczone poprzez zmiejszenie dokładności aby zawierały dane w takiej samej dokładności jak w svg. Plik svg zawierał informacje o 8889 punktach dając średnią 1 punkta na 200 kilometrów jednocześnie zajmując 60KB. Drugi plik to analogicznie 24777, 1 punkt na 90 kilometrów przy wadze 500KB, plik ten zawierał więcej informacji. Z uwagi na dużą ilość dodatkowych tagów, informacji które nie wnoszą dodatkowych danych, których zadaniem jest jedynie zachowanie poprwanej struktury, w omawianym przypadku svg jest o 66\% lżejszy. Rozmiar pliku w tym formacie zawierający 25 tysięcy punktów nie przekraczałby 200KB.
+
+Dzięki temu korzystanie z formatu svg nie obciąża pracy komputera. Możliwość edycji jego nie jest obecnie dostępna w stworzonym framework-u, jednoczeście aby zmniejszyć rozmiar pliku kml i jemu podobnych możliwe jest skorzystanie z opcji tworzenia krzywych Bezier-a w procesie wizualizacji danych. Powoduje ona zmniejszenie ilości niezbędnych punktów w stosunku do tradycyjnego podejścia którym jest tworzenie linii prostych. Wykonane próby wskazują że wykorzystanie krzywych pozwala na zmiejszenie wymaganej ilośći punktów nawet o 20 procent przy zachowaniu szczegółowości danych. Zastosowaniu tej metody do powyższego pliku kml oznacza zmniejszenie rozmiaru o 100KB.
+
+
+\section{Czas załadowania danych}
+\label{sec:datatime}
+
+Innym równie ważnym czynnikiem oprócz rozmiaru danych jest czas potrzebny na ich wyświetlenie, oznacza to jak szybko aplikacja będzie odpowiadała na komendy użytkownika.
+
+Testy sprawdzające czas załadowania danych użytkownika, informacji z dostarczonego pliku, nie badających innych zmiennych, takich jak połączenie z bazą danych, pobranie tła mapy i innych elementów strony wskazy następtujące wyniki.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l<{\raggedright}|p{3in}|}
+    \hline
+    Nazwa aplikacji & Czas ładowania danych[ms]  \\ \hline
+    Google Earth  & 651 \\ \hline
+    Oparta na flash  & 2110 \\ \hline
+    Oparta na amMap  & 360 \\ \hline
+    Stworzona aplikacja  & 10< \\ \hline
+        \end{tabular}
+    \caption{Analiza czasu renderowania}
+    \label{tab:caseuse2}
+\end{table}
+
+W przypadku aplikacji opartej na technologi flash czasami nie jest możliwe wyodrębnienie czasu określającego poszcególną fazę, tak jest w omawianym przypadku, z tego powodu w powyższej tabeli zamieszczono całkowity czas potrzebny do uruchomienia całego komponentu.
+Wadą dwóch pozostałych jest konieczność jednoczesnego ładowania wszystkich elementów.
+Niewątpliwą zaletą stworzonego framework-u są zastosowane metody służące do optymalizacji. Fakt tworzenia jedynie obietków które są widoczne na ekranie połączony z możliwością określenia czasu miejsca i przybliżenia sprawiają że możliwe jest systuacja gdy początkowy widok jest pusty, nie zawiera żadnych informacji użytkownika. Dopiero zmiana położenia i okresu mogą ujawnić piersze informacje. Sprawia to że początkowy czas odpowiedzi może obniżyć się do pomijalnej wartości.
+
+
